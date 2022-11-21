@@ -1,6 +1,5 @@
 {
   "private": true,
-  "packageManager": "yarn",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -13,6 +12,9 @@
     "nuxt": "3.0.0"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.4",
+    "@heroicons/vue": "^2.0.13",
+    "@nuxtjs/google-fonts": "^3.0.0-1",
     "@nuxtjs/tailwindcss": "^6.1.3"
   }
 }
