@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import {Popover, PopoverButton, PopoverOverlay, PopoverPanel, TransitionChild, TransitionRoot} from '@headlessui/vue'
+import 'focus-visible'
 </script>
 
 <template>
