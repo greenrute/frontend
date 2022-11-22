@@ -20,8 +20,8 @@ type Variant = 'solid' | 'outline'
 type Color = 'zinc' | 'green' | 'white'
 
 withDefaults(defineProps<{
-  variant: Variant,
-  color: Color,
+  variant?: Variant,
+  color?: Color,
   to?: string
 }>(), {
   variant: 'solid',

@@ -26,11 +26,12 @@ module.exports = <Partial<Config>>{
       },
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
-        display: ['Lexend', ...defaultTheme.fontFamily.sans],
+        display: ['Fira Sans', ...defaultTheme.fontFamily.sans],
       },
       maxWidth: {
         '2xl': '40rem',
       },
     },
   },
+  plugins: [require('@tailwindcss/forms')],
 }

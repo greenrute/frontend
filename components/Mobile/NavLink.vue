@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import {PopoverButton} from '@headlessui/vue'
-import {NuxtLink} from '#components'
+import NuxtLink from '#app/components/nuxt-link'
 
 defineProps<{
   to: string

@@ -4,4 +4,7 @@
   </Head>
 
   <Header />
+  <main>
+    <Hero />
+  </main>
 </template>

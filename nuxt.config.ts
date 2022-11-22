@@ -11,10 +11,18 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       Inter: true,
-      Lexend: [400, 500],
+      'Fira Sans': [400, 500],
     },
     display: 'swap',
     preconnect: true,
     download: true,
+  },
+  postcss: {
+    plugins: {
+      'postcss-focus-visible': {
+        replaceWith: '[data-focus-visible-added]',
+      },
+      autoprefixer: {},
+    }
   },
 })

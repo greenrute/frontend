@@ -5,7 +5,7 @@ import {Popover, PopoverButton, PopoverOverlay, PopoverPanel, TransitionChild, T
 <template>
   <Popover v-slot="{ open }">
     <PopoverButton class="relative z-10 flex h-8 w-8 items-center justify-center [&:not(:focus-visible)]:focus:outline-none" aria-label="Toggle Navigation">
-      <MobileNavIcon open="open" />
+      <MobileNavIcon :open="open" />
     </PopoverButton>
     <TransitionRoot>
       <TransitionChild
@@ -29,11 +29,11 @@ import {Popover, PopoverButton, PopoverOverlay, PopoverPanel, TransitionChild, T
         leave-to="opacity-0 scale-95"
       >
         <PopoverPanel as="div" class="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5">
-          <MobileNavLink to="#features">Особливості</MobileNavLink>
+          <MobileNavLink to="#features">Функції</MobileNavLink>
           <MobileNavLink to="#testimonials">Відгуки</MobileNavLink>
           <MobileNavLink to="#pricing">Ціни</MobileNavLink>
           <hr class="m-2 border-slate-300/40" />
-          <MobileNavLink to="/login">Ввійти</MobileNavLink>
+          <MobileNavLink to="/login">Увійти</MobileNavLink>
         </PopoverPanel>
       </TransitionChild>
     </TransitionRoot>
