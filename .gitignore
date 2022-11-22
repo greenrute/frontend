@@ -6,6 +6,5 @@ node_modules
 .output
 .env
 dist
-.idea
+.idea/*
 !.idea/icon.svg
-!.idea/runConfigurations
