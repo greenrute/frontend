@@ -2,7 +2,6 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/color-mode',
-    '@nuxtjs/tailwindcss',
     '@nuxtjs/google-fonts',
   ],
   colorMode: {
@@ -17,8 +16,10 @@ export default defineNuxtConfig({
     preconnect: true,
     download: true,
   },
+  css: ['~/assets/css/main.css'],
   postcss: {
     plugins: {
+      tailwindcss: {},
       'postcss-focus-visible': {
         replaceWith: '[data-focus-visible-added]',
       },
