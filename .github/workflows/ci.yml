@@ -1,5 +1,5 @@
 name: ci-deploying
-run-name: ${{ github.actor }} is deploying GreenRute Front-end release
+run-name: ${{ github.actor }} is deploying GreenRute frontend release
 on:
   push:
     branches:
@@ -24,11 +24,11 @@ jobs:
       - name: Build
         run: yarn generate
 
-      - name: Add CNAME
-        run: |
-          cd .output/public
-          echo "greenrute.com" > CNAME
-          cd ..
+#      - name: Add CNAME
+#        run: |
+#          cd .output/public
+#          echo "greenrute.com" > CNAME
+#          cd ..
 
       - name: Push
         uses: s0/git-publish-subdir-action@develop
