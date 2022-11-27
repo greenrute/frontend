@@ -6,5 +6,6 @@ node_modules
 .output
 .env
 dist
+.vscode
 .idea/*
 !.idea/icon.svg
