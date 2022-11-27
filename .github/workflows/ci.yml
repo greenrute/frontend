@@ -28,6 +28,7 @@ jobs:
         run: |
           cd .output/public
           echo "beta.greenrute.com" > CNAME
+          touch .nojekyll
           cd ..
 
       - name: Push
