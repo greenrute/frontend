@@ -3,6 +3,5 @@
     <Body class="flex h-full flex-col" />
   </Html>
 
-  <NuxtLoadingIndicator color="#16a34a" />
   <slot />
 </template>
