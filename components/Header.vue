@@ -22,9 +22,7 @@
               </span>
           </Button>
           <div class="-mr-1 md:hidden">
-            <ClientOnly>
-              <MobileNavigation/>
-            </ClientOnly>
+            <MobileNavigation/>
           </div>
         </div>
       </nav>
