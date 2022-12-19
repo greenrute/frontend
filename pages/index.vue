@@ -3,7 +3,7 @@
     <Title>GreenRute - твій шкільний помічник</Title>
   </Head>
 
-  <Header />
+  <Header :home="true" />
   <main>
     <Hero />
   </main>
