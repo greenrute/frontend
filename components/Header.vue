@@ -1,7 +1,9 @@
 <script setup lang="ts">
-defineProps<{
+withDefaults(defineProps<{
   home: boolean
-}>()
+}>(), {
+  home: false
+})
 </script>
 
 <template>
