@@ -11,10 +11,10 @@ withDefaults(defineProps<{
     <Container>
       <nav class="relative z-50 flex justify-between">
         <div class="flex items-center md:gap-x-12">
-          <NuxtLink aria-label="Home" to="/" v-if="home">
+          <NuxtLink v-if="!home" aria-label="Home" to="/" >
             <Logo class="h-5 w-auto" />
           </NuxtLink>
-          <Logo class="h-5 w-auto" v-else />
+          <Logo v-else class="h-5 w-auto" />
           <div class="hidden md:flex md:gap-x-6">
             <NavLink to="#features">Функції</NavLink>
             <NavLink to="#testimonials">Відгуки</NavLink>
