@@ -9,4 +9,3 @@ dist
 .vscode
 .idea/*
 !.idea/icon.svg
-frontend.iml
