@@ -39,7 +39,7 @@ onMounted(() => {
           <div>
             <Button type="submit" variant="solid" color="green" class="w-full">
               Увійти
-              <ArrowSmallRightIcon aria-hidden="true" class="w-5 h-5" />
+              <ArrowSmallRightIcon aria-hidden="true" class="w-5 h-5 -mb-0.25" />
             </Button>
             <div ref="googleSignInButton" class="mt-4"></div>
           </div>
