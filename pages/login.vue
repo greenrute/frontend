@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import {ArrowSmallRightIcon} from '@heroicons/vue/20/solid'
+
 const googleSignIn = useGoogleSignIn()
 
 const googleSignInButton = ref(null)
@@ -37,7 +39,7 @@ onMounted(() => {
           <div>
             <Button type="submit" variant="solid" color="green" class="w-full">
               Увійти
-              <span aria-hidden="true">&nbsp;&rarr;</span>
+              <ArrowSmallRightIcon aria-hidden="true" class="w-5 h-5" />
             </Button>
             <div ref="googleSignInButton" class="mt-4"></div>
           </div>
