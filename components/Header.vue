@@ -3,8 +3,8 @@
     <Container>
       <nav class="relative z-50 flex justify-between">
         <div class="flex items-center md:gap-x-12">
-          <NuxtLink aria-label="Home" to="/">
-            <Logo class="h-5 w-auto" />
+          <NuxtLink aria-label="Домівка" to="/">
+            <Logo class="h-5 w-auto"/>
           </NuxtLink>
           <div class="hidden md:flex md:gap-x-6">
             <NavLink to="#features">Функції</NavLink>
