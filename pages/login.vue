@@ -1,44 +1,10 @@
 <script setup lang="ts">
-const config = useRuntimeConfig()
+const googleSignIn = useGoogleSignIn()
 
-interface gsiResponse {
-  clientId: string,
-  client_id: string,
-  credential: string,
-  select_by: string,
-}
-
-const handleCredentialResponse = (response: gsiResponse) => {
-  console.log(response.credential)
-}
+const googleSignInButton = ref(null)
 
 onMounted(() => {
-  if (!Array.from(document.querySelectorAll('script')).map(s => s.src).includes('https://accounts.google.com/gsi/client')) {
-    console.log('script is not set')
-    const script = document.createElement('script')
-    script.src = 'https://accounts.google.com/gsi/client'
-    script.async = true
-    script.defer = true
-    document.head.append(script)
-
-    script.addEventListener('load', () => {
-      nextTick(() => {
-        console.log('loaded');
-        (window as any).google.accounts.id.initialize({
-          client_id: config.public.gsiClientID,
-          callback: handleCredentialResponse,
-        });
-        (window as any).google.accounts.id.prompt();
-      })
-    })
-  } else {
-    console.log('script is set');
-    (window as any).google.accounts.id.initialize({
-      client_id: config.public.gsiClientID,
-      callback: handleCredentialResponse,
-    });
-    (window as any).google.accounts.id.prompt();
-  }
+  googleSignIn.render(googleSignInButton, 'signin_with')
 })
 </script>
 
@@ -73,6 +39,7 @@ onMounted(() => {
               Увійти
               <span aria-hidden="true">&nbsp;&rarr;</span>
             </Button>
+            <div ref="googleSignInButton" class="mt-4"></div>
           </div>
         </form>
       </div>

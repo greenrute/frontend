@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 #__nuxt {
-  min-height: 100%;
+  @apply min-h-full;
+}
+
+#credential_picker_container {
+  @apply top-28 !important;
 }
