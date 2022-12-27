@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      gsiClientID: process.env.GSI_CLIENT_ID || '122300346388-0ee31s58epvv7udrjvgqht1oij1sdnu7.apps.googleusercontent.com',
+      gsiClientID: process.env.GSI_CLIENT_ID || '',
     },
   },
   googleFonts: {
