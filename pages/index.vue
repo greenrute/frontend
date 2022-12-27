@@ -2,7 +2,9 @@
 const googleSignIn = useGoogleSignIn()
 
 onMounted(() => {
-  googleSignIn.prompt()
+  setTimeout(() => {
+    googleSignIn.prompt()
+  }, 5000)
 })
 
 onUnmounted(() => {
