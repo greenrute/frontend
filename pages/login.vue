@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import {ArrowSmallRightIcon} from '@heroicons/vue/20/solid/index'
+import {Ref} from 'vue'
 
 const googleSignIn = useGoogleSignIn()
 
-const googleSignInButton = ref(null)
+const googleSignInButton: Ref<HTMLDivElement | null> = ref(null)
 
 onMounted(() => {
   googleSignIn.render(googleSignInButton, 'signin_with')
@@ -41,7 +42,7 @@ onMounted(() => {
               Увійти
               <ArrowSmallRightIcon aria-hidden="true" class="w-5 h-5 -mb-0.25" />
             </Button>
-            <div ref="googleSignInButton" class="mt-4"></div>
+            <div ref="googleSignInButton" class="mt-4 h-10 overflow-hidden"></div>
           </div>
         </form>
       </div>
