@@ -35,6 +35,7 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
         display: ['Fira Sans', ...defaultTheme.fontFamily.sans],
+        system: [...defaultTheme.fontFamily.sans],
       },
       maxWidth: {
         '2xl': '40rem',
