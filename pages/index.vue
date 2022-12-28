@@ -1,13 +1,17 @@
 <script setup lang="ts">
+import type {Ref} from 'vue'
+
 const googleSignIn = useGoogleSignIn()
+const promptTimeout: Ref<NodeJS.Timeout | undefined> = ref(undefined)
 
 onMounted(() => {
-  setTimeout(() => {
+  promptTimeout.value = setTimeout(() => {
     googleSignIn.prompt()
   }, 5000)
 })
 
 onUnmounted(() => {
+  clearTimeout(promptTimeout.value)
   googleSignIn.cancel()
 })
 </script>
