@@ -11,12 +11,14 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       gsiClientID: process.env.GSI_CLIENT_ID || '',
+      apiBase: process.env.API_BASE || 'https://api.greenrute.com/',
     },
   },
   googleFonts: {
     families: {
       Inter: true,
       'Fira Sans': [400, 500],
+      'JetBrains Mono': [400],
     },
     display: 'swap',
     preconnect: true,
@@ -51,7 +53,7 @@ export default defineNuxtConfig({
         { name: 'description', content: 'Новий щоденник у твоєму смартфоні — спільний розклад, домашнє завдання, обмін інформацією. Програма для Android та iOS, багато опцій, щоб налаштувати свій щоденник.' },
         { name: 'msapplication-TileColor', content: '#ffffff' },
         { name: 'theme-color', content: '#16a34a' },
-        { 'http-equiv': 'content-security-policy', content: "object-src 'none'; base-uri 'self'; default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://accounts.google.com/gsi/client; style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style; font-src 'self' data: ; frame-src https://accounts.google.com/gsi/; connect-src 'self' ws: wss: https://accounts.google.com/gsi/;" },
+        { 'http-equiv': 'content-security-policy', content: "object-src 'none'; base-uri 'self'; default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://accounts.google.com/gsi/client; style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style; font-src 'self' data:; frame-src https://accounts.google.com/gsi/; connect-src 'self' localhost:* ws: wss: https://accounts.google.com/gsi/;" },
       ],
     },
   },
