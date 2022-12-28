@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type {Ref} from 'vue'
 
+definePageMeta({
+  layout: 'home',
+})
+
 const googleSignIn = useGoogleSignIn()
 const promptTimeout: Ref<NodeJS.Timeout | undefined> = ref(undefined)
 

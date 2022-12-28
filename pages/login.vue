@@ -2,13 +2,42 @@
 import {ArrowSmallRightIcon} from '@heroicons/vue/20/solid/index'
 import {Ref} from 'vue'
 
-const googleSignIn = useGoogleSignIn()
+definePageMeta({
+  layout: 'home',
+})
 
+const googleSignIn = useGoogleSignIn()
 const googleSignInButton: Ref<HTMLDivElement | null> = ref(null)
 
 onMounted(() => {
   googleSignIn.render(googleSignInButton, 'signin_with')
 })
+
+const credentials = reactive({
+  email: '',
+  password: '',
+})
+
+const login = async () => {
+  await $fetch('/users/login', {
+    method: 'POST',
+    body: {
+      email: credentials.email,
+      password: credentials.password,
+    },
+    baseURL: useRuntimeConfig().public.apiBase,
+  })
+    .then(data => {
+      console.log(data)
+    })
+    .catch(error => {
+      pushNotification({
+        status: 'error',
+        title: 'Помилка входу',
+        message: error.data.message,
+      })
+    })
+}
 </script>
 
 <template>
@@ -34,15 +63,15 @@ onMounted(() => {
             </p>
           </div>
         </div>
-        <form action="#" class="mt-10 grid grid-cols-1 gap-y-8">
-          <InputField label="Адреса електронної пошти" id="email" type="email" autocomplete="email" required />
-          <InputField label="Пароль" id="password" type="password" autocomplete="current-password" required />
+        <form @submit.prevent="login" class="mt-10 grid grid-cols-1 gap-y-8">
+          <InputField label="Адреса електронної пошти" id="email" type="email" v-model="credentials.email" autocomplete="email" required />
+          <InputField label="Пароль" id="password" type="password" v-model="credentials.password" autocomplete="current-password" required />
           <div>
             <Button type="submit" variant="solid" color="green" class="w-full">
               Увійти
               <ArrowSmallRightIcon aria-hidden="true" class="w-5 h-5 -mb-0.25" />
             </Button>
-            <div ref="googleSignInButton" class="mt-4 h-10 overflow-hidden"></div>
+            <div ref="googleSignInButton" class="mt-4 h-10 overflow-hidden" />
           </div>
         </form>
       </div>
