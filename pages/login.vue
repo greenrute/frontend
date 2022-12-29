@@ -34,7 +34,7 @@ const login = async () => {
       pushNotification({
         status: 'error',
         title: 'Помилка входу',
-        message: error.data.message,
+        message: error.data?.message,
       })
     })
 }

@@ -20,6 +20,8 @@ export const useNotification = () => useState<Notification>('notification', () =
 }))
 
 export const pushNotification = (notification: NotificationDraft) => {
+  if (!notification.message) return
+
   const notif = useNotification()
 
   clearTimeout(notif.value.timeout)
