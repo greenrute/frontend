@@ -11,10 +11,29 @@ interface UserNavigation {
 }
 
 const logout = async (): Promise<void> => {
-  useCookie('token', {
-    expires: new Date()
-  }).value = null
-  await navigateTo('/login')
+  await $fetch('/users/logout', {
+    method: 'POST',
+    body: { token: useCookie('token').value },
+    baseURL: useRuntimeConfig().public.apiBase,
+  })
+    .then(async r => {
+      useCookie('token', {
+        expires: new Date()
+      }).value = null
+      await navigateTo('/login')
+      setTimeout(() => {
+        pushNotification({
+          status: 'success',
+          message: (r as apiResponse).message,
+        })
+      }, 150)
+    })
+    .catch(error => {
+      pushNotification({
+        status: 'error',
+        message: error.data?.message,
+      })
+    })
 }
 
 const user = {
