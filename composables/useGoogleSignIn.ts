@@ -29,11 +29,25 @@ export const useGoogleSignIn = () => {
                   body: {credential: res.credential},
                   baseURL: useRuntimeConfig().public.apiBase,
                 })
-                  .then(data => {
-                    console.log(data)
+                  .then(async r => {
+                    const date = new Date()
+                    date.setMonth(date.getMonth() + 6)
+                    useCookie('token', {
+                      expires: date,
+                    }).value = (r as apiResponse).data?.token?.token || null
+                    await navigateTo('/dashboard')
+                    setTimeout(() => {
+                      pushNotification({
+                        status: 'success',
+                        message: (r as apiResponse).message,
+                      })
+                    }, 150)
                   })
                   .catch(error => {
-                    console.log(error.data)
+                    pushNotification({
+                      status: 'error',
+                      message: error.data?.message,
+                    })
                   })
               },
             })

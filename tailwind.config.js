@@ -12,6 +12,9 @@ module.exports = {
     './error.vue',
   ],
   darkMode: 'class',
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     fontSize: {
       'xs': ['0.75rem', {lineHeight: '1rem'}],
@@ -43,6 +46,15 @@ module.exports = {
       },
       spacing: {
         '0.25': '0.0625rem',
+      },
+      transitionProperty: {
+        height: 'height',
+        width: 'width',
+        spacing: 'margin, padding',
+        border: 'border-radius',
+      },
+      animation: {
+        loader: 'spin 1s steps(8, end) infinite',
       },
     },
   },

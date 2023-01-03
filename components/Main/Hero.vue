@@ -1,5 +1,5 @@
 <template>
-  <Container class="pt-20 pb-16 text-center lg:pt-32">
+  <MainContainer class="pt-20 pb-16 text-center lg:pt-32">
     <h1 class="mx-auto max-w-4xl font-display text-4xl font-medium tracking-tight text-slate-900 sm:text-7xl">
       Новий{{ ' ' }}
       <span class="relative whitespace-nowrap text-green-600">
@@ -13,12 +13,12 @@
         </svg>
         <span class="relative">щоденник</span>
       </span>{{ ' ' }}
-      у твоєму смартфоні.
+      у <br class="hidden lg:block" />твоєму смартфоні.
     </h1>
     <p class="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-zinc-700">
       Спільний розклад, домашнє завдання, обмін інформацією.
       Програма для Android та iOS, багато опцій, щоб налаштувати свій щоденник.
     </p>
     <div class="mt-10 flex justify-center gap-x-6"></div>
-  </Container>
+  </MainContainer>
 </template>

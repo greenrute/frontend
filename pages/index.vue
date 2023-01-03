@@ -2,7 +2,8 @@
 import type {Ref} from 'vue'
 
 definePageMeta({
-  layout: 'home',
+  layout: 'main',
+  middleware: 'guest',
 })
 
 const googleSignIn = useGoogleSignIn()
@@ -25,8 +26,8 @@ onUnmounted(() => {
     <Title>GreenRute - твій шкільний помічник</Title>
   </Head>
 
-  <Header />
+  <MainHeader />
   <main>
-    <Hero />
+    <MainHero />
   </main>
 </template>

@@ -17,7 +17,7 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       Inter: true,
-      'Fira Sans': [400, 500],
+      'Fira Sans': [400, 500, 700],
       'JetBrains Mono': [400],
     },
     display: 'swap',

@@ -3,7 +3,8 @@ import {ArrowSmallRightIcon} from '@heroicons/vue/20/solid/index'
 import {Ref} from 'vue'
 
 definePageMeta({
-  layout: 'home',
+  layout: 'main',
+  middleware: 'guest',
 })
 
 const googleSignIn = useGoogleSignIn()
@@ -13,12 +14,16 @@ onMounted(() => {
   googleSignIn.render(googleSignInButton, 'signin_with')
 })
 
+const pending = ref(false)
+
 const credentials = reactive({
   email: '',
   password: '',
 })
 
 const login = async () => {
+  pending.value = true
+  const start = new Date().getTime()
   await $fetch('/users/login', {
     method: 'POST',
     body: {
@@ -27,15 +32,36 @@ const login = async () => {
     },
     baseURL: useRuntimeConfig().public.apiBase,
   })
-    .then(data => {
-      console.log(data)
+    .then(async r => {
+      const date = new Date()
+      date.setMonth(date.getMonth() + 6)
+      useCookie('token', {
+        expires: date,
+      }).value = (r as apiResponse).data?.token?.token || null
+      await navigateTo('/dashboard')
+      setTimeout(() => {
+        pushNotification({
+          status: 'success',
+          message: (r as apiResponse).message,
+        })
+      }, 150)
     })
     .catch(error => {
       pushNotification({
         status: 'error',
-        title: 'Помилка входу',
         message: error.data?.message,
       })
+    })
+    .finally(() => {
+      const difference = new Date().getTime() - start
+
+      if (difference > 300) {
+        pending.value = false
+      } else {
+        setTimeout(() => {
+          pending.value = false
+        }, 300 - difference)
+      }
     })
 }
 </script>
@@ -63,17 +89,20 @@ const login = async () => {
             </p>
           </div>
         </div>
-        <form @submit.prevent="login" class="mt-10 grid grid-cols-1 gap-y-8">
-          <InputField label="Адреса електронної пошти" id="email" type="email" v-model="credentials.email" autocomplete="email" required />
-          <InputField label="Пароль" id="password" type="password" v-model="credentials.password" autocomplete="current-password" required />
+        <MainForm @validated="login" class="mt-10 grid grid-cols-1 gap-y-8">
+          <MainTextInput label="Адреса електронної пошти" invalid="Введіть правильну електронну адресу" id="email" type="email" v-model="credentials.email" autocomplete="email" required />
+          <MainTextInput label="Пароль" invalid="Пароль має бути не меншим, ніж 3 символа" id="password" type="password" v-model="credentials.password" autocomplete="current-password" required minlength="3" />
           <div>
-            <Button type="submit" variant="solid" color="green" class="w-full">
-              Увійти
-              <ArrowSmallRightIcon aria-hidden="true" class="w-5 h-5 -mb-0.25" />
-            </Button>
+            <MainButton type="submit" variant="solid" color="green" class="w-full" :disabled="pending">
+              <template v-if="!pending">
+                Увійти
+                <ArrowSmallRightIcon aria-hidden="true" class="w-5 h-5 -mb-0.25" />
+              </template>
+              <IconLoader v-else class="my-0.5 w-5 h-5 motion-safe:animate-loader" />
+            </MainButton>
             <div ref="googleSignInButton" class="mt-4 h-10 overflow-hidden" />
           </div>
-        </form>
+        </MainForm>
       </div>
     </div>
     <div class="hidden sm:contents lg:relative lg:block lg:flex-1">

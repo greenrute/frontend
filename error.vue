@@ -21,8 +21,8 @@ const pageError = useError()
             <p class="mt-1 text-base text-gray-500">Перевірте URL-адресу в адресному рядку та повторіть спробу.</p>
           </div>
           <div class="mt-10 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6">
-            <Button color="green" to="/">На головну</Button>
-            <Button to="/support" variant="outline">Служба підтримки</Button>
+            <MainButton color="green" to="/">На головну</MainButton>
+            <MainButton to="/support" variant="outline">Служба підтримки</MainButton>
           </div>
         </div>
       </main>
