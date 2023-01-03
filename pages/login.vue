@@ -10,8 +10,18 @@ definePageMeta({
 const googleSignIn = useGoogleSignIn()
 const googleSignInButton: Ref<HTMLDivElement | null> = ref(null)
 
+const email: Ref<{ input: HTMLInputElement } | null> = ref(null)
+const password: Ref<{ input: HTMLInputElement } | null> = ref(null)
+
 onMounted(() => {
   googleSignIn.render(googleSignInButton, 'signin_with')
+
+  if (credentials.email === '' && !!email.value) {
+    credentials.email = email.value?.input.value
+  }
+  if (credentials.password === '' && !!password.value) {
+    credentials.password = password.value?.input.value
+  }
 })
 
 const pending = ref(false)
@@ -37,7 +47,17 @@ const login = async () => {
       date.setMonth(date.getMonth() + 6)
       useCookie('token', {
         expires: date,
+        sameSite: true,
       }).value = (r as apiResponse).data?.token?.token || null
+      useCookie<UserCookie>('user', {
+        expires: date,
+        sameSite: true,
+      }).value = {
+        id: (r as apiResponse).data?.user?.id,
+        email: (r as apiResponse).data?.user?.name,
+        name: (r as apiResponse).data?.user?.email,
+        picture: (r as apiResponse).data?.user?.picture,
+      }
       await navigateTo('/dashboard')
       setTimeout(() => {
         pushNotification({
@@ -90,8 +110,8 @@ const login = async () => {
           </div>
         </div>
         <MainForm @validated="login" class="mt-10 grid grid-cols-1 gap-y-8">
-          <MainTextInput label="Адреса електронної пошти" invalid="Введіть правильну електронну адресу" id="email" type="email" v-model="credentials.email" autocomplete="email" required />
-          <MainTextInput label="Пароль" invalid="Пароль має бути не меншим, ніж 3 символа" id="password" type="password" v-model="credentials.password" autocomplete="current-password" required minlength="3" />
+          <MainTextInput label="Адреса електронної пошти" invalid="Введіть правильну електронну адресу" id="email" type="email" v-model="credentials.email" ref="email" autocomplete="email" required />
+          <MainTextInput label="Пароль" invalid="Пароль має бути не меншим, ніж 3 символа" id="password" type="password" v-model="credentials.password" ref="password" autocomplete="current-password" required minlength="3" />
           <div>
             <MainButton type="submit" variant="solid" color="green" class="w-full" :disabled="pending">
               <template v-if="!pending">

@@ -34,7 +34,17 @@ export const useGoogleSignIn = () => {
                     date.setMonth(date.getMonth() + 6)
                     useCookie('token', {
                       expires: date,
+                      sameSite: true,
                     }).value = (r as apiResponse).data?.token?.token || null
+                    useCookie<UserCookie>('user', {
+                      expires: date,
+                      sameSite: true,
+                    }).value = {
+                      id: (r as apiResponse).data?.user?.id,
+                      email: (r as apiResponse).data?.user?.name,
+                      name: (r as apiResponse).data?.user?.email,
+                      picture: (r as apiResponse).data?.user?.picture,
+                    }
                     await navigateTo('/dashboard')
                     setTimeout(() => {
                       pushNotification({
@@ -68,7 +78,7 @@ export const useGoogleSignIn = () => {
     },
     cancel: () => {
       initGSIScript().then(() => {
-        (window as any).google.accounts.id.cancel()
+        (window as any)?.google?.accounts?.id?.cancel()
       })
     },
     render: (

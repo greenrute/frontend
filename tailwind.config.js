@@ -35,6 +35,11 @@ module.exports = {
       borderRadius: {
         '4xl': '2rem',
       },
+      colors: {
+        green: {
+          550: '#1cb454',
+        },
+      },
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
         display: ['Fira Sans', ...defaultTheme.fontFamily.sans],

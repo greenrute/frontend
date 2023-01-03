@@ -1,17 +1,30 @@
 declare interface apiResponseToken {
-  token: {
-    id: number
-    user_id: number
-    email: string
-    token: string
-    expiry: string
-    created_at: string
-    updated_at: string
-  }
+  id: number
+  user_id: number
+  email: string
+  token: string
+  expiry: string
+  created_at: string
+  updated_at: string
+}
+
+declare interface apiResponseUser {
+  id: number
+  email: string
+  name: string
+  picture: string
+  password: string
+  google_id: string
+  created_at: string
+  updated_at: string
+  token: apiResponseToken
 }
 
 declare interface apiResponse {
   error: boolean
   message: string
-  data?: apiResponseToken
+  data?: {
+    token?: apiResponseToken
+    user?: apiResponseUser
+  }
 }

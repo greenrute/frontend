@@ -4,8 +4,8 @@ import {Bars3Icon, BellIcon, XMarkIcon} from '@heroicons/vue/24/outline/index'
 import NuxtLink from '#app/components/nuxt-link'
 
 interface UserNavigation {
-  name: string
   type: 'link' | 'button' | 'divider'
+  name?: string
   to?: string
   callback?: () => void
 }
@@ -17,9 +17,8 @@ const logout = async (): Promise<void> => {
     baseURL: useRuntimeConfig().public.apiBase,
   })
     .then(async r => {
-      useCookie('token', {
-        expires: new Date()
-      }).value = null
+      useCookie('token').value = null
+      useCookie('user').value = null
       await navigateTo('/login')
       setTimeout(() => {
         pushNotification({
@@ -43,15 +42,15 @@ const user = {
 }
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'Розклад', href: '#', current: true },
+  { name: 'Однокласники', href: '#', current: false },
+  { name: 'Календар', href: '#', current: false },
 ]
 
 const userNavigation: UserNavigation[] = [
   { name: 'Мій профіль', type: 'link', to: '/profile' },
   { name: 'Налаштування', type: 'link', to: '/settings' },
+  { type: 'divider' },
   { name: 'Вийти', type: 'button', callback: logout }
 ]
 </script>
@@ -62,7 +61,7 @@ const userNavigation: UserNavigation[] = [
       <div class="flex h-16 justify-between">
         <div class="flex">
           <div class="flex flex-shrink-0 items-center">
-            <Logo class="h-5 w-auto" />
+            <Logo class="h-4 w-auto" />
           </div>
           <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
             <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'border-green-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700', 'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
@@ -87,6 +86,7 @@ const userNavigation: UserNavigation[] = [
                 <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
                   <NuxtLink v-if="item.type === 'link'" :to="item.to" class="block px-4 py-2 text-sm text-gray-700" :class="active && 'bg-gray-100'">{{ item.name }}</NuxtLink>
                   <button v-else-if="item.type === 'button'" @click="item.callback" class="block w-full text-left px-4 py-2 text-sm text-gray-700" :class="active && 'bg-gray-100'">{{ item.name }}</button>
+                  <hr v-else-if="item.type === 'divider'" class="my-1" />
                 </MenuItem>
               </MenuItems>
             </transition>
