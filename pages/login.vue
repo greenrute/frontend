@@ -126,7 +126,7 @@ const login = async () => {
       </div>
     </div>
     <div class="hidden sm:contents lg:relative lg:block lg:flex-1">
-      <nuxt-img class="absolute inset-0 h-full w-full object-cover object-left" src="/img/auth-background.jpg" alt="" />
+      <nuxt-img class="absolute inset-0 h-full w-full object-cover object-left bg-green-600" src="/img/auth-background.jpg" alt="" />
     </div>
   </div>
 </template>
