@@ -54,8 +54,8 @@ const login = async () => {
         sameSite: true,
       }).value = {
         id: (r as apiResponse).data?.user?.id,
-        email: (r as apiResponse).data?.user?.name,
-        name: (r as apiResponse).data?.user?.email,
+        email: (r as apiResponse).data?.user?.email,
+        name: (r as apiResponse).data?.user?.name,
         picture: (r as apiResponse).data?.user?.picture,
       }
       await navigateTo('/dashboard')
