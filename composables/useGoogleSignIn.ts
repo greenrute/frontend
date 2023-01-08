@@ -56,7 +56,7 @@ export const useGoogleSignIn = () => {
                   .catch(error => {
                     pushNotification({
                       status: 'error',
-                      message: error.data?.message,
+                      message: error.data?.message || "не вдалося з'єднатись із сервером",
                     })
                   })
               },
