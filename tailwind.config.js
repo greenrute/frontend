@@ -32,6 +32,9 @@ module.exports = {
       '9xl': ['8rem', {lineHeight: '1'}],
     },
     extend: {
+      backgroundImage: {
+        'dashboard-gradient': 'url("/img/dashboard-background.png")',
+      },
       borderRadius: {
         '4xl': '2rem',
       },
@@ -43,6 +46,7 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
         display: ['Fira Sans', ...defaultTheme.fontFamily.sans],
+        manrope: ['Manrope', ...defaultTheme.fontFamily.sans],
         mono: ['JetBrains Mono', ...defaultTheme.fontFamily.mono],
         system: [...defaultTheme.fontFamily.sans],
       },

@@ -4,16 +4,17 @@ import { XMarkIcon } from '@heroicons/vue/20/solid/index'
 import type {Notification} from '~/composables/useNotification'
 import type {Ref} from 'vue'
 
-const notification: Ref<Notification> = useNotification()
+withDefaults(defineProps<{
+  position?: 'top' | 'bottom'
+}>(), {
+  position: 'top',
+})
 
-const close = () => {
-  notification.value.show = false
-  clearTimeout(notification.value.timeout)
-}
+const notification: Ref<Notification> = useNotification()
 </script>
 
 <template>
-  <div aria-live="assertive" class="pointer-events-none fixed z-30 inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6">
+  <div aria-live="assertive" class="pointer-events-none fixed z-30 inset-0 flex items-end px-4 py-6 sm:p-6" :class="position === 'top' ? 'sm:items-start' : 'sm:items-end'">
     <div class="flex w-full flex-col items-center space-y-4 sm:items-end">
       <transition enter-active-class="transform ease-out duration-300 transition" enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2" enter-to-class="translate-y-0 opacity-100 sm:translate-x-0" leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
         <div v-if="notification.show" class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
