@@ -24,7 +24,7 @@ export const useGoogleSignIn = () => {
             (window as any).google.accounts.id.initialize({
               client_id: config.public.gsiClientID,
               callback: async (res: GSIResponse) => {
-                await $fetch('/users/login/google', {
+                await $fetch('/users/google', {
                   method: 'POST',
                   body: {credential: res.credential},
                   baseURL: useRuntimeConfig().public.apiBase,
