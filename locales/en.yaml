@@ -1,0 +1,39 @@
+# Home page
+home: Home
+home title:
+  start: A new
+  highlight: diary
+  middle: in
+  end: your smartphone
+home description: Shared schedule, homework, information exchange. Android and iOS app, many options to customize your diary.
+
+# Home navigation
+menu features: Features
+menu testimonials: Testimonials
+menu pricing: Pricing
+
+# Authorization
+login: Sign in
+register: Register | Sign up | Sign up
+get started: Get started
+for free: for free
+
+sign in to your account: Sign in to your account
+get started for free: Get started for free
+don't have an account: Don't have an account?
+already registered: Already registered?
+to your account: to your account
+
+name: Name
+email address: Email address
+password: Password
+
+# Authorization errors
+check that all fields are filled in correctly: check that all fields are filled in correctly
+
+please enter a valid email address: Please enter a valid email address
+the password must be at least n characters long: No limits | The password must be at least one character long | The password must be at least {n} characters long
+the name must not be shorter than n characters: No limits | The name must not be shorter than one character | The name must not be shorter than {n} characters
+
+# Connection errors
+could not connect to the server: could not connect to the server

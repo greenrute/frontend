@@ -1,0 +1,39 @@
+# Головна сторінка
+home: Домівка
+home title:
+  start: Новий
+  highlight: щоденник
+  middle: ""
+  end: у твоєму смартфоні
+home description: Спільний розклад, домашнє завдання, обмін інформацією. Додаток для Android та iOS, багато варіантів для налаштування щоденника.
+
+# Меню головної сторінки
+menu features: Функції
+menu testimonials: Відгуки
+menu pricing: Ціни
+
+# Авторизація
+login: Вхід | Увійти | Ввійдіть
+register: Реєстрація | Зареєструватися | Зареєструйтеся
+get started: Розпочати
+for free: безкоштовно
+
+sign in to your account: Увійдіть у свій акаунт
+get started for free: Зареєструйтеся безкоштовно
+don't have an account: Не маєте акаунта?
+already registered: Вже зареєстровані?
+to your account: у свій акаунт
+
+name: Ім'я
+email address: Адреса електронної пошти
+password: Пароль
+
+# Помилки авторизації
+check that all fields are filled in correctly: перевірте, чи всі поля правильно заповнено
+
+please enter a valid email address: Введіть правильну електронну адресу
+the password must be at least n characters long: Немає обмежень | Пароль має бути не меншим, ніж {n} символ | Пароль має бути не меншим, ніж {n} символи | Пароль має бути не меншим, ніж {n} символів
+the name must not be shorter than n characters: Немає обмежень | Ім'я не повинно бути коротшим за {n} символ | Ім'я не повинно бути коротшим за {n} символи | Ім'я не повинно бути коротшим за {n} символів
+
+# Помилки з'єднання
+could not connect to the server: не вдалося з'єднатись із сервером
