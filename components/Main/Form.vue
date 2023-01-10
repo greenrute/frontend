@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 const emit = defineEmits<{
   (e: 'validated'): void
 }>()
@@ -12,7 +14,7 @@ const validate = (event: SubmitEvent) => {
 
     pushNotification({
       status: 'error',
-      message: 'Перевірте, чи всі поля правильно заповнено',
+      message: t('check that all fields are filled in correctly'),
     })
     validated.value = true
   } else {

@@ -8,6 +8,7 @@ interface GSIResponse {
 }
 
 export const useGoogleSignIn = () => {
+  const { t } = useI18n()
   const initGSIScript = (): Promise<void> => {
     const config = useRuntimeConfig()
 
@@ -56,7 +57,7 @@ export const useGoogleSignIn = () => {
                   .catch(error => {
                     pushNotification({
                       status: 'error',
-                      message: error.data?.message || "не вдалося з'єднатись із сервером",
+                      message: error.data?.message || t('could not connect to the server'),
                     })
                   })
               },

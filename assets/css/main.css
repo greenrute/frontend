@@ -9,3 +9,7 @@
 #credential_picker_container {
   @apply top-28 !important;
 }
+
+.shadow-schedule {
+  box-shadow: 0 25px 108px rgba(22, 163, 74, 0.1), inset 4px 5px 17px #FFFFFF;
+}

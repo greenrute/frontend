@@ -7,6 +7,9 @@ definePageMeta({
   middleware: 'guest',
 })
 
+const { t } = useI18n()
+const localePath = useLocalePath()
+
 const googleSignIn = useGoogleSignIn()
 const googleSignInButton: Ref<HTMLDivElement | null> = ref(null)
 
@@ -69,7 +72,7 @@ const login = async () => {
     .catch(error => {
       pushNotification({
         status: 'error',
-        message: error.data?.message || "не вдалося з'єднатись із сервером",
+        message: error.data?.message || t('could not connect to the server'),
       })
     })
     .finally(() => {
@@ -88,34 +91,37 @@ const login = async () => {
 
 <template>
   <Head>
-    <Title>Вхід - GreenRute</Title>
+    <Title>{{ $t('login', 0) }} - GreenRute</Title>
   </Head>
 
   <div class="relative flex min-h-full justify-center md:px-12 lg:px-0">
     <div class="relative z-10 flex flex-1 flex-col bg-white py-10 px-4 shadow-2xl sm:justify-center md:flex-none md:px-28">
       <div class="mx-auto w-full max-w-md sm:px-4 md:w-96 md:max-w-sm md:px-0">
         <div class="flex flex-col">
-          <NuxtLink to="/" aria-label="Домівка">
-            <Logo class="h-5 w-auto" />
-          </NuxtLink>
+          <div class="flex items-center justify-between">
+            <NuxtLink :to="localePath('/')" :aria-label="$t('home')">
+              <Logo class="h-5 w-auto" />
+            </NuxtLink>
+            <MainLangSwitcher />
+          </div>
           <div class="mt-20">
             <h2 class="text-lg font-semibold text-gray-900">
-              Увійдіть у свій акаунт
+              {{ $t('sign in to your account') }}
             </h2>
             <p class="mt-2 text-sm text-gray-700">
-              Не маєте акаунта?{{ ' ' }}
-              <NuxtLink to="/register" class="font-medium text-green-600 hover:underline">Зареєструйтеся</NuxtLink>
-              безкоштовно.
+              {{ $t("don't have an account") + ' ' }}
+              <NuxtLink :to="localePath('/register')" class="font-medium text-green-600 hover:underline">{{ $t('register', 3) }}</NuxtLink>
+              {{ $t('for free') }}
             </p>
           </div>
         </div>
         <MainForm @validated="login" class="mt-10 grid grid-cols-1 gap-y-8">
-          <MainTextInput label="Адреса електронної пошти" invalid="Введіть правильну електронну адресу" id="email" type="email" v-model="credentials.email" ref="email" autocomplete="email" required />
-          <MainTextInput label="Пароль" invalid="Пароль має бути не меншим, ніж 3 символа" id="password" type="password" v-model="credentials.password" ref="password" autocomplete="current-password" required minlength="3" />
+          <MainTextInput :label="$t('email address')" :invalid="$t('please enter a valid email address')" id="email" type="email" v-model="credentials.email" ref="email" autocomplete="email" required />
+          <MainTextInput :label="$t('password')" :invalid="$t('the password must be at least n characters long', 3)" id="password" type="password" v-model="credentials.password" ref="password" autocomplete="current-password" required minlength="3" />
           <div>
             <MainButton type="submit" variant="solid" color="green" class="w-full" :disabled="pending">
               <template v-if="!pending">
-                Увійти
+                {{ $t('login', 1) }}
                 <ArrowSmallRightIcon aria-hidden="true" class="w-5 h-5 -mb-0.25" />
               </template>
               <IconLoader v-else class="my-0.5 w-5 h-5 motion-safe:animate-loader" />

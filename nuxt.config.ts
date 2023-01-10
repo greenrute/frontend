@@ -1,13 +1,60 @@
+function customRule(choice: number, choicesLength: number) {
+  if (choice === 0) {
+    return 0
+  }
+
+  const teen = choice > 10 && choice < 20
+  const endsWithOne = choice % 10 === 1
+  if (!teen && endsWithOne) {
+    return 1
+  }
+  if (!teen && choice % 10 >= 2 && choice % 10 <= 4) {
+    return 2
+  }
+
+  return choicesLength < 4 ? 2 : 3
+}
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/color-mode',
     '@nuxtjs/google-fonts',
+    '@nuxtjs/i18n',
     '@nuxt/image-edge',
     '@vueuse/nuxt',
   ],
   colorMode: {
     classSuffix: '',
+  },
+  i18n: {
+    locales: [
+      {
+        code: 'en',
+        iso: 'en-US',
+        name: 'English',
+        icon: 'English',
+        file: 'en.yaml',
+      },
+      {
+        code: 'uk',
+        iso: 'uk-UA',
+        name: 'Українська',
+        icon: 'Ukrainian',
+        file: 'uk.yaml',
+      },
+    ],
+    langDir: 'locales',
+    strategy: 'no_prefix',
+    defaultLocale: 'en',
+    detectBrowserLanguage: {
+      redirectOn: 'root',
+    },
+    vueI18n: {
+      pluralRules: {
+        uk: customRule
+      },
+    },
   },
   runtimeConfig: {
     public: {
@@ -18,7 +65,7 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       Inter: true,
-      'Fira Sans': [300, 400, 500, 700, 800],
+      'Montserrat': [300, 400, 500, 600, 700, 800],
       'JetBrains Mono': [400],
       'Manrope': [500, 600, 700, 800],
     },

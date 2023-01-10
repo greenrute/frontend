@@ -32,6 +32,9 @@ module.exports = {
       '9xl': ['8rem', {lineHeight: '1'}],
     },
     extend: {
+      screens: {
+        xs: '410px',
+      },
       backgroundImage: {
         'dashboard-gradient': 'url("/img/dashboard-background.png")',
       },
@@ -45,7 +48,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
-        display: ['Fira Sans', ...defaultTheme.fontFamily.sans],
+        display: ['Montserrat', ...defaultTheme.fontFamily.sans],
         manrope: ['Manrope', ...defaultTheme.fontFamily.sans],
         mono: ['JetBrains Mono', ...defaultTheme.fontFamily.mono],
         system: [...defaultTheme.fontFamily.sans],
@@ -55,6 +58,9 @@ module.exports = {
       },
       spacing: {
         '0.25': '0.0625rem',
+      },
+      letterSpacing: {
+        tightest: '-0.075em',
       },
       transitionProperty: {
         height: 'height',
