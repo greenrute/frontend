@@ -37,7 +37,7 @@ const localePath = useLocalePath()
           <PopoverButton :as="NuxtLink" to="#testimonials" class="block w-full p-2">{{ $t('menu testimonials') }}</PopoverButton>
           <PopoverButton :as="NuxtLink" to="#pricing" class="block w-full p-2">{{ $t('menu pricing') }}</PopoverButton>
           <hr class="m-2 border-slate-300/40" />
-          <PopoverButton :as="NuxtLink" :to="localePath('/login')" class="block w-full p-2">{{ $t('login') }}</PopoverButton>
+          <PopoverButton :as="NuxtLink" :to="localePath('/login')" class="block w-full p-2">{{ $t('login', 1) }}</PopoverButton>
         </PopoverPanel>
       </TransitionChild>
     </TransitionRoot>
