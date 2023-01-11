@@ -18,7 +18,7 @@ const localePath = useLocalePath()
         </div>
         <div class="flex items-center gap-x-5 md:gap-x-8">
           <div class="hidden md:block">
-            <MainNavLink :to="localePath('/login')">{{ $t('login') }}</MainNavLink>
+            <MainNavLink :to="localePath('/login')">{{ $t('login', 1) }}</MainNavLink>
           </div>
           <MainButton :to="localePath('/register')" color="green">
               <span>
