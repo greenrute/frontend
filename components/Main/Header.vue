@@ -26,7 +26,7 @@ const localePath = useLocalePath()
               </span>
           </MainButton>
           <!-- hidden md:block -->
-          <MainLangSwitcher class="md:-ml-4" />
+          <MainLangSwitcher class="-mx-4 md:mr-0" />
           <div class="-mr-1 md:hidden">
             <MainMobileNavigation />
           </div>
