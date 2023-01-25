@@ -28,6 +28,18 @@ name: Name
 email address: Email address
 password: Password
 
+google sign in:
+  assign or deny:
+    title: Link a Google account?
+    description: This account has been registered with a password, choose whether to link this Google account to your GreenRute account or do nothing.
+  create or deny:
+    title: Create an account?
+    description: This Google account is not linked to any GreenRute account, choose to create an account with Google or do nothing.
+
+  create: Create account
+  assign: Link
+  deny: Do nothing
+
 # Authorization errors
 check that all fields are filled in correctly: check that all fields are filled in correctly
 

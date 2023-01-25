@@ -7,7 +7,7 @@ definePageMeta({
   middleware: 'guest',
 })
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const localePath = useLocalePath()
 
 const googleSignIn = useGoogleSignIn()
@@ -39,6 +39,7 @@ const login = async () => {
   const start = new Date().getTime()
   await $fetch('/users/login', {
     method: 'POST',
+    headers: { 'Accept-Language': locale.value },
     body: {
       email: credentials.email,
       password: credentials.password,

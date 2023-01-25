@@ -12,7 +12,7 @@ const promptTimeout: Ref<NodeJS.Timeout | undefined> = ref(undefined)
 onMounted(() => {
   promptTimeout.value = setTimeout(() => {
     googleSignIn.prompt()
-  }, 5000)
+  }, 3000)
 })
 
 onUnmounted(() => {

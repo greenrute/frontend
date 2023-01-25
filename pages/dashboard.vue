@@ -69,7 +69,6 @@ const lessons: Lesson[][] = [
   </div>
   <!-- Schedule -->
   <div class="mt-6 px-4 sm:px-6 lg:px-8">
-    {{$t('hello')}}
     <div class="mt-3 mb-10 grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
       <ScheduleItem v-for="(day, index) in days" :key="day" :day="day" :lessons="lessons[index]" />
     </div>

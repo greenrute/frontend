@@ -28,6 +28,18 @@ name: Ім'я
 email address: Адреса електронної пошти
 password: Пароль
 
+google sign in:
+  assign or deny:
+    title: Привʼязати акаунт Google?
+    description: Цей акаунт був зареєстрований за допомогою пароля, виберіть, привʼязати цей обліковий запис Google до акаунта GreenRute, чи нічого не робити.
+  create or deny:
+    title: Створити акаунт?
+    description: Цей акаунт Google не привʼязаний до жодного акаунта GreenRute, виберіть, створити обліковий запис за допомогою Google, чи нічого не робити.
+
+  create: Створити акаунт
+  assign: Привʼязати
+  deny: Нічого не робити
+
 # Помилки авторизації
 check that all fields are filled in correctly: перевірте, чи всі поля правильно заповнено
 

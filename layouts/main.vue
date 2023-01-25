@@ -6,4 +6,5 @@
   <slot />
 
   <Notification />
+  <Prompt />
 </template>

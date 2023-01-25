@@ -7,7 +7,7 @@
 }
 
 #credential_picker_container {
-  @apply top-28 !important;
+  @apply top-28 z-10 !important;
 }
 
 .shadow-schedule {

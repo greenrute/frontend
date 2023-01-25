@@ -44,6 +44,7 @@ const login = async () => {
   const start = new Date().getTime()
   await $fetch('/users/register', {
     method: 'POST',
+    headers: { 'Accept-Language': locale.value },
     body: {
       name: credentials.name,
       email: credentials.email,

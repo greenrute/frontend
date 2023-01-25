@@ -1,6 +1,9 @@
 export const logout = async (): Promise<void> => {
+  const { $i18n } = useNuxtApp()
+
   await $fetch('/users/logout', {
     method: 'POST',
+    headers: { 'Accept-Language': ($i18n.locale as any).value },
     body: {token: useCookie('token').value},
     baseURL: useRuntimeConfig().public.apiBase,
   })
