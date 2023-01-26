@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { QuestionMarkCircleIcon } from '@heroicons/vue/24/outline/index'
-import { NoSymbolIcon, PlusCircleIcon, LinkIcon } from '@heroicons/vue/20/solid/index'
-import type {Prompt, DefaultOptionIcon} from '~/composables/usePrompt'
-import type {Ref} from 'vue'
+import { LinkIcon, NoSymbolIcon, PlusCircleIcon } from '@heroicons/vue/20/solid/index'
+import type { DefaultOptionIcon, Prompt } from '~/composables/usePrompt'
+import type { Component, Ref } from 'vue'
 
 const question: Ref<Prompt> = usePrompt()
 
-const icon = (i: DefaultOptionIcon): string => {
+const icon = (i: DefaultOptionIcon): Component => {
   switch (i) {
     case 'no':
-      return NoSymbolIcon as any
+      return NoSymbolIcon
     case 'go':
-      return PlusCircleIcon as any
+      return PlusCircleIcon
     case 'link':
-      return LinkIcon as any
+      return LinkIcon
   }
 }
 </script>
