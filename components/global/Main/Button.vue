@@ -11,7 +11,7 @@ const variantStyles = {
     white: 'bg-white text-zinc-900 hover:bg-green-50 active:bg-green-200 active:text-zinc-600 focus-visible:outline-white',
   },
   outline: {
-    zinc: 'ring-zinc-200 text-zinc-700 hover:text-zinc-900 hover:ring-zinc-300 active:bg-zinc-100 active:text-zinc-600 focus-visible:outline-green-600 focus-visible:ring-zinc-300',
+    zinc: 'ring-zinc-200 dark:ring-zinc-600 text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-50 hover:ring-zinc-300 dark:hover:ring-zinc-500 active:bg-zinc-100 dark:active:bg-zinc-700 active:text-zinc-600 focus-visible:outline-green-600 focus-visible:ring-zinc-300 dark:focus-visible:ring-zinc-500',
     white: 'ring-zinc-700 text-white hover:ring-zinc-500 active:ring-zinc-700 active:text-zinc-400 focus-visible:outline-white',
   },
 }

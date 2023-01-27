@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html.dark {
+  color-scheme: dark;
+  @apply motion-safe:scroll-smooth;
+}
+
 #__nuxt {
   @apply min-h-full;
 }
