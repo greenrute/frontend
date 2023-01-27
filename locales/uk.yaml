@@ -15,6 +15,7 @@ menu pricing: Ціни
 # Авторизація
 login: Вхід | Увійти | Ввійдіть
 register: Реєстрація | Зареєструватися | Зареєструйтеся
+logout: Вихід | Вийти
 get started: Розпочати
 for free: безкоштовно
 
@@ -49,3 +50,22 @@ the name must not be shorter than n characters: Немає обмежень | І
 
 # Помилки з'єднання
 could not connect to the server: не вдалося з'єднатись із сервером
+
+# Панель
+menu:
+  view profile: Мій профіль
+  settings: Налаштування
+  notifications: Повідомлення
+  get app: Завантажити застосунок
+  change language: Змінити мову
+  support: Підтримка
+  search: Пошук
+
+  schedule: Розклад
+  homework: Домашнє завдання
+
+  my classes: Мої класи
+
+actions:
+  change theme: Змінити тему
+  change language: Змінити мову

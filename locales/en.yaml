@@ -15,6 +15,7 @@ menu pricing: Pricing
 # Authorization
 login: Sign in
 register: Register | Sign up | Sign up
+logout: Logout
 get started: Get started
 for free: for free
 
@@ -49,3 +50,22 @@ the name must not be shorter than n characters: No limits | The name must not be
 
 # Connection errors
 could not connect to the server: could not connect to the server
+
+# Dashboard
+menu:
+  view profile: View profile
+  settings: Settings
+  notifications: Notifications
+  get app: Get mobile app
+  change language: Change language
+  support: Support
+  search: Search
+
+  schedule: Schedule
+  homework: Homework
+
+  my classes: My classes
+
+actions:
+  change theme: Change theme
+  change language: Change language
