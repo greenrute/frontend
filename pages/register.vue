@@ -7,7 +7,7 @@ definePageMeta({
   middleware: 'guest',
 })
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const localePath = useLocalePath()
 
 const googleSignIn = useGoogleSignIn()

@@ -3,6 +3,7 @@ import {Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue'
 import {LanguageIcon} from '@heroicons/vue/20/solid/index'
 
 const {locale, locales, setLocale} = useI18n()
+// @ts-ignore
 await preloadComponents(locales.value.map(l => 'Emoji' + l.icon))
 </script>
 
