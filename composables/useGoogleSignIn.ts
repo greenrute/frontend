@@ -154,12 +154,12 @@ export const useGoogleSignIn = () => {
       text: 'signin_with' | 'signup_with' | 'continue_with' | 'signin' = 'continue_with',
       logo_alignment: 'left' | 'center' = 'left',
     ) => {
-      // const theme = useColorMode().value === 'dark' ? 'filled_black' : 'outline'
+      const theme = useColorMode().value === 'dark' ? 'filled_black' : 'outline'
 
       initGSIScript().then(() => {
         (window as any).google.accounts.id.renderButton(
           ref.value,
-          {type: 'standard', theme: 'outline', size: 'large', text, shape: 'pill', logo_alignment, width: ref.value.offsetWidth},
+          {type: 'standard', theme, size: 'large', text, shape: 'pill', logo_alignment, width: ref.value.offsetWidth},
         )
       })
     },

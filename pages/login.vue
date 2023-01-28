@@ -96,7 +96,7 @@ const login = async () => {
   </Head>
 
   <div class="relative flex min-h-full justify-center md:px-12 lg:px-0">
-    <div class="relative z-10 flex flex-1 flex-col bg-white py-10 px-4 shadow-2xl sm:justify-center md:flex-none md:px-28">
+    <div class="relative z-10 flex flex-1 flex-col bg-white dark:bg-zinc-900 py-10 px-4 shadow-2xl sm:justify-center md:flex-none md:px-28">
       <div class="mx-auto w-full max-w-md sm:px-4 md:w-96 md:max-w-sm md:px-0">
         <div class="flex flex-col">
           <div class="flex items-center justify-between">
@@ -106,10 +106,10 @@ const login = async () => {
             <MainLangSwitcher />
           </div>
           <div class="mt-20">
-            <h2 class="text-lg font-semibold text-gray-900">
+            <h2 class="text-lg font-semibold text-gray-900 dark:text-zinc-50">
               {{ $t('sign in to your account') }}
             </h2>
-            <p class="mt-2 text-sm text-gray-700">
+            <p class="mt-2 text-sm text-gray-700 dark:text-zinc-300">
               {{ $t("don't have an account") + ' ' }}
               <NuxtLink :to="localePath('/register')" class="font-medium text-green-600 hover:underline">{{ $t('register', 3) }}</NuxtLink>
               {{ $t('for free') }}

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import {Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue'
-import {LanguageIcon} from '@heroicons/vue/20/solid/index'
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import { LanguageIcon } from '@heroicons/vue/20/solid/index'
 
-const {locale, locales, setLocale} = useI18n()
-// @ts-ignore
-await preloadComponents(locales.value.map(l => 'Emoji' + l.icon))
+const { locale, locales, setLocale } = useI18n()
+
+await preloadComponents(locales.value.map(l => 'Emoji' + (typeof l !== 'string' && l.icon)))
 </script>
 
 <template>

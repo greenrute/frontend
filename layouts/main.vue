@@ -1,5 +1,5 @@
 <template>
-  <Html class="h-full scroll-smooth bg-white antialiased [font-feature-settings:'ss01']">
+  <Html class="h-full scroll-smooth bg-white dark:bg-zinc-900 antialiased [font-feature-settings:'ss01']">
     <Body class="flex h-full flex-col" />
   </Html>
 
