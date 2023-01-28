@@ -117,7 +117,7 @@ const login = async () => {
             </h2>
             <p class="mt-2 text-sm text-gray-700 dark:text-zinc-300">
               {{ $t('already registered') + ' ' }}
-              <NuxtLink :to="localePath('/login')" class="font-medium text-green-600 hover:underline">{{ $t('login', 3) }}</NuxtLink>
+              <NuxtLink :to="localePath('/login')" class="font-medium text-green-600 dark:text-green-500 hover:underline">{{ $t('login', 3) }}</NuxtLink>
               {{ $t('to your account') }}
             </p>
           </div>
@@ -134,7 +134,7 @@ const login = async () => {
               </template>
               <IconLoader v-else class="my-0.5 w-5 h-5 motion-safe:animate-loader" />
             </MainButton>
-            <div ref="googleSignUpButton" class="mt-4 h-10 overflow-hidden" />
+            <div ref="googleSignUpButton" class="mt-4 h-10 overflow-hidden [color-scheme:light]" />
           </div>
         </MainForm>
       </div>
