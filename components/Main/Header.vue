@@ -25,8 +25,8 @@ const localePath = useLocalePath()
                 {{ $t('get started') + ' ' }}<span class="hidden lg:inline">{{ $t('for free') }}</span>
               </span>
           </MainButton>
-          <!-- hidden md:block -->
           <MainLangSwitcher class="-ml-2 -mr-3 md:-ml-4 md:mr-0" />
+          <MainColorModeSwitcher class="hidden md:block -ml-2 -mr-3 md:-ml-4 md:mr-0" />
           <div class="-mr-1 md:hidden">
             <MainMobileNavigation />
           </div>

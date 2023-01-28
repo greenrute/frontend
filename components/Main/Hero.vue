@@ -1,11 +1,11 @@
 <template>
   <MainContainer class="pt-20 pb-16 text-center lg:pt-32">
-    <h1 class="mx-auto max-w-4xl font-display text-3xl xs:text-4xl tracking-tighter font-semibold tracking-tight text-slate-900 sm:text-5xl md:text-7xl sm:tracking-tight sm:font-bold">
+    <h1 class="mx-auto max-w-4xl font-display text-3xl xs:text-4xl tracking-tighter font-semibold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-5xl md:text-7xl sm:tracking-tight sm:font-bold">
       {{ $t('home title.start') + ' ' }}
       <span class="relative whitespace-nowrap text-green-600">
         <svg
           aria-hidden="true"
-          class="absolute top-2/3 left-0 h-[0.48em] w-full fill-green-300/70"
+          class="absolute top-2/3 left-0 h-[0.48em] w-full fill-green-300/70 dark:fill-green-300/50"
           preserveAspectRatio="none"
           viewBox="0 0 418 42"
         >
@@ -17,7 +17,7 @@
       <br class="hidden lg:block" />
       {{ $t('home title.end') }}
     </h1>
-    <p class="mx-auto mt-6 max-w-2xl xs:text-lg md:text-xl tracking-tight text-zinc-700">
+    <p class="mx-auto mt-6 max-w-2xl xs:text-lg md:text-xl tracking-tight text-zinc-700 dark:text-zinc-300">
       {{ $t('home description') }}
     </p>
     <div class="mt-10 flex justify-center gap-x-6"></div>

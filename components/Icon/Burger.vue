@@ -7,7 +7,7 @@ defineProps<{
 <template>
   <svg
     aria-hidden="true"
-    class="h-3.5 w-3.5 overflow-visible stroke-slate-700"
+    class="h-3.5 w-3.5 overflow-visible stroke-zinc-700 dark:stroke-zinc-200"
     fill="none"
     stroke-width="2"
     stroke-linecap="round"
