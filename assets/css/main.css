@@ -16,6 +16,10 @@ html.dark {
   @apply top-28 z-10 !important;
 }
 
+#credential_picker_iframe {
+  color-scheme: light;
+}
+
 /*noinspection CssInvalidPseudoSelector*/
 input:autofill, input:-webkit-autofill {
   @apply bg-none bg-gray-50 dark:bg-zinc-800 filter-none !important;
