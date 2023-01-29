@@ -7,6 +7,7 @@ definePageMeta({
   middleware: 'auth',
 })
 
+const now = useNow()
 const days = getDays()
 const lessons: Lesson[][] = [
   [
@@ -26,9 +27,9 @@ const lessons: Lesson[][] = [
     <Title>Розклад - GreenRute</Title>
   </Head>
 
-  <div v-if="lessons?.[new Date().getDay() - 1]" class="hidden lg:flex border-b border-gray-200 dark:border-zinc-700 px-4 py-3 items-center justify-end px-8">
+  <div class="hidden lg:flex border-b border-gray-200 dark:border-zinc-700 px-4 py-3 items-center justify-end px-8">
     <div class="mt-4 flex sm:mt-0 sm:ml-4">
-      <MainButton variant="outline" disabled class="!opacity-100 py-1.5">До кінця уроку: 34 хв</MainButton>
+      <MainButton variant="outline" disabled class="!opacity-100 py-1.5">{{ lessons?.[now.getDay() - 1] ? 'До кінця уроку: 34 хв' : $t('empty.day off') }}</MainButton>
     </div>
   </div>
 

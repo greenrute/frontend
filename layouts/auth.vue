@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Bars4Icon, HomeIcon } from '@heroicons/vue/24/outline/index'
+import { HomeIcon, ListBulletIcon } from '@heroicons/vue/24/outline/index'
 import type { Component, Ref } from 'vue'
 
 const { t } = useI18n()
@@ -12,7 +12,7 @@ const user = useCookie<UserCookie>('user')
 
 const navigation: NavMenuItem[] = [
   { name: t('menu.schedule'), href: '/dashboard', icon: HomeIcon },
-  { name: t('menu.homework'), href: '/homework', icon: Bars4Icon },
+  { name: t('menu.homework'), href: '/homework', icon: ListBulletIcon },
 ]
 
 const classes: NavClassItem[] = [
