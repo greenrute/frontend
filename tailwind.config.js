@@ -50,6 +50,7 @@ module.exports = {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
         display: ['Montserrat', ...defaultTheme.fontFamily.sans],
         manrope: ['Manrope', ...defaultTheme.fontFamily.sans],
+        overpass: ['Overpass', ...defaultTheme.fontFamily.sans],
         mono: ['JetBrains Mono', ...defaultTheme.fontFamily.mono],
         system: [...defaultTheme.fontFamily.sans],
       },

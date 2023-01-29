@@ -11,11 +11,11 @@ defineProps<{
 </script>
 
 <template>
-  <Html class="h-full scroll-smooth bg-white antialiased [font-feature-settings:'ss01']">
-    <Body class="flex h-full flex-col"/>
+  <Html class="h-full scroll-smooth antialiased [font-feature-settings:'ss01']">
+    <Body class="flex h-full flex-col bg-white dark:bg-zinc-900"/>
   </Html>
 
-  <div class="min-h-full bg-white dark:bg-zinc-900 px-4 py-16 sm:px-6 sm:py-24 md:grid md:place-items-center lg:px-8">
+  <div class="min-h-full px-4 py-16 sm:px-6 sm:py-24 md:grid md:place-items-center lg:px-8">
     <div class="mx-auto max-w-max">
       <main class="sm:flex">
         <p class="text-4xl font-bold tracking-tight text-green-600 sm:text-5xl">{{ error.statusCode }}</p>

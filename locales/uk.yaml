@@ -56,8 +56,7 @@ menu:
   view profile: Мій профіль
   settings: Налаштування
   notifications: Повідомлення
-  get app: Завантажити застосунок
-  change language: Змінити мову
+  get app: Отримати застосунок
   support: Підтримка
   search: Пошук
 
@@ -69,3 +68,10 @@ menu:
 actions:
   change theme: Змінити тему
   change language: Змінити мову
+  open sidebar: Відкрити бічну панель
+  open user menu: Відкрити меню користувача
+
+empty:
+  title: Немає уроків
+  description: Почніть із додавання нового дня.
+  button: Додати день

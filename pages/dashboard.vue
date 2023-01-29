@@ -1,55 +1,22 @@
 <script lang="ts" setup>
+import { QueueListIcon } from '@heroicons/vue/24/outline/index'
+import { PlusIcon } from '@heroicons/vue/20/solid/index'
+
 definePageMeta({
-  layout: 'dash',
+  layout: 'auth',
   middleware: 'auth',
 })
 
 const days = getDays()
 const lessons: Lesson[][] = [
   [
-    { id: 'pe', name: 'Фізкультура', icon: 'PE' },
-    { id: 'hs', name: 'Історія', icon: 'History' },
-    { id: 'al', name: 'Алгебра', icon: 'Algebra' },
-    { id: 'gr', name: 'Географія', icon: 'Geography' },
-    { id: 'uk', name: 'Українська мова', icon: 'Ukrainian' },
-    { id: 'bl', name: 'Біологія', icon: 'Biology' },
-    { id: 'hr', name: 'Громадянська освіта', icon: 'Civic' },
-  ],
-  [
-    { id: 'pe', name: 'Фізкультура', icon: 'PE' },
-    { id: 'hs', name: 'Історія', icon: 'History' },
-    { id: 'al', name: 'Алгебра', icon: 'Algebra' },
-    { id: 'gr', name: 'Географія', icon: 'Geography' },
-    { id: 'uk', name: 'Українська мова', icon: 'Ukrainian' },
-    { id: 'bl', name: 'Біологія', icon: 'Biology' },
-    { id: 'hr', name: 'Громадянська освіта', icon: 'Civic' },
-  ],
-  [
-    { id: 'pe', name: 'Фізкультура', icon: 'PE' },
-    { id: 'hs', name: 'Історія', icon: 'History' },
-    { id: 'al', name: 'Алгебра', icon: 'Algebra' },
-    { id: 'gr', name: 'Географія', icon: 'Geography' },
-    { id: 'uk', name: 'Українська мова', icon: 'Ukrainian' },
-    { id: 'bl', name: 'Біологія', icon: 'Biology' },
-    { id: 'hr', name: 'Громадянська освіта', icon: 'Civic' },
-  ],
-  [
-    { id: 'pe', name: 'Фізкультура', icon: 'PE' },
-    { id: 'hs', name: 'Історія', icon: 'History' },
-    { id: 'al', name: 'Алгебра', icon: 'Algebra' },
-    { id: 'gr', name: 'Географія', icon: 'Geography' },
-    { id: 'uk', name: 'Українська мова', icon: 'Ukrainian' },
-    { id: 'bl', name: 'Біологія', icon: 'Biology' },
-    { id: 'hr', name: 'Громадянська освіта', icon: 'Civic' },
-  ],
-  [
-    { id: 'pe', name: 'Фізкультура', icon: 'PE' },
-    { id: 'hs', name: 'Історія', icon: 'History' },
-    { id: 'al', name: 'Алгебра', icon: 'Algebra' },
-    { id: 'gr', name: 'Географія', icon: 'Geography' },
-    { id: 'uk', name: 'Українська мова', icon: 'Ukrainian' },
-    { id: 'bl', name: 'Біологія', icon: 'Biology' },
-    { id: 'hr', name: 'Громадянська освіта', icon: 'Civic' },
+    { id: 'pe', name: 'Фізкультура', icon: 'PE', alt: '⚽️' },
+    { id: 'hs', name: 'Історія', icon: 'History', alt: '🏰' },
+    { id: 'al', name: 'Алгебра', icon: 'Algebra', alt: '🧮' },
+    { id: 'gr', name: 'Географія', icon: 'Geography', alt: '🌍' },
+    { id: 'uk', name: 'Українська мова', icon: 'Ukrainian', alt: '🇺🇦' },
+    { id: 'bl', name: 'Біологія', icon: 'Biology', alt: '🔬' },
+    { id: 'hr', name: 'Громадянська освіта', icon: 'Civic', alt: '💼' },
   ],
 ]
 </script>
@@ -59,19 +26,26 @@ const lessons: Lesson[][] = [
     <Title>Розклад - GreenRute</Title>
   </Head>
 
-  <div class="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
-    <div class="min-w-0 flex-1">
-      <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">{{ $t('menu.schedule') }}</h1>
-    </div>
+  <div v-if="lessons?.[new Date().getDay() - 1]" class="hidden lg:flex border-b border-gray-200 dark:border-zinc-700 px-4 py-3 items-center justify-end px-8">
     <div class="mt-4 flex sm:mt-0 sm:ml-4">
-      <button type="button" class="sm:order-0 order-1 ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-0">Share</button>
-      <button type="button" class="order-0 inline-flex items-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:order-1 sm:ml-3">Create</button>
+      <MainButton variant="outline" disabled class="!opacity-100 py-1.5">До кінця уроку: 34 хв</MainButton>
     </div>
   </div>
 
   <div class="mt-6 px-4 sm:px-6 lg:px-8">
-    <div class="mt-3 mb-10 grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
-      <ScheduleItem v-for="(day, index) in days" :key="day" :day="day" :lessons="lessons[index]" />
+    <div v-if="lessons.length" class="mt-3 mb-10 grid grid-cols-1 gap-6 sm:gap-10 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
+      <ScheduleItem v-for="(day, index) in lessons" :key="index" :day="days[index]" :lessons="day" />
+    </div>
+    <div v-else class="py-16 sm:py-32 text-center">
+      <QueueListIcon class="mx-auto h-12 w-12 text-gray-400 dark:text-zinc-500 stroke-1" />
+      <h3 class="mt-2 font-medium text-gray-900 dark:text-white">{{ $t('empty.title') }}</h3>
+      <p class="mt-1.5 text-sm text-gray-500 dark:text-zinc-300/90">{{ $t('empty.description') }}</p>
+      <div class="mt-6">
+        <MainButton variant="solid" color="green" class="inline-flex items-center">
+          <PlusIcon class="-ml-1 mr-1.5 h-5 w-5" aria-hidden="true" />
+          {{ $t('empty.button') }}
+        </MainButton>
+      </div>
     </div>
   </div>
 </template>

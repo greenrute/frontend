@@ -57,7 +57,6 @@ menu:
   settings: Settings
   notifications: Notifications
   get app: Get mobile app
-  change language: Change language
   support: Support
   search: Search
 
@@ -69,3 +68,10 @@ menu:
 actions:
   change theme: Change theme
   change language: Change language
+  open sidebar: Open sidebar
+  open user menu: Open user menu
+
+empty:
+  title: No lessons
+  description: Get started by adding a new day.
+  button: Add a day

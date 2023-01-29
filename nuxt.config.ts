@@ -65,9 +65,10 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       Inter: true,
-      'Montserrat': [300, 400, 500, 600, 700, 800],
+      Montserrat: [300, 400, 500, 600, 700, 800],
+      Manrope: [500, 600, 700, 800],
+      Overpass: true,
       'JetBrains Mono': [400],
-      'Manrope': [500, 600, 700, 800],
     },
     display: 'swap',
     preconnect: true,
