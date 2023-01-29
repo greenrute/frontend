@@ -24,7 +24,7 @@ const lessons: Lesson[][] = [
 
 <template>
   <Head>
-    <Title>Розклад - GreenRute</Title>
+    <Title>{{ $t('menu.schedule') }} - GreenRute</Title>
   </Head>
 
   <div class="hidden lg:flex border-b border-gray-200 dark:border-zinc-700 px-4 py-3 items-center justify-end px-8">

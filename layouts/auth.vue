@@ -2,8 +2,6 @@
 import { HomeIcon, ListBulletIcon } from '@heroicons/vue/24/outline/index'
 import type { Component, Ref } from 'vue'
 
-const { t } = useI18n()
-
 const sidebarOpen: Ref<boolean> = ref(false)
 const openSidebar = () => sidebarOpen.value = true
 const closeSidebar = () => sidebarOpen.value = false
@@ -11,14 +9,14 @@ const closeSidebar = () => sidebarOpen.value = false
 const user = useCookie<UserCookie>('user')
 
 const navigation: NavMenuItem[] = [
-  { name: t('menu.schedule'), href: '/dashboard', icon: HomeIcon },
-  { name: t('menu.homework'), href: '/homework', icon: ListBulletIcon },
+  { name: 'menu.schedule', href: '/dashboard', icon: HomeIcon },
+  { name: 'menu.homework', href: '/homework', icon: ListBulletIcon },
 ]
 
 const classes: NavClassItem[] = [
-  { name: '10-А Фізика', href: '/c/1234567890hash', bgColorClass: 'bg-blue-500 dark:bg-blue-600' },
-  { name: '10-А Алгебра', href: '/c/1234567891hash', bgColorClass: 'bg-green-500 dark:bg-green-600' },
-  { name: '10-А Історія', href: '/c/1234567892hash', bgColorClass: 'bg-yellow-500 dark:bg-yellow-600' },
+  // { name: '10-А Фізика', href: '/c/1234567890hash', bgColorClass: 'bg-blue-500 dark:bg-blue-600' },
+  // { name: '10-А Алгебра', href: '/c/1234567891hash', bgColorClass: 'bg-green-500 dark:bg-green-600' },
+  // { name: '10-А Історія', href: '/c/1234567892hash', bgColorClass: 'bg-yellow-500 dark:bg-yellow-600' },
 ]
 </script>
 
@@ -47,14 +45,14 @@ const classes: NavClassItem[] = [
             <NuxtLink v-for="item in navigation" :key="item.name" :to="item.href" custom v-slot="{ href, navigate, isActive, isExactActive }">
               <a :href="href" @click="navigate" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md" :class="isActive ? 'bg-gray-200 dark:bg-zinc-700 text-gray-900 dark:text-zinc-50' : 'text-gray-700 dark:text-zinc-300 hover:text-gray-900 dark:hover:text-zinc-50 hover:bg-gray-50 dark:hover:bg-zinc-900'" :aria-current="isExactActive ? 'page' : undefined">
                 <component :is="item.icon" class="mr-3 flex-shrink-0 h-6 w-6" :class="isActive ? 'text-gray-500 dark:text-zinc-300' : 'text-gray-400 dark:text-zinc-400 group-hover:text-gray-500 dark:group-hover:text-zinc-300'" aria-hidden="true" />
-                {{ item.name }}
+                {{ $t(item.name) }}
               </a>
             </NuxtLink>
           </div>
           <div class="mt-8">
             <!-- Secondary navigation -->
             <h3 class="px-3 text-sm font-medium text-gray-500 dark:text-zinc-400" id="desktop-classes-headline">{{ $t('menu.my classes') }}</h3>
-            <div class="mt-1 space-y-1" role="group" aria-labelledby="desktop-classes-headline">
+            <div v-if="classes.length" class="mt-1 space-y-1" role="group" aria-labelledby="desktop-classes-headline">
               <NuxtLink v-for="classItem in classes" :key="classItem.name" :to="classItem.href" custom v-slot="{ href, navigate, isExactActive }">
                 <a :href="href" @click="navigate" class="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 dark:text-zinc-200 hover:bg-gray-50 dark:hover:bg-zinc-900 hover:text-gray-900 dark:hover:text-white" :aria-current="isExactActive ? 'page' : undefined">
                   <span class="w-2.5 h-2.5 mr-4 rounded-full" :class="classItem.bgColorClass" aria-hidden="true" />
@@ -62,6 +60,7 @@ const classes: NavClassItem[] = [
                 </a>
               </NuxtLink>
             </div>
+            <div v-else class="mt-1 px-3 text-sm text-gray-400 dark:text-zinc-500">{{ $t('empty.not available yet') }}</div>
           </div>
         </nav>
       </div>

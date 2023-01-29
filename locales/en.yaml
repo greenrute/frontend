@@ -75,5 +75,8 @@ empty:
   title: No lessons
   description: Get started by adding a new day.
   button: Add a day
-
   day off: Today is a day off
+  not available yet: This feature is not available yet
+
+settings:
+  language: Language

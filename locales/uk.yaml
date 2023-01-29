@@ -75,5 +75,8 @@ empty:
   title: Немає уроків
   description: Почніть із додавання нового дня.
   button: Додати день
-
   day off: Сьогодні вихідний
+  not available yet: Ця функція ще не доступна
+
+settings:
+  language: Мова
