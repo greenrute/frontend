@@ -79,4 +79,19 @@ empty:
   not available yet: Ця функція ще не доступна
 
 settings:
+  appearance: Зовнішній вигляд
   language: Мова
+
+color modes:
+  system: Системна
+  light: Світла
+  dark: Темна
+
+days:
+  sunday: Неділя
+  monday: Понеділок
+  tuesday: Вівторок
+  wednesday: Середа
+  thursday: Четвер
+  friday: Пʼятниця
+  saturday: Субота

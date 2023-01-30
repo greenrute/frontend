@@ -12,7 +12,7 @@ const selected = ref([...locales.value].filter(l => typeof l !== 'string' && l.c
   <Listbox as="div" v-model="selected" @update:model-value="setLocale($event.code)">
     <ListboxLabel class="block text-sm font-medium text-gray-700 dark:text-zinc-300">{{ $t('actions.change language') }}</ListboxLabel>
     <div class="relative mt-2">
-      <ListboxButton class="relative w-full cursor-default rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-2 pl-3 pr-10 text-left shadow-sm focus:border-green-500 dark:focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-zinc-200 dark:focus:ring-zinc-800 sm:text-sm">
+      <ListboxButton class="relative w-full cursor-default rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-2 pl-3 pr-10 text-left shadow-sm focus:border-green-500 dark:focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-500 dark:focus:ring-green-600 sm:text-sm">
         <span class="flex items-center">
           <component :is="'Emoji' + selected.icon" class="h-4 w-4 flex-shrink-0" />
           <span class="ml-2 block truncate">{{ selected.name }}</span>

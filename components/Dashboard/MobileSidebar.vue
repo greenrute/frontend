@@ -29,7 +29,7 @@ defineEmits<{
               <nav class="px-2">
                 <div class="space-y-1">
                   <NuxtLink v-for="item in navigation" :key="item.name" :to="item.href" custom v-slot="{ href, navigate, isActive, isExactActive }">
-                    <a :href="href" @click="navigate" class="group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md" :class="isActive ? 'bg-gray-200 dark:bg-zinc-700 text-gray-900 dark:text-zinc-50' : 'text-gray-700 dark:text-zinc-300 hover:text-gray-900 dark:hover:text-zinc-50 hover:bg-gray-50 dark:hover:bg-zinc-900'" :aria-current="isExactActive ? 'page' : undefined">
+                    <a :href="href" @click.prevent="$emit('close'); navigate()" class="group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md" :class="isActive ? 'bg-gray-200 dark:bg-zinc-700 text-gray-900 dark:text-zinc-50' : 'text-gray-700 dark:text-zinc-300 hover:text-gray-900 dark:hover:text-zinc-50 hover:bg-gray-50 dark:hover:bg-zinc-900'" :aria-current="isExactActive ? 'page' : undefined">
                       <!--suppress JSValidateTypes -->
                       <component :is="item.icon" class="mr-3 flex-shrink-0 h-6 w-6" :class="isActive ? 'text-gray-500 dark:text-zinc-300' : 'text-gray-400 dark:text-zinc-400 group-hover:text-gray-500 dark:group-hover:text-zinc-300'" aria-hidden="true" />
                       {{ $t(item.name) }}
@@ -40,7 +40,7 @@ defineEmits<{
                   <h3 class="px-3 text-sm font-medium text-gray-500 dark:text-zinc-400" id="mobile-classes-headline">{{ $t('menu.my classes') }}</h3>
                   <div v-if="classes.length" class="mt-1 space-y-1" role="group" aria-labelledby="mobile-classes-headline">
                     <NuxtLink v-for="classItem in classes" :key="classItem.name" :to="classItem.href" custom v-slot="{ href, navigate, isExactActive }">
-                      <a :href="href" @click="navigate" class="group flex items-center rounded-md px-3 py-2 text-base font-medium leading-5 text-gray-600 dark:text-zinc-200 hover:bg-gray-50 dark:hover:bg-zinc-900 hover:text-gray-900 dark:hover:text-white" :aria-current="isExactActive ? 'page' : undefined">
+                      <a :href="href" @click.prevent="$emit('close'); navigate()" class="group flex items-center rounded-md px-3 py-2 text-base font-medium leading-5 text-gray-600 dark:text-zinc-200 hover:bg-gray-50 dark:hover:bg-zinc-900 hover:text-gray-900 dark:hover:text-white" :aria-current="isExactActive ? 'page' : undefined">
                         <span class="w-2.5 h-2.5 mr-4 rounded-full" :class="classItem.bgColorClass" aria-hidden="true" />
                         <span class="truncate">{{ classItem.name }}</span>
                       </a>

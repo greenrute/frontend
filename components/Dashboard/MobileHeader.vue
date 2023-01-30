@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { MoonIcon, SunIcon, ArrowLeftOnRectangleIcon, LanguageIcon } from '@heroicons/vue/20/solid/index'
+import { UserCircleIcon, Cog8ToothIcon, BellIcon, ArrowDownTrayIcon, MoonIcon, SunIcon, LifebuoyIcon, ArrowLeftOnRectangleIcon, LanguageIcon } from '@heroicons/vue/20/solid/index'
 import { Bars3Icon } from '@heroicons/vue/24/outline/index'
 
 defineEmits<{
@@ -34,15 +34,27 @@ const switchTheme = () => {
             </MenuButton>
           </div>
           <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-            <MenuItems class="absolute right-0 z-10 mt-2 w-48 origin-top-right divide-y divide-gray-200 dark:divide-zinc-700 rounded-md bg-white dark:bg-zinc-900 shadow-lg ring-1 ring-black dark:ring-zinc-700 ring-opacity-5 focus:outline-none">
+            <MenuItems class="absolute right-0 z-10 mt-2 w-52 origin-top-right divide-y divide-gray-200 dark:divide-zinc-700 rounded-md bg-white dark:bg-zinc-900 shadow-lg ring-1 ring-black dark:ring-zinc-700 ring-opacity-5 focus:outline-none">
               <div class="py-1">
-                <MenuItem v-slot="{ active, close }"><NuxtLink class="block px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/profile" @click="close">{{ $t('menu.view profile') }}</NuxtLink></MenuItem>
-                <MenuItem v-slot="{ active, close }"><NuxtLink class="block px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/settings" @click="close">{{ $t('menu.settings') }}</NuxtLink></MenuItem>
-                <MenuItem v-slot="{ active, close }"><NuxtLink class="block px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/notifications" @click="close">{{ $t('menu.notifications') }}</NuxtLink></MenuItem>
+                <MenuItem v-slot="{ active, close }"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/profile" @click="close">
+                  {{ $t('menu.view profile') }}
+                  <UserCircleIcon class="h-4 w-4" aria-hidden="true" />
+                </NuxtLink></MenuItem>
+                <MenuItem v-slot="{ active, close }"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/settings" @click="close">
+                  {{ $t('menu.settings') }}
+                  <Cog8ToothIcon class="h-4 w-4" aria-hidden="true" />
+                </NuxtLink></MenuItem>
+                <MenuItem v-slot="{ active, close }"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/notifications" @click="close">
+                  {{ $t('menu.notifications') }}
+                  <BellIcon class="h-4 w-4" aria-hidden="true" />
+                </NuxtLink></MenuItem>
               </div>
               <div class="py-1">
-                <MenuItem v-slot="{ active, close }"><NuxtLink class="block px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="https://mobile.greenrute.com/" external target="_blank" @click="close">{{ $t('menu.get app') }}</NuxtLink></MenuItem>
-                <MenuItem v-slot="{ active, close }"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/settings#language">
+                <MenuItem v-slot="{ active, close }"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="https://mobile.greenrute.com/" external target="_blank" @click="close">
+                  {{ $t('menu.get app') }}
+                  <ArrowDownTrayIcon class="h-4 w-4" aria-hidden="true" />
+                </NuxtLink></MenuItem>
+                <MenuItem v-slot="{ active, close }"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/settings#language" @click="close">
                   {{ $t('actions.change language') }}
                   <LanguageIcon class="h-4 w-4" aria-hidden="true" />
                 </NuxtLink></MenuItem>
@@ -51,7 +63,10 @@ const switchTheme = () => {
                   <SunIcon class="h-4 w-4 hidden dark:block" aria-hidden="true" />
                   <MoonIcon class="h-4 w-4 block dark:hidden" aria-hidden="true" />
                 </button></MenuItem>
-                <MenuItem v-slot="{ active, close }"><NuxtLink class="block px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/support" @click="close">{{ $t('menu.support') }}</NuxtLink></MenuItem>
+                <MenuItem v-slot="{ active, close }"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/support" @click="close">
+                  {{ $t('menu.support') }}
+                  <LifebuoyIcon class="h-4 w-4" aria-hidden="true" />
+                </NuxtLink></MenuItem>
               </div>
               <div class="py-1">
                 <MenuItem v-slot="{ active }"><button class="flex items-center justify-between w-full text-left px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" @click="logout">
