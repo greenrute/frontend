@@ -74,4 +74,6 @@ const classes: NavClassItem[] = [
       </main>
     </div>
   </div>
+
+  <Notification />
 </template>

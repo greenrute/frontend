@@ -48,7 +48,7 @@ const switchTheme = () => {
             {{ $t('menu.get app') }}
             <ArrowDownTrayIcon class="h-4 w-4" aria-hidden="true" />
           </NuxtLink></MenuItem>
-          <MenuItem v-slot="{ active, close }" as="div"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/settings#language" @click="close">
+          <MenuItem v-slot="{ active, close }"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/settings#language" @click="close">
             {{ $t('actions.change language') }}
             <LanguageIcon class="h-4 w-4" aria-hidden="true" />
           </NuxtLink></MenuItem>

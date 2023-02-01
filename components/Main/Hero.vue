@@ -1,6 +1,6 @@
 <template>
   <MainContainer class="pt-12 sm:pt-20 pb-16 text-center lg:pt-28">
-    <h1 class="mx-auto max-w-4xl text-[1.85rem] xxs:text-6xl xxs:leading-[1.125] xs:text-4xl sm:text-5xl md:text-8xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+    <h1 class="mx-auto max-w-4xl text-[1.85rem] xxs:text-6xl xxs:leading-[1.125] sm:text-5xl md:text-8xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
       {{ $t('home title.start') + ' ' }}
       <span class="relative whitespace-nowrap text-green-600">
         <svg
@@ -13,10 +13,12 @@
         </svg>
         <span class="relative font-display">{{ $t('home title.highlight') }}</span>
       </span>{{ ' ' }}
-      <br class="hidden xxs:block xs:hidden" />
-      {{ $t('home title.middle') }}
-      <br class="hidden lg:block" />
-      {{ $t('home title.end') }}
+      <br class="hidden xxs:block" />
+      <span class="xxs:text-3xl xs:text-4xl leading-none sm:text-[length:inherit]">
+        {{ $t('home title.middle') }}
+        <br class="hidden lg:block" />
+        {{ $t('home title.end') }}
+      </span>
     </h1>
     <p class="mx-auto mt-6 max-w-3xl xs:text-lg md:text-xl tracking-tight text-zinc-700 dark:text-zinc-300">
       {{ $t('home description') }}

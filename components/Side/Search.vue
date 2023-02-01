@@ -24,7 +24,6 @@ watch(selectedAction, (newAction: Action | null) => {
 const blurHandler = () => {
   setTimeout(() => {
     if (!(document.activeElement as HTMLElement)?.dataset?.headlessuiState) {
-      console.log('123')
       show.value = false
     }
   }, 0)
