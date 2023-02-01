@@ -16,7 +16,6 @@
       <br class="hidden xxs:block" />
       <span class="xxs:text-3xl xs:text-4xl leading-none sm:text-[length:inherit]">
         {{ $t('home title.middle') }}
-        <br class="hidden lg:block" />
         {{ $t('home title.end') }}
       </span>
     </h1>
