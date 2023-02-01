@@ -1,7 +1,9 @@
 <script lang="ts" setup>
+const baseStyle = 'group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm focus:outline-none disabled:pointer-events-none'
+
 const baseStyles = {
-  solid: 'group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none',
-  outline: 'group inline-flex ring-1 items-center justify-center rounded-full py-2 px-4 text-sm focus:outline-none disabled:opacity-75 disabled:pointer-events-none',
+  solid: 'font-semibold focus-visible:outline-2 focus-visible:outline-offset-2',
+  outline: 'ring-1 disabled:opacity-75',
 }
 
 const variantStyles = {
@@ -30,10 +32,10 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <NuxtLink v-if="!!to" :class="[ baseStyles[variant], variantStyles[variant][color] ]" :to="to">
-    <slot/>
+  <NuxtLink v-if="!!to" :class="[ baseStyle, baseStyles[variant], variantStyles[variant][color] ]" :to="to">
+    <slot />
   </NuxtLink>
-  <button v-else :class="[ baseStyles[variant], variantStyles[variant][color] ]">
-    <slot/>
+  <button v-else :class="[ baseStyle, baseStyles[variant], variantStyles[variant][color] ]">
+    <slot />
   </button>
 </template>

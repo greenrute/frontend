@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { BellIcon, CheckCircleIcon, ExclamationCircleIcon, ExclamationTriangleIcon, InformationCircleIcon } from '@heroicons/vue/24/outline/index'
-import { XMarkIcon } from '@heroicons/vue/20/solid/index'
+import { BellIcon, CheckCircleIcon, ExclamationCircleIcon, ExclamationTriangleIcon, InformationCircleIcon } from '@heroicons/vue/24/outline'
+import { XMarkIcon } from '@heroicons/vue/20/solid'
 import type { Notification } from '~/composables/useNotification'
 import type { Ref } from 'vue'
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { HomeIcon, ListBulletIcon } from '@heroicons/vue/24/outline/index'
+import { HomeIcon, ListBulletIcon } from '@heroicons/vue/24/outline'
 import type { Component, Ref } from 'vue'
 
 const sidebarOpen: Ref<boolean> = ref(false)
@@ -22,7 +22,7 @@ const classes: NavClassItem[] = [
 
 <template>
   <Html class="h-full scroll-smooth">
-    <Body class="h-full font-manrope bg-white dark:bg-zinc-900" />
+    <Body class="h-full bg-white dark:bg-zinc-900" />
   </Html>
 
   <div class="min-h-full">

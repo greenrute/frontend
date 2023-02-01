@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ArrowSmallRightIcon} from '@heroicons/vue/20/solid/index'
+import {ArrowSmallRightIcon} from '@heroicons/vue/20/solid'
 import {Ref} from 'vue'
 
 definePageMeta({

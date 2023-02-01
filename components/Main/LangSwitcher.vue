@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { LanguageIcon } from '@heroicons/vue/20/solid/index'
+import { LanguageIcon } from '@heroicons/vue/20/solid'
+import { MainButton } from '#components'
 
 const { locale, locales, setLocale } = useI18n()
 
@@ -9,7 +10,7 @@ await preloadComponents(locales.value.map(l => 'Emoji' + (typeof l !== 'string' 
 
 <template>
   <Menu as="div" class="relative inline-block text-left">
-    <MenuButton :as="resolveComponent('MainButton')" class="px-2" color="zinc" variant="outline">
+    <MenuButton :as="MainButton" class="px-2" color="zinc" variant="outline">
       <LanguageIcon aria-hidden="true" class="h-5 w-5" />
     </MenuButton>
 

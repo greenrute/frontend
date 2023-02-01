@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Combobox, ComboboxButton, ComboboxInput, ComboboxLabel, ComboboxOption, ComboboxOptions } from '@headlessui/vue'
-import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid/index'
+import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import { actions, Action } from '~/utils/actions'
 
 const show = ref<boolean>(false)
@@ -24,6 +24,7 @@ watch(selectedAction, (newAction: Action | null) => {
 const blurHandler = () => {
   setTimeout(() => {
     if (!(document.activeElement as HTMLElement)?.dataset?.headlessuiState) {
+      console.log('123')
       show.value = false
     }
   }, 0)
@@ -43,7 +44,7 @@ const blurHandler = () => {
       <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
         <div v-if="show || open">
           <ComboboxOptions static v-if="filteredActions.length > 0" class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg ring-1 ring-black dark:ring-zinc-700 ring-opacity-5 focus:outline-none sm:text-sm">
-            <ComboboxOption v-for="action in filteredActions" :key="action.id" :value="action" as="template" v-slot="{ active, selected }">
+            <ComboboxOption v-for="action in filteredActions" :key="action.id" :value="action" as="div" v-slot="{ active, selected }">
               <li class="relative cursor-default select-none py-2 pl-3 pr-9" :class="active ? 'bg-green-600 text-white' : 'text-gray-900 dark:text-zinc-300'">
                 <div class="flex items-center">
                 <span class="inline-block h-4 w-4 flex-shrink-0" aria-hidden="true">

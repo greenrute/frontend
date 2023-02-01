@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {ChevronLeftIcon, ChevronRightIcon} from '@heroicons/vue/20/solid/index'
+import {ChevronLeftIcon, ChevronRightIcon} from '@heroicons/vue/20/solid'
 
 const weeks: Week[] = [
   {

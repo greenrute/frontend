@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { QueueListIcon } from '@heroicons/vue/24/outline/index'
-import { PlusIcon } from '@heroicons/vue/20/solid/index'
+import { QueueListIcon } from '@heroicons/vue/24/outline'
+import { PlusIcon } from '@heroicons/vue/20/solid'
 
 definePageMeta({
   layout: 'auth',

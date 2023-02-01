@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ExclamationCircleIcon } from '@heroicons/vue/20/solid/index'
+import { ExclamationCircleIcon } from '@heroicons/vue/20/solid'
 
 withDefaults(defineProps<{
   id: string

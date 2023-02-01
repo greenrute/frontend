@@ -1,4 +1,4 @@
-import { MoonIcon, SunIcon } from '@heroicons/vue/20/solid/index'
+import { MoonIcon, SunIcon } from '@heroicons/vue/20/solid'
 
 export const changeThemeAction = (t: (key: string) => string) => {
   if (process.server) return

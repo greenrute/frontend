@@ -16,7 +16,7 @@ const localePath = useLocalePath()
             <MainNavLink to="#pricing">{{ $t('menu pricing') }}</MainNavLink>
           </div>
         </div>
-        <div class="flex items-center gap-x-5 md:gap-x-8">
+        <div class="flex items-center gap-x-3 xxs:gap-x-5 md:gap-x-8">
           <div class="hidden md:block">
             <MainNavLink :to="localePath('/login')">{{ $t('login', 1) }}</MainNavLink>
           </div>
@@ -25,8 +25,8 @@ const localePath = useLocalePath()
                 {{ $t('get started') + ' ' }}<span class="hidden lg:inline">{{ $t('for free') }}</span>
               </span>
           </MainButton>
-          <MainLangSwitcher class="-ml-2 -mr-3 md:-ml-4 md:mr-0" />
-          <MainColorModeSwitcher class="hidden md:block -ml-2 -mr-3 md:-ml-4 md:mr-0" />
+          <MainLangSwitcher class="hidden xxs:block -ml-2 -mr-3 md:-ml-4 md:mr-0" />
+          <MainColorModeSwitcher class="hidden md:block xxs:-ml-2 -mr-3 md:-ml-4 md:mr-0" />
           <div class="-mr-1 md:hidden">
             <MainMobileNavigation />
           </div>

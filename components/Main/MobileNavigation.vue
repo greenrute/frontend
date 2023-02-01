@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Popover, PopoverButton, PopoverOverlay, PopoverPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { MoonIcon, SunIcon, ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline/index'
+import { MoonIcon, SunIcon, ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline'
 import { NuxtLink } from '#components'
 import 'focus-visible'
 

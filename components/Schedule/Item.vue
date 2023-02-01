@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PlusIcon } from '@heroicons/vue/20/solid/index'
+import { PlusIcon } from '@heroicons/vue/20/solid'
 
 defineProps<{
   day: string
@@ -9,7 +9,7 @@ defineProps<{
 
 <template>
   <div>
-    <div class="px-3 font-display font-semibold mb-2 uppercase">{{ day }}</div>
+    <div class="px-3 font-bold mb-2 uppercase">{{ day }}</div>
     <div class="font-overpass bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-2xl backdrop-blur-sm shadow-md">
       <div class="flex flex-col">
         <div v-for="(lesson, index) in lessons" :key="lesson.id" class="flex items-center justify-between gap-1.5 py-[0.45rem] px-3" :class="index % 2 === 0 ? undefined : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80'">

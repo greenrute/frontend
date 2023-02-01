@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MoonIcon, SunIcon } from '@heroicons/vue/24/outline/index'
+import { MoonIcon, SunIcon } from '@heroicons/vue/24/outline'
 </script>
 
 <template>

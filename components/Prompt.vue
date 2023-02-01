@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { QuestionMarkCircleIcon } from '@heroicons/vue/24/outline/index'
-import { LinkIcon, NoSymbolIcon, PlusCircleIcon } from '@heroicons/vue/20/solid/index'
+import { QuestionMarkCircleIcon } from '@heroicons/vue/24/outline'
+import { LinkIcon, NoSymbolIcon, PlusCircleIcon } from '@heroicons/vue/20/solid'
 import type { DefaultOptionIcon, Prompt } from '~/composables/usePrompt'
 import type { Component, Ref } from 'vue'
 

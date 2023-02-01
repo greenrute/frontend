@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
-import { CheckIcon, ChevronUpDownIcon, ComputerDesktopIcon, SunIcon, MoonIcon } from '@heroicons/vue/20/solid/index'
+import { CheckIcon, ChevronUpDownIcon, ComputerDesktopIcon, SunIcon, MoonIcon } from '@heroicons/vue/20/solid'
 import type { Component } from 'vue'
 const colorMode = useColorMode()
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid/index'
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 const { locale, locales, setLocale } = useI18n()
 
 await preloadComponents(locales.value.map(l => 'Emoji' + (typeof l !== 'string' && l.icon)))

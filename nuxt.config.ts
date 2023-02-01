@@ -19,7 +19,7 @@ function customRule(choice: number, choicesLength: number) {
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/color-mode',
-    '@nuxtjs/google-fonts',
+    '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
     '@nuxt/image-edge',
     '@vueuse/nuxt',
@@ -62,22 +62,9 @@ export default defineNuxtConfig({
       apiBase: process.env.API_BASE || 'https://api.greenrute.com/',
     },
   },
-  googleFonts: {
-    families: {
-      Inter: true,
-      Montserrat: [300, 400, 500, 600, 700, 800],
-      Manrope: [500, 600, 700, 800],
-      Overpass: true,
-      'JetBrains Mono': [400],
-    },
-    display: 'swap',
-    preconnect: true,
-    download: true,
-  },
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/css/fonts.css'],
   postcss: {
     plugins: {
-      tailwindcss: {},
       'postcss-focus-visible': {
         replaceWith: '[data-focus-visible-added]',
       },

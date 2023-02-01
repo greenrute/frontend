@@ -1,4 +1,4 @@
-import { LanguageIcon } from '@heroicons/vue/20/solid/index'
+import { LanguageIcon } from '@heroicons/vue/20/solid'
 
 export const changeLanguageAction = (t: (key: string) => string) => {
   return {
