@@ -38,13 +38,13 @@ const localePath = useLocalePath()
           <PopoverButton :as="NuxtLink" to="#testimonials" class="block w-full p-2">{{ $t('menu testimonials') }}</PopoverButton>
           <PopoverButton :as="NuxtLink" to="#pricing" class="block w-full p-2">{{ $t('menu pricing') }}</PopoverButton>
           <hr class="m-2 border-zinc-300/40 dark:border-zinc-700" />
-          <PopoverButton as="button" @click.prevent="switchColorMode" class="flex items-center justify-between w-full text-left p-2 pr-3">
+          <PopoverButton as="button" @click.prevent="switchColorMode" class="flex items-center justify-between w-full text-left p-2">
             {{ $t('actions.change theme') }}
             <SunIcon class="h-5 w-5 hidden dark:block" aria-hidden="true" />
             <MoonIcon class="h-5 w-5 block dark:hidden" aria-hidden="true" />
           </PopoverButton>
           <hr class="m-2 border-zinc-300/40 dark:border-zinc-700" />
-          <PopoverButton :as="NuxtLink" :to="localePath('/login')" class="flex items-center justify-between w-full p-2 pr-3">
+          <PopoverButton :as="NuxtLink" :to="localePath('/login')" class="flex items-center justify-between w-full p-2">
             {{ $t('login', 1) }}
             <ArrowRightOnRectangleIcon class="h-5 w-5" aria-hidden="true" />
           </PopoverButton>
