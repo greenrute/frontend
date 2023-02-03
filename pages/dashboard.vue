@@ -13,7 +13,7 @@ const lessons: Lesson[][] = [
   [
     { id: 'pe', name: 'Фізкультура', icon: 'PE', alt: '⚽️' },
     { id: 'hs', name: 'Історія', icon: 'History', alt: '🏰' },
-    { id: 'al', name: 'Алгебра', icon: 'Algebra', alt: '🧮' },
+    { id: 'al', name: 'Алгебра', icon: 'Math', alt: '🧮' },
     { id: 'gr', name: 'Географія', icon: 'Geography', alt: '🌍' },
     { id: 'uk', name: 'Українська мова', icon: 'Ukrainian', alt: '🇺🇦' },
     { id: 'bl', name: 'Біологія', icon: 'Biology', alt: '🔬' },
