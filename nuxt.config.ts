@@ -62,7 +62,7 @@ export default defineNuxtConfig({
       apiBase: process.env.API_BASE || 'https://api.greenrute.com/',
     },
   },
-  css: ['~/assets/css/fonts.css'],
+  css: ['~/assets/css/fonts.css', '~/assets/css/animations.css'],
   postcss: {
     plugins: {
       'postcss-focus-visible': {
@@ -90,7 +90,7 @@ export default defineNuxtConfig({
         { name: 'description', content: 'Новий щоденник у твоєму смартфоні — спільний розклад, домашнє завдання, обмін інформацією. Програма для Android та iOS, багато опцій, щоб налаштувати свій щоденник.' },
         { name: 'msapplication-TileColor', content: '#ffffff' },
         { name: 'theme-color', content: '#16a34a' },
-        { 'http-equiv': 'content-security-policy', content: "object-src 'none'; base-uri 'self'; default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://accounts.google.com/gsi/client; style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style; font-src 'self' data:; img-src 'self' data: images.unsplash.com gravatar.com lh3.googleusercontent.com; frame-src https://accounts.google.com/gsi/; connect-src 'self' api.greenrute.com https://accounts.google.com/gsi/" + (process.env.NODE_ENV !== 'production' ? " localhost:* 192.168.0.106:* ws: wss:;" : ";") },
+        { 'http-equiv': 'content-security-policy', content: "object-src 'none'; base-uri 'self'; default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://accounts.google.com/gsi/client; style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style; font-src 'self' data:; img-src 'self' data: images.unsplash.com gravatar.com lh3.googleusercontent.com; frame-src https://accounts.google.com/gsi/; connect-src 'self' api.greenrute.com https://accounts.google.com/gsi/" + (process.env.NODE_ENV !== 'production' ? " localhost:* 192.168.0.102:* ws: wss:;" : ";") },
       ],
     },
   },

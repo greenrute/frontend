@@ -57,6 +57,7 @@ module.exports = <Partial<Config>> {
       },
       animation: {
         loader: 'spin 1s steps(8, end) infinite',
+        wave: 'wave 1s linear',
       },
     },
   },

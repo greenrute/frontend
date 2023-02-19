@@ -9,17 +9,7 @@ definePageMeta({
 
 const now = useNow()
 const days = getDays()
-const lessons: Lesson[][] = [
-  [
-    { id: 'pe', name: 'Фізкультура', icon: 'PE', alt: '⚽️' },
-    { id: 'hs', name: 'Історія', icon: 'History', alt: '🏰' },
-    { id: 'al', name: 'Алгебра', icon: 'Math', alt: '🧮' },
-    { id: 'gr', name: 'Географія', icon: 'Geography', alt: '🌍' },
-    { id: 'uk', name: 'Українська мова', icon: 'Ukrainian', alt: '🇺🇦' },
-    { id: 'bl', name: 'Біологія', icon: 'Biology', alt: '🔬' },
-    { id: 'hr', name: 'Громадянська освіта', icon: 'Civic', alt: '💼' },
-  ],
-]
+const lessons: Lesson[][] = []
 </script>
 
 <template>
@@ -34,7 +24,7 @@ const lessons: Lesson[][] = [
   </div>
 
   <div class="mt-6 px-4 sm:px-6 lg:px-8">
-    <div v-if="lessons.length" class="mt-3 mb-10 grid grid-cols-1 gap-6 sm:gap-10 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
+    <div v-if="lessons.length" class="mt-3 mb-10 grid grid-cols-1 gap-6 sm:gap-10 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 xl:grid-cols-4">
       <ScheduleItem v-for="(day, index) in lessons" :key="index" :day="days[index]" :lessons="day" />
     </div>
     <div v-else class="py-16 sm:py-32 text-center">

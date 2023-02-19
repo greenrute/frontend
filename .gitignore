@@ -9,3 +9,4 @@ dist
 .vscode
 .idea/*
 !.idea/icon.svg
+.DS_Store

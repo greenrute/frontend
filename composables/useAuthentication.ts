@@ -5,7 +5,7 @@ export const useAuthentication = () => {
     logout: async (): Promise<void> => {
       await $fetch('/users/logout', {
         method: 'POST',
-        headers: { 'Accept-Language': locale.value },
+        headers: { 'Accept-Language': locale.value, 'Authorization': 'Bearer ' + useCookie('token').value },
         body: { token: useCookie('token').value },
         baseURL: useRuntimeConfig().public.apiBase,
       })
