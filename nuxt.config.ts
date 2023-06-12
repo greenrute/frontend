@@ -1,29 +1,20 @@
-function customRule(choice: number, choicesLength: number) {
-  if (choice === 0) {
-    return 0
-  }
-
-  const teen = choice > 10 && choice < 20
-  const endsWithOne = choice % 10 === 1
-  if (!teen && endsWithOne) {
-    return 1
-  }
-  if (!teen && choice % 10 >= 2 && choice % 10 <= 4) {
-    return 2
-  }
-
-  return choicesLength < 4 ? 2 : 3
-}
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
+// noinspection JSUnusedGlobalSymbols
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/color-mode',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
+    '@nuxtjs/tailwindcss',
     '@nuxt/image-edge',
     '@vueuse/nuxt',
   ],
+  runtimeConfig: {
+    public: {
+      gsiClientID: '',
+      apiBase: 'https://api.greenrute.com/',
+    },
+  },
   colorMode: {
     classSuffix: '',
   },
@@ -50,17 +41,7 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       redirectOn: 'root',
     },
-    vueI18n: {
-      pluralRules: {
-        uk: customRule
-      },
-    },
-  },
-  runtimeConfig: {
-    public: {
-      gsiClientID: process.env.GSI_CLIENT_ID || '',
-      apiBase: process.env.API_BASE || 'https://api.greenrute.com/',
-    },
+    vueI18n: './i18n.config.ts',
   },
   css: ['~/assets/css/fonts.css', '~/assets/css/animations.css'],
   postcss: {

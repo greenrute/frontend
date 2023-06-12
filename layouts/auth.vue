@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { HomeIcon, ListBulletIcon } from '@heroicons/vue/24/outline'
-import type { Component, Ref } from 'vue'
+import { PlusIcon } from '@heroicons/vue/20/solid'
 
-const sidebarOpen: Ref<boolean> = ref(false)
+const sidebarOpen = ref<boolean>(false)
 const openSidebar = () => sidebarOpen.value = true
 const closeSidebar = () => sidebarOpen.value = false
 
@@ -14,7 +14,7 @@ const navigation: NavMenuItem[] = [
 ]
 
 const classes: NavClassItem[] = [
-  // { name: '10-А Фізика', href: '/c/1234567890hash', bgColorClass: 'bg-blue-500 dark:bg-blue-600' },
+  // { name: '11-А', href: '/c/1234567890hash', bgColorClass: 'bg-blue-500 dark:bg-blue-600' },
   // { name: '10-А Алгебра', href: '/c/1234567891hash', bgColorClass: 'bg-green-500 dark:bg-green-600' },
   // { name: '10-А Історія', href: '/c/1234567892hash', bgColorClass: 'bg-yellow-500 dark:bg-yellow-600' },
 ]
@@ -60,7 +60,12 @@ const classes: NavClassItem[] = [
                 </a>
               </NuxtLink>
             </div>
-            <div v-else class="mt-1 px-3 text-sm text-gray-400 dark:text-zinc-500">{{ $t('empty.not available yet') }}</div>
+            <div v-else class="mt-2 px-3">
+              <MainButton variant="outline" color="zinc" class="inline-flex items-center">
+                <PlusIcon class="-ml-1 mr-1.5 h-5 w-5" aria-hidden="true" />
+                {{ $t('empty.classes.button') }}
+              </MainButton>
+            </div>
           </div>
         </nav>
       </div>

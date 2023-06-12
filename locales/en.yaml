@@ -72,9 +72,14 @@ actions:
   open user menu: Open user menu
 
 empty:
-  title: No lessons
-  description: Get started by adding a new day.
-  button: Add a day
+  lessons:
+    title: No lessons
+    description: Get started by adding a new day.
+    button: Add a day
+  classes:
+    title: No classes
+    description: Get started by creating a new class.
+    button: Create a class
   day off: Today is a day off
   not available yet: This feature is not available yet
 

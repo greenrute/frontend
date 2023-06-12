@@ -8,22 +8,18 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/image-edge": "^1.0.0-27840416.dc1ed65",
+    "@headlessui/vue": "^1.7.14",
+    "@heroicons/vue": "^2.0.18",
+    "@nuxt/image-edge": "^1.0.0-rc.1-28109463.8782712",
     "@nuxtjs/color-mode": "^3.1.8",
-    "@nuxtjs/i18n": "^8.0.0-beta.7",
-    "@nuxtjs/tailwindcss": "^6.3.0",
-    "@types/node": "^18.11.18",
-    "@vueuse/core": "^9.10.0",
-    "@vueuse/nuxt": "^9.10.0",
-    "nuxt": "^3.1.1"
-  },
-  "dependencies": {
-    "@headlessui/vue": "^1.7.8",
-    "@heroicons/vue": "^2.0.13",
+    "@nuxtjs/i18n": "^8.0.0-beta.12",
+    "@nuxtjs/tailwindcss": "^6.7.0",
     "@tailwindcss/forms": "^0.5.3",
-    "autoprefixer": "^10.4.13",
+    "@types/node": "^20.3.0",
+    "@vueuse/core": "^10.1.2",
+    "@vueuse/nuxt": "^10.1.2",
     "focus-visible": "^5.2.0",
-    "postcss-focus-visible": "^8.0.1",
-    "tailwindcss": "^3.2.4"
+    "nuxt": "^3.5.3",
+    "postcss-focus-visible": "^8.0.2"
   }
 }

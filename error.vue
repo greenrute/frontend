@@ -8,6 +8,8 @@ defineProps<{
     stack: string
   },
 }>()
+
+useThemeColor()
 </script>
 
 <template>

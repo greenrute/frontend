@@ -1,13 +1,5 @@
 <script setup lang="ts">
-const colorMode = useColorMode()
-
-const themeColor = computed(() => colorMode.value === 'dark' ? '#18181b' : '#ffffff')
-
-useHead({
-  meta: [
-    { name: 'theme-color', content: themeColor },
-  ],
-})
+useThemeColor()
 </script>
 
 <template>

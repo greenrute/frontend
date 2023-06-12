@@ -72,9 +72,14 @@ actions:
   open user menu: Відкрити меню користувача
 
 empty:
-  title: Немає уроків
-  description: Почніть із додавання нового дня.
-  button: Додати день
+  lessons:
+    title: Немає уроків
+    description: Почніть із додавання нового дня.
+    button: Додати день
+  classes:
+    title: Немає класів
+    description: Почніть із створення нового класу.
+    button: Створити клас
   day off: Сьогодні вихідний
   not available yet: Ця функція ще не доступна
 
