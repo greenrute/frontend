@@ -2,11 +2,11 @@
 import { HomeIcon, ListBulletIcon } from '@heroicons/vue/24/outline'
 import { PlusIcon } from '@heroicons/vue/20/solid'
 
+const route = useRoute()
+const localePath = useLocalePath()
 const sidebarOpen = ref<boolean>(false)
 const openSidebar = () => sidebarOpen.value = true
 const closeSidebar = () => sidebarOpen.value = false
-
-const user = useCookie<UserCookie>('user')
 
 const navigation: NavMenuItem[] = [
   { name: 'menu.schedule', href: '/dashboard', icon: HomeIcon },
@@ -43,7 +43,7 @@ const classes: NavClassItem[] = [
         <nav class="mt-6 px-3">
           <div class="space-y-1">
             <NuxtLink v-for="item in navigation" :key="item.name" :to="item.href" custom v-slot="{ href, navigate, isActive, isExactActive }">
-              <a :href="href" @click="navigate" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md" :class="isActive ? 'bg-gray-200 dark:bg-zinc-700 text-gray-900 dark:text-zinc-50' : 'text-gray-700 dark:text-zinc-300 hover:text-gray-900 dark:hover:text-zinc-50 hover:bg-gray-50 dark:hover:bg-zinc-900'" :aria-current="isExactActive ? 'page' : undefined">
+              <a :href="localePath(href)" @click="navigate" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md" :class="isActive ? 'bg-gray-200 dark:bg-zinc-700 text-gray-900 dark:text-zinc-50' : 'text-gray-700 dark:text-zinc-300 hover:text-gray-900 dark:hover:text-zinc-50 hover:bg-gray-50 dark:hover:bg-zinc-900'" :aria-current="isExactActive ? 'page' : undefined">
                 <component :is="item.icon" class="mr-3 flex-shrink-0 h-6 w-6" :class="isActive ? 'text-gray-500 dark:text-zinc-300' : 'text-gray-400 dark:text-zinc-400 group-hover:text-gray-500 dark:group-hover:text-zinc-300'" aria-hidden="true" />
                 {{ $t(item.name) }}
               </a>
@@ -60,8 +60,9 @@ const classes: NavClassItem[] = [
                 </a>
               </NuxtLink>
             </div>
+            <div v-else-if="route.name === 'dashboard' || route.name === 'classes-new'" class="mt-1 px-3 text-sm text-gray-400 dark:text-zinc-500">{{ $t('empty.classes.description alt') }}</div>
             <div v-else class="mt-2 px-3">
-              <MainButton variant="outline" color="zinc" class="inline-flex items-center">
+              <MainButton variant="outline" color="zinc" class="inline-flex items-center" :to="localePath('/classes/new')">
                 <PlusIcon class="-ml-1 mr-1.5 h-5 w-5" aria-hidden="true" />
                 {{ $t('empty.classes.button') }}
               </MainButton>

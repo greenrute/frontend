@@ -29,6 +29,8 @@ name: Name
 email address: Email address
 password: Password
 
+optional: Optional
+
 google sign in:
   assign or deny:
     title: Link a Google account?

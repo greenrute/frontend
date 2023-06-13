@@ -5,6 +5,12 @@ declare interface Lesson {
   alt: string
 }
 
+declare interface Class {
+  name: string
+  description: string
+  color: string
+}
+
 declare interface NavigationItem {
   name: string
   href: string

@@ -7,6 +7,8 @@ definePageMeta({
   middleware: 'auth',
 })
 
+const localePath = useLocalePath()
+
 const selectedClass = useState('class')
 
 const now = useNow()
@@ -45,7 +47,7 @@ const lessons: Lesson[][] = []
       <h3 class="mt-2 font-medium text-gray-900 dark:text-white">{{ $t('empty.classes.title') }}</h3>
       <p class="mt-1.5 text-sm text-gray-500 dark:text-zinc-300/90">{{ $t('empty.classes.description') }}</p>
       <div class="mt-6">
-        <MainButton variant="solid" color="green" class="inline-flex items-center">
+        <MainButton variant="solid" color="green" class="inline-flex items-center" :to="localePath('/classes/new')">
           <PlusIcon class="-ml-1 mr-1.5 h-5 w-5" aria-hidden="true" />
           {{ $t('empty.classes.button') }}
         </MainButton>

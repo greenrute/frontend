@@ -10,7 +10,7 @@ definePageMeta({
     <Title>{{ $t('menu.settings') }} - GreenRute</Title>
   </Head>
 
-  <div class="px-4 py-8 flex flex-col gap-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+  <div class="px-4 py-8 sm:py-16 flex flex-col gap-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
     <h1 class="text-2xl mb-4 font-display font-semibold text-gray-900 dark:text-zinc-50 sm:truncate">{{ $t('menu.settings') }}</h1>
 
     <div>

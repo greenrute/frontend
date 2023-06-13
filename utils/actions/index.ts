@@ -1,6 +1,6 @@
 import { changeThemeAction } from '~/utils/actions/changeTheme'
-import type { Component } from 'vue'
 import { changeLanguageAction } from '~/utils/actions/changeLanguage'
+import type { Component } from 'vue'
 
 export interface Action {
   id: number
