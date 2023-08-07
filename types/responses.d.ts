@@ -20,11 +20,20 @@ declare interface apiResponseUser {
   token: apiResponseToken
 }
 
-declare interface apiResponse {
+declare interface apiResponseClass {
+  id: number
+  name: string
+  description: string
+  color: string
+  hash: string
+  timetable: any[]
+  schedule: any[]
+  created_at: string
+  updated_at: string
+}
+
+declare interface apiResponse<T> {
   error: boolean
   message: string
-  data?: {
-    token?: apiResponseToken
-    user?: apiResponseUser
-  }
+  data?: T
 }

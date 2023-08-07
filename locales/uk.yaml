@@ -85,6 +85,9 @@ empty:
     description: Почніть із створення нового класу.
     description alt: Створіть клас, щоб почати
     button: Створити клас
+    select:
+      title: Виберіть основний клас
+      button: Вибрати клас
   day off: Сьогодні вихідний
   not available yet: Ця функція ще не доступна
 

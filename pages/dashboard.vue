@@ -10,6 +10,7 @@ definePageMeta({
 const localePath = useLocalePath()
 
 const selectedClass = useState('class')
+const classes = useState<apiResponseClass[]>('classes')
 
 const now = useNow()
 const days = getDays()
@@ -39,6 +40,17 @@ const lessons: Lesson[][] = []
         <MainButton variant="solid" color="green" class="inline-flex items-center">
           <PlusIcon class="-ml-1 mr-1.5 h-5 w-5" aria-hidden="true" />
           {{ $t('empty.lessons.button') }}
+        </MainButton>
+      </div>
+    </div>
+    <div v-else-if="classes.length" class="py-16 sm:py-32 text-center">
+      <UserGroupIcon class="mx-auto h-12 w-12 text-gray-400 dark:text-zinc-500 stroke-1" />
+      <h3 class="mt-2 font-medium text-gray-900 dark:text-white">{{ $t('empty.classes.select.title') }}</h3>
+      <p class="mt-1.5 text-sm text-gray-500 dark:text-zinc-300/90">{{ $t('empty.classes.description') }}</p>
+      <div class="mt-6">
+        <MainButton variant="solid" color="green" class="inline-flex items-center" :to="localePath('/classes/new')">
+          <PlusIcon class="-ml-1 mr-1.5 h-5 w-5" aria-hidden="true" />
+          {{ $t('empty.classes.select.button') }}
         </MainButton>
       </div>
     </div>

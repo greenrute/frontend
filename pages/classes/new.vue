@@ -4,7 +4,9 @@ definePageMeta({
   middleware: 'auth',
 })
 
+const { t, locale } = useI18n()
 const localePath = useLocalePath()
+
 const pending = ref(false)
 const color = useState<string>('class-color', getRandomColor)
 
@@ -18,7 +20,49 @@ onUnmounted(() => {
   color.value = getRandomColor()
 })
 
-const create = async () => { }
+const create = async () => {
+  pending.value = true
+  const start = new Date().getTime()
+  await $fetch('/classes/new', {
+    method: 'POST',
+    headers: {
+      'Accept-Language': locale.value,
+      'Authorization': 'Bearer ' + useCookie('token').value
+    },
+    body: {
+      name: newClass.name,
+      description: newClass.description,
+      color: newClass.color,
+    },
+    baseURL: useRuntimeConfig().public.apiBase,
+  })
+    .then(async r => {
+      await navigateTo('/dashboard')
+      setTimeout(() => {
+        pushNotification({
+          status: 'success',
+          message: (r as apiResponse<any>).message,
+        })
+      }, 150)
+    })
+    .catch(error => {
+      pushNotification({
+        status: 'error',
+        message: error.data?.message || t('could not connect to the server'),
+      })
+    })
+    .finally(() => {
+      const difference = new Date().getTime() - start
+
+      if (difference > 300) {
+        pending.value = false
+      } else {
+        setTimeout(() => {
+          pending.value = false
+        }, 300 - difference)
+      }
+    })
+}
 </script>
 
 <template>

@@ -19,7 +19,3 @@ declare interface NavigationItem {
 declare interface NavMenuItem extends NavigationItem {
   icon: import('vue').Component
 }
-
-declare interface NavClassItem extends NavigationItem {
-  bgColorClass: string
-}
