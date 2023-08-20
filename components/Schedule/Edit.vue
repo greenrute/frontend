@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { TrashIcon } from '@heroicons/vue/20/solid'
+
 defineProps<{
   day: string
   lessons?: Lesson[]
@@ -16,6 +18,9 @@ defineProps<{
             <component :is="'Emoji' + lesson.icon" class="h-4 w-4 shrink-0" />
             <div class="text-base truncate">{{ lesson.name }}</div>
           </div>
+          <button class="transition-colors text-gray-300 dark:text-zinc-600 hover:text-red-600 dark:hover:text-red-600">
+            <TrashIcon class="h-5 w-5" />
+          </button>
         </div>
         <div class="flex items-center justify-between gap-1.5 border-zinc-200 dark:border-zinc-700" :class="lessons && lessons.length ? 'mt-1 border-t' : ''">
           <ScheduleNewLesson :day="day" />

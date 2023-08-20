@@ -23,6 +23,7 @@ const { data } = await useFetch<apiResponse<{ classes: apiResponseClass[] }>>('/
 })
 
 const classes = useState<apiResponseClass[]>('classes', () => data.value?.data?.classes as apiResponseClass[])
+const currentClass = useCurrentClass()
 
 onMounted(() => {
   if (!classes.value || classes.value.filter(c => c.hash === useCookie('selectedClass').value).length === 0) {
@@ -94,9 +95,12 @@ onMounted(() => {
     <div class="flex flex-col lg:pl-64">
       <!-- Search header -->
       <DashboardMobileHeader @open="openSidebar" />
-      <main class="flex-1">
+      <main class="min-h-screen relative flex-1">
         <slot />
+
+        <div v-if="route.params.hash" class="bg-cover bg-center absolute inset-0 -z-10 opacity-5" :style="{ backgroundImage: `url('/img/patterns/${getColorName(currentClass.color)}.png')` }" />
       </main>
+
     </div>
   </div>
 
