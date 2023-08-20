@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { PlusIcon } from '@heroicons/vue/20/solid'
-
 defineProps<{
   day: string
   lessons?: Lesson[]
@@ -18,9 +16,9 @@ defineProps<{
             <component :is="'Emoji' + lesson.icon" class="h-4 w-4 shrink-0" />
             <div class="text-base truncate">{{ lesson.name }}</div>
           </div>
-          <button class="text-green-600 hover:text-green-900 dark:hover:text-green-700">
-            <PlusIcon class="h-6 w-6" />
-          </button>
+        </div>
+        <div class="flex items-center justify-between gap-1.5 border-zinc-200 dark:border-zinc-700" :class="lessons && lessons.length ? 'mt-1 border-t' : ''">
+          <ScheduleNewLesson :day="day" />
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ export default {
 import { ExclamationCircleIcon } from '@heroicons/vue/20/solid'
 
 withDefaults(defineProps<{
-  id: string
+  id?: string
   label?: string
   type?: string
   invalid?: string

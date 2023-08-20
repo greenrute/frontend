@@ -1,23 +1,27 @@
 declare interface apiResponseToken {
-  id: number
-  user_id: number
-  email: string
-  token: string
-  expiry: string
-  created_at: string
-  updated_at: string
+  token: {
+    id: number
+    user_id: number
+    email: string
+    token: string
+    expiry: string
+    created_at: string
+    updated_at: string
+  }
 }
 
 declare interface apiResponseUser {
-  id: number
-  email: string
-  name: string
-  picture: string
-  password: string
-  google_id: string
-  created_at: string
-  updated_at: string
-  token: apiResponseToken
+  user: {
+    id: number
+    email: string
+    name: string
+    picture: string
+    password: string
+    google_id: string
+    created_at: string
+    updated_at: string
+    token: apiResponseToken
+  }
 }
 
 declare interface apiResponseClass {
@@ -27,9 +31,16 @@ declare interface apiResponseClass {
   color: string
   hash: string
   timetable: any[]
-  schedule: any[]
+  schedule: {
+    day: string
+    lessons: Lesson[]
+  }[]
   created_at: string
   updated_at: string
+}
+
+declare interface ARLessons {
+  lessons: Lesson[]
 }
 
 declare interface apiResponse<T> {

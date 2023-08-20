@@ -8,7 +8,7 @@ const { t, locale } = useI18n()
 const localePath = useLocalePath()
 
 const pending = ref(false)
-const color = useState<string>('class-color', getRandomColor)
+const color = useState<string>('class-color', () => getRandomColor().color)
 
 const newClass = reactive<Class>({
   name: '',
@@ -17,7 +17,7 @@ const newClass = reactive<Class>({
 })
 
 onUnmounted(() => {
-  color.value = getRandomColor()
+  color.value = getRandomColor().color
 })
 
 const create = async () => {
@@ -37,13 +37,21 @@ const create = async () => {
     baseURL: useRuntimeConfig().public.apiBase,
   })
     .then(async r => {
-      await navigateTo('/dashboard')
-      setTimeout(() => {
-        pushNotification({
-          status: 'success',
-          message: (r as apiResponse<any>).message,
+      $fetch('/classes/all', {
+        headers: {
+          'Accept-Language': locale.value,
+          'Authorization': 'Bearer ' + useCookie('token').value
+        },
+        baseURL: useRuntimeConfig().public.apiBase,
+      })
+        .then(r => {
+          useState<apiResponseClass[]>('classes', () => (r as any)?.data?.classes)
         })
-      }, 150)
+      pushNotification({
+        status: 'success',
+        message: (r as apiResponse<any>).message,
+      })
+      location.href = localePath('/dashboard')
     })
     .catch(error => {
       pushNotification({
@@ -77,7 +85,7 @@ const create = async () => {
       <MainTextInput :label="$t('new class.name')" :invalid="$t('the title must not be shorter than n characters', 3)" id="class-name" v-model="newClass.name" required minlength="3" />
       <MainTextArea :label="$t('new class.description')" id="class-description" v-model="newClass.description" />
       <div class="flex justify-between items-center">
-        <MainColorPicker :label="$t('new class.color')" id="class-color" v-model="newClass.color" :colors="mainColors" />
+        <MainColorPicker :label="$t('new class.color')" id="class-color" v-model="newClass.color" :colors="mainColors.map(c => c.color)" />
         <MainButton type="submit" variant="solid" color="green" :disabled="pending">
           <template v-if="!pending">{{ $t('empty.classes.button') }}</template>
           <IconLoader v-else class="my-0.5 w-5 h-5 motion-safe:animate-loader" />

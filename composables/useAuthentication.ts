@@ -16,7 +16,7 @@ export const useAuthentication = () => {
           setTimeout(() => {
             pushNotification({
               status: 'success',
-              message: (r as apiResponse).message,
+              message: (r as apiResponse<any>).message,
             })
           }, 150)
         })

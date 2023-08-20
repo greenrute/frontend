@@ -87,6 +87,7 @@ empty:
     button: Створити клас
     select:
       title: Виберіть основний клас
+      description: Виберіть клас, що відображатиметься на головній сторінці.
       button: Вибрати клас
   day off: Сьогодні вихідний
   not available yet: Ця функція ще не доступна
@@ -115,3 +116,10 @@ days:
   thursday: Четвер
   friday: Пʼятниця
   saturday: Субота
+
+edit:
+  add lesson: Додати урок
+  add: Додати
+  cancel: Скасувати
+  lesson name: Назва уроку
+  invalid: Будь-ласка, виберіть урок з випадаючого списку

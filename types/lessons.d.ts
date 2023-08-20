@@ -1,5 +1,5 @@
 declare interface Lesson {
-  id: string
+  id: number
   name: string
   icon: string
   alt: string

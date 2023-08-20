@@ -25,7 +25,7 @@ export const useGoogleSignIn = () => {
       baseURL: useRuntimeConfig().public.apiBase,
     })
       .then(async r => {
-        if ((r as apiResponse).message === 'assign or deny') {
+        if ((r as apiResponse<any>).message === 'assign or deny') {
           promptQuestion({
             title: t('google sign in.assign or deny.title'),
             description: t('google sign in.assign or deny.description'),
@@ -52,7 +52,7 @@ export const useGoogleSignIn = () => {
           return
         }
 
-        if ((r as apiResponse).message === 'create or deny') {
+        if ((r as apiResponse<any>).message === 'create or deny') {
           promptQuestion({
             title: t('google sign in.create or deny.title'),
             description: t('google sign in.create or deny.description'),
@@ -86,21 +86,21 @@ export const useGoogleSignIn = () => {
         useCookie('token', {
           expires: date,
           sameSite: true,
-        }).value = (r as apiResponse).data?.token?.token || null
+        }).value = (r as apiResponse<apiResponseToken>).data?.token?.token || null
         useCookie<UserCookie>('user', {
           expires: date,
           sameSite: true,
         }).value = {
-          id: (r as apiResponse).data?.user?.id,
-          email: (r as apiResponse).data?.user?.email,
-          name: (r as apiResponse).data?.user?.name,
-          picture: (r as apiResponse).data?.user?.picture,
+          id: (r as apiResponse<apiResponseUser>).data?.user?.id,
+          email: (r as apiResponse<apiResponseUser>).data?.user?.email,
+          name: (r as apiResponse<apiResponseUser>).data?.user?.name,
+          picture: (r as apiResponse<apiResponseUser>).data?.user?.picture,
         }
         await navigateTo('/dashboard')
         setTimeout(() => {
           pushNotification({
             status: 'success',
-            message: (r as apiResponse).message,
+            message: (r as apiResponse<any>).message,
           })
         }, 150)
       })

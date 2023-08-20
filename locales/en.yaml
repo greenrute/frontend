@@ -87,6 +87,7 @@ empty:
     button: Create a class
     select:
       title: Select the default class
+      description: Select the class to display on the main page.
       button: Select a class
   day off: Today is a day off
   not available yet: This feature is not available yet
@@ -115,3 +116,10 @@ days:
   thursday: Thursday
   friday: Friday
   saturday: Saturday
+
+edit:
+  add lesson: Add a lesson
+  add: Add
+  cancel: Cancel
+  lesson name: Lesson name
+  invalid: Please select a lesson from the drop-down list

@@ -3,6 +3,8 @@ import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } fro
 import { HandRaisedIcon, UserGroupIcon, RectangleGroupIcon } from '@heroicons/vue/24/outline'
 import { ArrowRightIcon, PlusIcon } from '@heroicons/vue/20/solid'
 
+const localePath = useLocalePath()
+
 const firstStage = ref<HTMLElement | null>(null)
 const secondStage = ref<HTMLElement | null>(null)
 const thirdStage = ref<HTMLElement | null>(null)
@@ -113,7 +115,7 @@ const toThirdStage = () => {
                   </div>
                   <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
                     <MainButton variant="outline" color="zinc" class="w-full" @click="completeView">Закрити</MainButton>
-                    <MainButton variant="solid" color="adaptive" class="w-full mt-3 sm:mt-0">
+                    <MainButton variant="solid" color="adaptive" class="w-full mt-3 sm:mt-0" :to="localePath('/classes/new')" @click="completeView">
                       Створити клас&nbsp;
                       <PlusIcon class="h-4 w-4" />
                     </MainButton>

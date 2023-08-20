@@ -17,12 +17,18 @@ const navigation: NavMenuItem[] = [
 const { data } = await useFetch<apiResponse<{ classes: apiResponseClass[] }>>('/classes/all', {
   headers: {
     'Accept-Language': locale.value,
-    'Authorization': 'Bearer ' + useCookie('token').value
+    'Authorization': 'Bearer ' + useCookie('token').value,
   },
   baseURL: useRuntimeConfig().public.apiBase,
 })
 
 const classes = useState<apiResponseClass[]>('classes', () => data.value?.data?.classes as apiResponseClass[])
+
+onMounted(() => {
+  if (!classes.value || classes.value.filter(c => c.hash === useCookie('selectedClass').value).length === 0) {
+    useCookie('selectedClass').value = null
+  }
+})
 </script>
 
 <template>
@@ -33,7 +39,7 @@ const classes = useState<apiResponseClass[]>('classes', () => data.value?.data?.
   </Html>
 
   <div class="min-h-full">
-    <DashboardMobileSidebar :sidebar-open="sidebarOpen" :navigation="navigation" :classes="classes?.data?.classes" @close="closeSidebar" />
+    <DashboardMobileSidebar :sidebar-open="sidebarOpen" :navigation="navigation" :classes="classes" @close="closeSidebar" />
 
     <!-- Static sidebar for desktop -->
     <div class="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-gray-200 dark:lg:border-zinc-600 lg:bg-gray-100 dark:lg:bg-zinc-800 lg:pt-6 lg:pb-5">
@@ -58,11 +64,17 @@ const classes = useState<apiResponseClass[]>('classes', () => data.value?.data?.
           </div>
           <div class="mt-8">
             <!-- Secondary navigation -->
-            <h3 class="px-3 text-sm font-medium text-gray-500 dark:text-zinc-400" id="desktop-classes-headline">{{ $t('menu.my classes') }}</h3>
-            <div v-if="classes?.data?.classes?.length" class="mt-1 space-y-1" role="group" aria-labelledby="desktop-classes-headline">
-              <NuxtLink v-for="classItem in classes.data.classes" :key="classItem.name" :to="localePath('/c/' + classItem.hash)" custom v-slot="{ href, navigate, isExactActive }">
+            <h3 class="flex justify-between items-center px-3 text-sm font-medium text-gray-500 dark:text-zinc-400" id="desktop-classes-headline">
+              {{ $t('menu.my classes') }}
+              <NuxtLink :to="localePath('/classes/new')" v-if="classes?.length" class="hover:text-gray-600 dark:hover:text-zinc-300">
+                <PlusIcon class="h-5 w-5" aria-hidden="true" />
+                <span class="sr-only">{{ $t('empty.classes.button') }}</span>
+              </NuxtLink>
+            </h3>
+            <div v-if="classes?.length" class="mt-1 space-y-1" role="group" aria-labelledby="desktop-classes-headline">
+              <NuxtLink v-for="classItem in classes" :key="classItem.hash" :to="localePath('/c/' + classItem.hash)" custom v-slot="{ href, navigate, isExactActive }">
                 <a :href="href" @click="navigate" class="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 dark:text-zinc-200 hover:bg-gray-50 dark:hover:bg-zinc-900 hover:text-gray-900 dark:hover:text-white" :aria-current="isExactActive ? 'page' : undefined">
-                  <span class="w-2.5 h-2.5 mr-4 rounded-full" :style="{ backgroundColor: classItem.color }" aria-hidden="true" />
+                  <span class="w-2.5 h-2.5 mr-3 rounded-full" :style="{ backgroundColor: classItem.color }" aria-hidden="true" />
                   <span class="truncate">{{ classItem.name }}</span>
                 </a>
               </NuxtLink>

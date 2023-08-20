@@ -38,19 +38,19 @@ const blurHandler = () => {
         <MagnifyingGlassIcon class="mr-3 h-4 w-4 text-gray-400 dark:text-zinc-400" aria-hidden="true" />
       </ComboboxButton>
       <!--suppress JSUnusedLocalSymbols -->
-      <ComboboxInput class="block w-full rounded-md dark:bg-zinc-900 border-gray-300 dark:border-zinc-700 dark:placeholder-zinc-400 pl-9 focus:border-green-500 dark:focus:border-green-600 focus:ring-green-500 dark:focus:ring-green-600 sm:text-sm" @focus="show = true" @blur="blurHandler" @change="query = $event.target.value" :display-value="(action) => action?.name" :placeholder="$t('menu.search')" />
+      <ComboboxInput class="block w-full rounded-md dark:bg-zinc-900 border-gray-300 dark:border-zinc-700 dark:placeholder-zinc-400 pl-9 focus:border-green-500 dark:focus:border-green-600 focus:ring-green-500 dark:focus:ring-green-600 sm:text-sm" @focus="show = true" @blur="blurHandler" @change="query = $event.target.value" :display-value="(action) => (action as any)?.name" :placeholder="$t('menu.search')" />
 
       <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
         <div v-if="show || open">
           <ComboboxOptions static v-if="filteredActions.length > 0" class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg ring-1 ring-black dark:ring-zinc-700 ring-opacity-5 focus:outline-none sm:text-sm">
-            <ComboboxOption v-for="action in filteredActions" :key="action.id" :value="action" as="div" v-slot="{ active, selected }">
+            <ComboboxOption v-for="action in filteredActions" :key="action?.id" :value="action" as="div" v-slot="{ active, selected }">
               <li class="relative cursor-default select-none py-2 pl-3 pr-9" :class="active ? 'bg-green-600 text-white' : 'text-gray-900 dark:text-zinc-300'">
                 <div class="flex items-center">
                 <span class="inline-block h-4 w-4 flex-shrink-0" aria-hidden="true">
-                  <component :is="action.icon" class="h-4 w-4" aria-hidden="true" />
+                  <component :is="action?.icon" class="h-4 w-4" aria-hidden="true" />
                 </span>
                   <span class="block ml-2 truncate" :class="selected ? 'font-semibold' : ''">
-                  {{ action.name }}
+                  {{ action?.name }}
                 </span>
                 </div>
               </li>

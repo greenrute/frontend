@@ -1,22 +1,22 @@
 import type { Config } from 'tailwindcss'
 const defaultTheme = require('tailwindcss/defaultTheme')
 
-module.exports = <Partial<Config>> {
+module.exports = <Partial<Config>>{
   theme: {
     fontSize: {
-      'xs': ['0.7rem', {lineHeight: '1rem'}],
-      'sm': ['0.8rem', {lineHeight: '1.5rem'}],
-      'base': ['0.925rem', {lineHeight: '1.75rem'}],
-      'lg': ['1.05rem', {lineHeight: '2rem'}],
-      'xl': ['1.175rem', {lineHeight: '2rem'}],
-      '2xl': ['1.3rem', {lineHeight: '2rem'}],
-      '3xl': ['1.55rem', {lineHeight: '2.5rem'}],
-      '4xl': ['2.05rem', {lineHeight: '3.5rem'}],
-      '5xl': ['2.55rem', {lineHeight: '3.5rem'}],
-      '6xl': ['3.05rem', {lineHeight: '1'}],
-      '7xl': ['3.755rem', {lineHeight: '1.1'}],
-      '8xl': ['4.55rem', {lineHeight: '1.125'}],
-      '9xl': ['6.05rem', {lineHeight: '1'}],
+      'xs': ['0.7rem', { lineHeight: '1rem' }],
+      'sm': ['0.8rem', { lineHeight: '1.5rem' }],
+      'base': ['0.925rem', { lineHeight: '1.75rem' }],
+      'lg': ['1.05rem', { lineHeight: '2rem' }],
+      'xl': ['1.175rem', { lineHeight: '2rem' }],
+      '2xl': ['1.3rem', { lineHeight: '2rem' }],
+      '3xl': ['1.55rem', { lineHeight: '2.5rem' }],
+      '4xl': ['2.05rem', { lineHeight: '3.5rem' }],
+      '5xl': ['2.55rem', { lineHeight: '3.5rem' }],
+      '6xl': ['3.05rem', { lineHeight: '1' }],
+      '7xl': ['3.755rem', { lineHeight: '1.1' }],
+      '8xl': ['4.55rem', { lineHeight: '1.125' }],
+      '9xl': ['6.05rem', { lineHeight: '1' }],
     },
     extend: {
       screens: {
