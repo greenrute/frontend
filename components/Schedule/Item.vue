@@ -18,9 +18,6 @@ defineProps<{
             <component :is="'Emoji' + lesson.icon" class="h-4 w-4 shrink-0" />
             <div class="text-base truncate">{{ lesson.name }}</div>
           </div>
-          <button class="text-green-600 hover:text-green-900 dark:hover:text-green-700">
-            <PlusIcon class="h-6 w-6" />
-          </button>
         </div>
       </div>
     </div>
