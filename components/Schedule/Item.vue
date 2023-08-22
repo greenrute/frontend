@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-  <div>
+  <div v-if="lessons?.length">
     <div class="pl-3 pr-2.5 font-bold mb-2 uppercase flex items-center justify-between">
       {{ $t(`days.${day}`) }}
       <button class="text-green-600">
