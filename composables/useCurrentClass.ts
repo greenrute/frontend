@@ -7,5 +7,9 @@ export const useCurrentClass = () => {
     currentClass.value = useCookie<string>('selectedClass').value
   }
 
-  return useState<apiResponseClass[]>('classes').value.filter(c => c.hash === currentClass.value)[0]
+  if (useState<apiResponseClass[]>('classes').value === null) {
+    if (typeof location !== 'undefined') location.reload()
+  }
+
+  return useState<apiResponseClass[]>('classes').value?.filter(c => c.hash === currentClass.value)?.[0]
 }
