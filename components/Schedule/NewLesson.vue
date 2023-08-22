@@ -6,7 +6,7 @@ const { t, locale } = useI18n()
 
 const props = defineProps<{ day: string }>()
 
-const currentClass = useState<apiResponseClass[]>('classes').value.filter(c => c.hash === useCookie('selectedClass').value)[0]
+const currentClass = useCurrentClass()
 
 const open = ref(false)
 const invalid = ref(false)
@@ -47,10 +47,10 @@ const submit = async () => {
   pending.value = true
   const start = new Date().getTime()
 
-  let schedule = toRaw(currentClass).schedule
+  let schedule = toRaw(currentClass.value).schedule
   schedule.filter(i => i.day === props.day)[0].lessons.push(selectedLesson.value)
 
-  await $fetch<apiResponse<any>>('/classes/' + currentClass.id, {
+  await $fetch<apiResponse<any>>('/classes/' + currentClass.value.id, {
     method: 'PATCH',
     headers: {
       'Accept-Language': locale.value,
