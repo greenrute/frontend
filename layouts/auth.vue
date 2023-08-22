@@ -26,7 +26,7 @@ const classes = useState<apiResponseClass[]>('classes', () => data.value?.data?.
 const currentClass = useCurrentClass()
 
 onMounted(() => {
-  if (!classes.value || classes.value.filter(c => c.hash === useCookie('selectedClass').value).length === 0) {
+  if (!classes.value || (classes.value && classes.value?.filter(c => c.hash === useCookie('selectedClass').value)?.length === 0)) {
     useCookie('selectedClass').value = null
   }
 })
