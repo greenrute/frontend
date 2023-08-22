@@ -124,4 +124,5 @@ edit:
   add: Add
   cancel: Cancel
   lesson name: Lesson name
+  placeholder: Start typing lesson name...
   invalid: Please select a lesson from the drop-down list

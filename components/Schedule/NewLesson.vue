@@ -113,7 +113,7 @@ const submit = async () => {
               <Combobox class="mt-5" as="div" v-model="selectedLesson">
                 <ComboboxLabel class="mb-3 block text-sm font-medium text-gray-700 dark:text-zinc-300">{{ $t('edit.lesson name') }}</ComboboxLabel>
                 <div class="relative">
-                  <ComboboxInput class="w-full rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left shadow-sm focus:outline-none focus:ring-1 sm:text-sm" :class="invalid ? 'ring-1 border-red-600 dark:border-red-500 ring-red-600 dark:ring-red-500' : 'focus:border-green-500 dark:focus:border-green-600 focus:ring-green-500 dark:focus:ring-green-600'" @change="query = $event.target.value" :display-value="(lesson) => (lesson as Lesson).name" />
+                  <ComboboxInput class="w-full rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left shadow-sm focus:outline-none focus:ring-1 sm:text-sm" :class="invalid ? 'ring-1 border-red-600 dark:border-red-500 ring-red-600 dark:ring-red-500' : 'focus:border-green-500 dark:focus:border-green-600 focus:ring-green-500 dark:focus:ring-green-600'" @change="query = $event.target.value" :display-value="(lesson) => (lesson as Lesson).name" :placeholder="$t('edit.placeholder')" />
                   <ComboboxButton class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
                     <ChevronUpDownIcon class="h-5 w-5 text-zinc-400" aria-hidden="true" />
                   </ComboboxButton>
