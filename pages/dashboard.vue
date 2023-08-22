@@ -23,7 +23,7 @@ const selectedClass = useCookie<string>('selectedClass', {
   sameSite: true,
 })
 const classes = useState<apiResponseClass[]>('classes')
-const currentClass = useState<apiResponseClass[]>('classes').value.filter(c => c.hash === useCookie('selectedClass').value)[0]
+const currentClass = useCurrentClass()
 
 const now = useNow()
 const days = getDays()
