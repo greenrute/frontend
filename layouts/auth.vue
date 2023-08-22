@@ -29,6 +29,18 @@ onMounted(() => {
   if (!classes.value || (classes.value && classes.value?.filter(c => c.hash === useCookie('selectedClass').value)?.length === 0)) {
     useCookie('selectedClass').value = null
   }
+
+  setInterval(async () => {
+    const { data } = await useFetch<apiResponse<{ classes: apiResponseClass[] }>>('/classes/all', {
+      headers: {
+        'Accept-Language': locale.value,
+        'Authorization': 'Bearer ' + useCookie('token').value,
+      },
+      baseURL: useRuntimeConfig().public.apiBase,
+    })
+
+    useState('classes').value = data.value?.data?.classes
+  }, 1000)
 })
 </script>
 
@@ -43,12 +55,12 @@ onMounted(() => {
     <DashboardMobileSidebar :sidebar-open="sidebarOpen" :navigation="navigation" :classes="classes" @close="closeSidebar" />
 
     <!-- Static sidebar for desktop -->
-    <div class="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-gray-200 dark:lg:border-zinc-600 lg:bg-gray-100 dark:lg:bg-zinc-800 lg:pt-6 lg:pb-5">
+    <div class="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-gray-200 dark:lg:border-zinc-600 lg:bg-gray-100 dark:lg:bg-zinc-800 lg:pt-6">
       <div class="flex flex-shrink-0 items-center px-6">
         <Logo class="h-5 w-auto" />
       </div>
       <!-- Sidebar component, swap this element with another sidebar if you like -->
-      <div class="mt-5 flex h-0 flex-1 flex-col overflow-y-auto pt-1">
+      <div class="mt-5 flex h-0 flex-1 flex-col overflow-y-auto pt-1 pb-5">
         <!-- User account dropdown -->
         <SideAccountDropdown class="px-3" />
         <!-- Sidebar Search -->

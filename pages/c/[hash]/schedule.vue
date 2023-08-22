@@ -4,7 +4,7 @@ definePageMeta({
   middleware: 'auth',
 })
 
-const currentClass = useState<apiResponseClass[]>('classes').value.filter(c => c.hash === useCookie('selectedClass').value)[0]
+const currentClass = useCurrentClass()
 </script>
 
 <template>
