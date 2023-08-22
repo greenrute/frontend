@@ -65,6 +65,7 @@ const submit = async () => {
       currentClass.schedule.filter(i => i.day === props.day)[0].lessons.push(selectedLesson.value)
       currentClass.schedule.filter(i => i.day === props.day)[0].lessons.splice(-1, 1)
       open.value = false
+      selectedLesson.value = { id: -1, icon: '', name: '', alt: '' }
       pushNotification({
         status: 'success',
         message: r.message,
@@ -91,7 +92,7 @@ const submit = async () => {
 </script>
 
 <template>
-  <button class="hover:bg-zinc-50 dark:hover:bg-zinc-900 dark:hover:bg-opacity-80 flex w-full gap-1 justify-center items-center py-1.5 px-3" @click="open = true">
+  <button class="hover:bg-zinc-50 dark:hover:bg-zinc-900 dark:hover:bg-opacity-80 flex w-full gap-1 justify-center items-center py-1.5 px-3 rounded-b-2xl focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-green-600" :class="currentClass.schedule.filter(i => i.day === day)[0].lessons.length ? '' : 'rounded-t-2xl'" @click="open = true">
     <PlusCircleIcon class="h-5 w-5" />
     <span class="text-base truncate">{{ $t('edit.add lesson') }}</span>
   </button>

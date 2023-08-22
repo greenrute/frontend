@@ -26,7 +26,6 @@ const classes = useState<apiResponseClass[]>('classes')
 const currentClass = useCurrentClass()
 
 const now = useNow()
-const days = getDays()
 </script>
 
 <template>
@@ -34,14 +33,14 @@ const days = getDays()
     <Title>{{ $t('menu.schedule') }} - GreenRute</Title>
   </Head>
 
-  <div v-show="classes?.length && currentClass?.schedule?.[0]?.lessons?.length" class="hidden lg:flex border-b border-gray-200 dark:border-zinc-700 py-3 items-center justify-end px-8">
+  <div v-show="classes?.length && currentClass?.schedule?.filter(i => i?.lessons?.length)?.length" class="hidden lg:flex border-b border-gray-200 dark:border-zinc-700 py-3 items-center justify-end px-8">
     <div class="mt-4 flex sm:mt-0 sm:ml-4">
       <MainButton variant="outline" disabled class="!opacity-100 !py-1.5 -my-0.5">{{ currentClass?.schedule?.[now.getDay() - 1] ? 'До кінця уроку: 34 хв' : $t('empty.day off') }}</MainButton>
     </div>
   </div>
 
   <div class="mt-6 px-4 sm:px-6 lg:px-8">
-    <div v-if="currentClass?.schedule?.[0]?.lessons?.length" class="mt-3 mb-10 grid grid-cols-1 gap-6 sm:gap-7 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+    <div v-if="currentClass?.schedule?.filter(i => i?.lessons?.length)?.length" class="mt-3 mb-10 grid grid-cols-1 gap-6 sm:gap-7 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
       <ScheduleItem v-for="(item, index) in currentClass.schedule" :key="item.day" :day="item.day" :lessons="item.lessons" />
     </div>
     <div v-else-if="selectedClass" class="py-16 sm:py-32 text-center">

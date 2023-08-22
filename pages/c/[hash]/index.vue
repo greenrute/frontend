@@ -9,6 +9,10 @@ const currentClass = useState<apiResponseClass[]>('classes').value.filter(c => c
 </script>
 
 <template>
+  <Head>
+    <Title>{{ currentClass.name }} | {{ $t('menu.schedule') }} - GreenRute</Title>
+  </Head>
+
   <DashboardClassHeader />
 
   <div class="mt-6 px-4 sm:px-6 lg:px-8">
