@@ -1,4 +1,4 @@
-export const useCurrentClass = () => {
+export const useCurrentClass = (updateLock: boolean = false) => {
   const currentClass = ref('')
   const refreshProperty = ref(0)
   const { params } = useRoute()
@@ -14,7 +14,7 @@ export const useCurrentClass = () => {
   })
 
   setInterval(() => {
-    refreshProperty.value++
+    if (!updateLock) refreshProperty.value++
   }, 1000)
 
   return cc

@@ -36,9 +36,7 @@ const filteredLessons = computed(() =>
 
 const pending = ref(false)
 
-const submit = async (prevent: boolean = false) => {
-  if (prevent) return
-
+const submit = async () => {
   if (selectedLesson.value.name === '') {
     invalid.value = true
     return
@@ -92,7 +90,7 @@ const submit = async (prevent: boolean = false) => {
 </script>
 
 <template>
-  <button class="hover:bg-zinc-50 dark:hover:bg-zinc-900 dark:hover:bg-opacity-80 flex w-full gap-1 justify-center items-center py-1.5 px-3 rounded-b-2xl focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-green-600" :class="currentClass.schedule.filter(i => i.day === day)[0].lessons.length ? '' : 'rounded-t-2xl'" @click="open = true">
+  <button class="hover:bg-zinc-50 dark:hover:bg-zinc-900 dark:hover:bg-opacity-80 flex w-full gap-1 justify-center items-center py-1.5 px-3 rounded-b-2xl focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-green-600" :class="currentClass.schedule.filter(i => i.day === day)[0].lessons?.length ? '' : 'rounded-t-2xl'" @click="open = true">
     <PlusCircleIcon class="h-5 w-5" />
     <span class="text-base truncate">{{ $t('edit.add lesson') }}</span>
   </button>
@@ -114,13 +112,13 @@ const submit = async (prevent: boolean = false) => {
               <Combobox class="mt-5" as="div" v-model="selectedLesson" v-slot="{ open }">
                 <ComboboxLabel class="mb-3 block text-sm font-medium text-gray-700 dark:text-zinc-300">{{ $t('edit.lesson name') }}</ComboboxLabel>
                 <div class="relative">
-                  <ComboboxInput class="w-full rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left shadow-sm focus:outline-none focus:ring-1 sm:text-sm" :class="invalid ? 'ring-1 border-red-600 dark:border-red-500 ring-red-600 dark:ring-red-500' : 'focus:border-green-500 dark:focus:border-green-600 focus:ring-green-500 dark:focus:ring-green-600'" @keydown.enter="submit(open)" @change="query = $event.target.value" :display-value="(lesson) => (lesson as Lesson).name" :placeholder="$t('edit.placeholder')" />
+                  <ComboboxInput class="w-full rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left shadow-sm focus:outline-none focus:ring-1 sm:text-sm" :class="invalid ? 'ring-1 border-red-600 dark:border-red-500 ring-red-600 dark:ring-red-500' : 'focus:border-green-500 dark:focus:border-green-600 focus:ring-green-500 dark:focus:ring-green-600'" @keydown.enter="!open && submit()" @change="query = $event.target.value" :display-value="(lesson) => (lesson as Lesson).name" :placeholder="$t('edit.placeholder')" />
                   <ComboboxButton class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
                     <ChevronUpDownIcon class="h-5 w-5 text-zinc-400" aria-hidden="true" />
                   </ComboboxButton>
 
                   <transition enter-active-class="transition duration-100 ease-out" enter-from-class="transform scale-95 opacity-0" enter-to-class="transform scale-100 opacity-100" leave-active-class="transition duration-75 ease-in" leave-from-class="transform scale-100 opacity-100" leave-to-class="transform scale-95 opacity-0">
-                    <ComboboxOptions v-if="filteredLessons.length > 0" class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py py-1 sm:text-sm shadow-lg ring-1 ring-black ring-opacity-5 dark:ring-zinc-700 focus:outline-none origin-top">
+                    <ComboboxOptions v-if="filteredLessons?.length > 0" class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py py-1 sm:text-sm shadow-lg ring-1 ring-black ring-opacity-5 dark:ring-zinc-700 focus:outline-none origin-top">
                       <ComboboxOption v-for="lesson in filteredLessons" :key="lesson.id" :value="lesson" as="template" v-slot="{ active, selected }">
                         <li class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-800 dark:text-white" :class="active ? 'bg-gray-100 dark:bg-zinc-800' : ''">
                           <div class="flex items-center">

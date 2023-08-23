@@ -20,6 +20,7 @@
     "@vueuse/nuxt": "^10.3.0",
     "focus-visible": "^5.2.0",
     "nuxt": "^3.6.5",
-    "postcss-focus-visible": "^9.0.0"
+    "postcss-focus-visible": "^9.0.0",
+    "vue-slicksort": "^2.0.5"
   }
 }

@@ -110,7 +110,7 @@ onMounted(() => {
       <main class="min-h-screen relative flex-1">
         <slot />
 
-        <div v-if="route.params.hash" class="bg-cover bg-center absolute inset-0 -z-10 opacity-5" :style="{ backgroundImage: `url('/img/patterns/${getColorName(currentClass.color)}.png')` }" />
+        <div v-if="route.params.hash" class="bg-cover bg-center absolute inset-0 -z-10 opacity-5" :style="{ backgroundImage: `url('/img/patterns/${getColorName(currentClass?.color)}.png')` }" />
       </main>
 
     </div>
