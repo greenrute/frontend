@@ -22,7 +22,7 @@ const bindSwipeHandler = (el: HTMLElement | null, index: number) => {
   const { lengthX } = useSwipe(
       el, {
       passive: false,
-      threshold: 1,
+      threshold: 40,
       onSwipe: () => {
         if (containerWidth.value) {
           if (lengthX.value > 0) {
