@@ -21,7 +21,6 @@ const bindSwipeHandler = (el: HTMLElement | null, index: number) => {
   const containerWidth = computed(() => el?.parentElement?.offsetWidth)
   const { lengthX } = useSwipe(
       el, {
-      passive: false,
       threshold: 0,
       onSwipe: () => {
         if (containerWidth.value) {
@@ -106,7 +105,7 @@ const deleteHandler = (index: number) => {
 
     <div class="overflow-hidden bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-2xl backdrop-blur-sm shadow-md">
       <div class="flex flex-col">
-        <transition-group enter-from-class="!translate-x-[calc(100%+40px)] scale-y-0 !h-0">
+        <transition-group enter-from-class="!translate-x-[calc(100%+40px)] scale-y-0 !h-0" leave-to-class="!-translate-x-[calc(100%+40px)] scale-y-0 !h-0">
           <div v-for="(lesson, index) in lessons" :key="lesson.id" ref="containers" class="relative transition-all ease-out duration-300" :class="lessonStatuses[index] ? '!-translate-x-[calc(100%+40px)] scale-y-0 h-0' : 'h-10'">
             <div class="absolute top-0 w-full group transition-all ease-out duration-300 hover:-translate-x-10 flex items-stretch justify-between gap-1.5 px-3" ref="lessonElements" :class="[
               index % 2 === 0 ? undefined : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80',
