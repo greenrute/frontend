@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { SlickList, SlickItem, DragHandle } from 'vue-slicksort'
 import { Bars3Icon, TrashIcon } from '@heroicons/vue/20/solid'
-import { CheckCircleIcon, QueueListIcon } from '@heroicons/vue/24/outline'
+import { ArrowsUpDownIcon, CheckCircleIcon } from '@heroicons/vue/24/outline'
+import { SlickList, SlickItem, DragHandle } from 'vue-slicksort'
 
 const { t, locale } = useI18n()
 
@@ -129,7 +129,7 @@ watch(computed(() => currentClass.value.schedule.filter(i => i.day === props.day
       {{ $t(`days.${day}`) }}
       <button v-show="lessons?.length && lessons.length > 1" class="h-5.5 w-5.5 relative overflow-hidden" @click="editMode = !editMode">
         <CheckCircleIcon class="text-green-600 dark:text-green-500 absolute transition-all ease-out duration-300 inset-0" :class="editMode ? '' : '-top-full'" />
-        <QueueListIcon class="text-gray-600 dark:text-zinc-300 absolute transition-all ease-out duration-300 inset-0" :class="editMode ? 'top-full' : ''" />
+        <ArrowsUpDownIcon class="h-5 w-5 text-gray-600 dark:text-zinc-300 absolute transition-all ease-out duration-300 inset-0.25" :class="editMode ? 'top-full' : ''" />
       </button>
     </div>
 
