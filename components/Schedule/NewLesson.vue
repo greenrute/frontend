@@ -50,7 +50,7 @@ const submit = async () => {
   let schedule = toRaw(currentClass.value).schedule
   schedule.filter(i => i.day === props.day)[0].lessons.push(selectedLesson.value)
 
-  await $fetch<apiResponse<any>>('/classes/' + currentClass.value.id, {
+  await $fetch<apiResponse<any>>(`/classes/${currentClass.value.id}/schedule`, {
     method: 'PATCH',
     headers: {
       'Accept-Language': locale.value,

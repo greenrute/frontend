@@ -70,6 +70,7 @@ menu:
   my classes: Мої класи
   options: Додаткові опції
   edit schedule: Редагувати розклад
+  edit class info: Редагувати інформацію про клас
 
 actions:
   change theme: Змінити тему
@@ -126,3 +127,6 @@ edit:
   lesson name: Назва уроку
   placeholder: Почніть вводити назву уроку...
   invalid: Будь-ласка, виберіть урок з випадаючого списку
+  class:
+    title: Інформація про клас
+    button: Оновити інформацію

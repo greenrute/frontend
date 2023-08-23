@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { UserCircleIcon, Cog8ToothIcon, BellIcon, ArrowDownTrayIcon, MoonIcon, SunIcon, LifebuoyIcon, ArrowLeftOnRectangleIcon, LanguageIcon } from '@heroicons/vue/20/solid'
-import { Bars3Icon, PencilSquareIcon } from '@heroicons/vue/24/outline'
-import { useAuthentication } from '~/composables/useAuthentication'
+import {
+  PencilSquareIcon as PencilSquareOutlineIcon,
+  InformationCircleIcon as InformationCircleOutlineIcon,
+  Bars3Icon,
+} from '@heroicons/vue/24/outline'
+import {
+  PencilSquareIcon as PencilSquareSolidIcon,
+  InformationCircleIcon as InformationCircleSolidIcon,
+} from '@heroicons/vue/24/solid'
 
 defineEmits<{
   (e: 'open'): void
@@ -35,8 +42,15 @@ const switchTheme = () => {
     <div class="flex flex-1" />
     <template v-if="currentClass && route.name?.toString()?.includes('c-hash')">
       <div class="flex items-center">
+        <NuxtLink :to="`/c/${currentClass.hash}/edit`" class="p-2">
+          <span class="sr-only">{{ $t('menu.edit class info') }}</span>
+          <InformationCircleSolidIcon class="h-6 w-6 text-gray-800 dark:text-white" aria-hidden="true" v-if="route.name === 'c-hash-edit'" />
+          <InformationCircleOutlineIcon class="h-6 w-6 text-gray-600 dark:text-zinc-200" aria-hidden="true" v-else />
+        </NuxtLink>
         <NuxtLink :to="`/c/${currentClass.hash}/schedule`" class="p-2">
-          <PencilSquareIcon class="h-6 w-6" :class="route.name === 'c-hash-schedule' ? 'text-gray-500 dark:text-zinc-300' : 'text-gray-400 dark:text-zinc-400'" aria-hidden="true" />
+          <span class="sr-only">{{ $t('menu.edit class info') }}</span>
+          <PencilSquareSolidIcon class="h-5.5 w-5.5 text-gray-800 dark:text-white" aria-hidden="true" v-if="route.name === 'c-hash-schedule'" />
+          <PencilSquareOutlineIcon class="h-5.5 w-5.5 text-gray-600 dark:text-zinc-200" aria-hidden="true" v-else />
         </NuxtLink>
       </div>
     </template>
@@ -98,14 +112,17 @@ const switchTheme = () => {
                 </MenuItem>
               </div>
               <div class="py-1">
-                <MenuItem v-slot="{ active }"><button class="flex items-center justify-between w-full text-left px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" @click="authentication.logout">
-                  {{ $t('logout', 1) }}
-                <ArrowLeftOnRectangleIcon class="h-4 w-4" aria-hidden="true" />
-              </button></MenuItem>
-            </div>
-          </MenuItems>
-        </transition>
-      </Menu>
+                <MenuItem v-slot="{ active }">
+                  <button class="flex items-center justify-between w-full text-left px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" @click="authentication.logout">
+                    {{ $t('logout', 1) }}
+                    <ArrowLeftOnRectangleIcon class="h-4 w-4" aria-hidden="true" />
+                  </button>
+                </MenuItem>
+              </div>
+            </MenuItems>
+          </transition>
+        </Menu>
+      </div>
     </div>
   </div>
-</div></template>
+</template>

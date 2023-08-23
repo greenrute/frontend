@@ -8,23 +8,20 @@ const { t, locale } = useI18n()
 const localePath = useLocalePath()
 
 const pending = ref(false)
-const color = useState<string>('class-color', () => getRandomColor().color)
+
+const currentClass = useCurrentClass()
 
 const newClass = reactive<Class>({
-  name: '',
-  description: '',
-  color: color.value,
-})
-
-onUnmounted(() => {
-  color.value = getRandomColor().color
+  name: currentClass.value.name,
+  description: currentClass.value.description,
+  color: currentClass.value.color,
 })
 
 const create = async () => {
   pending.value = true
   const start = new Date().getTime()
-  await $fetch('/classes/new', {
-    method: 'POST',
+  await $fetch<apiResponse<any>>(`/classes/${currentClass.value.id}`, {
+    method: 'PATCH',
     headers: {
       'Accept-Language': locale.value,
       'Authorization': 'Bearer ' + useCookie('token').value
@@ -37,7 +34,7 @@ const create = async () => {
     baseURL: useRuntimeConfig().public.apiBase,
   })
     .then(async r => {
-      $fetch('/classes/all', {
+      $fetch<apiResponse<{ classes: apiResponseClass[] }>>('/classes/all', {
         headers: {
           'Accept-Language': locale.value,
           'Authorization': 'Bearer ' + useCookie('token').value
@@ -45,11 +42,11 @@ const create = async () => {
         baseURL: useRuntimeConfig().public.apiBase,
       })
         .then(r => {
-          useState<apiResponseClass[]>('classes', () => (r as any)?.data?.classes)
+          useState('classes').value = r.data?.classes
         })
       pushNotification({
         status: 'success',
-        message: (r as apiResponse<any>).message,
+        message: r.message,
       })
       location.href = localePath('/dashboard')
     })
@@ -75,11 +72,13 @@ const create = async () => {
 
 <template>
   <Head>
-    <Title>{{ $t('new class.title') }} - GreenRute</Title>
+    <Title>{{ currentClass.name }} | {{ $t('menu.edit class info') }} - GreenRute</Title>
   </Head>
 
+  <DashboardClassHeader />
+
   <div class="px-4 py-8 sm:py-16 flex flex-col gap-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
-    <h1 class="text-2xl mb-4 font-display font-semibold text-gray-900 dark:text-zinc-50 sm:truncate">{{ $t('new class.heading') }}</h1>
+    <h1 class="text-2xl mb-4 font-display font-semibold text-gray-900 dark:text-zinc-50 sm:truncate">{{ $t('edit.class.title') }}</h1>
 
     <MainForm @validated="create" class="flex flex-col gap-6">
       <MainTextInput :label="$t('new class.name')" :invalid="$t('the title must not be shorter than n characters', 3)" id="class-name" v-model="newClass.name" required minlength="3" />
@@ -87,7 +86,7 @@ const create = async () => {
       <div class="flex justify-between items-center">
         <MainColorPicker :label="$t('new class.color')" id="class-color" v-model="newClass.color" :colors="mainColors.map(c => c.color)" />
         <MainButton type="submit" variant="solid" color="green" :disabled="pending">
-          <template v-if="!pending">{{ $t('empty.classes.button') }}</template>
+          <template v-if="!pending">{{ $t('edit.class.button') }}</template>
           <IconLoader v-else class="my-0.5 w-5 h-5 motion-safe:animate-loader" />
         </MainButton>
       </div>

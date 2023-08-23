@@ -70,6 +70,7 @@ menu:
   my classes: My classes
   options: Additional options
   edit schedule: Edit schedule
+  edit class info: Edit class information
 
 actions:
   change theme: Change theme
@@ -126,3 +127,6 @@ edit:
   lesson name: Lesson name
   placeholder: Start typing lesson name...
   invalid: Please select a lesson from the drop-down list
+  class:
+    title: Class information
+    button: Update information

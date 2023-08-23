@@ -1,15 +1,17 @@
 export const useCurrentClass = (updateLock: boolean = false) => {
   const currentClass = ref('')
   const refreshProperty = ref(0)
-  const { params } = useRoute()
-  if (params.hash) {
-    currentClass.value = params.hash as string
-  } else {
-    currentClass.value = useCookie<string>('selectedClass').value
-  }
 
   const cc = computed(() => {
-    let value = refreshProperty.value
+    refreshProperty.value
+    const { params } = useRoute()
+
+    if (params.hash) {
+      currentClass.value = params.hash as string
+    } else {
+      currentClass.value = useCookie<string>('selectedClass').value
+    }
+
     return useState<apiResponseClass[]>('classes').value?.filter(c => c.hash === currentClass.value)?.[0]
   })
 

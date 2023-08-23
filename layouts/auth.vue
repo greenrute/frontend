@@ -23,15 +23,14 @@ const { data } = await useFetch<apiResponse<{ classes: apiResponseClass[] }>>('/
 })
 
 const classes = useState<apiResponseClass[]>('classes', () => data.value?.data?.classes as apiResponseClass[])
-const interval = ref<NodeJS.Timer | undefined>(undefined)
-const currentClass = useCurrentClass()
+const backgroundImage = computed(() => `url('/img/patterns/${getColorName(useCurrentClass().value?.color)}.png')`)
 
 onMounted(() => {
   if (!classes.value || (classes.value && classes.value?.filter(c => c.hash === useCookie('selectedClass').value)?.length === 0)) {
     useCookie('selectedClass').value = null
   }
 
-  interval.value = setInterval(async () => {
+  setInterval(async () => {
     const { data } = await useFetch<apiResponse<{ classes: apiResponseClass[] }>>('/classes/all', {
       headers: {
         'Accept-Language': locale.value,
@@ -42,10 +41,6 @@ onMounted(() => {
 
     useState('classes').value = data.value?.data?.classes
   }, 1000)
-})
-
-onUnmounted(() => {
-  clearInterval(interval.value)
 })
 </script>
 
@@ -115,7 +110,7 @@ onUnmounted(() => {
       <main class="min-h-screen relative flex-1">
         <slot />
 
-        <div v-if="route.params.hash" class="bg-cover bg-center absolute inset-0 -z-10 opacity-5" :style="{ backgroundImage: `url('/img/patterns/${getColorName(currentClass?.color)}.png')` }" />
+        <div v-if="route.params.hash" class="bg-cover bg-center absolute inset-0 -z-10 opacity-5" :style="{ backgroundImage }" />
       </main>
 
     </div>

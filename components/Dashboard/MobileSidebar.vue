@@ -23,11 +23,11 @@ defineEmits<{
 
       <div class="fixed inset-0 z-40 flex">
         <TransitionChild as="template" enter="transition ease-in-out duration-300 transform" enter-from="-translate-x-full" enter-to="translate-x-0" leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0" leave-to="-translate-x-full">
-          <DialogPanel class="relative flex w-full max-w-xs flex-1 flex-col bg-white dark:bg-zinc-800 pt-5 pb-4">
+          <DialogPanel class="relative flex w-full max-w-xs flex-1 flex-col bg-white dark:bg-zinc-800 pt-5">
             <div class="flex flex-shrink-0 items-center px-4 py-2">
               <Logo class="h-5 w-auto" />
             </div>
-            <div class="mt-5 h-0 flex-1 overflow-y-auto">
+            <div class="mt-5 h-0 flex-1 overflow-y-auto pb-4">
               <nav class="px-2">
                 <div class="space-y-1">
                   <NuxtLink v-for="item in navigation" :key="item.name" :to="item.href" custom v-slot="{ href, navigate, isActive, isExactActive }">

@@ -71,7 +71,7 @@ const deleteHandler = (index: number) => {
     let schedule = toRaw(currentClass.value).schedule
     schedule.filter(i => i.day === props.day)[0].lessons.splice(index, 1)
 
-    await $fetch<apiResponse<any>>('/classes/' + currentClass.value.id, {
+    await $fetch<apiResponse<any>>(`/classes/${currentClass.value.id}/schedule`, {
       method: 'PATCH',
       headers: {
         'Accept-Language': locale.value,
@@ -102,7 +102,7 @@ watch(computed(() => currentClass.value.schedule.filter(i => i.day === props.day
     let schedule = toRaw(currentClass.value).schedule
     schedule.filter(i => i.day === props.day)[0].lessons = newSchedule
 
-    await $fetch<apiResponse<any>>('/classes/' + currentClass.value.id, {
+    await $fetch<apiResponse<any>>(`/classes/${currentClass.value.id}/schedule`, {
       method: 'PATCH',
       headers: {
         'Accept-Language': locale.value,
@@ -144,7 +144,7 @@ watch(computed(() => currentClass.value.schedule.filter(i => i.day === props.day
               index % 2 === 0 ? '' : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80',
               editMode ? 'pointer-events-none translate-x-10' : 'hover:-translate-x-10',
             ]">
-              <DragHandle class="shrink-0 flex justify-center items-center w-10 -ml-13 transition-all ease-out duration-200 text-gray-200 dark:text-zinc-300 hover:text-white dark:hover:text-zinc-100 bg-blue-500 dark:bg-blue-600 pointer-events-auto cursor-move" :class="editMode ? '' : 'invisible'" tabindex="-1">
+              <DragHandle class="shrink-0 flex justify-center items-center w-10 -ml-13 transition-all ease-out duration-200 pointer-events-auto cursor-move" :class="[editMode ? '' : 'invisible', contrastColorIsBlack(currentClass.color) ? 'text-black hover:text-zinc-700' : 'text-white hover:text-zinc-200']" :style="{ backgroundColor: currentClass.color }" tabindex="-1">
                 <Bars3Icon class="h-5 w-5" />
               </DragHandle>
               <div class="flex-1 flex items-stretch justify-between">

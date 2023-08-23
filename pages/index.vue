@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import type {Ref} from 'vue'
-
 definePageMeta({
   layout: 'main',
   middleware: 'guest',
 })
 
 const googleSignIn = useGoogleSignIn()
-const promptTimeout: Ref<NodeJS.Timeout | undefined> = ref(undefined)
+const promptTimeout = ref<NodeJS.Timeout | undefined>(undefined)
 
 onMounted(() => {
   promptTimeout.value = setTimeout(() => {
