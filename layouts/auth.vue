@@ -23,6 +23,7 @@ const { data } = await useFetch<apiResponse<{ classes: apiResponseClass[] }>>('/
 })
 
 const classes = useState<apiResponseClass[]>('classes', () => data.value?.data?.classes as apiResponseClass[])
+const interval = ref<NodeJS.Timer | undefined>(undefined)
 const currentClass = useCurrentClass()
 
 onMounted(() => {
@@ -30,7 +31,7 @@ onMounted(() => {
     useCookie('selectedClass').value = null
   }
 
-  setInterval(async () => {
+  interval.value = setInterval(async () => {
     const { data } = await useFetch<apiResponse<{ classes: apiResponseClass[] }>>('/classes/all', {
       headers: {
         'Accept-Language': locale.value,
@@ -41,6 +42,10 @@ onMounted(() => {
 
     useState('classes').value = data.value?.data?.classes
   }, 1000)
+})
+
+onUnmounted(() => {
+  clearInterval(interval.value)
 })
 </script>
 

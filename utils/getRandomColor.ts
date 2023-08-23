@@ -21,4 +21,4 @@ export const mainColors = [
 
 export const getRandomColor = (): { name: string, color: string } => mainColors[Math.floor(Math.random() * (mainColors.length - 4))]
 
-export const getColorName = (color: string): string => mainColors.filter(c => c.color === color)[0].name
+export const getColorName = (color: string | undefined): string => mainColors.filter(c => c.color === color)?.[0]?.name
