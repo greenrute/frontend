@@ -34,7 +34,7 @@ const create = async () => {
     baseURL: useRuntimeConfig().public.apiBase,
   })
     .then(async r => {
-      $fetch<apiResponse<{ classes: apiResponseClass[] }>>('/classes/all', {
+      await $fetch<apiResponse<{ classes: apiResponseClass[] }>>('/classes/all', {
         headers: {
           'Accept-Language': locale.value,
           'Authorization': 'Bearer ' + useCookie('token').value
@@ -48,7 +48,7 @@ const create = async () => {
         status: 'success',
         message: r.message,
       })
-      location.href = localePath('/dashboard')
+      await navigateTo(`/c/${currentClass.value.hash}`)
     })
     .catch(error => {
       pushNotification({

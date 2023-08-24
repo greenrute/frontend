@@ -19,7 +19,7 @@ defineEmits<{
   <div>
     <Menu as="div" class="relative inline-block">
       <div>
-        <MenuButton class="flex items-center w-full rounded-md dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 px-3 py-2 text-gray-900 dark:text-zinc-50 placeholder-gray-400 dark:placeholder-zinc-500 focus-visible:border-green-500 dark:focus-visible:border-green-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-green-500 dark:focus-visible:ring-green-600 text-sm">
+        <MenuButton class="flex items-center w-full rounded-md bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 px-3 py-2 text-gray-900 dark:text-zinc-50 placeholder-gray-400 dark:placeholder-zinc-500 focus-visible:border-green-500 dark:focus-visible:border-green-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-green-500 dark:focus-visible:ring-green-600 text-sm">
           {{ label }}
           <div class="ml-2 h-5 w-5 rounded ring-1 ring-inset ring-black/30 dark:ring-white/20" :style="{ backgroundColor: modelValue }" />
         </MenuButton>

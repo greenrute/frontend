@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Bars3Icon, TrashIcon } from '@heroicons/vue/20/solid'
-import { ArrowsUpDownIcon, CheckCircleIcon } from '@heroicons/vue/24/outline'
+import { ArrowsUpDownIcon } from '@heroicons/vue/24/outline'
+import { CheckCircleIcon } from '@heroicons/vue/24/solid'
 import { SlickList, SlickItem, DragHandle } from 'vue-slicksort'
 
 const { t, locale } = useI18n()
@@ -127,16 +128,16 @@ watch(computed(() => currentClass.value.schedule.filter(i => i.day === props.day
   <div>
     <div class="pl-3 pr-2.5 font-bold mb-2 uppercase flex items-center justify-between">
       {{ $t(`days.${day}`) }}
-      <button v-show="lessons?.length && lessons.length > 1" class="h-5.5 w-5.5 relative overflow-hidden" @click="editMode = !editMode">
+      <button v-show="lessons?.length && lessons.length > 1" class="h-6 w-6 relative overflow-hidden" @click="editMode = !editMode">
         <CheckCircleIcon class="text-green-600 dark:text-green-500 absolute transition-all ease-out duration-300 inset-0" :class="editMode ? '' : '-top-full'" />
-        <ArrowsUpDownIcon class="h-5 w-5 text-gray-600 dark:text-zinc-300 absolute transition-all ease-out duration-300 inset-0.25" :class="editMode ? 'top-full' : ''" />
+        <ArrowsUpDownIcon class="h-5 w-5 text-gray-600 dark:text-zinc-300 absolute transition-all ease-out duration-300 inset-0.5" :class="editMode ? 'top-full' : ''" />
       </button>
     </div>
 
     <div class="overflow-hidden bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-2xl backdrop-blur-sm shadow-md">
       <SlickList axis="y" v-model:list="currentClass.schedule.filter(i => i.day === day)[0].lessons" lockAxis="y" :useDragHandle="true" class="flex flex-col">
         <transition-group enter-from-class="!translate-x-[calc(100%+40px)] scale-y-0 !h-0" leave-to-class="!-translate-x-[calc(100%+40px)] scale-y-0 !h-0">
-          <SlickItem v-for="(lesson, index) in currentClass.schedule.filter(i => i.day === day)[0].lessons" :key="lesson.id" :index="index" ref="containers" class="relative" :class="[
+          <SlickItem v-for="(lesson, index) in lessons" :key="lesson.id" :index="index" ref="containers" class="relative" :class="[
             lessonStatuses[index] ? '!-translate-x-[calc(100%+40px)] scale-y-0 h-0' : 'h-10',
             editMode ? 'cursor-default select-none' : 'transition-all ease-out duration-300',
           ]">
@@ -144,7 +145,16 @@ watch(computed(() => currentClass.value.schedule.filter(i => i.day === props.day
               index % 2 === 0 ? '' : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80',
               editMode ? 'pointer-events-none translate-x-10' : 'hover:-translate-x-10',
             ]">
-              <DragHandle class="shrink-0 flex justify-center items-center w-10 -ml-13 transition-all ease-out duration-200 pointer-events-auto cursor-move" :class="[editMode ? '' : 'invisible', contrastColorIsBlack(currentClass.color) ? 'text-black hover:text-zinc-700' : 'text-white hover:text-zinc-200']" :style="{ backgroundColor: currentClass.color }" tabindex="-1">
+              <DragHandle
+                class="shrink-0 flex justify-center items-center w-10 -ml-13 transition-all ease-out duration-200 pointer-events-auto cursor-move"
+                :class="[
+                  editMode ? '' : 'invisible',
+                  contrastColorIsBlack(currentClass.color) ? 'text-black hover:text-zinc-700' : 'text-white hover:text-zinc-200',
+                  index + 1 < lessons.length ? contrastColorIsBlack(currentClass.color) ? 'border-b border-black/20' : 'border-b border-white/30' : '',
+                ]"
+                :style="{ backgroundColor: currentClass.color }"
+                tabindex="-1"
+              >
                 <Bars3Icon class="h-5 w-5" />
               </DragHandle>
               <div class="flex-1 flex items-stretch justify-between">

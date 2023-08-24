@@ -46,9 +46,7 @@ onMounted(() => {
 
 <template>
   <Html class="h-full scroll-smooth">
-
-  <Body class="h-full bg-white dark:bg-zinc-900" />
-
+    <Body class="h-full bg-white dark:bg-zinc-900" />
   </Html>
 
   <div class="min-h-full">
