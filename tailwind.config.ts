@@ -48,6 +48,9 @@ module.exports = <Partial<Config>>{
         '5.5': '1.375rem',
         '13': '3.25rem',
       },
+      opacity: {
+        '3': '0.03',
+      },
       letterSpacing: {
         tightest: '-0.075em',
       },
