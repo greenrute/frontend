@@ -70,7 +70,7 @@ export default defineNuxtConfig({
       meta: [
         { name: 'description', content: 'Новий щоденник у твоєму смартфоні — спільний розклад, домашнє завдання, обмін інформацією. Програма для Android та iOS, багато опцій, щоб налаштувати свій щоденник.' },
         { name: 'msapplication-TileColor', content: '#ffffff' },
-        { 'http-equiv': 'content-security-policy', content: "object-src 'none'; base-uri 'self'; default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://accounts.google.com/gsi/client; style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style; font-src 'self' data:; img-src 'self' data: images.unsplash.com gravatar.com lh3.googleusercontent.com; frame-src https://accounts.google.com/gsi/; connect-src 'self' api.greenrute.com https://accounts.google.com/gsi/" + (process.env.NODE_ENV !== 'production' ? " localhost:* 192.168.0.101:* ws: wss:;" : ";") },
+        { 'http-equiv': 'content-security-policy', content: "object-src 'none'; base-uri 'self'; default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://accounts.google.com/gsi/client; style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style; font-src 'self' data:; img-src 'self' data: images.unsplash.com gravatar.com lh3.googleusercontent.com; frame-src https://accounts.google.com/gsi/; connect-src 'self' api.greenrute.com https://accounts.google.com/gsi/ vitals.vercel-insights.com" + (process.env.NODE_ENV !== 'production' ? " localhost:* 192.168.0.101:* ws: wss:;" : ";") },
       ],
     },
   },
