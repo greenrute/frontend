@@ -93,8 +93,15 @@ empty:
       title: Виберіть основний клас
       description: Виберіть клас, що відображатиметься на головній сторінці.
       button: Вибрати клас
-  day off: Сьогодні вихідний
   not available yet: Ця функція ще не доступна
+  day off: Сьогодні вихідний
+  no lessons today: Сьогодні немає уроків
+  unknown timetable: Сьогоднішній розклад невідомий
+  lessons have not started yet: Уроки ще не почались
+  lessons are already over: Уроки вже закінчились
+  break now: Зараз перерва
+  time to end: "До кінця уроку: {n} хв"
+  time to end sec: "До кінця уроку: {n} с"
 
 new class:
   title: Новий клас

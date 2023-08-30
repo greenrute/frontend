@@ -20,3 +20,10 @@ declare interface NavigationItem {
 declare interface NavMenuItem extends NavigationItem {
   icon: import('vue').Component
 }
+
+declare interface CurrentLesson {
+  active: boolean
+  dayoff: boolean
+  timeToEnd: string
+  lessonUUID?: string
+}

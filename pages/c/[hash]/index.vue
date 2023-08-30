@@ -4,8 +4,8 @@ definePageMeta({
   middleware: 'auth',
 })
 
-const now = useNow()
 const currentClass = useCurrentClass()
+const currentLesson = useCurrentLesson()
 </script>
 
 <template>
@@ -22,6 +22,6 @@ const currentClass = useCurrentClass()
   </div>
 
   <div class="flex fixed bottom-4 left-1/2 lg:left-[calc(50%+8rem)] -translate-x-1/2">
-    <MainButton variant="solid" color="adaptive" disabled class="!opacity-100 !py-1.5 whitespace-nowrap !shadow-lg">{{ currentClass?.schedule?.[now.getDay() - 1] ? 'До кінця уроку: 34 хв' : $t('empty.day off') }}</MainButton>
+    <MainButton variant="solid" :color="currentLesson.active ? 'adaptive' : 'reverse'" disabled class="!opacity-100 !py-1.5 whitespace-nowrap shadow-md dark:shadow-zinc-800/30">{{ currentLesson.timeToEnd }}</MainButton>
   </div>
 </template>

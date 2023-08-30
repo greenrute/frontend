@@ -93,8 +93,15 @@ empty:
       title: Select the default class
       description: Select the class to display on the main page.
       button: Select a class
-  day off: Today is a day off
   not available yet: This feature is not available yet
+  day off: Today is a day off
+  no lessons today: There are no lessons today
+  unknown timetable: Today's schedule is unknown
+  lessons have not started yet: Lessons haven't started yet
+  lessons are already over: Lessons are already over
+  break now: It's a break now
+  time to end: "Until the end of the lesson: {n} min"
+  time to end sec: "Until the end of the lesson: {n} sec"
 
 new class:
   title: New class

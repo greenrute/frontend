@@ -25,7 +25,7 @@ const selectedClass = useCookie<string>('selectedClass', {
 const classes = useState<apiResponseClass[]>('classes')
 const currentClass = useCurrentClass()
 
-const now = useNow()
+const currentLesson = useCurrentLesson()
 </script>
 
 <template>
@@ -35,7 +35,7 @@ const now = useNow()
 
   <div v-show="classes?.length && currentClass?.schedule?.filter(i => i?.lessons?.length)?.length" class="hidden lg:flex border-b border-gray-200 dark:border-zinc-700 py-3 items-center justify-end px-8">
     <div class="mt-4 flex sm:mt-0 sm:ml-4">
-      <MainButton variant="outline" disabled class="!opacity-100 !py-1.5 -my-0.5">{{ currentClass?.schedule?.[now.getDay() - 1] ? 'До кінця уроку: 34 хв' : $t('empty.day off') }}</MainButton>
+      <MainButton variant="outline" disabled class="!opacity-100 !py-1.5 -my-0.5">{{ currentLesson.timeToEnd }}</MainButton>
     </div>
   </div>
 

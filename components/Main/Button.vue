@@ -12,17 +12,19 @@ const variantStyles = {
     green: 'bg-green-600 text-white hover:text-zinc-100 hover:bg-green-550 active:bg-green-800 active:text-green-100 focus-visible:outline-green-600 disabled:bg-green-700',
     white: 'bg-white text-zinc-900 hover:bg-green-50 active:bg-green-200 active:text-zinc-600 focus-visible:outline-white',
     adaptive: 'bg-zinc-900 text-white hover:bg-zinc-700 hover:text-zinc-100 active:bg-zinc-800 active:text-zinc-300 focus-visible:outline-zinc-900 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200 dark:active:bg-zinc-300 dark:active:text-zinc-600 dark:focus-visible:outline-white',
+    reverse: 'bg-white text-zinc-900 hover:bg-zinc-200 active:bg-zinc-300 active:text-zinc-600 focus-visible:outline-white dark:bg-zinc-900 dark:text-white dark:hover:bg-zinc-700 dark:hover:text-zinc-100 dark:active:bg-zinc-800 dark:active:text-zinc-300 dark:focus-visible:outline-zinc-900',
   },
   outline: {
     zinc: 'ring-zinc-200 dark:ring-zinc-600 text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-50 hover:ring-zinc-300 dark:hover:ring-zinc-500 active:bg-zinc-100 dark:active:bg-zinc-700 active:text-zinc-600 focus-visible:outline-green-600 focus-visible:ring-zinc-300 dark:focus-visible:ring-zinc-500',
     white: 'ring-zinc-700 text-white hover:ring-zinc-500 active:ring-zinc-700 active:text-zinc-400 focus-visible:outline-white',
     green: '',
     adaptive: '',
+    reverse: '',
   },
 }
 
 type Variant = 'solid' | 'outline'
-type Color = 'zinc' | 'green' | 'white' | 'adaptive'
+type Color = 'zinc' | 'green' | 'white' | 'adaptive' | 'reverse'
 
 withDefaults(defineProps<{
   variant?: Variant,
