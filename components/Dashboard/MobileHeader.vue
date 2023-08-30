@@ -41,7 +41,7 @@ const switchTheme = () => {
         <h3 class="text-lg truncate">{{ currentClass.name }}</h3>
       </NuxtLink>
     </template>
-    <template v-else>
+    <template v-else-if="currentClass && route.name?.toString()?.includes('dashboard')">
       <div class="flex items-center gap-2 min-w-0">
         <div class="h-3 w-3 rounded-full shrink-0" :style="{ backgroundColor: currentClass?.color }" />
         <h3 class="text-lg truncate">{{ currentClass.name }}</h3>
@@ -85,7 +85,7 @@ const switchTheme = () => {
         </Menu>
       </div>
     </template>
-    <template v-else>
+    <template v-else-if="currentClass && route.name?.toString()?.includes('dashboard')">
       <div class="max-sm:hidden w-full max-w-[11.25rem] flex justify-end shrink-0">
         <MainButton variant="outline" disabled class="w-full !opacity-100 my-2 ml-2 px-0">{{ currentLesson.timeToEnd }}</MainButton>
       </div>

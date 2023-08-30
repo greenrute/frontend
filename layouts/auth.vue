@@ -4,10 +4,15 @@ import { PlusIcon } from '@heroicons/vue/20/solid'
 
 const route = useRoute()
 const { locale } = useI18n()
+const token = useCookie('token')
+const config = useRuntimeConfig()
 const localePath = useLocalePath()
+const currentClass = useCurrentClass()
 const sidebarOpen = ref<boolean>(false)
+const selectedClass = useCookie('selectedClass')
 const openSidebar = () => sidebarOpen.value = true
 const closeSidebar = () => sidebarOpen.value = false
+const interval = ref<NodeJS.Timeout | undefined>(undefined)
 
 const navigation: NavMenuItem[] = [
   { name: 'menu.schedule', href: '/dashboard', icon: HomeIcon },
@@ -17,30 +22,34 @@ const navigation: NavMenuItem[] = [
 const { data } = await useFetch<apiResponse<{ classes: apiResponseClass[] }>>('/classes/all', {
   headers: {
     'Accept-Language': locale.value,
-    'Authorization': 'Bearer ' + useCookie('token').value,
+    'Authorization': 'Bearer ' + token.value,
   },
-  baseURL: useRuntimeConfig().public.apiBase,
+  baseURL: config.public.apiBase,
 })
 
-const classes = useState<apiResponseClass[]>('classes', () => data.value?.data?.classes as apiResponseClass[])
-const backgroundImage = computed(() => `url('/img/patterns/${getColorName(useCurrentClass().value?.color)}.png')`)
+const classes = useState<apiResponseClass[] | undefined>('classes', () => data.value?.data?.classes)
+const backgroundImage = computed(() => `url('/img/patterns/${getColorName(currentClass.value?.color)}.png')`)
 
 onMounted(() => {
-  if (!classes.value || (classes.value && classes.value?.filter(c => c.hash === useCookie('selectedClass').value)?.length === 0)) {
-    useCookie('selectedClass').value = null
+  if (!classes.value || (classes.value && classes.value?.filter(c => c.hash === selectedClass.value)?.length === 0)) {
+    selectedClass.value = null
   }
 
-  setInterval(async () => {
+  interval.value = setInterval(async () => {
     const { data } = await useFetch<apiResponse<{ classes: apiResponseClass[] }>>('/classes/all', {
       headers: {
         'Accept-Language': locale.value,
-        'Authorization': 'Bearer ' + useCookie('token').value,
+        'Authorization': 'Bearer ' + token.value,
       },
-      baseURL: useRuntimeConfig().public.apiBase,
+      baseURL: config.public.apiBase,
     })
 
-    useState('classes').value = data.value?.data?.classes
+    classes.value = data.value?.data?.classes
   }, 1000)
+})
+
+onUnmounted(() => {
+  clearInterval(interval.value)
 })
 </script>
 

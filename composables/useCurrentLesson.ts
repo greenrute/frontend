@@ -24,7 +24,7 @@ export const useCurrentLesson = (): ComputedRef<CurrentLesson> => {
   const { t } = useI18n()
 
   const currentLesson = computed<CurrentLesson>((): CurrentLesson => {
-    const currentDay = currentClass.value.schedule?.[now.value.getDay() - 1]
+    const currentDay = currentClass.value?.schedule?.[now.value.getDay() - 1]
     if (!currentDay) {
       return {
         active: false,

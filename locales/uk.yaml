@@ -66,6 +66,7 @@ menu:
 
   schedule: Розклад
   homework: Домашнє завдання
+  people: Люди
 
   my classes: Мої класи
   options: Додаткові опції
@@ -140,3 +141,6 @@ edit:
   class:
     title: Інформація про клас
     button: Оновити інформацію
+
+people:
+  students: Список однокласників
