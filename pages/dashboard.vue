@@ -36,7 +36,7 @@ const currentLesson = useCurrentLesson()
   <div v-show="classes?.length && currentClass?.schedule?.filter(i => i?.lessons?.length)?.length" class="hidden lg:flex border-b border-gray-200 dark:border-zinc-700 py-3 items-center justify-between px-8">
     <div class="mt-4 flex items-center gap-2 sm:mt-0 max-w-[16rem]">
       <div class="h-3 w-3 rounded-full shrink-0" :style="{ backgroundColor: currentClass?.color }" />
-      <h3 class="text-lg truncate">{{ currentClass?.name }}</h3>
+      <h3 class="text-lg truncate">{{ currentClass.name }}</h3>
     </div>
     <div class="mt-4 flex sm:mt-0 sm:ml-4">
       <MainButton variant="outline" disabled class="!opacity-100 !py-1.5 -my-0.5">{{ currentLesson.timeToEnd }}</MainButton>

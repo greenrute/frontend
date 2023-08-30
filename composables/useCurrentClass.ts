@@ -1,4 +1,4 @@
-export const useCurrentClass = (updateLock: boolean = false): ComputedRef<apiResponseClass| undefined> => {
+export const useCurrentClass = (updateLock: boolean = false) => {
   const currentClass = ref('')
 
   const cc = computed(() => {
