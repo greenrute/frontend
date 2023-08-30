@@ -24,10 +24,10 @@ defineEmits<{
       <div class="fixed inset-0 z-40 flex">
         <TransitionChild as="template" enter="transition ease-in-out duration-300 transform" enter-from="-translate-x-full" enter-to="translate-x-0" leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0" leave-to="-translate-x-full">
           <DialogPanel class="relative flex w-full max-w-xs flex-1 flex-col bg-white dark:bg-zinc-800 pt-5">
-            <div class="flex flex-shrink-0 items-center px-4 py-2">
+            <div class="flex flex-shrink-0 items-center px-4 pt-2 pb-1">
               <Logo class="h-5 w-auto" />
             </div>
-            <div class="mt-5 h-0 flex-1 overflow-y-auto pb-4">
+            <div class="mt-5 h-0 flex-1 overflow-y-auto pt-1 pb-4">
               <nav class="px-2">
                 <div class="space-y-1">
                   <NuxtLink v-for="item in navigation" :key="item.name" :to="item.href" custom v-slot="{ href, navigate, isActive, isExactActive }">
@@ -43,7 +43,7 @@ defineEmits<{
                   <div v-if="classes?.length" class="mt-1 space-y-1" role="group" aria-labelledby="mobile-classes-headline">
                     <NuxtLink v-for="classItem in classes" :key="classItem.hash" :to="localePath('/c/' + classItem.hash)" custom v-slot="{ href, navigate, isExactActive }">
                       <a :href="href" @click.prevent="$emit('close'); navigate()" class="group flex items-center rounded-md px-3 py-2 text-base font-medium leading-5 text-gray-600 dark:text-zinc-200 hover:bg-gray-50 dark:hover:bg-zinc-900 hover:text-gray-900 dark:hover:text-white" :aria-current="isExactActive ? 'page' : undefined">
-                        <span class="w-2.5 h-2.5 mr-4 rounded-full" :style="{ backgroundColor: classItem.color }" aria-hidden="true" />
+                        <span class="w-2.5 h-2.5 mr-4 rounded-full shrink-0" :style="{ backgroundColor: classItem.color }" aria-hidden="true" />
                         <span class="truncate">{{ classItem.name }}</span>
                       </a>
                     </NuxtLink>

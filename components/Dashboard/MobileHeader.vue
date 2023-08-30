@@ -36,15 +36,15 @@ const switchTheme = () => {
       <Bars3Icon class="h-6 w-6" aria-hidden="true" />
     </button>
     <template v-if="currentClass && route.name?.toString()?.includes('c-hash')">
-      <NuxtLink :to="`/c/${currentClass.hash}`" class="flex items-center gap-2">
-        <div class="h-3 w-3 rounded-full" :style="{ backgroundColor: currentClass.color }" />
-        <h3 class="text-lg">{{ currentClass.name }}</h3>
+      <NuxtLink :to="`/c/${currentClass.hash}`" class="flex items-center gap-2 min-w-0">
+        <div class="h-3 w-3 rounded-full shrink-0" :style="{ backgroundColor: currentClass?.color }" />
+        <h3 class="text-lg truncate">{{ currentClass.name }}</h3>
       </NuxtLink>
     </template>
     <template v-else>
       <div class="flex items-center gap-2 min-w-0">
-        <div class="h-3 w-3 rounded-full shrink-0" :style="{ backgroundColor: currentClass.color }" />
-        <h3 class="text-lg truncate min-w-0">{{ currentClass.name }}</h3>
+        <div class="h-3 w-3 rounded-full shrink-0" :style="{ backgroundColor: currentClass?.color }" />
+        <h3 class="text-lg truncate">{{ currentClass.name }}</h3>
       </div>
     </template>
     <div class="flex flex-1" />
