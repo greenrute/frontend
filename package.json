@@ -25,5 +25,10 @@
     "object-hash": "^3.0.0",
     "postcss-focus-visible": "^9.0.0",
     "vue-slicksort": "^2.0.5"
+  },
+  "overrides": {
+    "@intlify/bundle-utils": "7.0.2",
+    "@intlify/message-compiler": "9.3.0-beta.24",
+    "@intlify/shared": "9.3.0-beta.24"
   }
 }
