@@ -25,6 +25,5 @@
     "object-hash": "^3.0.0",
     "postcss-focus-visible": "^9.0.0",
     "vue-slicksort": "^2.0.5"
-  },
-  "dependencies": {}
+  }
 }
