@@ -27,7 +27,7 @@ if (error.value) {
 }
 
 const query = ref<string>('')
-const selectedLesson = ref<Lesson>({ id: -1, icon: '', name: '', alt: '' })
+const selectedLesson = ref<Lesson>({ id: -1, uuid: '', icon: '', name: '', alt: '' })
 const filteredLessons = computed(() =>
   query.value === ''
     ? (lessons.value?.data?.lessons as Lesson[] ?? [])
@@ -46,6 +46,7 @@ const submit = async () => {
 
   pending.value = true
   const start = new Date().getTime()
+  selectedLesson.value.uuid = crypto.randomUUID()
 
   let schedule = toRaw(currentClass.value).schedule
   schedule.filter(i => i.day === props.day)[0].lessons.push(selectedLesson.value)
@@ -63,7 +64,7 @@ const submit = async () => {
   })
     .then(r => {
       open.value = false
-      selectedLesson.value = { id: -1, icon: '', name: '', alt: '' }
+      selectedLesson.value = { id: -1, uuid: '', icon: '', name: '', alt: '' }
       pushNotification({
         status: 'success',
         message: r.message,

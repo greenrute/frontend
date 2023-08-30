@@ -11,7 +11,6 @@ const props = defineProps<{
 }>()
 
 const lessonStatuses = ref<boolean[]>([])
-const containers = ref<(HTMLElement | null)[]>([])
 const lessonElements = ref<(HTMLElement | null)[]>([])
 
 const bindSwipeHandler = (el: HTMLElement | null, index: number) => {
@@ -98,7 +97,7 @@ const deleteHandler = (index: number) => {
   }, 200)
 }
 
-watch(computed(() => currentClass.value.schedule.filter(i => i.day === props.day)[0].lessons), async (newSchedule, oldSchedule) => {
+watch(lessons, async (newSchedule, oldSchedule) => {
   if (editMode.value && !arraysEqual(oldSchedule, newSchedule)) {
     let schedule = toRaw(currentClass.value).schedule
     schedule.filter(i => i.day === props.day)[0].lessons = newSchedule
@@ -137,7 +136,7 @@ watch(computed(() => currentClass.value.schedule.filter(i => i.day === props.day
     <div class="overflow-hidden bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-2xl backdrop-blur-sm shadow-md">
       <SlickList axis="y" v-model:list="currentClass.schedule.filter(i => i.day === day)[0].lessons" lockAxis="y" :useDragHandle="true" class="flex flex-col">
         <transition-group enter-from-class="!translate-x-[calc(100%+40px)] scale-y-0 !h-0" leave-to-class="!-translate-x-[calc(100%+40px)] scale-y-0 !h-0">
-          <SlickItem v-for="(lesson, index) in lessons" :key="lesson.id" :index="index" ref="containers" class="relative" :class="[
+          <SlickItem v-for="(lesson, index) in lessons" :key="lesson.uuid" :index="index" class="relative" :class="[
             lessonStatuses[index] ? '!-translate-x-[calc(100%+40px)] scale-y-0 h-0' : 'h-10',
             editMode ? 'cursor-default select-none' : 'transition-all ease-out duration-300',
           ]">

@@ -30,7 +30,14 @@ declare interface apiResponseClass {
   description: string
   color: string
   hash: string
-  timetable: any[]
+  timetable: {
+    day: string
+    records: {
+      uuid: string
+      start: string
+      end: string
+    }[]
+  }[]
   schedule: {
     day: string
     lessons: Lesson[]

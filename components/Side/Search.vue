@@ -1,15 +1,28 @@
 <script setup lang="ts">
 import { Combobox, ComboboxButton, ComboboxInput, ComboboxLabel, ComboboxOption, ComboboxOptions } from '@headlessui/vue'
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
-import { actions, Action } from '~/utils/actions'
+import { actions, type Action } from '~/utils/actions'
+
+const localePath = useLocalePath()
+const classes = useState<apiResponseClass[]>('classes')
+
+const availableActions = computed(() => [
+  ...classes.value.map(c => <Action>{
+    id: c.id * 100,
+    name: c.name,
+    icon: c.color,
+    action: () => navigateTo(localePath(`/c/${c.hash}`)),
+  }),
+  ...actions()
+])
 
 const show = ref<boolean>(false)
 const query = ref<string>('')
 const selectedAction = ref(null)
 const filteredActions = computed(() =>
   query.value === ''
-    ? actions()
-    : actions().filter((action) => {
+    ? availableActions.value
+    : availableActions.value.filter((action) => {
       return action?.name.toLowerCase().includes(query.value.toLowerCase())
     })
 )
@@ -46,8 +59,9 @@ const blurHandler = () => {
             <ComboboxOption v-for="action in filteredActions" :key="action?.id" :value="action" as="div" v-slot="{ active, selected }">
               <li class="relative cursor-default select-none py-2 pl-3 pr-9" :class="active ? 'bg-green-600 text-white' : 'text-gray-900 dark:text-zinc-300'">
                 <div class="flex items-center">
-                <span class="inline-block h-4 w-4 flex-shrink-0" aria-hidden="true">
-                  <component :is="action?.icon" class="h-4 w-4" aria-hidden="true" />
+                <span class="inline-flex justify-center items-center h-4 w-4 flex-shrink-0" aria-hidden="true">
+                  <div v-if="typeof action?.icon === 'string'" class="h-3 w-3 rounded-full" :style="{ backgroundColor: action?.icon }" />
+                  <component v-else :is="action?.icon" class="h-4 w-4" aria-hidden="true" />
                 </span>
                   <span class="block ml-2 truncate" :class="selected ? 'font-semibold' : ''">
                   {{ action?.name }}

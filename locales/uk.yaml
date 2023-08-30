@@ -69,7 +69,8 @@ menu:
 
   my classes: Мої класи
   options: Додаткові опції
-  edit schedule: Редагувати розклад
+  edit schedule: Розклад уроків
+  edit timetable: Розклад дзвінків
   edit class info: Редагувати інформацію про клас
 
 actions:
@@ -112,6 +113,7 @@ color modes:
   dark: Темна
 
 days:
+  standard: Стандартний
   sunday: Неділя
   monday: Понеділок
   tuesday: Вівторок
@@ -124,6 +126,7 @@ edit:
   add lesson: Додати урок
   add: Додати
   cancel: Скасувати
+  select: Вибрати
   lesson name: Назва уроку
   placeholder: Почніть вводити назву уроку...
   invalid: Будь-ласка, виберіть урок з випадаючого списку

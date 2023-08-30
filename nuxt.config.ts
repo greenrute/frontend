@@ -43,7 +43,11 @@ export default defineNuxtConfig({
     },
     vueI18n: './i18n.config.ts',
   },
-  css: ['~/assets/css/fonts.css', '~/assets/css/animations.css'],
+  css: [
+    '~/assets/css/fonts.css',
+    '~/assets/css/animations.css',
+    '~/assets/css/datepicker.css',
+  ],
   postcss: {
     plugins: {
       'postcss-focus-visible': {
@@ -51,6 +55,9 @@ export default defineNuxtConfig({
       },
       autoprefixer: {},
     }
+  },
+  build: {
+    transpile: ['@vuepic/vue-datepicker'],
   },
   experimental: {
     payloadExtraction: false,

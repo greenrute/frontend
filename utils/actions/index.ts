@@ -5,7 +5,7 @@ import type { Component } from 'vue'
 export interface Action {
   id: number
   name: string
-  icon: Component
+  icon: Component | string
   action: () => void
 }
 

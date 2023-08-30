@@ -70,6 +70,7 @@ menu:
   my classes: My classes
   options: Additional options
   edit schedule: Edit schedule
+  edit timetable: Edit timetable
   edit class info: Edit class information
 
 actions:
@@ -112,6 +113,7 @@ color modes:
   dark: Dark
 
 days:
+  standard: Standard
   sunday: Sunday
   monday: Monday
   tuesday: Tuesday
@@ -124,6 +126,7 @@ edit:
   add lesson: Add a lesson
   add: Add
   cancel: Cancel
+  select: Select
   lesson name: Lesson name
   placeholder: Start typing lesson name...
   invalid: Please select a lesson from the drop-down list

@@ -3,6 +3,7 @@ declare interface Lesson {
   name: string
   icon: string
   alt: string
+  uuid: string
 }
 
 declare interface Class {
