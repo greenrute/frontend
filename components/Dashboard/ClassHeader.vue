@@ -18,21 +18,24 @@ const currentClass = useCurrentClass()
 
 <template>
   <div class="hidden lg:flex relative border-b border-gray-200 dark:border-zinc-700 py-3 items-center justify-between px-8">
-    <NuxtLink :to="localePath(`/c/${currentClass.hash}`)" class="mt-4 flex items-center gap-2 sm:mt-0 max-w-[8rem]">
+    <NuxtLink :to="localePath(`/c/${currentClass?.hash}`)" class="mt-4 flex items-center gap-2 sm:mt-0 max-w-[8rem]">
       <div class="h-3 w-3 rounded-full shrink-0" :style="{ backgroundColor: currentClass?.color }" />
-      <h3 class="text-lg truncate">{{ currentClass.name }}</h3>
+      <h3 class="text-lg truncate">{{ currentClass?.name }}</h3>
     </NuxtLink>
 
     <nav class="absolute left-1/2 -translate-x-1/2">
       <ul class="flex items-center gap-4">
         <li>
-          <NuxtLink :to="localePath(`/c/${currentClass.hash}`)" :class="route.name === 'c-hash' ? 'font-bold' : ''">{{ $t('menu.schedule') }}</NuxtLink>
+          <NuxtLink :to="localePath(`/c/${currentClass?.hash}`)" :class="route.name === 'c-hash' ? 'font-bold' : ''">{{ $t('menu.schedule') }}</NuxtLink>
+        </li>
+        <li>
+          <NuxtLink :to="localePath(`/c/${currentClass?.hash}/people`)" :class="route.name === 'c-hash-people' ? 'font-bold' : ''">{{ $t('menu.people') }}</NuxtLink>
         </li>
       </ul>
     </nav>
 
     <div class="flex items-center gap-1.5">
-      <NuxtLink :to="localePath(`/c/${currentClass.hash}/edit`)" class="text-gray-600 hover:text-gray-800 dark:text-zinc-200 dark:hover:text-white rounded-full p-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500">
+      <NuxtLink :to="localePath(`/c/${currentClass?.hash}/edit`)" class="text-gray-600 hover:text-gray-800 dark:text-zinc-200 dark:hover:text-white rounded-full p-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500">
         <span class="sr-only">{{ $t('menu.edit class info') }}</span>
         <InformationCircleSolidIcon class="h-6 w-6 text-gray-800 dark:text-white" aria-hidden="true" v-if="route.name === 'c-hash-edit'" />
         <InformationCircleOutlineIcon class="h-6 w-6" aria-hidden="true" v-else />
@@ -50,13 +53,13 @@ const currentClass = useCurrentClass()
           <MenuItems class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-zinc-800 shadow-lg ring-1 ring-black ring-opacity-5 dark:ring-zinc-700 focus:outline-none">
             <div class="py-1">
               <MenuItem v-slot="{ active }">
-                <NuxtLink :to="localePath(`/c/${currentClass.hash}/schedule`)" class="group flex items-center px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-900 text-gray-900 dark:text-zinc-50' : 'text-gray-800 dark:text-zinc-300'">
+                <NuxtLink :to="localePath(`/c/${currentClass?.hash}/schedule`)" class="group flex items-center px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-900 text-gray-900 dark:text-zinc-50' : 'text-gray-800 dark:text-zinc-300'">
                   <TableCellsIcon class="mr-3 h-5 w-5 text-gray-500 dark:text-zinc-400 group-hover:text-gray-600 dark:group-hover:text-zinc-400" aria-hidden="true" />
                   {{ $t('menu.edit schedule') }}
                 </NuxtLink>
               </MenuItem>
               <MenuItem v-slot="{ active }">
-                <NuxtLink :to="localePath(`/c/${currentClass.hash}/timetable`)" class="group flex items-center px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-900 text-gray-900 dark:text-zinc-50' : 'text-gray-800 dark:text-zinc-300'">
+                <NuxtLink :to="localePath(`/c/${currentClass?.hash}/timetable`)" class="group flex items-center px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-900 text-gray-900 dark:text-zinc-50' : 'text-gray-800 dark:text-zinc-300'">
                   <ClockIcon class="mr-3 h-5 w-5 text-gray-500 dark:text-zinc-400 group-hover:text-gray-600 dark:group-hover:text-zinc-400" aria-hidden="true" />
                   {{ $t('menu.edit timetable') }}
                 </NuxtLink>

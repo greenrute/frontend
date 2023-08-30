@@ -66,6 +66,7 @@ menu:
 
   schedule: Schedule
   homework: Homework
+  people: People
 
   my classes: My classes
   options: Additional options
@@ -140,3 +141,6 @@ edit:
   class:
     title: Class information
     button: Update information
+
+people:
+  students: Classmates list
