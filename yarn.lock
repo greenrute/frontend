@@ -2754,9 +2754,9 @@ formdata-polyfill@^4.0.10:
     fetch-blob "^3.1.2"
 
 fraction.js@^4.2.0:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.3.1.tgz#828c46dce1c8ad270e1c4170b3d06a2761e997d3"
-  integrity sha512-nx0cki48JBA6ThPeUpeKCNpdhEl/9bRS+dAEYnRUod+Z1jhFfC3K/mBLorZZntqHM+GTH3/dkkpfoT3QITYe7g==
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.3.2.tgz#ea144a08ed23a284bf9067153075f212771a92d9"
+  integrity sha512-9VLF466MqX1OUP7/d9r7/Vsvu6Hpp+taXBLmiR5x6mEYfT0BDkGVBt5TyA1aDu1WzIE1sF8F66evOFaz7iAEGQ==
 
 fresh@0.5.2, fresh@~0.5.2:
   version "0.5.2"
