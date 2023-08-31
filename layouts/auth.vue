@@ -19,17 +19,6 @@ const navigation: NavMenuItem[] = [
   { name: 'menu.homework', href: '/homework', icon: ListBulletIcon },
 ]
 
-const { data } = await useFetch<apiResponse<{ classes: apiResponseClass[] }>>('/classes/all', {
-  headers: {
-    'Accept-Language': locale.value,
-    'Authorization': 'Bearer ' + token.value,
-  },
-  baseURL: config.public.apiBase,
-})
-
-const classes = useState<apiResponseClass[] | undefined>('classes', () => data.value?.data?.classes)
-const backgroundImage = computed(() => `url('/img/patterns/${getColorName(currentClass.value?.color)}.png')`)
-
 onMounted(() => {
   if (!classes.value || (classes.value && classes.value?.filter(c => c.hash === selectedClass.value)?.length === 0)) {
     selectedClass.value = null
@@ -51,6 +40,17 @@ onMounted(() => {
 onUnmounted(() => {
   clearInterval(interval.value)
 })
+
+const { data } = await useFetch<apiResponse<{ classes: apiResponseClass[] }>>('/classes/all', {
+  headers: {
+    'Accept-Language': locale.value,
+    'Authorization': 'Bearer ' + token.value,
+  },
+  baseURL: config.public.apiBase,
+})
+
+const classes = useState<apiResponseClass[] | undefined>('classes', () => data.value?.data?.classes)
+const backgroundImage = computed(() => `url('/img/patterns/${getColorName(currentClass.value?.color)}.png')`)
 </script>
 
 <template>
