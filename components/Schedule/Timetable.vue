@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ArrowLeftOnRectangleIcon, ArrowRightOnRectangleIcon, TrashIcon } from '@heroicons/vue/20/solid'
-import { PencilIcon, PlusCircleIcon } from '@heroicons/vue/24/outline'
-import { CheckCircleIcon } from '@heroicons/vue/24/solid'
+import { CheckCircleIcon, PlusCircleIcon } from '@heroicons/vue/24/solid'
+import { PencilIcon } from '@heroicons/vue/24/outline'
 
 const { t, locale } = useI18n()
 

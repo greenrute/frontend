@@ -42,6 +42,18 @@ declare interface apiResponseClass {
     day: string
     lessons: Lesson[]
   }[]
+  people: {
+    id: number
+    email: string
+    name: string
+    role: string
+    picture: string
+    password: string
+    google_id: string
+    created_at: string
+    updated_at: string
+    token: apiResponseToken
+  }[]
   created_at: string
   updated_at: string
 }

@@ -83,8 +83,8 @@ actions:
 empty:
   lessons:
     title: No lessons
-    description: Get started by adding a new day.
-    button: Add a day
+    description: Get started by adding lessons to your schedule.
+    button: Add lessons
   classes:
     title: No classes
     description: Get started by creating a new class.
@@ -103,6 +103,18 @@ empty:
   break now: It's a break now
   time to end: "Until the end of the lesson: {n} min"
   time to end sec: "Until the end of the lesson: {n} sec"
+
+welcome:
+  - title: Congratulations!
+    text: You have successfully registered in GreenRute, we would like to tell you about some aspects of using the application.
+  - title: Class is the main structural link of GreenRute
+    text: GreenRute consists of classes. You can find them in the left panel <-. You can create them and join classes. On the main page, you can choose which class will be displayed by default.
+  - title: Joint timetable
+    text: Within the classes, you can have a common schedule and homework. You can manage member rights and choose who can add tasks.
+
+general:
+  next: Next
+  close: Close
 
 new class:
   title: New class
@@ -144,3 +156,10 @@ edit:
 
 people:
   students: Classmates list
+  roles:
+    owner: Owner
+    admin: Administrator
+    member: Member
+  actions:
+    change role: Change rights
+    delete member: Видалити учасника

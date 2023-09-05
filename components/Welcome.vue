@@ -73,14 +73,14 @@ const toThirdStage = () => {
                       <HandRaisedIcon class="h-6 w-6 text-zinc-600 dark:text-zinc-300 motion-safe:animate-wave origin-bottom" aria-hidden="true" />
                     </div>
                     <div class="mt-3 text-center sm:mt-5">
-                      <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900 dark:text-zinc-50">Вітаємо!</DialogTitle>
+                      <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900 dark:text-zinc-50">{{ $t('welcome.0.title') }}</DialogTitle>
                       <div class="mt-2">
-                        <p class="text-sm text-gray-500 dark:text-zinc-400">Ви успішно зареєструвалися в GreenRute, хочемо розказати Вам про деякі аспекти користування застосунком.</p>
+                        <p class="text-sm text-gray-500 dark:text-zinc-400">{{ $t('welcome.0.text') }}</p>
                       </div>
                     </div>
                   </div>
                   <MainButton variant="solid" color="adaptive" class="mt-5 sm:mt-6 w-full" @click="toSecondStage">
-                    Далі&nbsp;
+                    {{ $t('general.next') }}&nbsp;
                     <ArrowRightIcon class="h-4 w-4" />
                   </MainButton>
                 </div>
@@ -90,14 +90,14 @@ const toThirdStage = () => {
                       <UserGroupIcon class="h-6 w-6 text-yellow-600" aria-hidden="true" />
                     </div>
                     <div class="mt-3 text-center sm:mt-5">
-                      <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900 dark:text-zinc-50">Клас — основна структурна ланка GreenRute</DialogTitle>
+                      <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900 dark:text-zinc-50">{{ $t('welcome.1.title') }}</DialogTitle>
                       <div class="mt-2">
-                        <p class="text-sm text-gray-500 dark:text-zinc-400">GreenRute складається з класів. Ви можете їх знайти на панелі зліва &lt;-. Ви можете їх створювати та приєднуватись до класів. На головній сторінці Ви можете вибрати, який клас буде відображатись за замовчуванням.</p>
+                        <p class="text-sm text-gray-500 dark:text-zinc-400">{{ $t('welcome.1.text') }}</p>
                       </div>
                     </div>
                   </div>
                   <MainButton variant="solid" color="adaptive" class="mt-5 sm:mt-6 w-full" @click="toThirdStage">
-                    Далі&nbsp;
+                    {{ $t('general.next') }}&nbsp;
                     <ArrowRightIcon class="h-4 w-4" />
                   </MainButton>
                 </div>
@@ -107,16 +107,16 @@ const toThirdStage = () => {
                       <RectangleGroupIcon class="h-6 w-6 text-green-600" aria-hidden="true" />
                     </div>
                     <div class="mt-3 text-center sm:mt-5">
-                      <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900 dark:text-zinc-50">Спільний розклад</DialogTitle>
+                      <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900 dark:text-zinc-50">{{ $t('welcome.2.title') }}</DialogTitle>
                       <div class="mt-2">
-                        <p class="text-sm text-gray-500 dark:text-zinc-400">Всередині класів Ви можете мати спільний розклад та домашнє завдання. Ви можете керувати правами учасників і вибирати, хто може додавати завдання.</p>
+                        <p class="text-sm text-gray-500 dark:text-zinc-400">{{ $t('welcome.2.text') }}</p>
                       </div>
                     </div>
                   </div>
                   <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-                    <MainButton variant="outline" color="zinc" class="w-full" @click="completeView">Закрити</MainButton>
+                    <MainButton variant="outline" color="zinc" class="w-full" @click="completeView">{{ $t('general.close') }}</MainButton>
                     <MainButton variant="solid" color="adaptive" class="w-full mt-3 sm:mt-0" :to="localePath('/classes/new')" @click="completeView">
-                      Створити клас&nbsp;
+                      {{ $t('empty.classes.button') }}&nbsp;
                       <PlusIcon class="h-4 w-4" />
                     </MainButton>
                   </div>
