@@ -156,10 +156,12 @@ edit:
 
 people:
   students: Classmates list
+  user role: User role
   roles:
     owner: Owner
     admin: Administrator
     member: Member
   actions:
+    add member: Add person to class
     change role: Change rights
     delete member: Видалити учасника

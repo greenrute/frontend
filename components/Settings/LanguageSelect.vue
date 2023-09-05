@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
+import type { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables'
 const { locale, locales, setLocale } = useI18n()
 
 await preloadComponents(locales.value.map(l => 'Emoji' + (typeof l !== 'string' && l.icon)))
 
-const selected = ref([...locales.value].filter(l => typeof l !== 'string' && l.code === locale.value)[0])
+const selected = ref<LocaleObject>([...locales.value].filter(l => typeof l !== 'string' && l.code === locale.value)[0] as LocaleObject)
 </script>
 
 <template>
@@ -24,7 +25,7 @@ const selected = ref([...locales.value].filter(l => typeof l !== 'string' && l.c
 
       <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
         <ListboxOptions class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-800 py-1 text-base shadow-lg ring-1 ring-black dark:ring-zinc-700 ring-opacity-5 focus:outline-none sm:text-sm">
-          <ListboxOption as="template" v-for="l in locales" :key="l.id" :value="l" v-slot="{ active, selected }">
+          <ListboxOption as="template" v-for="l in (locales as LocaleObject[])" :key="l.id" :value="l" v-slot="{ active, selected }">
             <li class="relative cursor-default select-none py-2 pl-3 pr-9" :class="active ? 'text-black dark:text-white bg-zinc-200 dark:bg-zinc-900' : 'text-gray-900 dark:text-zinc-50'">
               <div class="flex items-center">
                 <component :is="'Emoji' + l.icon" class="h-4 w-4 flex-shrink-0" />

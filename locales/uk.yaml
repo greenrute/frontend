@@ -156,10 +156,12 @@ edit:
 
 people:
   students: Список однокласників
+  user role: Роль учасника
   roles:
     owner: Власник
     admin: Адміністратор
     member: Учасник
   actions:
+    add member: Додати людину до класу
     change role: Змінити права
     delete member: Видалити учасника

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { EllipsisVerticalIcon, UserMinusIcon, UsersIcon } from '@heroicons/vue/20/solid'
-import { UserPlusIcon } from '@heroicons/vue/24/outline'
 
 definePageMeta({
   layout: 'auth',
@@ -24,9 +23,7 @@ const isAdmin = computed(() => !!currentClass.value?.people?.filter(p => p.id ==
   <div class="px-4 py-8 sm:pb-16 flex flex-col gap-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
     <div class="flex items-center justify-between gap-2 mb-2">
       <h1 class="text-2xl font-display font-semibold text-gray-900 dark:text-zinc-50 sm:truncate">{{ $t('people.students') }}</h1>
-      <MainButton variant="outline" color="zinc" class="!px-2">
-        <UserPlusIcon class="w-5.5 h-5.5" aria-hidden="true" />
-      </MainButton>
+      <PeopleAddPerson />
     </div>
 
     <ul role="list" class="divide-y divide-gray-100 dark:divide-zinc-700 bg-white/70 dark:bg-zinc-800/70 shadow-sm ring-1 ring-gray-900/5 dark:ring-zinc-700 rounded-xl">
@@ -49,7 +46,7 @@ const isAdmin = computed(() => !!currentClass.value?.people?.filter(p => p.id ==
           <div class="hidden sm:flex sm:flex-col sm:items-end">
             <p class="text-sm leading-6 text-gray-900 dark:text-zinc-50">{{ $t('people.roles.' + person.role) }}</p>
           </div>
-          <Menu as="div" class="relative text-left">
+          <Menu v-if="isAdmin" as="div" class="relative text-left">
             <div class="-ml-0.5">
               <MenuButton class="flex p-1 items-center rounded-full text-gray-600 hover:text-gray-800 dark:text-zinc-200 dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500">
                 <span class="sr-only">{{ $t('menu.options') }}</span>

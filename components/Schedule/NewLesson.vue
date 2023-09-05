@@ -129,7 +129,7 @@ const submit = async () => {
                             </span>
                           </div>
 
-                          <span v-if="selected" :class="['absolute inset-y-0 right-0 flex items-center pr-4', active ? 'text-white' : 'text-green-600']">
+                          <span v-if="selected" :class="['absolute inset-y-0 right-0 flex items-center pr-4', active ? 'text-gray-800 dark:text-white' : 'text-green-600']">
                             <CheckIcon class="h-5 w-5" aria-hidden="true" />
                           </span>
                         </li>

@@ -14,13 +14,13 @@ const recordStatuses = ref<boolean[]>([])
 const updateLock = ref(false)
 const deleteMode = ref<boolean>(false)
 const currentClass = useCurrentClass(updateLock.value)
-const records = computed(() => currentClass.value.timetable.filter(i => i.day === props.day)[0].records)
+const records = computed(() => currentClass.value?.timetable.filter(i => i.day === props.day)[0].records)
 
 const addLesson = async () => {
   updateLock.value = true
-  let timetable = toRaw(currentClass.value).timetable
-  let lastItem = timetable.filter(i => i.day === props.day)[0].records.at(-1)
-  timetable.filter(i => i.day === props.day)[0].records.push(lastItem ? {
+  let timetable = toRaw(currentClass.value)?.timetable
+  let lastItem = timetable?.filter(i => i.day === props.day)[0].records.at(-1)
+  timetable?.filter(i => i.day === props.day)[0].records.push(lastItem ? {
     uuid: crypto.randomUUID(),
     start: addMinutes(lastItem.start, 60),
     end: addMinutes(lastItem.start, 105),
@@ -30,7 +30,7 @@ const addLesson = async () => {
     end: '09:15'
   })
 
-  await $fetch<apiResponse<any>>(`/classes/${currentClass.value.id}/timetable`, {
+  await $fetch<apiResponse<any>>(`/classes/${currentClass.value?.id}/timetable`, {
     method: 'PATCH',
     headers: {
       'Accept-Language': locale.value,
@@ -54,14 +54,14 @@ const addLesson = async () => {
 
 const deleteHandler = (index: number) => {
   updateLock.value = true
-  if (records.value.length === 1) deleteMode.value = false
+  if (records.value?.length === 1) deleteMode.value = false
   recordStatuses.value[index] = true
 
   setTimeout(async () => {
-    let timetable = toRaw(currentClass.value).timetable
-    timetable.filter(i => i.day === props.day)[0].records.splice(index, 1)
+    let timetable = toRaw(currentClass.value)?.timetable
+    timetable?.filter(i => i.day === props.day)[0].records.splice(index, 1)
 
-    await $fetch<apiResponse<any>>(`/classes/${currentClass.value.id}/timetable`, {
+    await $fetch<apiResponse<any>>(`/classes/${currentClass.value?.id}/timetable`, {
       method: 'PATCH',
       headers: {
         'Accept-Language': locale.value,
@@ -134,7 +134,7 @@ const deleteHandler = (index: number) => {
       <TransitionCollapse>
         <div v-show="!deleteMode">
           <div class="flex items-center justify-between gap-1.5 border-zinc-200 dark:border-zinc-700 transition-all ease-out duration-300" :class="records && records.length && !(records.length < 2 && recordStatuses.filter(s => s).length) ? 'mt-1 border-t' : ''">
-            <button class="hover:bg-zinc-50 dark:hover:bg-zinc-900 dark:hover:bg-opacity-80 flex w-full gap-1 justify-center items-center py-1.5 px-3 rounded-b-2xl focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-green-600" :class="records.length ? '' : 'rounded-t-2xl'" @click="addLesson">
+            <button class="hover:bg-zinc-50 dark:hover:bg-zinc-900 dark:hover:bg-opacity-80 flex w-full gap-1 justify-center items-center py-1.5 px-3 rounded-b-2xl focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-green-600" :class="records?.length ? '' : 'rounded-t-2xl'" @click="addLesson">
               <PlusCircleIcon class="h-5 w-5" />
               <span class="text-base truncate">{{ $t('edit.add lesson') }}</span>
             </button>
