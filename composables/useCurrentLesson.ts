@@ -71,13 +71,14 @@ export const useCurrentLesson = (): ComputedRef<CurrentLesson> => {
 
     const currentLesson = ref<number | null>(null)
     currentDay.lessons.forEach((l, i) => {
-      const lessonLimits = getLessonLimits(currentTimetable[i], now.value)
+      if (!currentTimetable?.[i]) return
+      const lessonLimits = getLessonLimits(currentTimetable?.[i], now.value)
       if (lessonLimits.start <= now.value.getTime() && now.value.getTime() <= lessonLimits.end) {
         currentLesson.value = i
       }
     })
 
-    if (!currentLesson.value) {
+    if (currentLesson.value === null) {
       return {
         active: false,
         dayoff: false,

@@ -4,11 +4,13 @@ import { UserCircleIcon, Cog8ToothIcon, BellIcon, ArrowDownTrayIcon, MoonIcon, S
 import {
   PencilSquareIcon as PencilSquareOutlineIcon,
   InformationCircleIcon as InformationCircleOutlineIcon,
+  UsersIcon as UsersOutlineIcon,
   Bars3Icon,
 } from '@heroicons/vue/24/outline'
 import {
   PencilSquareIcon as PencilSquareSolidIcon,
   InformationCircleIcon as InformationCircleSolidIcon,
+  UsersIcon as UsersSolidIcon,
 } from '@heroicons/vue/24/solid'
 
 defineEmits<{
@@ -50,6 +52,11 @@ const switchTheme = () => {
     <div class="flex flex-1" />
     <template v-if="currentClass && route.name?.toString()?.includes('c-hash')">
       <div class="flex items-center">
+        <NuxtLink :to="`/c/${currentClass?.hash}/people`" class="p-2 -mr-0.5">
+          <span class="sr-only">{{ $t('menu.people') }}</span>
+          <UsersSolidIcon class="h-5.5 w-5.5 text-gray-800 dark:text-white" aria-hidden="true" v-if="route.name === 'c-hash-people'" />
+          <UsersOutlineIcon class="h-5.5 w-5.5 text-gray-600 dark:text-zinc-200" aria-hidden="true" v-else />
+        </NuxtLink>
         <NuxtLink :to="`/c/${currentClass?.hash}/edit`" class="p-2">
           <span class="sr-only">{{ $t('menu.edit class info') }}</span>
           <InformationCircleSolidIcon class="h-6 w-6 text-gray-800 dark:text-white" aria-hidden="true" v-if="route.name === 'c-hash-edit'" />
@@ -90,7 +97,7 @@ const switchTheme = () => {
         <MainButton variant="outline" disabled class="w-full !opacity-100 my-2 ml-2 px-0">{{ currentLesson.timeToEnd }}</MainButton>
       </div>
       <div class="sm:hidden flex fixed bottom-4 left-1/2 lg:left-[calc(50%+8rem)] -translate-x-1/2">
-        <MainButton variant="solid" :color="currentLesson.active ? 'adaptive' : 'reverse'" disabled class="!opacity-100 !py-1.5 whitespace-nowrap shadow-md dark:shadow-zinc-800/30">{{ currentLesson.timeToEnd }}</MainButton>
+        <MainButton variant="solid" :color="currentLesson.active ? 'adaptive' : 'reverse'" disabled class="!opacity-100 !py-1.5 whitespace-nowrap shadow-md dark:shadow-zinc-800/30 transition-all duration-300 ease-out">{{ currentLesson.timeToEnd }}</MainButton>
       </div>
     </template>
     <div class="flex pr-4 sm:pr-6 lg:pr-8 shrink-0">

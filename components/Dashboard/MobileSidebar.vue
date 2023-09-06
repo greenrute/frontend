@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { PlusIcon } from '@heroicons/vue/20/solid'
 
 const localePath = useLocalePath()
 
@@ -39,7 +40,13 @@ defineEmits<{
                   </NuxtLink>
                 </div>
                 <div class="mt-8">
-                  <h3 class="px-3 text-sm font-medium text-gray-500 dark:text-zinc-400" id="mobile-classes-headline">{{ $t('menu.my classes') }}</h3>
+                  <h3 class="flex justify-between items-center px-3 text-sm font-medium text-gray-500 dark:text-zinc-400" id="mobile-classes-headline">
+                    {{ $t('menu.my classes') }}
+                    <NuxtLink :to="localePath('/classes/new')" v-if="classes?.length" class="hover:text-gray-600 dark:hover:text-zinc-300">
+                      <PlusIcon class="h-5 w-5" aria-hidden="true" />
+                      <span class="sr-only">{{ $t('empty.classes.button') }}</span>
+                    </NuxtLink>
+                  </h3>
                   <div v-if="classes?.length" class="mt-1 space-y-1" role="group" aria-labelledby="mobile-classes-headline">
                     <NuxtLink v-for="classItem in classes" :key="classItem.hash" :to="localePath('/c/' + classItem.hash)" custom v-slot="{ href, navigate, isExactActive }">
                       <a :href="href" @click.prevent="$emit('close'); navigate()" class="group flex items-center rounded-md px-3 py-2 text-base font-medium leading-5 text-gray-600 dark:text-zinc-200 hover:bg-gray-50 dark:hover:bg-zinc-900 hover:text-gray-900 dark:hover:text-white" :aria-current="isExactActive ? 'page' : undefined">

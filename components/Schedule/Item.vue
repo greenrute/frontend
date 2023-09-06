@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { PlusCircleIcon } from '@heroicons/vue/24/outline'
+import { QueueListIcon } from '@heroicons/vue/24/outline'
 
 defineProps<{
   day: string
   lessons?: Lesson[]
 }>()
-
-const currentLesson = useCurrentLesson()
 </script>
 
 <template>
@@ -14,7 +12,7 @@ const currentLesson = useCurrentLesson()
     <div class="pl-3 pr-2.5 font-bold mb-2 uppercase flex items-center justify-between">
       {{ $t(`days.${day}`) }}
       <button class="text-green-600">
-        <PlusCircleIcon class="h-5.5 w-5.5" />
+        <QueueListIcon class="h-5.5 w-5.5" />
       </button>
     </div>
     <div class="overflow-hidden bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-2xl backdrop-blur-sm shadow-md">

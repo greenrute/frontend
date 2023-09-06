@@ -41,6 +41,7 @@ const submit = async () => {
   })
     .then(r => {
       open.value = false
+      email.value = ''
       selectedRole.value = 'member'
       pushNotification({
         status: 'success',
@@ -89,7 +90,7 @@ const submit = async () => {
                 </DialogTitle>
 
                 <div class="mt-5">
-                  <MainTextInput class="!py-1.5 !pl-3" v-model="email" id="user-add-email" :label="$t('email address')" required :invalid="$t('please enter a valid email address')" autocomplete="off" />
+                  <MainTextInput class="!py-1.5 !pl-3" v-model="email" name="notASearchField" id="user-add-email" :label="$t('email address')" required :invalid="$t('please enter a valid email address')" autocomplete="off" />
                 </div>
 
                 <Listbox class="mt-5" as="div" v-model="selectedRole" v-slot="{ open }">

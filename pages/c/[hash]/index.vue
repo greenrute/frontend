@@ -22,6 +22,6 @@ const currentLesson = useCurrentLesson()
   </div>
 
   <div class="flex fixed bottom-4 left-1/2 lg:left-[calc(50%+8rem)] -translate-x-1/2">
-    <MainButton variant="solid" :color="currentLesson.active ? 'adaptive' : 'reverse'" disabled class="!opacity-100 !py-1.5 whitespace-nowrap shadow-md dark:shadow-zinc-800/30">{{ currentLesson.timeToEnd }}</MainButton>
+    <MainButton variant="solid" :color="currentLesson.active ? 'adaptive' : 'reverse'" disabled class="!opacity-100 !py-1.5 whitespace-nowrap shadow-md dark:shadow-zinc-800/30 transition-all duration-300 ease-out">{{ currentLesson.timeToEnd }}</MainButton>
   </div>
 </template>
