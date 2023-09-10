@@ -124,6 +124,7 @@ new class:
   color: Колір класу
 
 settings:
+  default class: Клас за замовчуванням
   appearance: Зовнішній вигляд
   language: Мова
 

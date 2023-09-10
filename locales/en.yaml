@@ -124,6 +124,7 @@ new class:
   color: Class color
 
 settings:
+  default class: Default class
   appearance: Appearance
   language: Language
 

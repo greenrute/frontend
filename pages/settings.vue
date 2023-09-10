@@ -27,5 +27,11 @@ definePageMeta({
       </div>
     </div>
 
+    <div>
+      <h4 class="text-xl font-overpass font-medium mb-2">{{ $t('settings.default class') }}</h4>
+      <div class="border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 rounded-xl p-3">
+        <SettingsDefaultClassSelect />
+      </div>
+    </div>
   </div>
 </template>
