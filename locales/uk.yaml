@@ -73,6 +73,9 @@ menu:
   edit schedule: Розклад уроків
   edit timetable: Розклад дзвінків
   edit class info: Редагувати інформацію про клас
+  delete class:
+    short: Видалити клас
+    full: Справді видалити клас?
 
 actions:
   change theme: Змінити тему
@@ -166,3 +169,4 @@ people:
     add member: Додати людину до класу
     change role: Змінити права
     delete member: Видалити учасника
+    delete member full: Справді видалити учасника {name}?

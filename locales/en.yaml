@@ -73,6 +73,9 @@ menu:
   edit schedule: Edit schedule
   edit timetable: Edit timetable
   edit class info: Edit class information
+  delete class:
+    short: Видалити клас
+    full: Справді видалити клас?
 
 actions:
   change theme: Change theme
@@ -166,3 +169,4 @@ people:
     add member: Add person to class
     change role: Change rights
     delete member: Видалити учасника
+    delete member full: Really delete member {name}?

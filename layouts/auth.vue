@@ -20,7 +20,7 @@ const navigation: NavMenuItem[] = [
 ]
 
 onMounted(() => {
-  if (!classes.value || (classes.value && classes.value?.filter(c => c.hash === selectedClass.value)?.length === 0)) {
+  if (classes.value && classes.value?.filter(c => c.hash === selectedClass.value)?.length === 0) {
     selectedClass.value = null
   }
 

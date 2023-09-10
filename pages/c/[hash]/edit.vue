@@ -12,15 +12,15 @@ const pending = ref(false)
 const currentClass = useCurrentClass()
 
 const newClass = reactive<Class>({
-  name: currentClass.value.name,
-  description: currentClass.value.description,
-  color: currentClass.value.color,
+  name: currentClass.value?.name as string,
+  description: currentClass.value?.description as string,
+  color: currentClass.value?.color as string,
 })
 
 const create = async () => {
   pending.value = true
   const start = new Date().getTime()
-  await $fetch<apiResponse<any>>(`/classes/${currentClass.value.id}`, {
+  await $fetch<apiResponse<any>>(`/classes/${currentClass.value?.id}`, {
     method: 'PATCH',
     headers: {
       'Accept-Language': locale.value,
@@ -48,7 +48,7 @@ const create = async () => {
         status: 'success',
         message: r.message,
       })
-      await navigateTo(`/c/${currentClass.value.hash}`)
+      await navigateTo(`/c/${currentClass.value?.hash}`)
     })
     .catch(error => {
       pushNotification({
@@ -72,7 +72,7 @@ const create = async () => {
 
 <template>
   <Head>
-    <Title>{{ currentClass.name }} | {{ $t('menu.edit class info') }} - GreenRute</Title>
+    <Title>{{ currentClass?.name }} | {{ $t('menu.edit class info') }} - GreenRute</Title>
   </Head>
 
   <DashboardClassHeader />

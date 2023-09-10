@@ -11,10 +11,12 @@ const { t, locale } = useI18n()
 
 const currentClass = useCurrentClass()
 const localePath = useLocalePath()
-const user = useCookie<UserCookie>('user')
-const isAdmin = computed(() => !!currentClass.value?.people?.filter(p => p.id === user.value.id && (p.role === 'owner' || p.role === 'admin'))?.length)
+const user = useUser()
 
 const deletePerson = async (id: number) => {
+  if (!confirm(t('people.actions.delete member full', {
+    name: currentClass.value?.people?.filter(p => p.id === id)?.[0]?.name as string,
+  }))) return
   await $fetch<apiResponse<any>>(`/classes/${currentClass.value?.id}/users/remove`, {
     method: 'PATCH',
     headers: {
@@ -51,7 +53,7 @@ const deletePerson = async (id: number) => {
   <div class="px-4 pt-8 flex flex-col gap-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
     <div class="flex items-center justify-between gap-2 mb-2">
       <h1 class="text-2xl font-display font-semibold text-gray-900 dark:text-zinc-50 sm:truncate">{{ $t('people.students') }}</h1>
-      <PeopleAddPerson />
+      <PeopleAddPerson v-if="user.isOwner" />
     </div>
 
     <div class="overflow-hidden pb-8 sm:pb-16 p-0.25">
@@ -75,7 +77,7 @@ const deletePerson = async (id: number) => {
                 <div class="hidden sm:flex sm:flex-col sm:items-end">
                   <p class="text-sm leading-6 text-gray-900 dark:text-zinc-50">{{ $t('people.roles.' + person.role) }}</p>
                 </div>
-                <Menu v-if="isAdmin && person.id !== user.id" as="div" class="relative text-left">
+                <Menu v-if="user.isOwner && person.id !== user.id" as="div" class="relative text-left">
                   <div class="-ml-0.5">
                     <MenuButton class="flex p-1 items-center rounded-full text-gray-600 hover:text-gray-800 dark:text-zinc-200 dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500">
                       <span class="sr-only">{{ $t('menu.options') }}</span>
@@ -87,14 +89,14 @@ const deletePerson = async (id: number) => {
                     <MenuItems class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 dark:divide-zinc-700 rounded-md bg-white dark:bg-zinc-800 shadow-lg ring-1 ring-black ring-opacity-5 dark:ring-zinc-700 focus:outline-none">
                       <div class="py-1">
                         <!-- <MenuItem v-slot="{ active }">
-                        <button v-if="isAdmin" class="w-full group flex items-center px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-900 text-gray-900 dark:text-zinc-50' : 'text-gray-800 dark:text-zinc-300'">
+                        <button v-if="isOwner" class="w-full group flex items-center px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-900 text-gray-900 dark:text-zinc-50' : 'text-gray-800 dark:text-zinc-300'">
                           <UsersIcon class="mr-3 h-5 w-5 text-gray-500 dark:text-zinc-400 group-hover:text-gray-600 dark:group-hover:text-zinc-400" aria-hidden="true" />
                           {{ $t('people.actions.change role') }}
                         </button>
                       </MenuItem> -->
                         <MenuItem v-slot="{ active }">
-                        <button v-if="isAdmin" @click="deletePerson(person.id)" class="w-full group flex items-center px-4 py-2 text-sm" :class="active ? 'bg-red-100 dark:bg-red-900 text-red-900 dark:text-red-50' : 'text-gray-800 dark:text-zinc-300'">
-                          <UserMinusIcon class="mr-3 h-5 w-5 text-gray-500 dark:text-zinc-400 group-hover:text-red-600 dark:group-hover:text-red-200" aria-hidden="true" />
+                        <button v-if="user.isOwner" @click="deletePerson(person.id)" class="w-full group flex items-center px-4 py-2 text-sm" :class="active ? 'bg-red-500 dark:bg-red-600 text-gray-50 dark:text-white' : 'text-gray-800 dark:text-zinc-300'">
+                          <UserMinusIcon class="mr-3 h-5 w-5 text-gray-500 dark:text-zinc-400 group-hover:text-gray-50 dark:group-hover:text-white" aria-hidden="true" />
                           {{ $t('people.actions.delete member') }}
                         </button>
                         </MenuItem>
@@ -102,7 +104,8 @@ const deletePerson = async (id: number) => {
                     </MenuItems>
                   </transition>
                 </Menu>
-                <div class="h-7 w-7" v-else />
+                <div class="h-7 w-7" v-else-if="user.isOwner" />
+                <div v-else />
               </div>
             </div>
           </li>
