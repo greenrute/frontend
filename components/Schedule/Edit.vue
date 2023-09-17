@@ -62,16 +62,16 @@ onUpdated(() => {
 
 const editMode = ref<boolean>(false)
 const currentClass = useCurrentClass(editMode.value)
-const lessons = computed(() => currentClass.value.schedule.filter(i => i.day === props.day)[0].lessons)
+const lessons = computed(() => currentClass.value?.schedule.filter(i => i.day === props.day)[0].lessons)
 
 const deleteHandler = (index: number) => {
   lessonStatuses.value[index] = true
 
   setTimeout(async () => {
-    let schedule = toRaw(currentClass.value).schedule
-    schedule.filter(i => i.day === props.day)[0].lessons.splice(index, 1)
+    let schedule = toRaw(currentClass.value)?.schedule
+    schedule?.filter(i => i.day === props.day)[0].lessons.splice(index, 1)
 
-    await $fetch<apiResponse<any>>(`/classes/${currentClass.value.id}/schedule`, {
+    await $fetch<apiResponse<any>>(`/classes/${currentClass.value?.id}/schedule`, {
       method: 'PATCH',
       headers: {
         'Accept-Language': locale.value,
@@ -98,11 +98,11 @@ const deleteHandler = (index: number) => {
 }
 
 watch(lessons, async (newSchedule, oldSchedule) => {
-  if (editMode.value && !arraysEqual(oldSchedule, newSchedule)) {
+  if (editMode.value && !arraysEqual(oldSchedule, newSchedule) && !!currentClass.value) {
     let schedule = toRaw(currentClass.value).schedule
-    schedule.filter(i => i.day === props.day)[0].lessons = newSchedule
+    schedule.filter(i => i.day === props.day)[0].lessons = newSchedule as Lesson[]
 
-    await $fetch<apiResponse<any>>(`/classes/${currentClass.value.id}/schedule`, {
+    await $fetch<apiResponse<any>>(`/classes/${currentClass.value?.id}/schedule`, {
       method: 'PATCH',
       headers: {
         'Accept-Language': locale.value,
@@ -134,7 +134,7 @@ watch(lessons, async (newSchedule, oldSchedule) => {
     </div>
 
     <div class="overflow-hidden bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-2xl backdrop-blur-sm shadow-md">
-      <SlickList axis="y" v-model:list="currentClass.schedule.filter(i => i.day === day)[0].lessons" lockAxis="y" :useDragHandle="true" class="flex flex-col">
+      <SlickList axis="y" v-model:list="currentClass?.schedule.filter(i => i.day === day)[0].lessons" lockAxis="y" :useDragHandle="true" class="flex flex-col">
         <transition-group enter-from-class="!translate-x-[calc(100%+40px)] scale-y-0 !h-0" leave-to-class="!-translate-x-[calc(100%+40px)] scale-y-0 !h-0">
           <SlickItem v-for="(lesson, index) in lessons" :key="lesson.uuid" :index="index" class="relative" :class="[
             lessonStatuses[index] ? '!-translate-x-[calc(100%+40px)] scale-y-0 h-0' : 'h-10',
@@ -148,10 +148,10 @@ watch(lessons, async (newSchedule, oldSchedule) => {
                 class="shrink-0 flex justify-center items-center w-10 -ml-13 transition-all ease-out duration-200 pointer-events-auto cursor-move"
                 :class="[
                   editMode ? '' : 'invisible',
-                  contrastColorIsBlack(currentClass.color) ? 'text-black hover:text-zinc-700' : 'text-white hover:text-zinc-200',
-                  index + 1 < lessons.length ? contrastColorIsBlack(currentClass.color) ? 'border-b border-black/20' : 'border-b border-white/30' : '',
+                  contrastColorIsBlack(currentClass?.color) ? 'text-black hover:text-zinc-700' : 'text-white hover:text-zinc-200',
+                  (lessons && index + 1 < lessons.length) ? contrastColorIsBlack(currentClass?.color) ? 'border-b border-black/20' : 'border-b border-white/30' : '',
                 ]"
-                :style="{ backgroundColor: currentClass.color }"
+                :style="{ backgroundColor: currentClass?.color }"
                 tabindex="-1"
               >
                 <Bars3Icon class="h-5 w-5" />
@@ -172,7 +172,7 @@ watch(lessons, async (newSchedule, oldSchedule) => {
       </SlickList>
       <TransitionCollapse>
         <div v-show="!editMode">
-          <div class="flex items-center justify-between gap-1.5 border-zinc-200 dark:border-zinc-700 transition-all ease-out duration-300" :class="lessons && lessons.length && !((currentClass.schedule.filter(i => i.day === props.day)[0].lessons.length < 2) && lessonStatuses.filter(s => s).length) ? 'mt-1 border-t' : ''">
+          <div class="flex items-center justify-between gap-1.5 border-zinc-200 dark:border-zinc-700 transition-all ease-out duration-300" :class="lessons && lessons.length && !(currentClass?.schedule?.length && (currentClass.schedule.filter(i => i.day === props.day)[0].lessons.length < 2) && lessonStatuses.filter(s => s).length) ? 'mt-1 border-t' : ''">
             <ScheduleNewLesson :day="day" />
           </div>
         </div>

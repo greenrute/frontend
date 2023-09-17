@@ -170,3 +170,13 @@ people:
     change role: Змінити права
     delete member: Видалити учасника
     delete member full: Справді видалити учасника {name}?
+
+profile:
+  photo: Фото
+  general info: Загальна інформація
+  сhange password: Змінити пароль
+  old password: Поточний пароль
+  new password: Новий пароль
+  repeat password: Повторіть новий пароль
+  change picture: Змінити
+  drop here: Перетягніть фото сюди

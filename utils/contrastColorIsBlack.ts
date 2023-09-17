@@ -10,7 +10,8 @@ export const hexToRgb = (hexColor: string) => {
   } : null
 }
 
-export const contrastColorIsBlack = (hexColor: string) => {
+export const contrastColorIsBlack = (hexColor: string | undefined) => {
+  if (!hexColor) return null
   const rgbColor = hexToRgb(hexColor)
 
   return rgbColor && ((rgbColor.r * 0.299 + rgbColor.g * 0.587 + rgbColor.b * 0.114) > 186)

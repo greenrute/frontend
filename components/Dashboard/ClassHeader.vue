@@ -97,7 +97,7 @@ const deleteHandler = async () => {
           </MenuItems>
         </transition>
       </Menu>
-      <Menu v-if="user.isOwner" as="div" class="relative text-left">
+      <Menu v-if="false" as="div" class="relative text-left">
         <div class="-ml-0.5">
           <MenuButton class="flex p-1 items-center rounded-full text-gray-600 hover:text-gray-800 dark:text-zinc-200 dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500">
             <span class="sr-only">{{ $t('menu.options') }}</span>

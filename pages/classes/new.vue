@@ -16,8 +16,9 @@ const newClass = reactive<Class>({
   color: color.value,
 })
 
+const randomColor = getRandomColor()
 onUnmounted(() => {
-  color.value = getRandomColor().color
+  color.value = randomColor.color
 })
 
 const create = async () => {

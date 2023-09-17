@@ -18,7 +18,7 @@ const switchTheme = () => {
       <MenuButton class="group w-full rounded-md bg-gray-100 dark:bg-zinc-800 px-3.5 py-2 text-left text-sm font-medium text-gray-700 dark:text-zinc-200 hover:bg-gray-200 dark:hover:bg-zinc-900/50 active:bg-gray-300/60 dark:active:bg-zinc-900/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:focus-visible:ring-green-600 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-100 dark:focus-visible:ring-offset-zinc-800">
         <span class="flex w-full items-center justify-between">
           <span class="flex min-w-0 items-center justify-between space-x-3">
-            <img class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300 dark:bg-zinc-700" :src="user?.picture ?? 'https://gravatar.com/avatar?d=mp'" alt="" />
+            <img class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300 dark:bg-zinc-700 object-cover" :src="user?.picture ?? 'https://gravatar.com/avatar?d=mp'" alt="" />
             <span class="flex min-w-0 flex-1 flex-col">
               <span class="truncate text-sm font-medium text-gray-900 dark:text-zinc-50">{{ user?.name ?? '' }}</span>
               <span class="truncate text-sm text-gray-500 dark:text-zinc-400">{{ user?.email ?? '' }}</span>
