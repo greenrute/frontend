@@ -107,7 +107,7 @@ const switchTheme = () => {
           <div>
             <MenuButton class="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900">
               <span class="sr-only">{{ $t('actions.open user menu') }}</span>
-              <img class="h-8 w-8 rounded-full" :src="user?.picture ?? 'https://gravatar.com/avatar?d=mp'" alt="" />
+              <img class="h-8 w-8 rounded-full object-cover" :src="user?.picture ?? 'https://gravatar.com/avatar?d=mp'" alt="" />
             </MenuButton>
           </div>
           <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
