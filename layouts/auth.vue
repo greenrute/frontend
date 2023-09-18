@@ -13,6 +13,7 @@ const selectedClass = useCookie('selectedClass')
 const openSidebar = () => sidebarOpen.value = true
 const closeSidebar = () => sidebarOpen.value = false
 const interval = ref<NodeJS.Timeout | undefined>(undefined)
+const user = useCookie<UserCookie>('user')
 
 const navigation: NavMenuItem[] = [
   { name: 'menu.schedule', href: '/dashboard', icon: HomeIcon },
@@ -51,6 +52,17 @@ const { data } = await useFetch<apiResponse<{ classes: apiResponseClass[] }>>('/
 
 const classes = useState<apiResponseClass[] | undefined>('classes', () => data.value?.data?.classes)
 const backgroundImage = computed(() => `url('/img/patterns/${getColorName(currentClass.value?.color)}.png')`)
+
+await $fetch<apiResponse<UserCookie>>('/users/profile', {
+  headers: {
+    'Accept-Language': locale.value,
+    'Authorization': 'Bearer ' + token.value,
+  },
+  baseURL: config.public.apiBase,
+})
+  .then(r => {
+    if (!!r.data) user.value = r.data
+  })
 </script>
 
 <template>
