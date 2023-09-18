@@ -118,6 +118,7 @@ welcome:
 general:
   next: Next
   close: Close
+  save: Save
 
 new class:
   title: New class
@@ -177,6 +178,8 @@ profile:
   сhange password: Change password
   old password: Current password
   new password: New password
-  repeat password: Repeat the new password
+  confirm password: Confirm password
   change picture: Change
   drop here: Drop the photo here
+  old password hint: If you registered through Google, leave this field empty
+  passwords do not match: Passwords do not match

@@ -18,13 +18,16 @@ const userData = ref({
   ...toRaw(user.value),
   oldPassword: '',
   newPassword: '',
-  repeatedPassword: '',
+  confirmPassword: '',
 })
 
 const fileInput = ref<HTMLInputElement | null>(null)
 const overlay = ref<boolean>(false)
 
 onMounted(() => {
+  (document.getElementById('name-input') as HTMLInputElement).value = user.value.name as string
+  (document.getElementById('email-input') as HTMLInputElement).value = user.value.email as string
+
   window.addEventListener('dragenter', (event: DragEvent) => {
     event.stopPropagation()
     event.preventDefault()
@@ -54,7 +57,7 @@ const updateProfilePicture = async (file: File | undefined) => {
     method: 'PUT',
     headers: {
       'Accept-Language': locale.value,
-      'Authorization': 'Bearer ' + token.value
+      'Authorization': 'Bearer ' + token.value,
     },
     body: formData,
     baseURL: config.public.apiBase,
@@ -66,7 +69,7 @@ const updateProfilePicture = async (file: File | undefined) => {
         message: r.message
       })
       setTimeout(() => {
-        reloadNuxtApp()
+        reloadNuxtApp({ force: true })
       }, 400)
     })
     .catch(error => {
@@ -74,6 +77,104 @@ const updateProfilePicture = async (file: File | undefined) => {
         status: 'error',
         message: error.data?.message || t('could not connect to the server'),
       })
+    })
+}
+
+const pendingInfo = ref(false)
+const pendingPassword = ref(false)
+
+const updateInfo = async () => {
+  pendingInfo.value = true
+  const start = new Date().getTime()
+  await $fetch<apiResponse<any>>('/users/profile', {
+    method: 'PATCH',
+    headers: {
+      'Accept-Language': locale.value,
+      'Authorization': 'Bearer ' + token.value,
+    },
+    body: {
+      name: userData.value.name,
+      email: userData.value.email,
+    },
+    baseURL: config.public.apiBase,
+  })
+    .then(r => {
+      pushNotification({
+        status: 'success',
+        message: r.message
+      })
+      setTimeout(() => {
+        reloadNuxtApp({ force: true })
+      }, 400)
+    })
+    .catch(error => {
+      pushNotification({
+        status: 'error',
+        message: error.data?.message || t('could not connect to the server'),
+      })
+    })
+    .finally(() => {
+      const difference = new Date().getTime() - start
+
+      if (difference > 300) {
+        pendingInfo.value = false
+      } else {
+        setTimeout(() => {
+          pendingInfo.value = false
+        }, 300 - difference)
+      }
+    })
+}
+
+const updatePassword = async () => {
+  if (userData.value.newPassword !== userData.value.confirmPassword) {
+    pushNotification({
+      status: 'error',
+      message: t('profile.passwords do not match'),
+    })
+    return
+  }
+
+  pendingPassword.value = true
+  const start = new Date().getTime()
+  await $fetch<apiResponse<any>>('/users/password', {
+    method: 'PATCH',
+    headers: {
+      'Accept-Language': locale.value,
+      'Authorization': 'Bearer ' + token.value,
+    },
+    body: {
+      oldPassword: userData.value.oldPassword,
+      newPassword: userData.value.newPassword,
+      confirmPassword: userData.value.confirmPassword,
+    },
+    baseURL: config.public.apiBase,
+  })
+    .then(r => {
+      userData.value.oldPassword = ''
+      userData.value.newPassword = ''
+      userData.value.confirmPassword = ''
+      pushNotification({
+        status: 'success',
+        message: r.message
+      })
+    })
+    .catch(error => {
+      pushNotification({
+        status: 'error',
+        message: error.data?.message || t('could not connect to the server'),
+      })
+    })
+    .finally(() => {
+      const difference = new Date().getTime() - start
+
+      if (difference > 300) {
+        pendingPassword.value = false
+      } else {
+        setTimeout(() => {
+          pendingPassword.value = false
+        }, 300 - difference)
+      }
     })
 }
 </script>
@@ -97,10 +198,14 @@ const updateProfilePicture = async (file: File | undefined) => {
       <h4 class="text-xl font-overpass font-medium mb-2">{{ $t('profile.general info') }}</h4>
       <div class="border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 rounded-xl p-4">
         <div class="flex justify-between gap-8 max-[410px]:flex-col-reverse max-[410px]:gap-4">
-          <div class="[&_label]:mb-2 w-full flex flex-col gap-3">
+          <MainForm @validated="updateInfo" class="[&_label]:mb-2 w-full flex flex-col gap-3">
             <MainTextInput v-model="(userData.name as string)" id="name-input" :label="$t('name')" />
             <MainTextInput v-model="(userData.email as string)" id="email-input" :label="$t('email address')" />
-          </div>
+            <MainButton type="submit" color="green" class="mt-2 sm:self-start">
+              <span v-if="!pendingInfo">{{ $t('general.save') }}</span>
+              <IconLoader v-else class="my-0.5 w-5 h-5 motion-safe:animate-loader" />
+            </MainButton>
+          </MainForm>
           <div class="shrink-0">
             <div class="mb-2">{{ $t('profile.photo') }}</div>
             <input ref="fileInput" @change="fileInputHandler" type="file" id="picture" accept="image/png,image/jpg,image/jpeg" class="hidden">
@@ -120,11 +225,15 @@ const updateProfilePicture = async (file: File | undefined) => {
       <h4 class="text-xl font-overpass font-medium mb-2">{{ $t('profile.сhange password') }}</h4>
       <div class="border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 rounded-xl p-4">
         <div class="flex justify-between gap-8">
-          <div class="[&_label]:mb-2 w-full flex flex-col gap-3">
-            <MainTextInput v-model="userData.oldPassword" id="old-password-input" :label="$t('profile.old password')" type="password" autocomplete="current-password" />
-            <MainTextInput v-model="userData.newPassword" id="new-password-input" :label="$t('profile.new password')" type="password" autocomplete="new-password" />
-            <MainTextInput v-model="userData.repeatedPassword" id="repeat-password-input" :label="$t('profile.repeat password')" type="password" autocomplete="new-password" />
-          </div>
+          <MainForm @validated="updatePassword" class="[&_label]:mb-2 w-full flex flex-col gap-3">
+            <MainTextInput v-model="userData.oldPassword" id="old-password-input" :label="$t('profile.old password')" type="password" :hint="$t('profile.old password hint')" autocomplete="current-password" />
+            <MainTextInput v-model="userData.newPassword" id="new-password-input" :label="$t('profile.new password')" :invalid="$t('the password must be at least n characters long', 3)" required minlength="3" type="password" autocomplete="new-password" />
+            <MainTextInput v-model="userData.confirmPassword" id="confirm-password-input" :label="$t('profile.confirm password')" :invalid="$t('the password must be at least n characters long', 3)" required minlength="3" type="password" autocomplete="new-password" />
+            <MainButton type="submit" color="green" class="mt-2 sm:self-start">
+              <span v-if="!pendingPassword">{{ $t('general.save') }}</span>
+              <IconLoader v-else class="my-0.5 w-5 h-5 motion-safe:animate-loader" />
+            </MainButton>
+          </MainForm>
         </div>
       </div>
     </div>

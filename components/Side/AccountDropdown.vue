@@ -3,7 +3,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { ChevronUpDownIcon, UserCircleIcon, Cog8ToothIcon, BellIcon, ArrowDownTrayIcon, MoonIcon, SunIcon, LifebuoyIcon, ArrowLeftOnRectangleIcon, LanguageIcon } from '@heroicons/vue/20/solid'
 
 const authentication = useAuthentication()
-const user = useCookie<UserCookie>('user')
+const user = useUser()
 
 const switchTheme = () => {
   setTimeout(() => {

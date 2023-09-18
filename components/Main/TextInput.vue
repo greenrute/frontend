@@ -10,6 +10,7 @@ import { ExclamationCircleIcon } from '@heroicons/vue/20/solid'
 withDefaults(defineProps<{
   id?: string
   label?: string
+  hint?: string
   type?: string
   invalid?: string
   modelValue: string
@@ -33,7 +34,7 @@ const detect = (event: Event) => {
 
 <template>
   <div>
-    <MainTag v-if="label" :id="id">{{ label }}</MainTag>
+    <MainTag v-if="label" :id="id" :hint="hint">{{ label }}</MainTag>
     <div class="relative rounded-md">
       <input :id="id" :type="type" :value="modelValue" v-bind="$attrs" @invalid="valid = false" ref="input"
         @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value);detect($event)" :class="type === 'password' && 'font-mono'"

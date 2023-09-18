@@ -62,7 +62,7 @@ const deletePerson = async (id: number) => {
           <li v-for="person in currentClass?.people" :key="person.email" class="h-[5.5rem] transition-all ease-out duration-300">
             <div class="relative flex justify-between gap-x-6 px-4 py-5 sm:px-6">
               <div class="flex min-w-0 gap-x-4">
-                <img class="h-12 w-12 flex-none rounded-full bg-gray-50 dark:bg-zinc-700" :src="person.picture" alt="" />
+                <img class="h-12 w-12 flex-none rounded-full object-cover bg-gray-50 dark:bg-zinc-700" :src="person.picture" alt="" />
                 <div class="min-w-0 flex-auto">
                   <p class="text-sm font-semibold leading-6 text-gray-900 dark:text-zinc-50">
                     <span class="absolute inset-x-0 -top-px bottom-0" />

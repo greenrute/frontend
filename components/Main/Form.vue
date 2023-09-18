@@ -19,6 +19,7 @@ const validate = (event: SubmitEvent) => {
     validated.value = true
   } else {
     emit('validated')
+    validated.value = false
   }
 }
 </script>

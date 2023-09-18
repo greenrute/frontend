@@ -118,6 +118,7 @@ welcome:
 general:
   next: Далі
   close: Закрити
+  save: Зберегти
 
 new class:
   title: Новий клас
@@ -177,6 +178,8 @@ profile:
   сhange password: Змінити пароль
   old password: Поточний пароль
   new password: Новий пароль
-  repeat password: Повторіть новий пароль
+  confirm password: Підтвердьте пароль
   change picture: Змінити
   drop here: Перетягніть фото сюди
+  old password hint: Якщо Ви реєструвалися через Google, залиште це поле порожнім
+  passwords do not match: Паролі не збігаються
