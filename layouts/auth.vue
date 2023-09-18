@@ -20,38 +20,38 @@ const navigation: NavMenuItem[] = [
   { name: 'menu.homework', href: '/homework', icon: ListBulletIcon },
 ]
 
+const classes = useState<apiResponseClass[]>('classes')
+const backgroundImage = computed(() => `url('/img/patterns/${getColorName(currentClass.value?.color)}.png')`)
+
+const updateClasses = async () => {
+  await $fetch<apiResponse<{ classes: apiResponseClass[] }>>('/classes/all', {
+    headers: {
+      'Accept-Language': locale.value,
+      'Authorization': 'Bearer ' + token.value,
+    },
+    baseURL: config.public.apiBase,
+  })
+    .then(r => {
+      if (!!r.data?.classes) classes.value = r.data.classes
+    })
+    .catch(e => {
+      console.error(e)
+    })
+}
+
 onMounted(() => {
   if (classes.value && classes.value?.filter(c => c.hash === selectedClass.value)?.length === 0) {
     selectedClass.value = null
   }
 
-  interval.value = setInterval(async () => {
-    const { data } = await useFetch<apiResponse<{ classes: apiResponseClass[] }>>('/classes/all', {
-      headers: {
-        'Accept-Language': locale.value,
-        'Authorization': 'Bearer ' + token.value,
-      },
-      baseURL: config.public.apiBase,
-    })
-
-    classes.value = data.value?.data?.classes
-  }, 1000)
+  interval.value = setInterval(updateClasses, 1000)
 })
 
 onUnmounted(() => {
   clearInterval(interval.value)
 })
 
-const { data } = await useFetch<apiResponse<{ classes: apiResponseClass[] }>>('/classes/all', {
-  headers: {
-    'Accept-Language': locale.value,
-    'Authorization': 'Bearer ' + token.value,
-  },
-  baseURL: config.public.apiBase,
-})
-
-const classes = useState<apiResponseClass[] | undefined>('classes', () => data.value?.data?.classes)
-const backgroundImage = computed(() => `url('/img/patterns/${getColorName(currentClass.value?.color)}.png')`)
+await updateClasses()
 
 await $fetch<apiResponse<UserCookie>>('/users/profile', {
   headers: {
@@ -63,11 +63,16 @@ await $fetch<apiResponse<UserCookie>>('/users/profile', {
   .then(r => {
     if (!!r.data) user.value = r.data
   })
+  .catch(e => {
+    console.error(e)
+  })
 </script>
 
 <template>
   <Html class="h-full scroll-smooth">
-    <Body class="h-full bg-white dark:bg-zinc-900" />
+
+  <Body class="h-full bg-white dark:bg-zinc-900" />
+
   </Html>
 
   <div class="min-h-full">

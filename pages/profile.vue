@@ -107,7 +107,7 @@ const updateProfilePicture = async (file: File | undefined) => {
             <button @click="openFile" class="block h-24 w-24 group cursor-pointer max-[410px]:h-28 max-[410px]:w-28 max-[410px]:mx-auto flex-shrink-0 rounded-full overflow-hidden relative">
               <img class="bg-gray-300 dark:bg-zinc-700 object-cover w-full h-full" :src="user?.picture ?? 'https://gravatar.com/avatar?d=mp'" alt="" />
               <div class="absolute bottom-0 inset-x-0 flex items-center justify-center bg-black/50 p-1 transition-opacity ease-out duration-200 [@media(hover:hover)]:opacity-0 group-hover:opacity-100">
-                <CameraIcon class="h-5 w-5" aria-hidden="true" />
+                <CameraIcon class="h-5 w-5 text-white" aria-hidden="true" />
               </div>
             </button>
             <button @click="openFile" class="w-full mt-2 lg:mt-1 text-base text-green-600 dark:text-green-500">{{ $t('profile.change picture') }}</button>
