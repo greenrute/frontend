@@ -28,7 +28,7 @@ useThemeColor()
           </div>
           <div class="mt-10 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6">
             <MainButton color="green" to="/">На головну</MainButton>
-            <MainButton to="/support" variant="outline">Служба підтримки</MainButton>
+            <MainButton to="https://t.me/greenrute_support" target="_blank" :external="true" variant="outline">Служба підтримки</MainButton>
           </div>
         </div>
       </main>

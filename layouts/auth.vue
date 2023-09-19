@@ -34,9 +34,7 @@ const updateClasses = async () => {
     .then(r => {
       if (!!r.data?.classes) classes.value = r.data.classes
     })
-    .catch(e => {
-      console.error(e)
-    })
+    .catch(() => {})
 }
 
 onMounted(() => {
@@ -63,9 +61,7 @@ await $fetch<apiResponse<UserCookie>>('/users/profile', {
   .then(r => {
     if (!!r.data) user.value = r.data
   })
-  .catch(e => {
-    console.error(e)
-  })
+  .catch(() => {})
 </script>
 
 <template>
