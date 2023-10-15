@@ -134,7 +134,7 @@ watch(lessons, async (newSchedule, oldSchedule) => {
     </div>
 
     <div class="overflow-hidden bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-2xl backdrop-blur-sm shadow-md">
-      <SlickList axis="y" v-model:list="currentClass.schedule.filter(i => i.day === day)[0].lessons" lockAxis="y" :useDragHandle="true" class="flex flex-col">
+      <SlickList axis="y" v-model:list="currentClass?.schedule.filter(i => i.day === day)[0].lessons" lockAxis="y" :useDragHandle="true" class="flex flex-col">
         <transition-group enter-from-class="!translate-x-[calc(100%+40px)] scale-y-0 !h-0" leave-to-class="!-translate-x-[calc(100%+40px)] scale-y-0 !h-0">
           <SlickItem v-for="(lesson, index) in lessons" :key="lesson.uuid" :index="index" class="relative" :class="[
             lessonStatuses[index] ? '!-translate-x-[calc(100%+40px)] scale-y-0 h-0' : 'h-10',

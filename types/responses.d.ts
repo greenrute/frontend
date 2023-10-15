@@ -62,6 +62,20 @@ declare interface ARLessons {
   lessons: Lesson[]
 }
 
+declare interface ARHomework {
+  id: number,
+  text: string,
+  description: string,
+  date: string,
+  visibility: string,
+  done: boolean,
+  class: number,
+  created_at: string,
+  updated_at: string,
+  lesson: Lesson,
+  created_by: apiResponseUser['user']
+}
+
 declare interface apiResponse<T> {
   error: boolean
   message: string

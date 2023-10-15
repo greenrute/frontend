@@ -2,7 +2,7 @@
 import { QueueListIcon } from '@heroicons/vue/24/outline'
 
 defineProps<{
-  day: string
+  day: DayName
   lessons?: Lesson[]
 }>()
 </script>

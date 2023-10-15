@@ -34,10 +34,26 @@ const updateClasses = async () => {
     .then(r => {
       if (!!r.data?.classes) classes.value = r.data.classes
     })
-    .catch(() => {})
+    .catch(() => { })
 }
 
-onMounted(() => {
+const updateUser = async () => {
+  await $fetch<apiResponse<UserCookie>>('/users/profile', {
+    headers: {
+      'Accept-Language': locale.value,
+      'Authorization': 'Bearer ' + token.value,
+    },
+    baseURL: config.public.apiBase,
+  })
+    .then(r => {
+      if (!!r.data?.id) user.value = r.data
+    })
+    .catch(() => { })
+}
+
+onMounted(async () => {
+  await updateUser()
+
   if (classes.value && classes.value?.filter(c => c.hash === selectedClass.value)?.length === 0) {
     selectedClass.value = null
   }
@@ -50,18 +66,7 @@ onUnmounted(() => {
 })
 
 await updateClasses()
-
-await $fetch<apiResponse<UserCookie>>('/users/profile', {
-  headers: {
-    'Accept-Language': locale.value,
-    'Authorization': 'Bearer ' + token.value,
-  },
-  baseURL: config.public.apiBase,
-})
-  .then(r => {
-    if (!!r.data) user.value = r.data
-  })
-  .catch(() => {})
+await updateUser()
 </script>
 
 <template>

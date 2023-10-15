@@ -28,3 +28,25 @@ export const getDays = (native: boolean = false): string[] => {
     ]
   }
 }
+
+export const getDayIndex = (day: DayName): number => {
+  switch (day) {
+    case 'monday':
+      return 1
+      break 
+    case 'tuesday':
+      return 2
+      break 
+    case 'wednesday':
+      return 3
+      break 
+    case 'thursday':
+      return 4
+      break 
+    case 'friday':
+      return 5
+      break 
+    default:
+      return 1
+  }
+}

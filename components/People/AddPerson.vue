@@ -4,6 +4,8 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 import { UserPlusIcon } from '@heroicons/vue/24/outline'
 
 const { t, locale } = useI18n()
+const token = useCookie('token')
+const config = useRuntimeConfig()
 
 const currentClass = useCurrentClass()
 
@@ -31,13 +33,13 @@ const submit = async () => {
     method: 'PATCH',
     headers: {
       'Accept-Language': locale.value,
-      'Authorization': 'Bearer ' + useCookie('token').value,
+      'Authorization': 'Bearer ' + token.value,
     },
     body: {
       email: email.value,
       role: selectedRole.value,
     },
-    baseURL: useRuntimeConfig().public.apiBase,
+    baseURL: config.public.apiBase,
   })
     .then(r => {
       open.value = false

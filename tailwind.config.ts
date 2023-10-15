@@ -46,6 +46,7 @@ module.exports = <Partial<Config>>{
       spacing: {
         '0.25': '0.0625rem',
         '0.75': '0.1875rem',
+        '4.5': '1.125rem',
         '5.5': '1.375rem',
         '13': '3.25rem',
       },
