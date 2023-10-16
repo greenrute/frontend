@@ -47,7 +47,7 @@ const deleteHandler = async () => {
 
 <template>
   <div class="hidden lg:flex relative border-b border-gray-200 dark:border-zinc-700 py-3 items-center justify-between px-8">
-    <NuxtLink :to="localePath(`/c/${currentClass?.hash}`)" class="mt-4 flex items-center gap-2 sm:mt-0 max-w-[8rem]">
+    <NuxtLink :to="localePath(`/c/${currentClass?.hash}`)" class="mt-4 flex items-center gap-2 sm:mt-0 max-w-[10rem]">
       <div class="h-3 w-3 rounded-full shrink-0" :style="{ backgroundColor: currentClass?.color }" />
       <h3 class="text-lg truncate">{{ currentClass?.name }}</h3>
     </NuxtLink>
