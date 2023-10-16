@@ -184,3 +184,6 @@ profile:
   drop here: Drop the photo here
   old password hint: If you registered through Google, leave this field empty
   passwords do not match: Passwords do not match
+
+homework:
+  empty: No tasks

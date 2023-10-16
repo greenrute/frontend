@@ -184,3 +184,6 @@ profile:
   drop here: Перетягніть фото сюди
   old password hint: Якщо Ви реєструвалися через Google, залиште це поле порожнім
   passwords do not match: Паролі не збігаються
+
+homework:
+  empty: Завдань немає
