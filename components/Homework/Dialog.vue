@@ -20,7 +20,7 @@ const currentClass = useCurrentClass()
 
 const open = ref(false)
 
-const { data: homework, refresh } = await useFetch<apiResponse<{ homeworks: ARHomework[] }>>(`/classes/${currentClass.value?.id}/homework/by-day/${getDayIndex(props.day)}`, {
+const { data: homework, refresh } = await useFetch<apiResponse<{ homeworks: { [key: string]: { [key: string]: ARHomework[] } } }>>(`/classes/${currentClass.value?.id}/homework/by-day/${getDayIndex(props.day)}`, {
   method: 'GET',
   headers: {
     'Accept-Language': locale.value,
@@ -29,13 +29,14 @@ const { data: homework, refresh } = await useFetch<apiResponse<{ homeworks: ARHo
   baseURL: config.public.apiBase,
 })
 
-const days = computed<Record<string, ARHomework[]>>(() => homework.value?.data?.homeworks?.reduce((previousValue, currentValue) => {
-  if (!(previousValue as any)[currentValue.date]) {
-    (previousValue as any)[currentValue.date] = []
-  }
-  (previousValue as any)[currentValue.date].push(currentValue)
-  return previousValue
-}, {}) as any)
+const days = computed<{ [key: string]: { [key: string]: ARHomework[] } }>(() => Object.keys(homework.value?.data?.homeworks as object).sort((a, b) => {
+  const A = parseInt(a.split('.').reverse().join(''))
+  const B = parseInt(b.split('.').reverse().join(''))
+  return A > B ? -1 : A < B ? 1 : 0
+}).reduce((object, key) => {
+  (object as any)[key] = homework.value?.data?.homeworks[key]
+  return object
+}, {}))
 
 watch(open, newValue => {
   if (newValue) refresh()
@@ -82,31 +83,42 @@ const changeTaskStatus = async (tastId: number) => {
                   {{ $t('days.' + day) }}
                 </DialogTitle>
 
-                <div v-if="!homework?.data?.homeworks?.length" class="pt-6 lg:pt-4 pb-3 flex justify-center items-center gap-1 text-gray-600 dark:text-zinc-400">
+                <div v-if="!Object.keys(days || {}).length" class="pt-6 lg:pt-4 pb-3 flex justify-center items-center gap-1 text-gray-600 dark:text-zinc-400">
                   <CheckCircleIcon class="w-5 h-5" />
                   {{ $t('homework.empty') }}
                 </div>
 
-                <div v-for="(day, date) in days">
+                <div v-for="(day, date) in days" :key="date">
                   <div class="mt-5">
-                    <h5 class="bg-gray-100 dark:bg-zinc-800 py-2 px-4 -mx-1 rounded-full">{{ (new Date(date).getDate()).toString().padStart(2, '0') + '.' + (new Date(date).getMonth() + 1).toString().padStart(2, '0') }}</h5>
+                    <h5 class="bg-gray-100 dark:bg-zinc-800 py-2 px-4 -mx-1 rounded-full flex justify-between items-center">
+                      <span>{{ (date as string).split('.').slice(0, 2).join('.') }}</span>
+                      <span class="inline-flex items-center rounded-full bg-gray-200/70 dark:bg-zinc-700/70 px-2 text-sm font-medium text-gray-600 dark:text-zinc-300/80">{{ capitalizeFirstLetter(timeAgo(new Date(parseInt((date as string).split('.')[2]), parseInt((date as string).split('.')[1]) - 1, parseInt((date as string).split('.')[0])))) }}</span>
+                    </h5>
                   </div>
 
-                  <div class="mt-3">
-                    <ul>
-                      <li v-for="task in day">
-                        <div class="flex items-center gap-2">
-                          <div class="flex items-center">
-                            <input :checked="task.done" @change="changeTaskStatus(task.id)" :id="task.id.toString()" :aria-describedby="task.id + '-description'" type="checkbox" class="h-4.5 w-4.5 cursor-pointer rounded dark:focus:ring-offset-zinc-900 border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:checked:bg-green-600 dark:checked:border-green-600 text-green-600 focus:ring-green-600" />
-                          </div>
-                          <div class="flex items-center w-full" :class="task.done ? 'line-through' : ''">
-                            <label :for="task.id.toString()" class="cursor-pointer truncate shrink-0">{{ task.text }}</label>
-                            <p :id="task.id + '-description'" class="truncate text-base text-gray-500">&nbsp;{{ task.description }}</p>
-                          </div>
-                          <img class="h-7 w-h-7 flex-shrink-0 rounded-full bg-gray-300 dark:bg-zinc-700 object-cover" :src="task.created_by.picture" :alt="task.created_by.name">
-                        </div>
-                      </li>
-                    </ul>
+                  <div class="mt-2">
+                    <div v-for="(tasks, lesson) in day" :key="lesson">
+                      <div class="flex items-center gap-1">
+                        <component :is="'Emoji' + tasks[0].lesson.icon" class="h-5 w-5 shrink-0 -mb-0.25" />
+                        <div class="text-lg truncate">{{ tasks[0].lesson.name }}</div>
+                      </div>
+                      <ul class="ml-2 mt-1 flex flex-col gap-0.5">
+                        <transition-group enter-from-class="!translate-x-[calc(100%+40px)] scale-y-0 !h-0" leave-to-class="!-translate-x-[calc(100%+40px)] scale-y-0 !h-0">
+                          <li v-for="task in tasks" :key="task.id" class="transition-all ease-out duration-300">
+                            <div class="flex items-center gap-2 py-0.5">
+                              <div class="flex items-center">
+                                <input :checked="task.done" @change="changeTaskStatus(task.id)" :id="task.id.toString()" :aria-describedby="task.id + '-description'" type="checkbox" class="h-4.5 w-4.5 cursor-pointer rounded dark:focus:ring-offset-zinc-900 border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:checked:bg-green-600 dark:checked:border-green-600 text-green-600 focus:ring-green-600" />
+                              </div>
+                              <div class="flex items-center w-full" :class="task.done ? 'line-through' : ''">
+                                <label :for="task.id.toString()" class="cursor-pointer truncate shrink-0">{{ task.text }}</label>
+                                <p :id="task.id + '-description'" class="truncate text-base text-gray-500"><span v-if="task.description">&nbsp;</span>{{ task.description }}</p>
+                              </div>
+                              <img class="h-6 w-h-6 flex-shrink-0 rounded-full bg-gray-300 dark:bg-zinc-700 object-cover" :src="task.created_by.picture" :alt="task.created_by.name">
+                            </div>
+                          </li>
+                        </transition-group>
+                      </ul>
+                    </div>
                   </div>
                 </div>
 

@@ -120,6 +120,9 @@ general:
   close: Close
   save: Save
   warning: The application is currently under active development, your account or data may be lost
+  yesterday: Yesterday
+  today: Today
+  tomorrow: Tomorrow
 
 new class:
   title: New class
