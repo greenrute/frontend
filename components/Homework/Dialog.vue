@@ -6,6 +6,7 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
+import { CheckCircleIcon } from '@heroicons/vue/20/solid'
 
 const props = defineProps<{
   day: DayName
@@ -80,6 +81,11 @@ const changeTaskStatus = async (tastId: number) => {
                 <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900 dark:text-zinc-50">
                   {{ $t('days.' + day) }}
                 </DialogTitle>
+
+                <div v-if="!homework?.data?.homeworks?.length" class="pt-6 lg:pt-4 pb-3 flex justify-center items-center gap-1 text-gray-600 dark:text-zinc-400">
+                  <CheckCircleIcon class="w-5 h-5" />
+                  {{ $t('homework.empty') }}
+                </div>
 
                 <div v-for="(day, date) in days">
                   <div class="mt-5">
