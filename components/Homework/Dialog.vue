@@ -32,7 +32,7 @@ const { data: homework, refresh } = await useFetch<apiResponse<{ homeworks: { [k
 const days = computed<{ [key: string]: { [key: string]: ARHomework[] } }>(() => Object.keys(homework.value?.data?.homeworks as object).sort((a, b) => {
   const A = parseInt(a.split('.').reverse().join(''))
   const B = parseInt(b.split('.').reverse().join(''))
-  return A > B ? -1 : A < B ? 1 : 0
+  return A > B ? 1 : A < B ? -1 : 0
 }).reduce((object, key) => {
   (object as any)[key] = homework.value?.data?.homeworks[key]
   return object
@@ -61,6 +61,11 @@ const changeTaskStatus = async (tastId: number) => {
       })
     })
 }
+
+const newHomework = reactive({
+  text: '',
+  description: '',
+})
 </script>
 
 <template>
@@ -100,7 +105,7 @@ const changeTaskStatus = async (tastId: number) => {
                     <div v-for="(tasks, lesson) in day" :key="lesson">
                       <div class="flex items-center gap-1">
                         <component :is="'Emoji' + tasks[0].lesson.icon" class="h-5 w-5 shrink-0 -mb-0.25" />
-                        <div class="text-lg truncate">{{ tasks[0].lesson.name }}</div>
+                        <div class="text-lg truncate font-semibold">{{ tasks[0].lesson.name }}</div>
                       </div>
                       <ul class="ml-2 mt-1 flex flex-col gap-0.5">
                         <transition-group enter-from-class="!translate-x-[calc(100%+40px)] scale-y-0 !h-0" leave-to-class="!-translate-x-[calc(100%+40px)] scale-y-0 !h-0">
@@ -110,8 +115,8 @@ const changeTaskStatus = async (tastId: number) => {
                                 <input :checked="task.done" @change="changeTaskStatus(task.id)" :id="task.id.toString()" :aria-describedby="task.id + '-description'" type="checkbox" class="h-4.5 w-4.5 cursor-pointer rounded dark:focus:ring-offset-zinc-900 border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:checked:bg-green-600 dark:checked:border-green-600 text-green-600 focus:ring-green-600" />
                               </div>
                               <div class="flex items-center w-full" :class="task.done ? 'line-through' : ''">
-                                <label :for="task.id.toString()" class="cursor-pointer truncate shrink-0">{{ task.text }}</label>
-                                <p :id="task.id + '-description'" class="truncate text-base text-gray-500"><span v-if="task.description">&nbsp;</span>{{ task.description }}</p>
+                                <label :for="task.id.toString()" class="cursor-pointer truncate shrink-0 text-gray-900 dark:text-zinc-200">{{ task.text }}</label>
+                                <p :id="task.id + '-description'" class="truncate text-base text-gray-500/90 dark:text-zinc-400/90"><span v-if="task.description">&nbsp;</span>{{ task.description }}</p>
                               </div>
                               <img class="h-6 w-h-6 flex-shrink-0 rounded-full bg-gray-300 dark:bg-zinc-700 object-cover" :src="task.created_by.picture" :alt="task.created_by.name">
                             </div>
@@ -119,6 +124,14 @@ const changeTaskStatus = async (tastId: number) => {
                         </transition-group>
                       </ul>
                     </div>
+                  </div>
+                </div>
+
+                <div class="mt-5">
+                  <div class="bg-gray-100 dark:bg-zinc-800 py-3 px-3 -mx-1 rounded-3xl flex flex-col items-stretch">
+                    <MainTextInput class="!w-[calc(100%+2px)] !rounded-t-2xl !rounded-b-none -mx-0.25 !ring-inset" v-model="newHomework.text" placeholder="Завдання, наприклад: вивчити вірш..." />
+                    <MainTextInput class="!w-[calc(100%+2px)] !rounded-none -m-0.25 !ring-inset" v-model="newHomework.description" placeholder="Опис, наприклад: на с. 12..." />
+                    <MainButton class="w-full z-10 rounded-b-2xl rounded-t-none" :class="newHomework.text ? '' : 'bg-white dark:bg-zinc-900 ring-gray-200 dark:ring-zinc-700'" :variant="newHomework.text ? 'solid' : 'outline'" :color="newHomework.text ? 'green' : 'zinc'" type="button" @click="open = false">{{ $t('general.create') }}</MainButton>
                   </div>
                 </div>
 

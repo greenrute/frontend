@@ -119,6 +119,7 @@ general:
   next: Next
   close: Close
   save: Save
+  create: Create
   warning: The application is currently under active development, your account or data may be lost
   yesterday: Yesterday
   today: Today
