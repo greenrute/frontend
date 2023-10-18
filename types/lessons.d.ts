@@ -27,4 +27,5 @@ declare interface CurrentLesson {
   dayoff: boolean
   timeToEnd: string
   lessonUUID?: string
+  lessonDetails?: Lesson
 }

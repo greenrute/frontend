@@ -18,7 +18,9 @@ const getLessonLimits = (r: { start: string, end: string }, c: Date): {
   end: transformStringToDate(r.end, c),
 })
 
-export const useCurrentLesson = (): ComputedRef<CurrentLesson> => {
+export const useCurrentLesson = (
+  withLessonDetails: boolean = false
+): ComputedRef<CurrentLesson> => {
   const currentClass = useCurrentClass()
   const now = useNow({ interval: 1000 })
   const { t } = useI18n()
@@ -56,16 +58,20 @@ export const useCurrentLesson = (): ComputedRef<CurrentLesson> => {
     const lastLessonLimits = getLessonLimits(currentTimetable[currentDay.lessons.length <= currentTimetable.length ? currentDay.lessons.length - 1 : currentTimetable.length - 1], now.value)
 
     if (now.value.getTime() < firstLessonLimits.start) {
-      return {
-        active: false,
-        dayoff: false,
-        timeToEnd: t('empty.lessons have not started yet'),
+      if (!withLessonDetails) {
+        return {
+          active: false,
+          dayoff: false,
+          timeToEnd: t('empty.lessons have not started yet'),
+        }
       }
     } else if (lastLessonLimits.end < now.value.getTime()) {
-      return {
-        active: false,
-        dayoff: false,
-        timeToEnd: t('empty.lessons are already over'),
+      if (!withLessonDetails) {
+        return {
+          active: false,
+          dayoff: false,
+          timeToEnd: t('empty.lessons are already over'),
+        }
       }
     }
 
@@ -73,12 +79,53 @@ export const useCurrentLesson = (): ComputedRef<CurrentLesson> => {
     currentDay.lessons.forEach((l, i) => {
       if (!currentTimetable?.[i]) return
       const lessonLimits = getLessonLimits(currentTimetable?.[i], now.value)
+      if (withLessonDetails) {
+        if (!currentTimetable?.[i + 1] || !currentDay.lessons?.[i + 1]) {
+          return {
+            active: false,
+            dayoff: false,
+            timeToEnd: '',
+            lessonDetails: l,
+          }
+        } else {
+          if (lessonLimits.start <= now.value.getTime() && getLessonLimits(currentTimetable?.[i + 1], now.value).start > now.value.getTime()) {
+            return {
+              active: false,
+              dayoff: false,
+              timeToEnd: '',
+              lessonDetails: currentDay.lessons[i + 1],
+            }
+          }
+        }
+      }
       if (lessonLimits.start <= now.value.getTime() && now.value.getTime() <= lessonLimits.end) {
         currentLesson.value = i
       }
     })
 
     if (currentLesson.value === null) {
+      if (withLessonDetails) {
+        if (now.value.getTime() < firstLessonLimits.start) {
+          if (withLessonDetails) {
+            return {
+              active: false,
+              dayoff: false,
+              timeToEnd: '',
+              lessonDetails: currentDay.lessons[0],
+            }
+          }
+        } else if (lastLessonLimits.end < now.value.getTime()) {
+          if (withLessonDetails) {
+            return {
+              active: false,
+              dayoff: false,
+              timeToEnd: '',
+              lessonDetails: currentDay.lessons[currentDay.lessons.length - 1],
+            }
+          }
+        }
+      }
+
       return {
         active: false,
         dayoff: false,

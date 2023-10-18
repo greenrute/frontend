@@ -191,3 +191,8 @@ profile:
 
 homework:
   empty: Завдань немає
+  add: Додати завдання
+  placeholders:
+    task: "Завдання, наприклад: вивчити вірш..."
+    description: "Опис, наприклад: на с. 12..."
+  public: Для всіх

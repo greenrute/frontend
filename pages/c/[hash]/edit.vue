@@ -120,7 +120,7 @@ const deleteHandler = async () => {
       </div>
     </MainForm>
     <hr class="border-gray-200 dark:border-zinc-700 mx-20 my-2">
-    <MainButton color="reverse" @click="deleteHandler" class="border w-full group flex items-center px-4 py-2 text-sm text-gray-800 dark:text-zinc-300 border-gray-200 dark:border-zinc-700 dark:bg-zinc-900/20 hover:bg-red-500 hover:border-red-500 dark:hover:bg-red-600 dark:hover:border-red-600 hover:text-gray-50 dark:hover:text-white">
+    <MainButton color="reverse" @click="deleteHandler" class="border w-full group flex items-center px-4 py-2 text-sm text-gray-800 dark:text-zinc-300 border-gray-200 dark:border-zinc-700 dark:bg-zinc-900/20 hover:!bg-red-500 hover:border-red-500 dark:hover:!bg-red-600 dark:hover:border-red-600 hover:text-gray-50 active:text-gray-50 dark:hover:text-white dark:active:text-white">
       <TrashIcon class="mr-3 h-5 w-5 text-gray-500 dark:text-zinc-400 group-hover:text-gray-50 dark:group-hover:text-white" aria-hidden="true"  />
       {{ $t('menu.delete class.short') }}
     </MainButton>

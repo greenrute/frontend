@@ -5,18 +5,17 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
+import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle, Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 import { CheckCircleIcon } from '@heroicons/vue/20/solid'
+import { ChevronLeftIcon } from '@heroicons/vue/24/solid'
 
-const props = defineProps<{
-  day: DayName
-}>()
+const props = defineProps<{ day: DayName }>()
 
 const { locale, t } = useI18n()
 const token = useCookie('token')
 const config = useRuntimeConfig()
-const now = useNow({ interval: 1000 })
 const currentClass = useCurrentClass()
+const currentLesson = useCurrentLesson(true)
 
 const open = ref(false)
 
@@ -62,10 +61,64 @@ const changeTaskStatus = async (tastId: number) => {
     })
 }
 
+const showOptions = ref<boolean>(false)
+
 const newHomework = reactive({
   text: '',
   description: '',
+  lesson: currentLesson.value.lessonDetails as Lesson,
+  date: getNearestDay(getDayIndex(props.day)),
+  public: true,
 })
+
+const pending = ref(false)
+
+const submit = async () => {
+  pending.value = true
+  const start = new Date().getTime()
+
+  await $fetch<apiResponse<any>>(`/classes/${currentClass.value?.id}/homework`, {
+    method: 'POST',
+    headers: {
+      'Accept-Language': locale.value,
+      'Authorization': 'Bearer ' + useCookie('token').value,
+    },
+    body: {
+      text: newHomework.text,
+      description: newHomework.description,
+      lesson: newHomework.lesson.id,
+      date: `${newHomework.date.getFullYear()}-${newHomework.date.getMonth() + 1}-${newHomework.date.getDate()}`,
+      public: newHomework.public,
+    },
+    baseURL: useRuntimeConfig().public.apiBase,
+  })
+    .then(() => {
+      newHomework.text = ''
+      newHomework.description = ''
+      newHomework.lesson = currentLesson.value.lessonDetails as Lesson
+      newHomework.date = getNearestDay(getDayIndex(props.day))
+      newHomework.public = true
+
+      refresh()
+    })
+    .catch(error => {
+      pushNotification({
+        status: 'error',
+        message: error.data?.message || t('could not connect to the server'),
+      })
+    })
+    .finally(() => {
+      const difference = new Date().getTime() - start
+
+      if (difference > 300) {
+        pending.value = false
+      } else {
+        setTimeout(() => {
+          pending.value = false
+        }, 300 - difference)
+      }
+    })
+}
 </script>
 
 <template>
@@ -88,7 +141,7 @@ const newHomework = reactive({
                   {{ $t('days.' + day) }}
                 </DialogTitle>
 
-                <div v-if="!Object.keys(days || {}).length" class="pt-6 lg:pt-4 pb-3 flex justify-center items-center gap-1 text-gray-600 dark:text-zinc-400">
+                <div v-if="!Object.keys(days || {}).length" class="pt-6 lg:pt-5 pb-3 flex justify-center items-center gap-1 text-gray-600 dark:text-zinc-400">
                   <CheckCircleIcon class="w-5 h-5" />
                   {{ $t('homework.empty') }}
                 </div>
@@ -108,7 +161,7 @@ const newHomework = reactive({
                         <div class="text-lg truncate font-semibold">{{ tasks[0].lesson.name }}</div>
                       </div>
                       <ul class="ml-2 mt-1 flex flex-col gap-0.5">
-                        <transition-group enter-from-class="!translate-x-[calc(100%+40px)] scale-y-0 !h-0" leave-to-class="!-translate-x-[calc(100%+40px)] scale-y-0 !h-0">
+                        <transition-group enter-from-class="!translate-x-12 scale-y-0 !h-0" leave-to-class="!-translate-x-12 scale-y-0 !h-0">
                           <li v-for="task in tasks" :key="task.id" class="transition-all ease-out duration-300">
                             <div class="flex items-center gap-2 py-0.5">
                               <div class="flex items-center">
@@ -128,11 +181,33 @@ const newHomework = reactive({
                 </div>
 
                 <div class="mt-5">
-                  <div class="bg-gray-100 dark:bg-zinc-800 py-3 px-3 -mx-1 rounded-3xl flex flex-col items-stretch">
-                    <MainTextInput class="!w-[calc(100%+2px)] !rounded-t-2xl !rounded-b-none -mx-0.25 !ring-inset" v-model="newHomework.text" placeholder="Завдання, наприклад: вивчити вірш..." />
-                    <MainTextInput class="!w-[calc(100%+2px)] !rounded-none -m-0.25 !ring-inset" v-model="newHomework.description" placeholder="Опис, наприклад: на с. 12..." />
-                    <MainButton class="w-full z-10 rounded-b-2xl rounded-t-none" :class="newHomework.text ? '' : 'bg-white dark:bg-zinc-900 ring-gray-200 dark:ring-zinc-700'" :variant="newHomework.text ? 'solid' : 'outline'" :color="newHomework.text ? 'green' : 'zinc'" type="button" @click="open = false">{{ $t('general.create') }}</MainButton>
-                  </div>
+                  <MainForm @validated="submit" class="bg-gray-100 dark:bg-zinc-800 py-3 px-3 -mx-1 rounded-3xl flex flex-col items-stretch [&_*:has(:focus)]:!z-20 [&_*:has(.on-top)]:!z-20 [&>div:nth-child(2):has(:focus)]:!z-40 [&>div:nth-child(2):has(.on-top)]:!z-40 [&.is-validated_*:has(:invalid)]:!z-30">
+                    <div class="w-full flex justify-stretch [&>div]:w-full [&>div]:-mx-0.25 [&>div]:-mt-0.25 [&:has(:first-child:not(:focus)>*:last-child)]:z-20">
+                      <MainTextInput class="!rounded-tl-2xl !rounded-b-none !rounded-r-none !ring-inset" v-model="newHomework.text" :placeholder="$t('homework.placeholders.task')" required />
+                      <MainButton type="button" @click="showOptions = !showOptions" variant="outline" class="z-10 focus:z-20 active:z-20 rounded-tr-2xl rounded-l-none rounded-b-none bg-white dark:bg-zinc-900 ring-inset ring-gray-200 dark:ring-zinc-700 -mx-0.25 -mt-0.25">
+                        <ChevronLeftIcon class="h-5.5 w-5.h-5.5 transition-all ease-out duration-300" :class="showOptions ? '-rotate-90' : ''" />
+                      </MainButton>
+                    </div>
+                    <TransitionCollapse>
+                      <div v-show="showOptions" class="-mx-0.25 px-0.25">
+                        <MainTextInput class="!w-[calc(100%+2px)] !rounded-none -m-0.25 !ring-inset" v-model="newHomework.description" :placeholder="$t('homework.placeholders.description')" />
+                        <HomeworkDatePicker class="!w-[calc(100%+2px)] !rounded-none -m-0.25 !ring-inset" v-model="newHomework.date" :day-index="getDayIndex(day)" />
+                        <HomeworkLessonPicker class="!w-[calc(100%+2px)] !rounded-none -m-0.25 !ring-inset" v-model="newHomework.lesson" :day-index="getDayIndex(day)" />
+                        <SwitchGroup as="div" class="flex items-center justify-between w-[calc(100%+2px)] rounded-none -m-0.25 mb-0 border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-2 px-3">
+                          <span class="flex flex-grow flex-col">
+                            <SwitchLabel as="span" class="text-sm leading-6" passive>{{ $t('homework.public') }}</SwitchLabel>
+                          </span>
+                          <Switch v-model="newHomework.public" :class="[newHomework.public ? 'bg-green-600' : 'bg-gray-200 dark:bg-zinc-700', 'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-800']">
+                            <span aria-hidden="true" :class="[newHomework.public ? 'translate-x-5 dark:bg-zinc-100' : 'translate-x-0 dark:bg-zinc-400', 'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out']" />
+                          </Switch>
+                        </SwitchGroup>
+                      </div>
+                    </TransitionCollapse>
+                    <MainButton class="w-full z-10 rounded-b-2xl rounded-t-none hover:z-20" :class="newHomework.text ? '' : 'bg-white dark:bg-zinc-900 ring-gray-200 dark:ring-zinc-700'" :variant="newHomework.text ? 'solid' : 'outline'" :color="newHomework.text ? 'green' : 'zinc'" type="submit" :disabled="!newHomework.text">
+                      <span v-if="!pending">{{ $t('homework.add') }}</span>
+                      <IconLoader v-else class="my-0.5 w-5 h-5 motion-safe:animate-loader" />
+                    </MainButton>
+                  </MainForm>
                 </div>
 
                 <div class="mt-5 flex items-center">

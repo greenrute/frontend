@@ -20,6 +20,7 @@ const time = ref({
 })
 
 watch(time, async newTime => {
+  if (!currentClass.value) return
   let timetable = toRaw(currentClass.value).timetable
   timetable.filter(i => i.day === props.day)[0].records[props.index][props.position] = `${newTime.hours}:${newTime.minutes}`
 
