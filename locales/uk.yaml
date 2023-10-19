@@ -120,6 +120,8 @@ general:
   close: Закрити
   save: Зберегти
   create: Створити
+  select: Вибрати
+  update: Оновити
   warning: Застосунок наразі перебуває на стадії активної розробки, Ваш обліковий запис або дані можуть бути втрачені
   yesterday: Вчора
   today: Сьогодні
@@ -176,6 +178,7 @@ people:
     change role: Змінити права
     delete member: Видалити учасника
     delete member full: Справді видалити учасника {name}?
+    select new role: Виберіть нову роль
 
 profile:
   photo: Фото

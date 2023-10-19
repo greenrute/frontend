@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle, Listbox, ListboxLabel, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/vue'
+import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle, Listbox, ListboxLabel, ListboxButton, ListboxOptions, ListboxOption, MenuItem } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
-import { UserPlusIcon } from '@heroicons/vue/24/outline'
+
+const props = defineProps<{
+  open: boolean
+  person: Person | null
+}>()
+const emit = defineEmits<{ (e: 'close'): void }>()
 
 const { t, locale } = useI18n()
 const token = useCookie('token')
@@ -9,42 +14,33 @@ const config = useRuntimeConfig()
 
 const currentClass = useCurrentClass()
 
-const open = ref(false)
-const invalid = ref(false)
-
 const roles = ['owner', 'admin', 'member'] as const
-const email = ref('')
-const selectedRole = ref<typeof roles[number]>('member')
+type Role = typeof roles[number]
+const selectedRole = ref<Role>(props.person?.role as Role)
+
+watch(props, newProps => {
+  selectedRole.value = newProps.person?.role as Role
+})
 
 const pending = ref(false)
 
 const submit = async () => {
-  if (email.value === '') {
-    invalid.value = true
-    return
-  } else {
-    invalid.value = false
-  }
-
   pending.value = true
   const start = new Date().getTime()
 
-  await $fetch<apiResponse<any>>(`/classes/${currentClass.value?.id}/users`, {
-    method: 'POST',
+  await $fetch<apiResponse<any>>(`/classes/${currentClass.value?.id}/users/${props.person?.id}`, {
+    method: 'PATCH',
     headers: {
       'Accept-Language': locale.value,
       'Authorization': 'Bearer ' + token.value,
     },
     body: {
-      email: email.value,
       role: selectedRole.value,
     },
     baseURL: config.public.apiBase,
   })
     .then(r => {
-      open.value = false
-      email.value = ''
-      selectedRole.value = 'member'
+      emit('close')
       pushNotification({
         status: 'success',
         message: r.message,
@@ -71,13 +67,8 @@ const submit = async () => {
 </script>
 
 <template>
-  <MainButton variant="outline" color="zinc" class="!px-2" @click="open = true">
-    <UserPlusIcon class="w-5.5 h-5.5" aria-hidden="true" />
-    <span class="sr-only">{{ $t('people.actions.add member') }}</span>
-  </MainButton>
-
   <TransitionRoot appear :show="open" as="template">
-    <Dialog as="div" @close="open = false" class="relative z-10">
+    <Dialog as="div" @close="$emit('close')" class="relative z-10">
       <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0" enter-to="opacity-100" leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-0">
         <div class="fixed inset-0 bg-gray-500 dark:bg-zinc-800 bg-opacity-75 dark:bg-opacity-75 backdrop-blur" />
       </TransitionChild>
@@ -88,12 +79,8 @@ const submit = async () => {
             <DialogPanel class="w-full max-w-md transform rounded-2xl bg-white dark:bg-zinc-900 p-6 text-left align-middle shadow-xl transition-all">
               <MainForm @validated="submit">
                 <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900 dark:text-zinc-50">
-                  {{ $t('people.actions.add member') }}
+                  {{ $t('people.actions.select new role') }}
                 </DialogTitle>
-
-                <div class="mt-5">
-                  <MainTextInput class="!py-1.5 !pl-3" v-model="email" name="notASearchField" id="user-add-email" :label="$t('email address')" required :invalid="$t('please enter a valid email address')" autocomplete="off" />
-                </div>
 
                 <Listbox class="mt-5" as="div" v-model="selectedRole" v-slot="{ open }">
                   <ListboxLabel class="mb-3 block text-sm font-medium text-gray-700 dark:text-zinc-300">{{ $t('people.user role') }}</ListboxLabel>
@@ -128,10 +115,10 @@ const submit = async () => {
 
                 <div class="mt-5 flex gap-5 items-center flex-row-reverse">
                   <MainButton class="w-full" color="green">
-                    <template v-if="!pending">{{ $t('edit.add') }}</template>
+                    <template v-if="!pending">{{ $t('general.update') }}</template>
                     <IconLoader v-else class="my-0.5 w-5 h-5 motion-safe:animate-loader" />
                   </MainButton>
-                  <MainButton class="w-full" variant="outline" type="button" @click="open = false">{{ $t('edit.cancel') }}</MainButton>
+                  <MainButton class="w-full" variant="outline" type="button" @click="$emit('close')">{{ $t('edit.cancel') }}</MainButton>
                 </div>
               </MainForm>
             </DialogPanel>

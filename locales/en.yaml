@@ -120,6 +120,8 @@ general:
   close: Close
   save: Save
   create: Create
+  select: Select
+  update: Update
   warning: The application is currently under active development, your account or data may be lost
   yesterday: Yesterday
   today: Today
@@ -176,6 +178,7 @@ people:
     change role: Change rights
     delete member: Видалити учасника
     delete member full: Really delete member {name}?
+    select new role: Select a new role
 
 profile:
   photo: Photo

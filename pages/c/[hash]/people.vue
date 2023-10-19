@@ -12,19 +12,18 @@ const { t, locale } = useI18n()
 const currentClass = useCurrentClass()
 const localePath = useLocalePath()
 const user = useUser()
+const open = ref(false)
+const selectedPerson = ref<Person | null>(null)
 
 const deletePerson = async (id: number) => {
   if (!confirm(t('people.actions.delete member full', {
     name: currentClass.value?.people?.filter(p => p.id === id)?.[0]?.name as string,
   }))) return
-  await $fetch<apiResponse<any>>(`/classes/${currentClass.value?.id}/users/remove`, {
-    method: 'PATCH',
+  await $fetch<apiResponse<any>>(`/classes/${currentClass.value?.id}/users/${id}`, {
+    method: 'DELETE',
     headers: {
       'Accept-Language': locale.value,
       'Authorization': 'Bearer ' + useCookie('token').value,
-    },
-    body: {
-      id,
     },
     baseURL: useRuntimeConfig().public.apiBase,
   })
@@ -41,6 +40,15 @@ const deletePerson = async (id: number) => {
       })
     })
 }
+
+const changeUsersRole = (person: Person) => {
+  selectedPerson.value = person
+  nextTick(() => {
+    nextTick(() => {
+      open.value = true
+    })
+  })
+}
 </script>
 
 <template>
@@ -49,6 +57,7 @@ const deletePerson = async (id: number) => {
   </Head>
 
   <DashboardClassHeader />
+  <PeopleChangeRole :person="selectedPerson" :open="open" @close="open = false" />
 
   <div class="px-4 pt-8 flex flex-col gap-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
     <div class="flex items-center justify-between gap-2 mb-2">
@@ -56,7 +65,7 @@ const deletePerson = async (id: number) => {
       <PeopleAddPerson v-if="user.isOwner" />
     </div>
 
-    <div class="overflow-hidden pb-8 sm:pb-16 p-0.25">
+    <div class="overflow-hidden pb-20 p-0.25">
       <ul role="list" class="flex flex-col divide-y divide-gray-100 dark:divide-zinc-700 bg-white/70 dark:bg-zinc-800/70 shadow-sm ring-1 ring-gray-900/5 dark:ring-zinc-700 rounded-xl">
         <transition-group enter-from-class="!translate-x-full scale-y-0 !h-0" leave-to-class="!-translate-x-full scale-y-0 !h-0">
           <li v-for="person in currentClass?.people" :key="person.email" class="h-[5.5rem] transition-all ease-out duration-300">
@@ -88,17 +97,17 @@ const deletePerson = async (id: number) => {
                   <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
                     <MenuItems class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 dark:divide-zinc-700 rounded-md bg-white dark:bg-zinc-800 shadow-lg ring-1 ring-black ring-opacity-5 dark:ring-zinc-700 focus:outline-none">
                       <div class="py-1">
-                        <!-- <MenuItem v-slot="{ active }">
-                        <button v-if="isOwner" class="w-full group flex items-center px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-900 text-gray-900 dark:text-zinc-50' : 'text-gray-800 dark:text-zinc-300'">
-                          <UsersIcon class="mr-3 h-5 w-5 text-gray-500 dark:text-zinc-400 group-hover:text-gray-600 dark:group-hover:text-zinc-400" aria-hidden="true" />
-                          {{ $t('people.actions.change role') }}
-                        </button>
-                      </MenuItem> -->
                         <MenuItem v-slot="{ active }">
-                        <button v-if="user.isOwner" @click="deletePerson(person.id)" class="w-full group flex items-center px-4 py-2 text-sm" :class="active ? 'bg-red-500 dark:bg-red-600 text-gray-50 dark:text-white' : 'text-gray-800 dark:text-zinc-300'">
-                          <UserMinusIcon class="mr-3 h-5 w-5 text-gray-500 dark:text-zinc-400 group-hover:text-gray-50 dark:group-hover:text-white" aria-hidden="true" />
-                          {{ $t('people.actions.delete member') }}
-                        </button>
+                          <button @click="changeUsersRole(person)" class="w-full group flex items-center px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-900 text-gray-900 dark:text-zinc-50' : 'text-gray-800 dark:text-zinc-300'">
+                            <UsersIcon class="mr-3 h-5 w-5 text-gray-500 dark:text-zinc-400 group-hover:text-gray-600 dark:group-hover:text-zinc-400" aria-hidden="true" />
+                            {{ $t('people.actions.change role') }}
+                          </button>
+                        </MenuItem>
+                        <MenuItem v-slot="{ active }">
+                          <button @click="deletePerson(person.id)" class="w-full group flex items-center px-4 py-2 text-sm" :class="active ? 'bg-red-500 dark:bg-red-600 text-gray-50 dark:text-white' : 'text-gray-800 dark:text-zinc-300'">
+                            <UserMinusIcon class="mr-3 h-5 w-5 text-gray-500 dark:text-zinc-400 group-hover:text-gray-50 dark:group-hover:text-white" aria-hidden="true" />
+                            {{ $t('people.actions.delete member') }}
+                          </button>
                         </MenuItem>
                       </div>
                     </MenuItems>
