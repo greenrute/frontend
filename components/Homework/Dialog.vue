@@ -215,7 +215,7 @@ const percentOfDoneHomework = (day: { [key: string]: ARHomework[] }) => (
       </TransitionChild>
 
       <div class="fixed inset-0 overflow-y-auto">
-        <div class="flex min-h-full items-start lg:items-center justify-center p-4 text-center">
+        <div class="flex min-h-full lg:items-center justify-center p-4 text-center" :class="Object.keys(days).length ? 'items-end' : 'items-start'">
           <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0 scale-95" enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
             <DialogPanel class="w-full max-w-md transform rounded-2xl bg-white dark:bg-zinc-900 p-6 text-left align-middle shadow-xl transition-all">
               <div>
@@ -223,7 +223,7 @@ const percentOfDoneHomework = (day: { [key: string]: ARHomework[] }) => (
                   {{ $t('days.' + day) }}
                 </DialogTitle>
 
-                <div v-if="!Object.keys(days || {}).length" class="pt-6 lg:pt-5 pb-3 flex justify-center items-center gap-1 text-gray-600 dark:text-zinc-400">
+                <div v-if="!Object.keys(days).length" class="pt-6 lg:pt-5 pb-3 flex justify-center items-center gap-1 text-gray-600 dark:text-zinc-400">
                   <CheckCircleIcon class="w-5 h-5" />
                   {{ $t('homework.empty') }}
                 </div>
