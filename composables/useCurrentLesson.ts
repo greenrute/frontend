@@ -19,10 +19,17 @@ const getLessonLimits = (r: { start: string, end: string }, c: Date): {
 })
 
 export const useCurrentLesson = (
-  withLessonDetails: boolean = false
+  withLessonDetails: boolean = false,
+  date: Date | null = null,
 ): ComputedRef<CurrentLesson> => {
   const currentClass = useCurrentClass()
-  const now = useNow({ interval: 1000 })
+  const reactiveNow = useNow({ interval: 1000 })
+  let now: globalThis.ComputedRef<Date>
+  if (date) {
+    now = computed(() => new Date(date.getFullYear(), date.getMonth(), date.getDate(), reactiveNow.value.getHours(), reactiveNow.value.getMinutes(), reactiveNow.value.getSeconds()))
+  } else {
+    now = computed(() => reactiveNow.value)
+  }
   const { t } = useI18n()
 
   const currentLesson = computed<CurrentLesson>((): CurrentLesson => {
@@ -47,10 +54,19 @@ export const useCurrentLesson = (
       ? currentClass.value.timetable?.[now.value.getDay()]?.records
       : currentClass.value.timetable?.[0]?.records
     if (!currentTimetable?.length) {
-      return {
-        active: false,
-        dayoff: false,
-        timeToEnd: t('empty.unknown timetable'),
+      if (withLessonDetails) {
+        return {
+          active: false,
+          dayoff: false,
+          timeToEnd: '',
+          lessonDetails: currentDay.lessons[0],
+        }
+      } else {
+        return {
+          active: false,
+          dayoff: false,
+          timeToEnd: t('empty.unknown timetable'),
+        }
       }
     }
 
@@ -76,25 +92,16 @@ export const useCurrentLesson = (
     }
 
     const currentLesson = ref<number | null>(null)
+    const currentLessonWithDetails = ref<Lesson | undefined>(undefined)
     currentDay.lessons.forEach((l, i) => {
       if (!currentTimetable?.[i]) return
       const lessonLimits = getLessonLimits(currentTimetable?.[i], now.value)
       if (withLessonDetails) {
         if (!currentTimetable?.[i + 1] || !currentDay.lessons?.[i + 1]) {
-          return {
-            active: false,
-            dayoff: false,
-            timeToEnd: '',
-            lessonDetails: l,
-          }
+          currentLessonWithDetails.value = l
         } else {
           if (lessonLimits.start <= now.value.getTime() && getLessonLimits(currentTimetable?.[i + 1], now.value).start > now.value.getTime()) {
-            return {
-              active: false,
-              dayoff: false,
-              timeToEnd: '',
-              lessonDetails: currentDay.lessons[i + 1],
-            }
+            currentLessonWithDetails.value = currentDay.lessons[i + 1]
           }
         }
       }
@@ -103,29 +110,33 @@ export const useCurrentLesson = (
       }
     })
 
-    if (currentLesson.value === null) {
-      if (withLessonDetails) {
-        if (now.value.getTime() < firstLessonLimits.start) {
-          if (withLessonDetails) {
-            return {
-              active: false,
-              dayoff: false,
-              timeToEnd: '',
-              lessonDetails: currentDay.lessons[0],
-            }
-          }
-        } else if (lastLessonLimits.end < now.value.getTime()) {
-          if (withLessonDetails) {
-            return {
-              active: false,
-              dayoff: false,
-              timeToEnd: '',
-              lessonDetails: currentDay.lessons[currentDay.lessons.length - 1],
-            }
-          }
+
+    if (withLessonDetails && currentLessonWithDetails === null) {
+      if (now.value.getTime() < firstLessonLimits.start) {
+        return {
+          active: false,
+          dayoff: false,
+          timeToEnd: '',
+          lessonDetails: currentDay.lessons[0],
+        }
+      } else if (lastLessonLimits.end < now.value.getTime()) {
+        return {
+          active: false,
+          dayoff: false,
+          timeToEnd: '',
+          lessonDetails: currentDay.lessons[currentDay.lessons.length - 1],
         }
       }
+    } else if (withLessonDetails && currentLessonWithDetails !== undefined) {
+      return {
+        active: false,
+        dayoff: false,
+        timeToEnd: '',
+        lessonDetails: currentLessonWithDetails.value,
+      }
+    }
 
+    if (currentLesson.value === null) {
       return {
         active: false,
         dayoff: false,

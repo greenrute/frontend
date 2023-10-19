@@ -6,7 +6,7 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle, Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
-import { CheckCircleIcon } from '@heroicons/vue/20/solid'
+import { CheckCircleIcon, TrashIcon } from '@heroicons/vue/20/solid'
 import { ChevronLeftIcon } from '@heroicons/vue/24/solid'
 
 const props = defineProps<{ day: DayName }>()
@@ -15,7 +15,12 @@ const { locale, t } = useI18n()
 const token = useCookie('token')
 const config = useRuntimeConfig()
 const currentClass = useCurrentClass()
-const currentLesson = useCurrentLesson(true)
+const interval = ref<NodeJS.Timeout | undefined>(undefined)
+const currentLesson = useCurrentLesson(true, getNearestDay(getDayIndex(props.day)))
+
+onUnmounted(() => {
+  clearInterval(interval.value)
+})
 
 const open = ref(false)
 
@@ -28,6 +33,14 @@ const { data: homework, refresh } = await useFetch<apiResponse<{ homeworks: { [k
   baseURL: config.public.apiBase,
 })
 
+onMounted(() => {
+  interval.value = setInterval(() => refresh(), 1000)
+})
+
+watch(open, newValue => {
+  if (newValue) refresh()
+})
+
 const days = computed<{ [key: string]: { [key: string]: ARHomework[] } }>(() => Object.keys(homework.value?.data?.homeworks as object).sort((a, b) => {
   const A = parseInt(a.split('.').reverse().join(''))
   const B = parseInt(b.split('.').reverse().join(''))
@@ -36,10 +49,6 @@ const days = computed<{ [key: string]: { [key: string]: ARHomework[] } }>(() => 
   (object as any)[key] = homework.value?.data?.homeworks[key]
   return object
 }, {}))
-
-watch(open, newValue => {
-  if (newValue) refresh()
-})
 
 const changeTaskStatus = async (tastId: number) => {
   await $fetch(`/classes/${currentClass.value?.id}/homework/${tastId}/status`, {
@@ -119,6 +128,53 @@ const submit = async () => {
       }
     })
 }
+
+const deleteButtons = ref<boolean[]>([])
+
+const toggleDeleteButton = (id: number) => {
+  const initialValue = deleteButtons.value[id]
+  deleteButtons.value.forEach((b, i) => {
+    deleteButtons.value[i] = false
+  })
+  deleteButtons.value[id] = !initialValue
+}
+
+const deleting = ref<boolean[]>([])
+
+const deleteHomework = async (id: number, task: string) => {
+  if (!confirm(t('homework.delete', { task }))) return
+  deleting.value[id] = true
+  const start = new Date().getTime()
+
+  await $fetch<apiResponse<any>>(`/classes/${currentClass.value?.id}/homework/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Accept-Language': locale.value,
+      'Authorization': 'Bearer ' + useCookie('token').value,
+    },
+    baseURL: useRuntimeConfig().public.apiBase,
+  })
+    .then(() => {
+      refresh()
+    })
+    .catch(error => {
+      pushNotification({
+        status: 'error',
+        message: error.data?.message || t('could not connect to the server'),
+      })
+    })
+    .finally(() => {
+      const difference = new Date().getTime() - start
+
+      if (difference > 300) {
+        deleting.value[id] = false
+      } else {
+        setTimeout(() => {
+          deleting.value[id] = false
+        }, 300 - difference)
+      }
+    })
+}
 </script>
 
 <template>
@@ -133,7 +189,7 @@ const submit = async () => {
       </TransitionChild>
 
       <div class="fixed inset-0 overflow-y-auto">
-        <div class="flex min-h-full items-end lg:items-center justify-center p-4 text-center">
+        <div class="flex min-h-full items-start lg:items-center justify-center p-4 text-center">
           <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0 scale-95" enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
             <DialogPanel class="w-full max-w-md transform rounded-2xl bg-white dark:bg-zinc-900 p-6 text-left align-middle shadow-xl transition-all">
               <div>
@@ -146,39 +202,46 @@ const submit = async () => {
                   {{ $t('homework.empty') }}
                 </div>
 
-                <div v-for="(day, date) in days" :key="date">
-                  <div class="mt-5">
-                    <h5 class="bg-gray-100 dark:bg-zinc-800 py-2 px-4 -mx-1 rounded-full flex justify-between items-center">
-                      <span>{{ (date as string).split('.').slice(0, 2).join('.') }}</span>
-                      <span class="inline-flex items-center rounded-full bg-gray-200/70 dark:bg-zinc-700/70 px-2 text-sm font-medium text-gray-600 dark:text-zinc-300/80">{{ capitalizeFirstLetter(timeAgo(new Date(parseInt((date as string).split('.')[2]), parseInt((date as string).split('.')[1]) - 1, parseInt((date as string).split('.')[0])))) }}</span>
-                    </h5>
-                  </div>
+                <transition-group enter-from-class="!translate-x-8 opacity-0" leave-to-class="!-translate-x-8 opacity-0">
+                  <div v-for="(day, date) in days" :key="date" class="transition-all ease-out duration-300">
+                    <div class="mt-5">
+                      <h5 class="bg-gray-100 dark:bg-zinc-800 py-2 px-4 -mx-1 rounded-full flex justify-between items-center">
+                        <span>{{ (date as string).split('.').slice(0, 2).join('.') }}</span>
+                        <span class="inline-flex items-center rounded-full bg-gray-200/70 dark:bg-zinc-700/70 px-2 text-sm font-medium text-gray-600 dark:text-zinc-300/80">{{ capitalizeFirstLetter(timeAgo(new Date(parseInt((date as string).split('.')[2]), parseInt((date as string).split('.')[1]) - 1, parseInt((date as string).split('.')[0])))) }}</span>
+                      </h5>
+                    </div>
 
-                  <div class="mt-2">
-                    <div v-for="(tasks, lesson) in day" :key="lesson">
-                      <div class="flex items-center gap-1">
-                        <component :is="'Emoji' + tasks[0].lesson.icon" class="h-5 w-5 shrink-0 -mb-0.25" />
-                        <div class="text-lg truncate font-semibold">{{ tasks[0].lesson.name }}</div>
-                      </div>
-                      <ul class="ml-2 mt-1 flex flex-col gap-0.5">
-                        <transition-group enter-from-class="!translate-x-12 scale-y-0 !h-0" leave-to-class="!-translate-x-12 scale-y-0 !h-0">
-                          <li v-for="task in tasks" :key="task.id" class="transition-all ease-out duration-300">
-                            <div class="flex items-center gap-2 py-0.5">
-                              <div class="flex items-center">
-                                <input :checked="task.done" @change="changeTaskStatus(task.id)" :id="task.id.toString()" :aria-describedby="task.id + '-description'" type="checkbox" class="h-4.5 w-4.5 cursor-pointer rounded dark:focus:ring-offset-zinc-900 border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:checked:bg-green-600 dark:checked:border-green-600 text-green-600 focus:ring-green-600" />
-                              </div>
-                              <div class="flex items-center w-full" :class="task.done ? 'line-through' : ''">
-                                <label :for="task.id.toString()" class="cursor-pointer truncate shrink-0 text-gray-900 dark:text-zinc-200">{{ task.text }}</label>
-                                <p :id="task.id + '-description'" class="truncate text-base text-gray-500/90 dark:text-zinc-400/90"><span v-if="task.description">&nbsp;</span>{{ task.description }}</p>
-                              </div>
-                              <img class="h-6 w-h-6 flex-shrink-0 rounded-full bg-gray-300 dark:bg-zinc-700 object-cover" :src="task.created_by.picture" :alt="task.created_by.name">
-                            </div>
-                          </li>
-                        </transition-group>
-                      </ul>
+                    <div class="mt-2">
+                      <transition-group enter-from-class="!translate-x-8 opacity-0" leave-to-class="!-translate-x-8 opacity-0">
+                        <div v-for="(tasks, lesson) in day" :key="lesson" class="transition-all ease-out duration-300">
+                          <div class="flex items-center gap-1">
+                            <component :is="'Emoji' + tasks[0].lesson.icon" class="h-5 w-5 shrink-0 -mb-0.25" />
+                            <div class="text-lg truncate font-semibold">{{ tasks[0].lesson.name }}</div>
+                          </div>
+                          <ul class="ml-2 mt-1 flex flex-col gap-0.5">
+                            <transition-group enter-from-class="!translate-x-8 opacity-0" leave-to-class="!-translate-x-8 opacity-0">
+                              <li v-for="task in tasks" :key="task.id" class="transition-all ease-out duration-300">
+                                <div class="flex items-center gap-2 py-0.5">
+                                  <div class="flex items-center [&:has(:checked)~div:has(label)]:line-through">
+                                    <input :checked="task.done" @change="changeTaskStatus(task.id)" :id="task.id.toString()" :aria-describedby="task.id + '-description'" type="checkbox" class="h-4.5 w-4.5 cursor-pointer rounded dark:focus:ring-offset-zinc-900 border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:checked:bg-green-600 dark:checked:border-green-600 text-green-600 focus:ring-green-600" />
+                                  </div>
+                                  <div class="flex items-center w-full overflow-hidden" :class="task.done ? 'line-through' : ''">
+                                    <label :for="task.id.toString()" class="max-w-full truncate cursor-pointer shrink-0 text-gray-900 dark:text-zinc-200">{{ task.text }}</label>
+                                    <span :id="task.id + '-description'" class="max-w-full truncate text-base text-gray-500/90 dark:text-zinc-400/90"><span v-if="task.description">&nbsp;</span>{{ task.description }}</span>
+                                  </div>
+                                  <div class="shrink-0 flex gap-1 group h-6 overflow-hidden transition-all ease-out duration-300 rounded-full" :class="deleteButtons[task.id] === true ? 'w-13 ring ring-gray-200 dark:ring-zinc-700' : 'w-6 hover:w-13 hover:ring hover:ring-gray-200 dark:hover:ring-zinc-700'">
+                                    <button @click="toggleDeleteButton(task.id)" class="h-6 w-6 flex shrink-0"><img class="h-full w-full rounded-full bg-gray-300 dark:bg-zinc-700 object-cover" :src="task.created_by.picture" :alt="task.created_by.name"></button>
+                                    <button @click="deleteHomework(task.id, `${task.text}${task.description ? ` ${task.description}` : ''}`)" class="h-6 w-6 flex shrink-0 justify-center items-center rounded-full bg-red-600 text-white transition-all ease-out duration-300"><TrashIcon class="h-4.5 w-4.h-4.5" /></button>
+                                  </div>
+                                </div>
+                              </li>
+                            </transition-group>
+                          </ul>
+                        </div>
+                      </transition-group>
                     </div>
                   </div>
-                </div>
+                </transition-group>
 
                 <div class="mt-5">
                   <MainForm @validated="submit" class="bg-gray-100 dark:bg-zinc-800 py-3 px-3 -mx-1 rounded-3xl flex flex-col items-stretch [&_*:has(:focus)]:!z-20 [&_*:has(.on-top)]:!z-20 [&>div:nth-child(2):has(:focus)]:!z-40 [&>div:nth-child(2):has(.on-top)]:!z-40 [&.is-validated_*:has(:invalid)]:!z-30">
@@ -195,7 +258,7 @@ const submit = async () => {
                         <HomeworkLessonPicker class="!w-[calc(100%+2px)] !rounded-none -m-0.25 !ring-inset" v-model="newHomework.lesson" :day-index="getDayIndex(day)" />
                         <SwitchGroup as="div" class="flex items-center justify-between w-[calc(100%+2px)] rounded-none -m-0.25 mb-0 border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-2 px-3">
                           <span class="flex flex-grow flex-col">
-                            <SwitchLabel as="span" class="text-sm leading-6" passive>{{ $t('homework.public') }}</SwitchLabel>
+                            <SwitchLabel as="span" class="sm:text-sm leading-6" passive>{{ $t('homework.public') }}</SwitchLabel>
                           </span>
                           <Switch v-model="newHomework.public" :class="[newHomework.public ? 'bg-green-600' : 'bg-gray-200 dark:bg-zinc-700', 'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-800']">
                             <span aria-hidden="true" :class="[newHomework.public ? 'translate-x-5 dark:bg-zinc-100' : 'translate-x-0 dark:bg-zinc-400', 'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out']" />

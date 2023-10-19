@@ -196,3 +196,4 @@ homework:
     task: "A task, for example: to learn a poem..."
     description: "Description, for example: on p. 12..."
   public: For everyone
+  delete: Really delete task "{task}"?
