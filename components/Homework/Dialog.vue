@@ -44,7 +44,7 @@ watch(open, newValue => {
   if (newValue) refresh()
 })
 
-const days = computed<{ [key: string]: { [key: string]: ARHomework[] } }>(() => Object.keys(homework.value?.data?.homeworks as object).sort((a, b) => {
+const days = computed<{ [key: string]: { [key: string]: ARHomework[] } }>(() => Object.keys(homework.value?.data?.homeworks ?? {}).sort((a, b) => {
   const A = parseInt(a.split('.').reverse().join(''))
   const B = parseInt(b.split('.').reverse().join(''))
   return A > B ? 1 : A < B ? -1 : 0

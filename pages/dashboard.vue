@@ -45,8 +45,8 @@ const currentLesson = useCurrentLesson()
 
   <div class="mt-6 px-4 sm:px-6 lg:px-8">
 
-    <div class="bg-zinc-800 p-2 rounded-3xl">
-      <div v-if="currentClass?.schedule[new Date().getDay() - 1].lessons.length">
+    <div v-if="currentClass?.schedule[new Date().getDay() - 1].lessons.length" class="bg-zinc-800 p-2 rounded-3xl">
+      <div>
         <div class="pl-3 pr-2.5 font-bold mb-2 uppercase text-xl flex items-center justify-between">
           {{ $t(`days.${currentClass?.schedule[new Date().getDay() - 1].day}`) }}
           <HomeworkDialog class="text-green-600 flex items-center gap-1 text-base" :day="currentClass?.schedule[new Date().getDay() - 1].day">
