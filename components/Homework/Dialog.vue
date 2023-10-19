@@ -222,7 +222,7 @@ const deleteHomework = async (id: number, task: string) => {
                             <transition-group enter-from-class="!translate-x-8 opacity-0" leave-to-class="!-translate-x-8 opacity-0">
                               <li v-for="task in tasks" :key="task.id" class="transition-all ease-out duration-300">
                                 <div class="flex items-center gap-2 py-0.5">
-                                  <div class="flex items-center [&:has(:checked)~div:has(label)]:line-through">
+                                  <div class="flex items-center [&:has(:checked)~div:has(label)]:line-through [&:has(:not(:checked))~div:has(label)]:!no-underline">
                                     <input :checked="task.done" @change="changeTaskStatus(task.id)" :id="task.id.toString()" :aria-describedby="task.id + '-description'" type="checkbox" class="h-4.5 w-4.5 cursor-pointer rounded dark:focus:ring-offset-zinc-900 border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:checked:bg-green-600 dark:checked:border-green-600 text-green-600 focus:ring-green-600" />
                                   </div>
                                   <div class="flex items-center w-full overflow-hidden" :class="task.done ? 'line-through' : ''">
