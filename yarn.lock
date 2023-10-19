@@ -1471,6 +1471,11 @@
     "@tufjs/canonical-json" "2.0.0"
     minimatch "^9.0.3"
 
+"@types/canvas-confetti@^1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@types/canvas-confetti/-/canvas-confetti-1.6.2.tgz#69474d32271f347ff291ccde23268ecc3e426961"
+  integrity sha512-ozy7d+7AmYnPEgzdGwwAIA0/yLHnT9YBUQAOm5Ucu+P2ptxq2P464SZDVzYp71wD10ZPYckyeC665bPxQM78kw==
+
 "@types/estree@*", "@types/estree@^1.0.0":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.1.tgz#aa22750962f3bf0e79d753d3cc067f010c95f194"
@@ -2291,6 +2296,11 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001517, caniuse-lite@^1.0.30001520:
   version "1.0.30001538"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001538.tgz#9dbc6b9af1ff06b5eb12350c2012b3af56744f3f"
   integrity sha512-HWJnhnID+0YMtGlzcp3T9drmBJUVDchPJ08tpUGFLs9CYlwWPH2uLgpHn8fND5pCgXVtnGS3H4QR9XLMHVNkHw==
+
+canvas-confetti@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/canvas-confetti/-/canvas-confetti-1.9.0.tgz#03a9fa528b47bd37a127af216828e67894a60b0a"
+  integrity sha512-0UGU/T5Un/Cd4Aj4fu/p/oVQm8Il+brK5xcmY+y77u7PXuyNJD4ODUWe01A5o3GUI9Bb8lOBlQ10VdaDsY1FBA==
 
 chalk@^2.4.2:
   version "2.4.2"
@@ -7302,6 +7312,7 @@ widest-line@^4.0.1:
     string-width "^5.0.1"
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==

@@ -8,6 +8,9 @@ export default defineComponent({
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle, Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 import { CheckCircleIcon, TrashIcon } from '@heroicons/vue/20/solid'
 import { ChevronLeftIcon } from '@heroicons/vue/24/solid'
+import { CheckIcon } from '@heroicons/vue/24/outline'
+// @ts-ignore
+import confetti from 'canvas-confetti'
 
 const props = defineProps<{ day: DayName }>()
 
@@ -178,6 +181,26 @@ const deleteHomework = async (id: number, task: string) => {
       }
     })
 }
+
+const percentsOfDoneHomeworks = computed(() => Object.values(days.value).map(day => {
+  return Math.round((Object.values(day).flat(1).filter(t => t.done).length / Object.values(day).flat(1).length) * 100)
+}))
+
+watch(percentsOfDoneHomeworks, (newData, oldData) => {
+  newData.forEach((p, i) => {
+    if (p !== oldData[i]) {
+      if (p === 100) {
+        confetti({
+          origin: { y: 0.8 },
+        })
+      }
+    }
+  })
+})
+
+const percentOfDoneHomework = (day: { [key: string]: ARHomework[] }) => (
+  Math.round((Object.values(day).flat(1).filter(t => t.done).length / Object.values(day).flat(1).length) * 100)
+)
 </script>
 
 <template>
@@ -211,7 +234,18 @@ const deleteHomework = async (id: number, task: string) => {
                       <div class="mt-5">
                         <h5 class="bg-gray-100 dark:bg-zinc-800 py-2 px-4 -mx-1 rounded-full flex justify-between items-center">
                           <span>{{ (date as string).split('.').slice(0, 2).join('.') }}</span>
-                          <span class="inline-flex items-center rounded-full bg-gray-200/70 dark:bg-zinc-700/70 px-2 text-sm font-medium text-gray-600 dark:text-zinc-300/80">{{ capitalizeFirstLetter(timeAgo(new Date(parseInt((date as string).split('.')[2]), parseInt((date as string).split('.')[1]) - 1, parseInt((date as string).split('.')[0])))) }}</span>
+                          <div class="flex items-center gap-2">
+                            <span class="inline-flex items-center rounded-full bg-gray-200/70 dark:bg-zinc-700/70 px-2 text-sm font-medium text-gray-600 dark:text-zinc-300/80">{{ capitalizeFirstLetter(timeAgo(new Date(parseInt((date as string).split('.')[2]), parseInt((date as string).split('.')[1]) - 1, parseInt((date as string).split('.')[0])))) }}</span>
+                            <div class="relative">
+                              <div class="absolute inset-0.25 flex justify-center items-center rounded-full bg-green-600 z-10 transition-all ease-out duration-300" :class="percentOfDoneHomework(day) === 100 ? '' : 'scale-0'">
+                                <CheckIcon class="h-4 w-4 text-white stroke-[3] -ml-0.25" aria-hidden="true" />
+                              </div>
+                              <svg class="-rotate-90" width="24" height="24" viewBox="0 0 24 24">
+                                <circle class="stroke-gray-300/80 dark:stroke-zinc-700" cx="12" cy="12" r="10" fill="none" stroke-width="3" />
+                                <circle class="stroke-green-600 [stroke-dasharray:100] transition-all ease-out duration-300" :style="{ strokeDashoffset: `calc(100 - ${percentOfDoneHomework(day)})` }" cx="12" cy="12" r="10" fill="none" stroke-width="3" pathLength="100" />
+                              </svg>
+                            </div>
+                          </div>
                         </h5>
                       </div>
 
@@ -234,10 +268,10 @@ const deleteHomework = async (id: number, task: string) => {
                                       <span :id="task.id + '-description'" class="max-w-full truncate text-base text-gray-500/90 dark:text-zinc-400/90"><span v-if="task.description">&nbsp;</span>{{ task.description }}</span>
                                     </div>
                                     <div class="shrink-0 flex gap-1 group h-6 overflow-hidden transition-all ease-out duration-300 rounded-full" :class="deleteButtons[task.id] === true ? 'w-13 ring ring-gray-200 dark:ring-zinc-700' : 'w-6 hover:w-13 hover:ring hover:ring-gray-200 dark:hover:ring-zinc-700'">
-                                      <button @click="toggleDeleteButton(task.id)" class="h-6 w-6 flex shrink-0">
+                                      <button @click="toggleDeleteButton(task.id)" class="h-6 w-6 flex shrink-0 rounded-full" tabindex="-1">
                                         <img class="h-full w-full rounded-full bg-gray-300 dark:bg-zinc-700 object-cover" :src="task.created_by.picture" :alt="task.created_by.name">
                                       </button>
-                                      <button @click="deleteHomework(task.id, `${task.text}${task.description ? ` ${task.description}` : ''}`)" class="h-6 w-6 flex shrink-0 justify-center items-center rounded-full bg-red-600 text-white transition-all ease-out duration-300">
+                                      <button @click="deleteHomework(task.id, `${task.text}${task.description ? ` ${task.description}` : ''}`)" class="h-6 w-6 flex shrink-0 justify-center items-center rounded-full bg-red-600 text-white transition-all ease-out duration-300" tabindex="-1">
                                         <TrashIcon v-if="!deleting[task.id]" class="h-4.5 w-4.h-4.5" />
                                         <IconLoader v-else class="w-4.5 h-4.5 motion-safe:animate-loader" />
                                       </button>
