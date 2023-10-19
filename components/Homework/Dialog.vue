@@ -142,8 +142,11 @@ const toggleDeleteButton = (id: number) => {
 const deleting = ref<boolean[]>([])
 
 const deleteHomework = async (id: number, task: string) => {
-  if (!confirm(t('homework.delete', { task }))) return
   deleting.value[id] = true
+  if (!confirm(t('homework.delete', { task }))) {
+    deleting.value[id] = false
+    return
+  }
   const start = new Date().getTime()
 
   await $fetch<apiResponse<any>>(`/classes/${currentClass.value?.id}/homework/${id}`, {
@@ -230,8 +233,13 @@ const deleteHomework = async (id: number, task: string) => {
                                     <span :id="task.id + '-description'" class="max-w-full truncate text-base text-gray-500/90 dark:text-zinc-400/90"><span v-if="task.description">&nbsp;</span>{{ task.description }}</span>
                                   </div>
                                   <div class="shrink-0 flex gap-1 group h-6 overflow-hidden transition-all ease-out duration-300 rounded-full" :class="deleteButtons[task.id] === true ? 'w-13 ring ring-gray-200 dark:ring-zinc-700' : 'w-6 hover:w-13 hover:ring hover:ring-gray-200 dark:hover:ring-zinc-700'">
-                                    <button @click="toggleDeleteButton(task.id)" class="h-6 w-6 flex shrink-0"><img class="h-full w-full rounded-full bg-gray-300 dark:bg-zinc-700 object-cover" :src="task.created_by.picture" :alt="task.created_by.name"></button>
-                                    <button @click="deleteHomework(task.id, `${task.text}${task.description ? ` ${task.description}` : ''}`)" class="h-6 w-6 flex shrink-0 justify-center items-center rounded-full bg-red-600 text-white transition-all ease-out duration-300"><TrashIcon class="h-4.5 w-4.h-4.5" /></button>
+                                    <button @click="toggleDeleteButton(task.id)" class="h-6 w-6 flex shrink-0">
+                                      <img class="h-full w-full rounded-full bg-gray-300 dark:bg-zinc-700 object-cover" :src="task.created_by.picture" :alt="task.created_by.name">
+                                    </button>
+                                    <button @click="deleteHomework(task.id, `${task.text}${task.description ? ` ${task.description}` : ''}`)" class="h-6 w-6 flex shrink-0 justify-center items-center rounded-full bg-red-600 text-white transition-all ease-out duration-300">
+                                      <TrashIcon v-if="!deleting[task.id]" class="h-4.5 w-4.h-4.5" />
+                                      <IconLoader v-else class="w-4.5 h-4.5 motion-safe:animate-loader" />
+                                    </button>
                                   </div>
                                 </div>
                               </li>
