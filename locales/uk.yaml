@@ -126,6 +126,7 @@ general:
   yesterday: Вчора
   today: Сьогодні
   tomorrow: Завтра
+  wip: Сторінка в розробці
 
 new class:
   title: Новий клас

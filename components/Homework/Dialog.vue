@@ -96,8 +96,8 @@ const submit = async () => {
       'Authorization': 'Bearer ' + useCookie('token').value,
     },
     body: {
-      text: newHomework.text,
-      description: newHomework.description,
+      text: newHomework.text.trim(),
+      description: newHomework.description.trim(),
       lesson: newHomework.lesson.id,
       date: `${newHomework.date.getFullYear()}-${newHomework.date.getMonth() + 1}-${newHomework.date.getDate()}`,
       public: newHomework.public,
@@ -310,7 +310,7 @@ const percentOfDoneHomework = (day: { [key: string]: ARHomework[] }) => (
                         </SwitchGroup>
                       </div>
                     </TransitionCollapse>
-                    <MainButton class="w-full z-10 rounded-b-2xl rounded-t-none hover:z-20" :class="newHomework.text ? '' : 'bg-white dark:bg-zinc-900 ring-gray-200 dark:ring-zinc-700'" :variant="newHomework.text ? 'solid' : 'outline'" :color="newHomework.text ? 'green' : 'zinc'" type="submit" :disabled="!newHomework.text">
+                    <MainButton class="w-full z-10 rounded-b-2xl rounded-t-none hover:z-20" :class="newHomework.text.trim() ? '' : 'bg-white dark:bg-zinc-900 ring-gray-200 dark:ring-zinc-700'" :variant="newHomework.text.trim() ? 'solid' : 'outline'" :color="newHomework.text.trim() ? 'green' : 'zinc'" type="submit" :disabled="!newHomework.text.trim()">
                       <span v-if="!pending">{{ $t('homework.add') }}</span>
                       <IconLoader v-else class="my-0.5 w-5 h-5 motion-safe:animate-loader" />
                     </MainButton>

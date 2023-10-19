@@ -44,9 +44,36 @@ const currentLesson = useCurrentLesson()
   </div>
 
   <div class="mt-6 px-4 sm:px-6 lg:px-8">
-    <div v-if="currentClass?.schedule?.filter(i => i?.lessons?.length)?.length" class="mt-3 mb-10 grid grid-cols-1 gap-6 sm:gap-7 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-      <ScheduleItem v-for="(item, index) in currentClass.schedule" :key="item.day" :day="item.day" :lessons="item.lessons" />
+
+    <div class="bg-zinc-800 p-2 rounded-3xl">
+      <div v-if="currentClass?.schedule[new Date().getDay() - 1].lessons.length">
+        <div class="pl-3 pr-2.5 font-bold mb-2 uppercase text-xl flex items-center justify-between">
+          {{ $t(`days.${currentClass?.schedule[new Date().getDay() - 1].day}`) }}
+          <HomeworkDialog class="text-green-600 flex items-center gap-1 text-base" :day="currentClass?.schedule[new Date().getDay() - 1].day">
+            <QueueListIcon class="h-5.5 w-5.5" />
+            {{ $t('menu.homework') }}
+          </HomeworkDialog>
+        </div>
+        <div class="overflow-hidden bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-700 rounded-2xl backdrop-blur-sm shadow-md">
+          <div class="flex flex-col">
+            <transition-group enter-from-class="!translate-x-[calc(100%+40px)] scale-y-0 !h-0" leave-to-class="!-translate-x-[calc(100%+40px)] scale-y-0 !h-0">
+              <div v-for="(lesson, index) in currentClass?.schedule[new Date().getDay() - 1].lessons" :key="lesson.uuid" class="flex items-center justify-between gap-1.5 py-1.5 px-3 transition-all ease-out duration-300" :class="index % 2 === 0 ? undefined : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80'">
+                <div class="grid grid-cols-[1fr_auto_auto] items-center gap-2">
+                  <div class="text-base text-gray-400 dark:text-zinc-400 w-2.5">{{ index + 1 }}.</div>
+                  <component :is="'Emoji' + lesson.icon" class="h-4.5 w-4.5 shrink-0" />
+                  <div class="text-lg truncate">{{ lesson.name }}</div>
+                </div>
+              </div>
+            </transition-group>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <div v-if="currentClass?.schedule?.filter(i => i?.lessons?.length)?.length" class="mt-10 mb-10 grid grid-cols-1 gap-6 sm:gap-7 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+      <ScheduleItem v-for="item in currentClass.schedule.filter((d, i) => i !== new Date().getDay() - 1)" :key="item.day" :day="item.day" :lessons="item.lessons" />
+    </div>
+
     <div v-else-if="selectedClass" class="py-16 sm:py-32 text-center">
       <QueueListIcon class="mx-auto h-12 w-12 text-gray-400 dark:text-zinc-500 stroke-1" />
       <h3 class="mt-2 font-medium text-gray-900 dark:text-white">{{ $t('empty.lessons.title') }}</h3>

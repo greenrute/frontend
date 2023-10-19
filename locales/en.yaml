@@ -126,6 +126,7 @@ general:
   yesterday: Yesterday
   today: Today
   tomorrow: Tomorrow
+  wip: Page under development
 
 new class:
   title: New class
