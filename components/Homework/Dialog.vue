@@ -188,7 +188,7 @@ const percentsOfDoneHomeworks = computed(() => Object.values(days.value).map(day
 
 watch(percentsOfDoneHomeworks, (newData, oldData) => {
   newData.forEach((p, i) => {
-    if (p !== oldData[i]) {
+    if ((oldData[i] || oldData[i] === 0) && p !== oldData[i]) {
       if (p === 100) {
         confetti({
           origin: { y: 0.8 },
