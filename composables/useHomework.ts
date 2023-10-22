@@ -1,14 +1,11 @@
 import confetti from 'canvas-confetti'
 
-export const useHomework = async (day: DayName | null = null) => {
+export const useHomework = async (day: DayName) => {
   const { locale, t } = useI18n()
   const token = useCookie('token')
   const config = useRuntimeConfig()
   const currentClass = useCurrentClass()
-
-  if (day === null) {
-    day = 'monday'
-  }
+  const currentLesson = useCurrentLesson(true, getNearestDay(getDayIndex(day)))
 
   const { data, refresh } = await useFetch<apiResponse<{ homeworks: { [key: string]: { [key: string]: ARHomework[] } } }>>(`/classes/${currentClass.value?.id}/homework/by-day/${getDayIndex(day)}`, {
     method: 'GET',
@@ -24,7 +21,19 @@ export const useHomework = async (day: DayName | null = null) => {
     const B = parseInt(b.split('.').reverse().join(''))
     return A > B ? 1 : A < B ? -1 : 0
   }).reduce((object, key) => {
-    (object as any)[key] = data.value?.data?.homeworks[key]
+    (object as any)[key] = Object.keys(data.value?.data?.homeworks[key] ?? {}).sort((a, b) => {
+      const A = data.value?.data?.homeworks[key][a]
+      const B = data.value?.data?.homeworks[key][b]
+      if (!A || !B) return 0
+
+      const C = Math.round((A.filter(t => t.done).length / A.length) * 100)
+      const D = Math.round((B.filter(t => t.done).length / B.length) * 100)
+
+      return C > D ? 1 : C < D ? -1 : 0
+    }).reduce((object2, key2) => {
+      (object2 as any)[key2] = data.value?.data?.homeworks[key][key2]
+      return object2
+    }, {})
     return object
   }, {}))
 
@@ -68,5 +77,62 @@ export const useHomework = async (day: DayName | null = null) => {
       })
   }
 
-  return { homework, refresh, percentsOfDoneHomeworks, percentOfDoneHomework, changeTaskStatus }
+  const pending = ref<boolean>(false)
+
+  const add = async (homework: NewHomework) => {
+    pending.value = true
+    const start = new Date().getTime()
+  
+    await $fetch<apiResponse<any>>(`/classes/${currentClass.value?.id}/homework`, {
+      method: 'POST',
+      headers: {
+        'Accept-Language': locale.value,
+        'Authorization': 'Bearer ' + useCookie('token').value,
+      },
+      body: {
+        text: homework.text.trim(),
+        description: homework.description.trim(),
+        lesson: homework.lesson.id,
+        date: `${homework.date.getFullYear()}-${homework.date.getMonth() + 1}-${homework.date.getDate()}`,
+        public: homework.public,
+      },
+      baseURL: useRuntimeConfig().public.apiBase,
+    })
+      .then(() => {
+        homework.text = ''
+        homework.description = ''
+        homework.lesson = currentLesson.value.lessonDetails as Lesson
+        homework.date = getNearestDay(getDayIndex(day as DayName))
+        homework.public = true
+  
+        refresh()
+      })
+      .catch(error => {
+        pushNotification({
+          status: 'error',
+          message: error.data?.message || t('could not connect to the server'),
+        })
+      })
+      .finally(() => {
+        const difference = new Date().getTime() - start
+  
+        if (difference > 300) {
+          pending.value = false
+        } else {
+          setTimeout(() => {
+            pending.value = false
+          }, 300 - difference)
+        }
+      })
+  }
+
+  return {
+    homework,
+    refresh,
+    percentsOfDoneHomeworks,
+    percentOfDoneHomework,
+    changeTaskStatus,
+    pending,
+    add,
+  }
 }

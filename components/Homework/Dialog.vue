@@ -18,18 +18,23 @@ const token = useCookie('token')
 const config = useRuntimeConfig()
 const currentClass = useCurrentClass()
 const currentLesson = useCurrentLesson(true, getNearestDay(getDayIndex(props.day)))
+const {
+  homework: days,
+  refresh,
+  percentOfDoneHomework,
+  changeTaskStatus,
+  add,
+  pending,
+} = await useHomework(props.day)
 
 const open = ref(false)
-
-const { homework: days, refresh, percentOfDoneHomework, changeTaskStatus } = await useHomework(props.day)
-
 watch(open, newValue => {
   if (newValue) refresh()
 })
 
 const showOptions = ref<boolean>(false)
 
-const newHomework = reactive({
+const newHomework = reactive<NewHomework>({
   text: '',
   description: '',
   lesson: currentLesson.value.lessonDetails as Lesson,
@@ -37,53 +42,8 @@ const newHomework = reactive({
   public: true,
 })
 
-const pending = ref(false)
-
 const submit = async () => {
-  pending.value = true
-  const start = new Date().getTime()
-
-  await $fetch<apiResponse<any>>(`/classes/${currentClass.value?.id}/homework`, {
-    method: 'POST',
-    headers: {
-      'Accept-Language': locale.value,
-      'Authorization': 'Bearer ' + useCookie('token').value,
-    },
-    body: {
-      text: newHomework.text.trim(),
-      description: newHomework.description.trim(),
-      lesson: newHomework.lesson.id,
-      date: `${newHomework.date.getFullYear()}-${newHomework.date.getMonth() + 1}-${newHomework.date.getDate()}`,
-      public: newHomework.public,
-    },
-    baseURL: useRuntimeConfig().public.apiBase,
-  })
-    .then(() => {
-      newHomework.text = ''
-      newHomework.description = ''
-      newHomework.lesson = currentLesson.value.lessonDetails as Lesson
-      newHomework.date = getNearestDay(getDayIndex(props.day))
-      newHomework.public = true
-
-      refresh()
-    })
-    .catch(error => {
-      pushNotification({
-        status: 'error',
-        message: error.data?.message || t('could not connect to the server'),
-      })
-    })
-    .finally(() => {
-      const difference = new Date().getTime() - start
-
-      if (difference > 300) {
-        pending.value = false
-      } else {
-        setTimeout(() => {
-          pending.value = false
-        }, 300 - difference)
-      }
-    })
+  await add(newHomework)
 }
 
 const deleteButtons = ref<boolean[]>([])
