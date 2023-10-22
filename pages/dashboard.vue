@@ -62,7 +62,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
 
   <div class="mt-6 px-4 sm:px-6 lg:px-8">
 
-    <div class="grid grid-cols-1 sm:auto-rows-fr gap-6 sm:gap-7 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3" v-if="currentClass?.schedule[new Date().getDay() - 1]?.lessons.length">
+    <div class="grid grid-cols-1 sm:auto-rows-fr gap-6 sm:gap-7 sm:grid-cols-2 lg:grid-cols-3" v-if="currentClass?.schedule[new Date().getDay() - 1]?.lessons.length">
       <div class="bg-gray-200/30 dark:bg-zinc-700/30 p-2 pt-1.5 rounded-4xl shadow-xl overflow-hidden">
         <div class="h-full">
           <div class="pl-3 pr-2.5 font-medium mb-3 text-lg flex items-center justify-between">
@@ -88,7 +88,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
         </div>
       </div>
 
-      <div class="relative bg-gray-200/30 dark:bg-zinc-700/20 rounded-4xl shadow-xl overflow-hidden">
+      <div class="relative bg-gray-200/30 dark:bg-zinc-700/20 rounded-4xl shadow-xl overflow-hidden sm:max-lg:col-span-2">
         <div v-if="!Object.keys(homework).length" class="h-full py-10 flex justify-center items-center gap-1 text-lg text-gray-600 dark:text-zinc-400">
           <CheckCircleIcon class="w-6 h-6" />
           {{ $t('homework.empty') }}
