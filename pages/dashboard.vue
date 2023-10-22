@@ -88,7 +88,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
         </div>
       </div>
 
-      <div class="relative bg-gray-200/30 dark:bg-zinc-700/20 rounded-4xl shadow-xl overflow-hidden sm:max-lg:col-span-2">
+      <div class="relative bg-gray-200/30 dark:bg-zinc-700/20 rounded-4xl shadow-xl overflow-hidden">
         <div v-if="!Object.keys(homework).length" class="h-full py-10 flex justify-center items-center gap-1 text-lg text-gray-600 dark:text-zinc-400">
           <CheckCircleIcon class="w-6 h-6" />
           {{ $t('homework.empty') }}
@@ -145,7 +145,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
         </div>
       </div>
 
-      <div class="bg-gray-200/30 dark:bg-zinc-700/30 rounded-4xl shadow-xl" ref="addHomerworkEl">
+      <div class="bg-gray-200/30 dark:bg-zinc-700/30 rounded-4xl shadow-xl sm:max-lg:col-span-2" ref="addHomerworkEl">
         <MainForm @validated="submit" class="rounded-4xl h-full flex flex-col items-stretch [&_*:has(:focus)]:!z-20 [&_*:has(.on-top)]:!z-20 [&>div:nth-child(2):has(:focus)]:!z-40 [&>div:nth-child(2):has(.on-top)]:!z-40 [&.is-validated_*:has(:invalid)]:!z-30">
           <div>
             <MainTextInput class="!w-[calc(100%+2px)] !text-base !bg-transparent border-x-transparent dark:border-x-transparent border-t-transparent dark:border-t-transparent !rounded-t-4xl !rounded-b-none !rounded-r-none !ring-inset -mx-0.25 -mt-0.25" v-model="newHomework.text" :placeholder="$t('homework.placeholders.task')" required />
