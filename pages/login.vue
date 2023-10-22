@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import {ArrowSmallRightIcon} from '@heroicons/vue/20/solid'
-import {Ref} from 'vue'
+import { ArrowSmallRightIcon } from '@heroicons/vue/20/solid'
 
 definePageMeta({
   layout: 'main',
@@ -11,10 +10,10 @@ const { t, locale } = useI18n()
 const localePath = useLocalePath()
 
 const googleSignIn = useGoogleSignIn()
-const googleSignInButton: Ref<HTMLDivElement | null> = ref(null)
+const googleSignInButton = ref<HTMLDivElement | null>(null)
 
-const email: Ref<{ input: HTMLInputElement } | null> = ref(null)
-const password: Ref<{ input: HTMLInputElement } | null> = ref(null)
+const email = ref<{ input: HTMLInputElement } | null>(null)
+const password = ref<{ input: HTMLInputElement } | null>(null)
 
 onMounted(() => {
   googleSignIn.render(googleSignInButton, 'signin_with')

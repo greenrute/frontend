@@ -1,5 +1,3 @@
-import {Ref} from 'vue'
-
 interface GSIResponse {
   clientId: string,
   client_id: string,

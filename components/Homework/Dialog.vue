@@ -9,8 +9,7 @@ import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle, Swit
 import { CheckCircleIcon, TrashIcon } from '@heroicons/vue/20/solid'
 import { ChevronLeftIcon } from '@heroicons/vue/24/solid'
 import { CheckIcon } from '@heroicons/vue/24/outline'
-// @ts-ignore
-import confetti from 'canvas-confetti'
+import { isIOS } from '@vueuse/core'
 
 const props = defineProps<{ day: DayName }>()
 
@@ -18,60 +17,15 @@ const { locale, t } = useI18n()
 const token = useCookie('token')
 const config = useRuntimeConfig()
 const currentClass = useCurrentClass()
-const interval = ref<NodeJS.Timeout | undefined>(undefined)
 const currentLesson = useCurrentLesson(true, getNearestDay(getDayIndex(props.day)))
-
-onUnmounted(() => {
-  clearInterval(interval.value)
-})
 
 const open = ref(false)
 
-const { data: homework, refresh } = await useFetch<apiResponse<{ homeworks: { [key: string]: { [key: string]: ARHomework[] } } }>>(`/classes/${currentClass.value?.id}/homework/by-day/${getDayIndex(props.day)}`, {
-  method: 'GET',
-  headers: {
-    'Accept-Language': locale.value,
-    'Authorization': 'Bearer ' + token.value,
-  },
-  baseURL: config.public.apiBase,
-})
-
-onMounted(() => {
-  interval.value = setInterval(() => refresh(), 1000)
-})
+const { homework: days, refresh, percentOfDoneHomework, changeTaskStatus } = await useHomework(props.day)
 
 watch(open, newValue => {
   if (newValue) refresh()
 })
-
-const days = computed<{ [key: string]: { [key: string]: ARHomework[] } }>(() => Object.keys(homework.value?.data?.homeworks ?? {}).sort((a, b) => {
-  const A = parseInt(a.split('.').reverse().join(''))
-  const B = parseInt(b.split('.').reverse().join(''))
-  return A > B ? 1 : A < B ? -1 : 0
-}).reduce((object, key) => {
-  (object as any)[key] = homework.value?.data?.homeworks[key]
-  return object
-}, {}))
-
-const changeTaskStatus = async (tastId: number) => {
-  await $fetch(`/classes/${currentClass.value?.id}/homework/${tastId}/status`, {
-    method: 'GET',
-    headers: {
-      'Accept-Language': locale.value,
-      'Authorization': 'Bearer ' + token.value,
-    },
-    baseURL: config.public.apiBase,
-  })
-    .then(() => {
-      refresh()
-    })
-    .catch(error => {
-      pushNotification({
-        status: 'error',
-        message: error.data?.message || t('could not connect to the server'),
-      })
-    })
-}
 
 const showOptions = ref<boolean>(false)
 
@@ -181,26 +135,6 @@ const deleteHomework = async (id: number, task: string) => {
       }
     })
 }
-
-const percentsOfDoneHomeworks = computed(() => Object.values(days.value).map(day => {
-  return Math.round((Object.values(day).flat(1).filter(t => t.done).length / Object.values(day).flat(1).length) * 100)
-}))
-
-watch(percentsOfDoneHomeworks, (newData, oldData) => {
-  newData.forEach((p, i) => {
-    if ((oldData[i] || oldData[i] === 0) && p !== oldData[i]) {
-      if (p === 100) {
-        confetti({
-          origin: { y: 0.8 },
-        })
-      }
-    }
-  })
-})
-
-const percentOfDoneHomework = (day: { [key: string]: ARHomework[] }) => (
-  Math.round((Object.values(day).flat(1).filter(t => t.done).length / Object.values(day).flat(1).length) * 100)
-)
 </script>
 
 <template>
@@ -215,7 +149,7 @@ const percentOfDoneHomework = (day: { [key: string]: ARHomework[] }) => (
       </TransitionChild>
 
       <div class="fixed inset-0 overflow-y-auto">
-        <div class="flex min-h-full lg:items-center justify-center p-4 text-center" :class="Object.keys(days).length ? 'items-end' : 'items-start'">
+        <div class="flex min-h-full sm:items-center justify-center p-4 text-center" :class="isIOS && Object.keys(days).length ? 'items-start' : 'items-end'">
           <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0 scale-95" enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
             <DialogPanel class="w-full max-w-md transform rounded-2xl bg-white dark:bg-zinc-900 p-6 text-left align-middle shadow-xl transition-all">
               <div>

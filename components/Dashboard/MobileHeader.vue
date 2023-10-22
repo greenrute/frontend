@@ -93,8 +93,8 @@ const switchTheme = () => {
       </div>
     </template>
     <template v-else-if="currentClass && route.name?.toString()?.includes('dashboard')">
-      <div class="max-sm:hidden w-full max-w-[11.25rem] flex justify-end shrink-0">
-        <MainButton variant="outline" disabled class="w-full !opacity-100 my-2 ml-2 px-0">{{ currentLesson.timeToEnd }}</MainButton>
+      <div class="max-sm:hidden w-max flex justify-end shrink-0">
+        <MainButton variant="outline" disabled class="!opacity-100 my-2 ml-2 px-0">{{ currentLesson.timeToEnd }}</MainButton>
       </div>
       <div class="sm:hidden flex fixed bottom-4 left-1/2 lg:left-[calc(50%+8rem)] -translate-x-1/2">
         <MainButton variant="solid" :color="currentLesson.active ? 'adaptive' : 'reverse'" disabled class="!opacity-100 !py-1.5 whitespace-nowrap shadow-md dark:shadow-zinc-800/30 transition-all duration-300 ease-out">{{ currentLesson.timeToEnd }}</MainButton>
