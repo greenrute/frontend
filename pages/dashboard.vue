@@ -62,7 +62,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
 
   <div class="mt-6 px-4 sm:px-6 lg:px-8">
 
-    <div class="grid grid-cols-1 sm:auto-rows-fr gap-6 sm:gap-7 sm:grid-cols-2 lg:grid-cols-3" v-if="currentClass?.schedule[new Date().getDay() - 1]?.lessons.length">
+    <div class="grid grid-cols-1 sm:auto-rows-fr gap-6 sm:gap-7 sm:grid-cols-2 md:grid-cols-3" v-if="currentClass?.schedule[new Date().getDay() - 1]?.lessons.length">
       <div class="bg-gray-200/30 dark:bg-zinc-700/30 p-2 pt-1.5 rounded-4xl shadow-xl overflow-hidden">
         <div class="h-full">
           <div class="pl-3 pr-2.5 font-medium mb-3 text-lg flex items-center justify-between">
@@ -145,7 +145,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
         </div>
       </div>
 
-      <div class="bg-gray-200/30 dark:bg-zinc-700/30 rounded-4xl shadow-xl sm:max-lg:col-span-2" ref="addHomerworkEl">
+      <div class="bg-gray-200/30 dark:bg-zinc-700/30 rounded-4xl shadow-xl sm:max-md:col-span-2" ref="addHomerworkEl">
         <MainForm @validated="submit" class="rounded-4xl h-full flex flex-col items-stretch [&_*:has(:focus)]:!z-20 [&_*:has(.on-top)]:!z-20 [&>div:nth-child(2):has(:focus)]:!z-40 [&>div:nth-child(2):has(.on-top)]:!z-40 [&.is-validated_*:has(:invalid)]:!z-30">
           <div>
             <MainTextInput class="!w-[calc(100%+2px)] !text-base !bg-transparent border-x-transparent dark:border-x-transparent border-t-transparent dark:border-t-transparent !rounded-t-4xl !rounded-b-none !rounded-r-none !ring-inset -mx-0.25 -mt-0.25" v-model="newHomework.text" :placeholder="$t('homework.placeholders.task')" required />
