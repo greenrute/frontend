@@ -113,7 +113,7 @@ export const useCurrentLesson = (
     })
 
 
-    if (withLessonDetails && currentLessonWithDetails === null) {
+    if (withLessonDetails && !currentLessonWithDetails) {
       if (now.value.getTime() < firstLessonLimits.start) {
         return {
           active: false,
