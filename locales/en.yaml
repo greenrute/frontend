@@ -78,7 +78,7 @@ menu:
     full: Справді видалити клас?
 
 actions:
-  change theme: Change theme
+  change theme: Change appearance
   change language: Change language
   open sidebar: Open sidebar
   open user menu: Open user menu
@@ -177,7 +177,7 @@ people:
   actions:
     add member: Add person to class
     change role: Change rights
-    delete member: Видалити учасника
+    delete member: Delete member
     delete member full: Really delete member {name}?
     select new role: Select a new role
 

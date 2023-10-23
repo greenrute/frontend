@@ -1,0 +1,203 @@
+# Startseite
+home: Startseite
+home title:
+  start: Ein neues
+  highlight: Tagebuch
+  middle: auf Ihrem
+  end: Smartphone
+home description: Gemeinsamer Stundenplan, Hausaufgaben, Informationsaustausch. App für Android und iOS, viele Optionen zur individuellen Gestaltung des Tagebuchs.
+
+# Menü der Hauptseite
+menu features: Funktionen
+menu testimonials: Bewertungen
+menu pricing: Preise
+
+# Авторизація
+login: Anmeldung | Anmelden
+register: Registrierung | Registrieren | Melden Sie sich an
+logout: Eingang | Hinausgehen
+get started: Registrieren
+for free: kostenlos
+
+sign in to your account: Melden Sie sich bei Ihrem Konto an
+get started for free: Registrieren Sie sich kostenlos
+don't have an account: Sie haben noch kein Konto?
+already registered: Bereits registriert?
+to your account: zu deinem Konto
+
+name: Name
+email address: E-Mail-Adresse
+password: Passwort
+
+optional: Optional
+
+google sign in:
+  assign or deny:
+    title: Ein Google-Konto verknüpfen?
+    description: Dieses Konto wurde mit einem Passwort registriert. Wählen Sie, ob Sie dieses Google-Konto mit Ihrem GreenRute-Konto verknüpfen oder nichts unternehmen möchten.
+  create or deny:
+    title: Ein Konto erstellen?
+    description: Dieses Google-Konto ist mit keinem GreenRute-Konto verknüpft. Sie können entweder ein Konto bei Google erstellen oder nichts unternehmen.
+
+  create: Ein Konto erstellen
+  assign: Verlinken
+  deny: Nichts tun
+
+# Помилки авторизації
+check that all fields are filled in correctly: überprüfen Sie, ob alle Felder korrekt ausgefüllt sind
+
+please enter a valid email address: Bitte geben Sie eine gültige E-Mail-Adresse ein
+the password must be at least n characters long: Keine Einschränkungen | Das Passwort muss mindestens {n} Zeichen lang sein
+the name must not be shorter than n characters: Keine Einschränkungen | Der Name darf nicht kürzer als {n} Zeichen sein
+the title must not be shorter than n characters: Keine Einschränkungen | Der Titel muss mindestens {n} Zeichen lang sein
+the description must not be shorter than n characters: Keine Einschränkungen | Die Beschreibung darf nicht kürzer als {n} Zeichen sein
+
+# Помилки з'єднання
+could not connect to the server: konnte keine Verbindung zum Server herstellen
+
+# Панель
+menu:
+  view profile: Mein Konto
+  settings: Einstellungen
+  notifications: Benachrichtigungen
+  get app: Mobile Applikation
+  support: Unterstützung
+  search: Suchen
+
+  schedule: Zeitplan
+  homework: Hausaufgaben
+  people: Menschen
+
+  my classes: Meine Klassen
+  options: Zusatzoptionen
+  edit schedule: Zeitplan
+  edit timetable: Anrufplan
+  edit class info: Klasseninformationen bearbeiten
+  delete class:
+    short: Klasse löschen
+    full: Die Klasse wirklich löschen?
+
+actions:
+  change theme: Aussehen verändern
+  change language: Sprache ändern
+  open sidebar: Seitenleiste öffnen
+  open user menu: Benutzermenü öffnen
+
+empty:
+  lessons:
+    title: Kein Unterricht
+    description: Beginnen Sie damit, Lektionen zu Ihrem Stundenplan hinzuzufügen.
+    button: Lektionen hinzufügen
+  classes:
+    title: Keine Klassen
+    description: Beginnen Sie mit der Erstellung einer neuen Klasse.
+    description alt: Erstellen Sie eine Klasse, um loszulegen
+    button: Eine Klasse erstellen
+    select:
+      title: Wählen Sie die Standard-Klasse
+      description: Wählen Sie die Klasse aus, die auf der Hauptseite angezeigt werden soll.
+      button: Wählen Sie eine Klasse aus
+  not available yet: Diese Funktion ist noch nicht verfügbar
+  day off: Heute ist ein freier Tag
+  no lessons today: Heute findet kein Unterricht statt
+  unknown timetable: Der heutige Zeitplan ist unbekannt
+  lessons have not started yet: Der Unterricht hat noch nicht begonnen
+  lessons are already over: Der Unterricht ist bereits beendet
+  break now: Es ist jetzt eine Pause
+  time to end: "Bis zum Ende der Lektion: {n} Min."
+  time to end sec: "Bis zum Ende der Lektion: {n} Sek."
+
+welcome:
+  - title: Glückwunsch!
+    text: Sie haben sich erfolgreich bei GreenRute registriert. Wir möchten Ihnen einige Aspekte der Nutzung der Anwendung erläutern.
+  - title: Die Klasse ist das wichtigste strukturelle Glied von GreenRute
+    text: GreenRute besteht aus Klassen. Sie finden sie im linken Bereich <-. Sie können sie erstellen und an Kursen teilnehmen. Auf der Hauptseite können Sie auswählen, welche Klasse standardmäßig angezeigt wird.
+  - title: Gemeinsamer Stundenplan
+    text: Innerhalb der Kurse können Sie einen gemeinsamen Stundenplan und Hausaufgaben haben. Sie können Mitgliederrechte verwalten und auswählen, wer Aufgaben hinzufügen darf.
+
+general:
+  next: Weiter
+  close: Schließen
+  save: Speichern
+  create: Erstellen
+  select: Wählen
+  update: Aktualisieren
+  warning: Die Anwendung befindet sich derzeit in der aktiven Entwicklung. Ihr Konto oder Ihre Daten können verloren gehen
+  yesterday: Gestern
+  today: Heute
+  tomorrow: Morgen
+  wip: Seite in Entwicklung
+
+new class:
+  title: Neue Klasse
+  heading: Eine neue Klasse erstellen
+  name: Klassenname
+  description: Klassenbeschreibung
+  color: Klassenfarbe
+
+settings:
+  default class: Standardklasse
+  appearance: Aussehen
+  language: Sprache
+
+color modes:
+  system: System
+  light: Licht
+  dark: Dunkel
+
+days:
+  standard: Standard
+  sunday: Sonntag
+  monday: Montag
+  tuesday: Dienstag
+  wednesday: Mittwoch
+  thursday: Donnerstag
+  friday: Freitag
+  saturday: Samstag
+
+edit:
+  add lesson: Lektion hinzufügen
+  add: Hinzufügen
+  cancel: Abbrechen
+  select: Wählen
+  lesson name: Unterrichtsname
+  placeholder: Beginnen Sie mit der Eingabe des Unterrichtsnamens...
+  invalid: Bitte wählen Sie eine Unterrichtseinheit aus der Dropdown-Liste aus
+  class:
+    title: Klasseninformationen
+    button: Aktualisieren
+
+people:
+  students: Klassenkameradenliste
+  user role: Benutzer-Rolle
+  roles:
+    owner: Eigentümer
+    admin: Administrator
+    member: Mitglied
+  actions:
+    add member: Person zur Klasse hinzufügen
+    change role: Rechte ändern
+    delete member: Mitglied löschen
+    delete member full: Mitglied {Name} wirklich löschen?
+    select new role: Wählen Sie eine neue Rolle
+
+profile:
+  photo: Foto
+  general info: Allgemeine Informationen
+  сhange password: Kennwort ändern
+  old password: Aktuelles Passwort
+  new password: Neues Kennwort
+  confirm password: Confirm password
+  change picture: Ändern
+  drop here: Legen Sie das Foto hier ab
+  old password hint: Wenn Sie über Google registriert sind, lassen Sie dieses Feld leer
+  passwords do not match: Passwörter stimmen nicht überein
+
+homework:
+  empty: Keine Aufgaben
+  add: Hausaufgaben hinzufügen
+  placeholders:
+    task: "Eine Aufgabe, zum Beispiel: ein Gedicht lernen..."
+    description: "Beschreibung, zum Beispiel: auf S. 12..."
+  public: Für jeden
+  delete: Aufgabe „{task}“ wirklich löschen?

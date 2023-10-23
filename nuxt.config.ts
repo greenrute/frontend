@@ -28,6 +28,13 @@ export default defineNuxtConfig({
         file: 'en.yaml',
       },
       {
+        code: 'de',
+        iso: 'de-DE',
+        name: 'Deutsch',
+        icon: 'German',
+        file: 'de.yaml',
+      },
+      {
         code: 'uk',
         iso: 'uk-UA',
         name: 'Українська',

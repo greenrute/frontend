@@ -70,6 +70,34 @@ export const timeAgo = (date: Date) => {
     minute: (n: number) => `${n} ${n % 10 === 0 ? 'хвилин' : n % 100 > 4 && n % 100 < 20 ? 'хвилин' : n % 10 === 1 ? 'хвилину' : 'хвилини'}`,
     second: (n: number) => `${n} ${n % 10 === 0 ? 'секунд' : n % 100 > 4 && n % 100 < 20 ? 'секунд' : n % 10 === 1 ? 'секунду' : 'секунди'}`,
     invalid: '',
+  } : locale.value === 'de' ? {
+    justNow: 'soeben',
+    past: (n: string) => n.match(/\d/) ? `vor ${n}` : n,
+    future: (n: string) => n.match(/\d/) ? `in ${n}` : n,
+    month: (n: number, past: boolean) => n === 1
+      ? past
+        ? 'letzten Monat'
+        : 'nächsten Monat'
+      : `${n} Monaten`,
+    year: (n: number, past: boolean) => n === 1
+      ? past
+        ? 'letztes Jahr'
+        : 'nächstes Jahr'
+      : `${n} Jahren`,
+    day: (n: number, past: boolean) => n === 1
+      ? past
+        ? 'gestern'
+        : 'morgen'
+      : `${n} Tagen`,
+    week: (n: number, past: boolean) => n === 1
+      ? past
+        ? 'letzte Woche'
+        : 'nächste Woche'
+      : `${n} Wochen`,
+    hour: (n: number) => `${n} Stunden`,
+    minute: (n: number) => `${n} Minuten`,
+    second: (n: number) => `${n} Sekunden`,
+    invalid: '',
   } : {
     justNow: 'just now',
     past: (n: string) => n.match(/\d/) ? `${n} ago` : n,
