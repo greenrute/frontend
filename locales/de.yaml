@@ -12,7 +12,7 @@ menu features: Funktionen
 menu testimonials: Bewertungen
 menu pricing: Preise
 
-# Авторизація
+# Genehmigung
 login: Anmeldung | Anmelden
 register: Registrierung | Registrieren | Melden Sie sich an
 logout: Eingang | Hinausgehen
@@ -43,7 +43,7 @@ google sign in:
   assign: Verlinken
   deny: Nichts tun
 
-# Помилки авторизації
+# Autorisierungsfehler
 check that all fields are filled in correctly: überprüfen Sie, ob alle Felder korrekt ausgefüllt sind
 
 please enter a valid email address: Bitte geben Sie eine gültige E-Mail-Adresse ein
@@ -52,10 +52,10 @@ the name must not be shorter than n characters: Keine Einschränkungen | Der Nam
 the title must not be shorter than n characters: Keine Einschränkungen | Der Titel muss mindestens {n} Zeichen lang sein
 the description must not be shorter than n characters: Keine Einschränkungen | Die Beschreibung darf nicht kürzer als {n} Zeichen sein
 
-# Помилки з'єднання
+# Verbindungsfehler
 could not connect to the server: konnte keine Verbindung zum Server herstellen
 
-# Панель
+# Panel
 menu:
   view profile: Mein Konto
   settings: Einstellungen
