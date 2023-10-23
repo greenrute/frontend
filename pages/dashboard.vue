@@ -99,7 +99,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
       </div>
 
       <div class="relative bg-gray-200/30 dark:bg-zinc-700/20 rounded-4xl shadow-xl overflow-hidden">
-        <div v-if="!Object.keys(homework).length" class="h-full py-10 flex justify-center items-center gap-1 text-lg text-gray-600 dark:text-zinc-400">
+        <div v-if="!Object.keys(homework).length" class="h-full py-24 flex justify-center items-center gap-1 text-lg text-gray-600 dark:text-zinc-400">
           <CheckCircleIcon class="w-6 h-6" />
           {{ $t('homework.empty') }}
         </div>
