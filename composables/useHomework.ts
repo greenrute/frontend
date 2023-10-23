@@ -93,7 +93,7 @@ export const useHomework = async (day: DayName) => {
         text: homework.text.trim(),
         description: homework.description.trim(),
         lesson: homework.lesson.id,
-        date: `${homework.date.getFullYear()}-${homework.date.getMonth() + 1}-${homework.date.getDate()}`,
+        date: `${homework.date.getFullYear()}-${(homework.date.getMonth() + 1).toString().padStart(2, '0')}-${homework.date.getDate().toString().padStart(2, '0')}`,
         public: homework.public,
       },
       baseURL: useRuntimeConfig().public.apiBase,
