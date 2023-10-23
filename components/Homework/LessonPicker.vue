@@ -36,12 +36,12 @@ const filteredLessons = computed(() =>
             <li class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-800 dark:text-white" :class="active ? 'bg-gray-100 dark:bg-zinc-800' : ''">
               <div class="flex items-center">
                 <component :is="'Emoji' + lesson.icon" class="h-4 w-4 shrink-0" />
-                <span :class="['ml-3 truncate', selected && 'font-semibold']">
+                <span :class="['ml-3 truncate', lesson.uuid === modelValue.uuid && 'font-semibold']">
                   {{ lesson.name }}
                 </span>
               </div>
 
-              <span v-if="selected" :class="['absolute inset-y-0 right-0 flex items-center pr-4', active ? 'text-gray-800 dark:text-white' : 'text-green-600']">
+              <span v-if="lesson.uuid === modelValue.uuid" :class="['absolute inset-y-0 right-0 flex items-center pr-4', active ? 'text-gray-800 dark:text-white' : 'text-green-600']">
                 <CheckIcon class="h-5 w-5" aria-hidden="true" />
               </span>
             </li>

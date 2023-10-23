@@ -27,8 +27,10 @@ const classes = useState<apiResponseClass[]>('classes')
 const currentClass = useCurrentClass()
 const currentDay = computed(() => currentClass.value?.schedule[now.value.getDay() - 1])
 
+const homeworkDate = ref<Date>(getNearestDay(getDayIndex(currentDay.value?.day ?? 'monday')))
+
 const currentLesson = useCurrentLesson()
-const currentLessonDetails = useCurrentLesson(true)
+const currentLessonDetails = useCurrentLesson(true, homeworkDate)
 const { homework, percentOfDoneHomework, changeTaskStatus, pending, add } = await useHomework(currentDay.value?.day ?? 'monday')
 
 const newHomework = reactive<NewHomework>({
@@ -37,6 +39,13 @@ const newHomework = reactive<NewHomework>({
   lesson: currentLessonDetails.value.lessonDetails as Lesson,
   date: getNearestDay(getDayIndex(currentDay.value?.day ?? 'monday')),
   public: true,
+})
+
+watch(newHomework, newData => {
+  if (newData.date !== homeworkDate.value) {
+    homeworkDate.value = newData.date
+    newHomework.lesson = currentLessonDetails.value.lessonDetails as Lesson
+  }
 })
 
 const submit = async () => {
@@ -151,8 +160,8 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
           <div>
             <MainTextInput class="!w-[calc(100%+2px)] !text-base !bg-transparent border-x-transparent dark:border-x-transparent border-t-transparent dark:border-t-transparent !rounded-t-4xl !rounded-b-none !rounded-r-none !ring-inset -mx-0.25 -mt-0.25" v-model="newHomework.text" :placeholder="$t('homework.placeholders.task')" required />
             <MainTextInput class="!w-[calc(100%+2px)] !text-base !bg-transparent border-x-transparent dark:border-x-transparent !rounded-none -mx-0.25 -mt-0.25 !ring-inset" v-model="newHomework.description" :placeholder="$t('homework.placeholders.description')" />
-            <HomeworkDatePicker class="!w-[calc(100%+2px)] !text-base !bg-transparent border-x-transparent dark:border-x-transparent !rounded-none -mx-0.25 -mt-0.25 !ring-inset" v-model="newHomework.date" :day-index="getDayIndex(currentDay?.day ?? 'monday')" />
-            <HomeworkLessonPicker class="!w-[calc(100%+2px)] !text-base !bg-transparent border-x-transparent dark:border-x-transparent !rounded-none -mx-0.25 -mt-0.25 !ring-inset" v-model="newHomework.lesson" :day-index="getDayIndex(currentDay?.day ?? 'monday')" />
+            <HomeworkDatePicker class="!w-[calc(100%+2px)] !text-base !bg-transparent border-x-transparent dark:border-x-transparent !rounded-none -mx-0.25 -mt-0.25 !ring-inset" v-model="newHomework.date" :day-index="-1" />
+            <HomeworkLessonPicker class="!w-[calc(100%+2px)] !text-base !bg-transparent border-x-transparent dark:border-x-transparent !rounded-none -mx-0.25 -mt-0.25 !ring-inset" v-model="newHomework.lesson" :day-index="newHomework.date.getDay()" />
             <SwitchGroup as="div" class="flex items-center justify-between w-[calc(100%+2px)] rounded-none -mx-0.25 -mt-0.25 border border-x-transparent dark:border-x-transparent border-gray-200 dark:border-zinc-700 bg-transparent py-2 px-3" :class="Number(addHomerworkEl?.offsetHeight) > 301 ? 'border-b-transparent' : ''">
               <span class="flex flex-grow flex-col">
                 <SwitchLabel as="span" class="leading-6" passive>{{ $t('homework.public') }}</SwitchLabel>

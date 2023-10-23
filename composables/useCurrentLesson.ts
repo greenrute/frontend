@@ -20,13 +20,13 @@ const getLessonLimits = (r: { start: string, end: string }, c: Date): {
 
 export const useCurrentLesson = (
   withLessonDetails: boolean = false,
-  date: Date | null = null,
+  date: globalThis.Ref<Date> | null = null,
 ): ComputedRef<CurrentLesson> => {
   const currentClass = useCurrentClass()
   const reactiveNow = useNow({ interval: 1000 })
   let now: globalThis.ComputedRef<Date>
   if (date) {
-    now = computed(() => new Date(date.getFullYear(), date.getMonth(), date.getDate(), reactiveNow.value.getHours(), reactiveNow.value.getMinutes(), reactiveNow.value.getSeconds()))
+    now = computed(() => new Date(date.value.getFullYear(), date.value.getMonth(), date.value.getDate(), reactiveNow.value.getHours(), reactiveNow.value.getMinutes(), reactiveNow.value.getSeconds()))
   } else {
     now = computed(() => reactiveNow.value)
   }

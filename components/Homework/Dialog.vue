@@ -17,7 +17,7 @@ const { locale, t } = useI18n()
 const token = useCookie('token')
 const config = useRuntimeConfig()
 const currentClass = useCurrentClass()
-const currentLesson = useCurrentLesson(true, getNearestDay(getDayIndex(props.day)))
+const currentLesson = useCurrentLesson(true, toRef(getNearestDay(getDayIndex(props.day))))
 const {
   homework: days,
   refresh,

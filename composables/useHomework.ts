@@ -5,7 +5,7 @@ export const useHomework = async (day: DayName) => {
   const token = useCookie('token')
   const config = useRuntimeConfig()
   const currentClass = useCurrentClass()
-  const currentLesson = useCurrentLesson(true, getNearestDay(getDayIndex(day)))
+  const currentLesson = useCurrentLesson(true, toRef(getNearestDay(getDayIndex(day))))
 
   const { data, refresh } = await useFetch<apiResponse<{ homeworks: { [key: string]: { [key: string]: ARHomework[] } } }>>(`/classes/${currentClass.value?.id}/homework/by-day/${getDayIndex(day)}`, {
     method: 'GET',
