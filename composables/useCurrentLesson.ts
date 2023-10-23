@@ -101,6 +101,8 @@ export const useCurrentLesson = (
           currentLessonWithDetails.value = l
         } else {
           if (lessonLimits.start <= now.value.getTime() && getLessonLimits(currentTimetable?.[i + 1], now.value).start > now.value.getTime()) {
+            currentLessonWithDetails.value = l
+          } else {
             currentLessonWithDetails.value = currentDay.lessons[i + 1]
           }
         }
