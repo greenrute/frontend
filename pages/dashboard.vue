@@ -10,6 +10,7 @@ definePageMeta({
 
 const localePath = useLocalePath()
 
+const now = useNow({ interval: 1000 })
 const date = new Date()
 date.setMonth(date.getMonth() + 6)
 
@@ -24,7 +25,7 @@ const selectedClass = useCookie<string>('selectedClass', {
 })
 const classes = useState<apiResponseClass[]>('classes')
 const currentClass = useCurrentClass()
-const currentDay = computed(() => currentClass.value?.schedule[date.getDay() - 1])
+const currentDay = computed(() => currentClass.value?.schedule[now.value.getDay() - 1])
 
 const currentLesson = useCurrentLesson()
 const currentLessonDetails = useCurrentLesson(true)
