@@ -1,0 +1,16 @@
+homepage:
+  title: GreenRute — your school assistant
+  hero:
+    cta: Join now
+    video: Watch video
+  faqs:
+    title: Frequently asked questions
+    description: If you can’t find what you're looking for, email our support team.
+    items:
+      - - question: Can a teacher join the class to add assignments for students?
+          answer: Yes, currently, a teacher can join as a class owner or administrator, and a separate role and functions for teachers are planned in the near future.
+      - - question: Is it possible to set events or changes in the schedule that may occur during the school year?
+          answer: Yes, making changes to the bell schedule or lessons is extremely easy, it can be done in just two clicks.
+      - - question: Can I use this service to track my school progress?
+          answer: Currently, progress in completing tasks for the current day is available (you will definitely like it :), and the development of tracking overall progress is planned in the near future.
+  copyright: Copyright © {year} GreenRute. All rights reserved.

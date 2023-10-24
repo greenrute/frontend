@@ -13,7 +13,7 @@ html.dark {
 
 #credential_picker_container {
   color-scheme: light;
-  @apply top-28 z-10 !important;
+  @apply z-10 !important;
 }
 
 #credential_picker_iframe {

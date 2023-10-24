@@ -31,7 +31,7 @@ const homeworkDate = ref<Date>(getNearestDay(getDayIndex(currentDay.value?.day ?
 
 const currentLesson = useCurrentLesson()
 const currentLessonDetails = useCurrentLesson(true, homeworkDate)
-const { homework, percentOfDoneHomework, changeTaskStatus, pending, add } = await useHomework(currentDay.value?.day ?? 'monday')
+const { homework, percentOfDoneHomework, changeTaskStatus, pending, add } = await useHomework(currentDay.value?.day ?? 'monday', true)
 
 const newHomework = reactive<NewHomework>({
   text: '',
@@ -75,11 +75,11 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
     <div class="grid grid-cols-1 sm:auto-rows-fr gap-6 sm:gap-7 sm:grid-cols-2 md:grid-cols-3" v-if="currentClass?.schedule[new Date().getDay() - 1]?.lessons.length">
       <div class="bg-gray-200/30 dark:bg-zinc-700/30 p-2 pt-1.5 rounded-4xl shadow-xl overflow-hidden">
         <div class="h-full">
-          <div class="pl-3 pr-2.5 font-medium mb-3 text-lg flex items-center justify-between">
+          <div class="pl-3 pr-2.5 font-medium mb-3 py-0.25 text-lg flex items-center justify-between">
             <span :style="{ color: currentClass?.color }">{{ $t(`days.${currentClass?.schedule[new Date().getDay() - 1].day}`) }}</span>
             <span>{{ useDateFormat(date, 'DD.MM').value }}</span>
           </div>
-          <div class="relative h-min -m-2 rounded-lg bg-white/50 dark:bg-zinc-900/40 backdrop-blur-sm">
+          <div class="relative h-full -m-2 rounded-lg bg-white/50 dark:bg-zinc-900/40 backdrop-blur-sm">
             <div class="flex flex-col">
               <transition-group enter-from-class="!translate-x-[calc(100%+40px)] scale-y-0 !h-0" leave-to-class="!-translate-x-[calc(100%+40px)] scale-y-0 !h-0">
                 <div v-for="(lesson, index) in currentClass?.schedule[new Date().getDay() - 1].lessons" :key="lesson.uuid" class="flex items-center justify-between gap-1.5 py-1.5 px-3 transition-all ease-out duration-300">
@@ -173,7 +173,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
           </div>
           <MainButton class="w-full z-10 !text-base hover:z-20" :class="[newHomework.text.trim() ? '' : '!text-gray-600 dark:!text-zinc-400 !bg-transparent', Number(addHomerworkEl?.offsetHeight) > 301 ? 'rounded-4xl mt-auto py-2.5' : 'rounded-b-4xl rounded-t-none']" variant="solid" :color="newHomework.text.trim() ? 'green' : 'reverse'" type="submit" :disabled="!newHomework.text.trim()">
             <span v-if="!pending">{{ $t('homework.add') }}</span>
-            <IconLoader v-else class="my-0.5 w-5 h-5 motion-safe:animate-loader" />
+            <IconLoader v-else class="my-1 w-5 h-5 motion-safe:animate-loader" />
           </MainButton>
         </MainForm>
       </div>
@@ -200,7 +200,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
       <p class="mt-1.5 text-sm text-gray-500 dark:text-zinc-300/90">{{ $t('empty.classes.select.description') }}</p>
       <div class="mt-6">
         <Listbox :model-value="selectedClass" @update:model-value="setSelectedClass">
-          <div class="relative max-w-[12rem] mx-auto">
+          <div class="relative w-max mx-auto">
             <ListboxButton class="relative w-full text-left rounded-md py-2 pl-3 pr-10 dark:bg-zinc-900 border border-gray-300 dark:border-zinc-700 dark:placeholder-zinc-400 focus:border-green-500 dark:focus:border-green-600 focus:ring-1 focus:ring-green-500 dark:focus:ring-green-600 sm:text-sm">
               {{ $t('empty.classes.select.button') }}
               <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">

@@ -1,13 +1,14 @@
 import confetti from 'canvas-confetti'
 
-export const useHomework = async (day: DayName) => {
+export const useHomework = async (day: DayName, tomorrow: boolean = false) => {
   const { locale, t } = useI18n()
   const token = useCookie('token')
   const config = useRuntimeConfig()
   const currentClass = useCurrentClass()
   const currentLesson = useCurrentLesson(true, toRef(getNearestDay(getDayIndex(day))))
 
-  const { data, refresh } = await useFetch<apiResponse<{ homeworks: { [key: string]: { [key: string]: ARHomework[] } } }>>(`/classes/${currentClass.value?.id}/homework/by-day/${getDayIndex(day)}`, {
+  const url = tomorrow ? `/classes/${currentClass.value?.id}/homework/by-days/${getDayIndex(day)},${getDayIndex(day)+1 > 5 ? 1 : getDayIndex(day)+1}` : `/classes/${currentClass.value?.id}/homework/by-day/${getDayIndex(day)}`
+  const { data, refresh } = await useFetch<apiResponse<{ homeworks: { [key: string]: { [key: string]: ARHomework[] } } }>>(url, {
     method: 'GET',
     headers: {
       'Accept-Language': locale.value,

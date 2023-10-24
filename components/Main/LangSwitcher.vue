@@ -11,7 +11,7 @@ await preloadComponents(locales.value.map(l => 'Emoji' + (typeof l !== 'string' 
 
 <template>
   <Menu as="div" class="relative inline-block text-left">
-    <MenuButton :as="MainButton" class="px-2" color="zinc" variant="outline">
+    <MenuButton :as="MainButton" class="!px-2" color="zinc" variant="outline">
       <span class="sr-only">{{ $t('actions.change language') }}</span>
       <LanguageIcon aria-hidden="true" class="h-5 w-5" />
     </MenuButton>

@@ -1,0 +1,16 @@
+homepage:
+  title: GreenRute — Ihr Schulassistent
+  hero:
+    cta: Jetzt beitreten
+    video: Schau Video
+  faqs:
+    title: Häufig gestellte Fragen
+    description: Wenn Sie nicht finden, wonach Sie suchen, senden Sie eine E-Mail an den dortigen Support.
+    items:
+      - - question: Kann sich ein Lehrer der Klasse anschließen, um Aufgaben für Schüler hinzuzufügen?
+          answer: Ja, derzeit kann ein Lehrer als Klasseninhaber oder Administrator beitreten, und in naher Zukunft sind eine separate Rolle und Funktionen für Lehrer geplant.
+      - - question: Ist es möglich, Ereignisse oder Änderungen im Stundenplan festzulegen, die während des Schuljahres auftreten können?
+          answer: Ja, Änderungen am Klingelplan oder den Stunden sind äußerst einfach durchzuführen und können in nur zwei Klicks erfolgen.
+      - - question: Kann ich diesen Service nutzen, um meinen schulischen Fortschritt zu verfolgen?
+          answer: Derzeit steht der Fortschritt bei der Erledigung von Aufgaben für den aktuellen Tag zur Verfügung (es wird Ihnen sicher gefallen :), und die Entwicklung zur Verfolgung des Gesamtfortschritts ist in naher Zukunft geplant.
+  copyright: Copyright © {year} GreenRute. Alle Rechte vorbehalten.

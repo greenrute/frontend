@@ -22,6 +22,7 @@ module.exports = <Partial<Config>>{
       screens: {
         xxs: '360px',
         xs: '410px',
+        s: '468px',
       },
       backgroundImage: {
         'dashboard-gradient': 'url("/img/dashboard-background.png")',

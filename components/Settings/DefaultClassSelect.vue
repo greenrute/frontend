@@ -27,7 +27,7 @@ const currentClass = useCurrentClass()
       <ListboxButton class="relative w-full cursor-default rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-2 pl-3 pr-10 text-left shadow-sm focus:border-green-500 dark:focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-500 dark:focus:ring-green-600 sm:text-sm">
         <span class="flex items-center">
           <span class="w-2.5 h-2.5 rounded-full shrink-0" :style="{ backgroundColor: currentClass?.color }" aria-hidden="true" />
-          <span class="ml-2 block truncate">{{ currentClass?.name }}</span>
+          <span class="ml-2 block truncate">{{ currentClass?.name ?? $t('empty.classes.select.button') }}</span>
         </span>
         <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
           <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
