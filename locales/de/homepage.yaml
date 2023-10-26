@@ -13,6 +13,15 @@ homepage:
       - Es ist jetzt schwieriger, eine Aufgabe zu vergessen, als die beste Fernsehsendung für den Abend auszuwählen!
       - Es ist jetzt schwieriger, eine Aufgabe zu vergessen, als Inspiration an einem regnerischen Tag zu finden!
       - Es ist jetzt schwieriger, eine Aufgabe zu vergessen, als die Gedanken einer Katze zu erraten!
+    items:
+      - title: Bequeme Startseite
+        description: Widgets für schnellen Zugriff auf wichtige Informationen.
+      - title: Bearbeiten Sie Ihren Zeitplan leicht
+        description: Einfache Bearbeitung des Zeitplans mit nur wenigen Klicks.
+      - title: Zusammenarbeit mit Mitschülern
+        description: Fügen Sie Freunde hinzu, um an Aufgaben und Stundenplänen zusammenzuarbeiten.
+      - title: Aufgaben aufzeichnen und teilen
+        description: Nehmen Sie Hausaufgaben auf und teilen Sie sie zur gemeinsamen Erledigung.
   faqs:
     title: Häufig gestellte Fragen
     description: Wenn Sie nicht finden, wonach Sie suchen, senden Sie eine E-Mail an den dortigen Support.

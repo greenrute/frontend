@@ -13,6 +13,15 @@ homepage:
       - It is now harder to forget a task than to choose the best TV show for the evening!
       - It is now harder to forget a task than to find inspiration on a rainy day!
       - It is now harder to forget a task than to guess a cat's mind!
+    items:
+      - title: Convenient home page
+        description: Widgets for quick access to important information.
+      - title: Easily edit your schedule
+        description: Simple schedule editing with just a few clicks.
+      - title: Collaborate with classmates
+        description: Add friends for teamwork on assignments and schedules.
+      - title: Record and share tasks
+        description: Record homework and share it for collaborative completion.
   faqs:
     title: Frequently asked questions
     description: If you can’t find what you're looking for, email our support team.
