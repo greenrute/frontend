@@ -3,6 +3,16 @@ homepage:
   hero:
     cta: Join now
     video: Watch video
+  features:
+    title: Track your tasks with GreenRute!
+    descriptions:
+      - It is now harder to forget a task than to understand a joke!
+      - It is now harder to forget a task than to find spare pocket money!
+      - It is now harder to forget a task than to count the stars in the sky!
+      - It is now harder to forget a task than to find a penguin in the desert!
+      - It is now harder to forget a task than to choose the best TV show for the evening!
+      - It is now harder to forget a task than to find inspiration on a rainy day!
+      - It is now harder to forget a task than to guess a cat's mind!
   faqs:
     title: Frequently asked questions
     description: If you can’t find what you're looking for, email our support team.

@@ -3,6 +3,16 @@ homepage:
   hero:
     cta: Jetzt beitreten
     video: Schau Video
+  features:
+    title: Verfolgen Sie Ihre Aufgaben mit GreenRute!
+    descriptions:
+      - Es ist jetzt schwieriger, eine Aufgabe zu vergessen, als einen Witz zu verstehen!
+      - Es ist jetzt schwieriger, eine Aufgabe zu vergessen, als übriges Taschengeld zu finden!
+      - Es ist jetzt schwieriger, eine Aufgabe zu vergessen, als die Sterne am Himmel zu zählen!
+      - Es ist jetzt schwieriger, eine Aufgabe zu vergessen, als einen Pinguin in der Wüste zu finden!
+      - Es ist jetzt schwieriger, eine Aufgabe zu vergessen, als die beste Fernsehsendung für den Abend auszuwählen!
+      - Es ist jetzt schwieriger, eine Aufgabe zu vergessen, als Inspiration an einem regnerischen Tag zu finden!
+      - Es ist jetzt schwieriger, eine Aufgabe zu vergessen, als die Gedanken einer Katze zu erraten!
   faqs:
     title: Häufig gestellte Fragen
     description: Wenn Sie nicht finden, wonach Sie suchen, senden Sie eine E-Mail an den dortigen Support.

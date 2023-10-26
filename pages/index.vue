@@ -36,9 +36,9 @@ onUnmounted(() => {
   <MainHeader />
   <main>
     <MainHero />
-    <!-- <ClientOnly>
+    <ClientOnly>
       <MainPrimaryFeatures />
-    </ClientOnly> -->
+    </ClientOnly>
     <MainFaqs />
   </main>
   <MainFooter />
