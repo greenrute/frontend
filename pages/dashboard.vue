@@ -72,7 +72,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
 
   <div class="mt-6 px-4 sm:px-6 lg:px-8">
 
-    <div class="grid grid-cols-1 sm:auto-rows-fr gap-6 sm:gap-7 sm:grid-cols-2 md:grid-cols-3" v-if="currentClass?.schedule[new Date().getDay() - 1]?.lessons.length">
+    <div class="grid grid-cols-1 sm:auto-rows-fr gap-6 sm:gap-7 sm:grid-cols-2 md:grid-cols-3 mb-10" v-if="currentClass?.schedule[new Date().getDay() - 1]?.lessons.length">
       <div class="bg-gray-200/30 dark:bg-zinc-700/30 p-2 pt-1.5 rounded-4xl shadow-xl overflow-hidden">
         <div class="h-full">
           <div class="pl-3 pr-2.5 font-medium mb-3 py-0.25 text-lg flex items-center justify-between">
@@ -179,7 +179,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
       </div>
     </div>
 
-    <div v-if="currentClass?.schedule?.filter(i => i?.lessons?.length)?.length" class="mt-10 mb-10 grid grid-cols-1 gap-6 sm:gap-7 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+    <div v-if="currentClass?.schedule?.filter(i => i?.lessons?.length)?.length" class="mb-10 grid grid-cols-1 gap-6 sm:gap-7 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
       <ScheduleItem v-for="item in currentClass.schedule.filter((d, i) => i !== new Date().getDay() - 1)" :key="item.day" :day="item.day" :lessons="item.lessons" />
     </div>
 
