@@ -73,7 +73,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
   <div class="mt-6 px-4 sm:px-6 lg:px-8">
 
     <div class="grid grid-cols-1 sm:auto-rows-fr gap-6 sm:gap-7 sm:grid-cols-2 md:grid-cols-3 mb-10" v-if="currentClass?.schedule[new Date().getDay() - 1]?.lessons.length">
-      <div class="bg-gray-200/30 dark:bg-zinc-700/30 p-2 pt-1.5 rounded-4xl shadow-xl overflow-hidden">
+      <div class="bg-gray-200/30 dark:bg-zinc-700/30 p-2 pt-1.5 rounded-3xl shadow-xl overflow-hidden">
         <div class="h-full">
           <div class="pl-3 pr-2.5 font-medium mb-3 py-0.25 text-lg flex items-center justify-between">
             <span :style="{ color: currentClass?.color }">{{ $t(`days.${currentClass?.schedule[new Date().getDay() - 1].day}`) }}</span>
@@ -98,13 +98,13 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
         </div>
       </div>
 
-      <div class="relative bg-gray-200/30 dark:bg-zinc-700/20 rounded-4xl shadow-xl overflow-hidden">
+      <div class="relative bg-gray-200/30 dark:bg-zinc-700/20 rounded-3xl shadow-xl overflow-hidden">
         <div v-if="!Object.keys(homework).length" class="h-full py-24 flex justify-center items-center gap-1 text-lg text-gray-600 dark:text-zinc-400">
           <CheckCircleIcon class="w-6 h-6" />
           {{ $t('homework.empty') }}
         </div>
 
-        <div class="sm:absolute inset-0 p-1.5 max-sm:pb-4 rounded-4xl overflow-y-auto">
+        <div class="sm:absolute inset-0 p-1.5 max-sm:pb-4 rounded-3xl overflow-y-auto">
           <transition-group enter-from-class="!translate-x-8 opacity-0" leave-from-class="!max-h-full" leave-active-class="-mt-[5.125rem] -mb-[3.125rem]" leave-to-class="opacity-0 scale-y-75 !max-h-0">
             <div v-for="(day, date, index) in homework" :key="date" class="transition-all ease-out duration-300">
               <div :class="index !== 0 ? 'mt-2' : ''">
@@ -155,10 +155,10 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
         </div>
       </div>
 
-      <div class="bg-gray-200/30 dark:bg-zinc-700/30 rounded-4xl shadow-xl sm:max-md:col-span-2" ref="addHomerworkEl">
-        <MainForm @validated="submit" class="rounded-4xl h-full flex flex-col items-stretch [&_*:has(:focus)]:!z-20 [&_*:has(.on-top)]:!z-20 [&>div:nth-child(2):has(:focus)]:!z-40 [&>div:nth-child(2):has(.on-top)]:!z-40 [&.is-validated_*:has(:invalid)]:!z-30">
+      <div class="bg-gray-200/30 dark:bg-zinc-700/30 rounded-3xl shadow-xl sm:max-md:col-span-2" ref="addHomerworkEl">
+        <MainForm @validated="submit" class="rounded-3xl h-full flex flex-col items-stretch [&_*:has(:focus)]:!z-20 [&_*:has(.on-top)]:!z-20 [&>div:nth-child(2):has(:focus)]:!z-40 [&>div:nth-child(2):has(.on-top)]:!z-40 [&.is-validated_*:has(:invalid)]:!z-30">
           <div>
-            <MainTextInput class="!w-[calc(100%+2px)] !text-base !bg-transparent border-x-transparent dark:border-x-transparent border-t-transparent dark:border-t-transparent !rounded-t-4xl !rounded-b-none !rounded-r-none !ring-inset -mx-0.25 -mt-0.25" v-model="newHomework.text" :placeholder="$t('homework.placeholders.task')" required />
+            <MainTextInput class="!w-[calc(100%+2px)] !text-base !bg-transparent border-x-transparent dark:border-x-transparent border-t-transparent dark:border-t-transparent !rounded-t-3xl !rounded-b-none !rounded-r-none !ring-inset -mx-0.25 -mt-0.25" v-model="newHomework.text" :placeholder="$t('homework.placeholders.task')" required />
             <MainTextInput class="!w-[calc(100%+2px)] !text-base !bg-transparent border-x-transparent dark:border-x-transparent !rounded-none -mx-0.25 -mt-0.25 !ring-inset" v-model="newHomework.description" :placeholder="$t('homework.placeholders.description')" />
             <HomeworkDatePicker class="!w-[calc(100%+2px)] !text-base !bg-transparent border-x-transparent dark:border-x-transparent !rounded-none -mx-0.25 -mt-0.25 !ring-inset" v-model="newHomework.date" :day-index="-1" />
             <HomeworkLessonPicker class="!w-[calc(100%+2px)] !text-base !bg-transparent border-x-transparent dark:border-x-transparent !rounded-none -mx-0.25 -mt-0.25 !ring-inset" v-model="newHomework.lesson" :day-index="newHomework.date.getDay()" />
@@ -171,7 +171,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
               </Switch>
             </SwitchGroup>
           </div>
-          <MainButton class="w-full z-10 !text-base hover:z-20" :class="[newHomework.text.trim() ? '' : '!text-gray-600 dark:!text-zinc-400 !bg-transparent', Number(addHomerworkEl?.offsetHeight) > 301 ? 'rounded-4xl mt-auto py-2.5' : 'rounded-b-4xl rounded-t-none']" variant="solid" :color="newHomework.text.trim() ? 'green' : 'reverse'" type="submit" :disabled="!newHomework.text.trim()">
+          <MainButton class="w-full z-10 !text-base hover:z-20" :class="[newHomework.text.trim() ? '' : '!text-gray-600 dark:!text-zinc-400 !bg-transparent', Number(addHomerworkEl?.offsetHeight) > 301 ? 'rounded-3xl mt-auto py-2.5' : 'rounded-b-3xl rounded-t-none']" variant="solid" :color="newHomework.text.trim() ? 'green' : 'reverse'" type="submit" :disabled="!newHomework.text.trim()">
             <span v-if="!pending">{{ $t('homework.add') }}</span>
             <IconLoader v-else class="my-1 w-5 h-5 motion-safe:animate-loader" />
           </MainButton>
