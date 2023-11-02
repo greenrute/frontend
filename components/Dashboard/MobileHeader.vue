@@ -32,7 +32,7 @@ const switchTheme = () => {
 </script>
 
 <template>
-  <div class="sticky top-0 z-50 flex h-14 flex-shrink-0 border-b border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 lg:hidden">
+  <div class="sticky top-0 z-20 flex h-14 flex-shrink-0 border-b border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 lg:hidden">
     <button type="button" class="px-4 text-gray-500 dark:text-zinc-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-green-500 lg:hidden" @click="$emit('open')">
       <span class="sr-only">{{ $t('actions.open sidebar') }}</span>
       <Bars3Icon class="h-6 w-6" aria-hidden="true" />
