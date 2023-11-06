@@ -83,6 +83,7 @@ const deleteHandler = async () => {
     baseURL: config.public.apiBase,
   })
     .then(async r => {
+      useCookie<string>('selectedClass').value = ''
       pushNotification({
         status: 'success',
         message: r.message,

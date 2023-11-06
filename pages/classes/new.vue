@@ -47,7 +47,7 @@ const create = async () => {
       })
         .then(r => {
           const classes = useState<apiResponseClass[]>('classes', () => (r as any)?.data?.classes)
-          if (classes.value.length === 1) {
+          if (classes.value?.length === 1) {
             const date = new Date()
             date.setMonth(date.getMonth() + 6)
             const selectedClass = useCookie<string>('selectedClass', {
@@ -56,12 +56,12 @@ const create = async () => {
             })
             selectedClass.value = classes.value[0].hash
           }
+          location.href = localePath('/dashboard')
         })
       pushNotification({
         status: 'success',
         message: (r as apiResponse<any>).message,
       })
-      location.href = localePath('/dashboard')
     })
     .catch(error => {
       pushNotification({

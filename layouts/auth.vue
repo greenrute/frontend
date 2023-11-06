@@ -21,7 +21,7 @@ const navigation: NavMenuItem[] = [
 ]
 
 const classes = useState<apiResponseClass[]>('classes')
-const backgroundImage = computed(() => `url('/img/patterns/${getColorName(currentClass.value?.color)}.png')`)
+const backgroundImage = computed(() => `url('/img/patterns/${getColorName(currentClass.value?.color) ?? 'green'}.png')`)
 
 const updateClasses = async () => {
   await $fetch<apiResponse<{ classes: apiResponseClass[] }>>('/classes/all', {
