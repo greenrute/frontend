@@ -46,7 +46,16 @@ const create = async () => {
         baseURL: useRuntimeConfig().public.apiBase,
       })
         .then(r => {
-          useState<apiResponseClass[]>('classes', () => (r as any)?.data?.classes)
+          const classes = useState<apiResponseClass[]>('classes', () => (r as any)?.data?.classes)
+          if (classes.value.length === 1) {
+            const date = new Date()
+            date.setMonth(date.getMonth() + 6)
+            const selectedClass = useCookie<string>('selectedClass', {
+              expires: date,
+              sameSite: true,
+            })
+            selectedClass.value = classes.value[0].hash
+          }
         })
       pushNotification({
         status: 'success',
