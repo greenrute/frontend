@@ -35,8 +35,8 @@ const localePath = useLocalePath()
       >
         <PopoverPanel as="div" class="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-white dark:bg-zinc-900 p-4 text-lg tracking-tight text-zinc-900 dark:text-zinc-50 shadow-xl ring-1 ring-zinc-900/5 dark:ring-zinc-700">
           <PopoverButton :as="NuxtLink" to="#features" class="block w-full p-2">{{ $t('menu features') }}</PopoverButton>
-          <PopoverButton :as="NuxtLink" to="#testimonials" class="block w-full p-2">{{ $t('menu testimonials') }}</PopoverButton>
-          <PopoverButton :as="NuxtLink" to="#pricing" class="block w-full p-2">{{ $t('menu pricing') }}</PopoverButton>
+          <!-- <PopoverButton :as="NuxtLink" to="#testimonials" class="block w-full p-2">{{ $t('menu testimonials') }}</PopoverButton> -->
+          <!-- <PopoverButton :as="NuxtLink" to="#pricing" class="block w-full p-2">{{ $t('menu pricing') }}</PopoverButton> -->
           <hr class="m-2 border-zinc-300/40 dark:border-zinc-700" />
           <PopoverButton as="button" @click.prevent="switchColorMode" class="flex items-center justify-between w-full text-left p-2">
             {{ $t('actions.change theme') }}
