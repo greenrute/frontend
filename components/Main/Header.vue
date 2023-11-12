@@ -12,8 +12,8 @@ const localePath = useLocalePath()
           </NuxtLink>
           <div class="hidden lg:flex lg:gap-x-6">
             <MainNavLink to="#features">{{ $t('menu features') }}</MainNavLink>
-            <MainNavLink to="#testimonials">{{ $t('menu testimonials') }}</MainNavLink>
-            <MainNavLink to="#pricing">{{ $t('menu pricing') }}</MainNavLink>
+            <!-- <MainNavLink to="#testimonials">{{ $t('menu testimonials') }}</MainNavLink> -->
+            <!-- <MainNavLink to="#pricing">{{ $t('menu pricing') }}</MainNavLink> -->
           </div>
         </div>
         <div class="flex items-center gap-x-3 xxs:gap-x-5 lg:gap-x-8">

@@ -10,8 +10,8 @@ const localePath = useLocalePath()
         <nav class="mt-10 text-sm" aria-label="quick links">
           <div class="-my-1 flex justify-center gap-x-6 gap-y-3 flex-wrap">
             <MainNavLink to="#features">{{ $t('menu features') }}</MainNavLink>
-            <MainNavLink to="#testimonials">{{ $t('menu testimonials') }}</MainNavLink>
-            <MainNavLink to="#pricing">{{ $t('menu pricing') }}</MainNavLink>
+            <!-- <MainNavLink to="#testimonials">{{ $t('menu testimonials') }}</MainNavLink> -->
+            <!-- <MainNavLink to="#pricing">{{ $t('menu pricing') }}</MainNavLink> -->
             <MainNavLink :to="localePath('/privacy-policy')">{{ $t('menu privacy policy') }}</MainNavLink>
           </div>
         </nav>
