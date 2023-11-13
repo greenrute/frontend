@@ -10,7 +10,7 @@ const head = useLocaleHead({
 useServerSeoMeta({
   description: t('meta description'),
   ogDescription: t('meta description'),
-  ogImage: `https://greenrute.com/_vercel/image?url=/img/screenshots/dark/${locale}/dashboard.png&w=768&q=100`,
+  ogImage: `https://greenrute.com/_vercel/image?url=/img/screenshots/dark/${locale.value}/dashboard.png&w=768&q=100`,
 })
 </script>
 
