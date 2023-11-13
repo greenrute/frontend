@@ -10,6 +10,7 @@ defineProps<{
 }>()
 
 useThemeColor()
+const localePath = useLocalePath()
 </script>
 
 <template>
@@ -27,7 +28,7 @@ useThemeColor()
             <p class="mt-1 text-base text-gray-500 dark:text-zinc-400">Перевірте URL-адресу в адресному рядку та повторіть спробу.</p>
           </div>
           <div class="mt-10 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6">
-            <MainButton color="green" to="/">На головну</MainButton>
+            <MainButton color="green" :to="localePath('/')">На головну</MainButton>
             <MainButton to="https://t.me/greenrute_support" target="_blank" :external="true" variant="outline">Служба підтримки</MainButton>
           </div>
         </div>

@@ -114,19 +114,19 @@ const switchTheme = () => {
             <MenuItems class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-200 dark:divide-zinc-700 rounded-md bg-white dark:bg-zinc-900 shadow-lg ring-1 ring-black dark:ring-zinc-700 ring-opacity-5 focus:outline-none">
               <div class="py-1">
                 <MenuItem v-slot="{ active, close }" as="div">
-                <NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/profile" @click="close">
+                <NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" :to="localePath('/profile')" @click="close">
                   {{ $t('menu.view profile') }}
                   <UserCircleIcon class="h-4 w-4" aria-hidden="true" />
                 </NuxtLink>
                 </MenuItem>
                 <MenuItem v-slot="{ active, close }" as="div">
-                <NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/settings" @click="close">
+                <NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" :to="localePath('/settings')" @click="close">
                   {{ $t('menu.settings') }}
                   <Cog8ToothIcon class="h-4 w-4" aria-hidden="true" />
                 </NuxtLink>
                 </MenuItem>
                 <MenuItem v-slot="{ active, close }" as="div">
-                <NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/notifications" @click="close">
+                <NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" :to="localePath('/notifications')" @click="close">
                   {{ $t('menu.notifications') }}
                   <BellIcon class="h-4 w-4" aria-hidden="true" />
                 </NuxtLink>
@@ -140,7 +140,7 @@ const switchTheme = () => {
                 </NuxtLink>
                 </MenuItem>
                 <MenuItem v-slot="{ active, close }" as="div">
-                <NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/settings#language" @click="close">
+                <NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" :to="localePath('/settings') + '#language'" @click="close">
                   {{ $t('actions.change language') }}
                   <LanguageIcon class="h-4 w-4" aria-hidden="true" />
                 </NuxtLink>

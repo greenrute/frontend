@@ -3,6 +3,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { ChevronUpDownIcon, UserCircleIcon, Cog8ToothIcon, BellIcon, ArrowDownTrayIcon, MoonIcon, SunIcon, LifebuoyIcon, ArrowLeftOnRectangleIcon, LanguageIcon } from '@heroicons/vue/20/solid'
 
 const authentication = useAuthentication()
+const localePath = useLocalePath()
 const user = useUser()
 
 const switchTheme = () => {
@@ -31,15 +32,15 @@ const switchTheme = () => {
     <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
       <MenuItems class="absolute right-0 left-0 z-10 mx-3 mt-1 origin-top divide-y divide-gray-200 dark:divide-zinc-700 rounded-md bg-white dark:bg-zinc-900 shadow-lg ring-1 ring-black dark:ring-zinc-700 ring-opacity-5 focus:outline-none">
         <div class="py-1">
-          <MenuItem v-slot="{ active, close }" as="div"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/profile" @click="close">
+          <MenuItem v-slot="{ active, close }" as="div"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" :to="localePath('/profile')" @click="close">
             {{ $t('menu.view profile') }}
             <UserCircleIcon class="h-4 w-4" aria-hidden="true" />
           </NuxtLink></MenuItem>
-          <MenuItem v-slot="{ active, close }" as="div"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/settings" @click="close">
+          <MenuItem v-slot="{ active, close }" as="div"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" :to="localePath('/settings')" @click="close">
             {{ $t('menu.settings') }}
             <Cog8ToothIcon class="h-4 w-4" aria-hidden="true" />
           </NuxtLink></MenuItem>
-          <MenuItem v-slot="{ active, close }" as="div"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/notifications" @click="close">
+          <MenuItem v-slot="{ active, close }" as="div"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" :to="localePath('/notifications')" @click="close">
             {{ $t('menu.notifications') }}
             <BellIcon class="h-4 w-4" aria-hidden="true" />
           </NuxtLink></MenuItem>
@@ -49,7 +50,7 @@ const switchTheme = () => {
             {{ $t('menu.get app') }}
             <ArrowDownTrayIcon class="h-4 w-4" aria-hidden="true" />
           </NuxtLink></MenuItem>
-          <MenuItem v-slot="{ active, close }" as="div"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="/settings#language" @click="close">
+          <MenuItem v-slot="{ active, close }" as="div"><NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" :to="localePath('/settings') + '#language'" @click="close">
             {{ $t('actions.change language') }}
             <LanguageIcon class="h-4 w-4" aria-hidden="true" />
           </NuxtLink></MenuItem>

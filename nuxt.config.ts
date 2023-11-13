@@ -43,7 +43,7 @@ export default defineNuxtConfig({
       },
     ],
     langDir: 'locales',
-    strategy: 'no_prefix',
+    strategy: 'prefix',
     defaultLocale: 'en',
     detectBrowserLanguage: {
       redirectOn: 'root',
