@@ -4,6 +4,12 @@ definePageMeta({
   middleware: 'guest',
 })
 
+const { t } = useI18n()
+
+useServerSeoMeta({
+  title: t('homepage.title'),
+})
+
 const documentEl = ref<Document | null>(null)
 
 const { y } = useScroll(documentEl)

@@ -71,9 +71,6 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      htmlAttrs: {
-        lang: 'uk',
-      },
       link: [
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
@@ -82,7 +79,6 @@ export default defineNuxtConfig({
         { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#16a34a' },
       ],
       meta: [
-        { name: 'description', content: 'Новий щоденник у твоєму смартфоні — спільний розклад, домашнє завдання, обмін інформацією. Програма для Android та iOS, багато опцій, щоб налаштувати свій щоденник.' },
         { name: 'msapplication-TileColor', content: '#ffffff' },
         process.env.NODE_ENV !== 'production' ? {} : { 'http-equiv': 'content-security-policy', content: "object-src 'none'; base-uri 'self'; default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://families.google.com https://accounts.google.com/gsi/client; style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style; font-src 'self' data:; img-src 'self' data: images.unsplash.com gravatar.com lh3.googleusercontent.com profile-pictures.greenrute.com; frame-src https://accounts.google.com/gsi/; connect-src 'self' api.greenrute.com vitals.vercel-insights.com vitals.vercel-analytics.com https://accounts.google.com/gsi/;" },
       ],

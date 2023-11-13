@@ -9,6 +9,10 @@ definePageMeta({
 const { t, locale } = useI18n()
 const localePath = useLocalePath()
 
+useServerSeoMeta({
+  title: t('register', 0) + ' - GreenRute',
+})
+
 const googleSignIn = useGoogleSignIn()
 const googleSignUpButton = ref<HTMLDivElement | null>(null)
 
