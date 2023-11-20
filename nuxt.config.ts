@@ -21,7 +21,21 @@ export default defineNuxtConfig({
     url: 'https://greenrute.com',
   },
   sitemap: {
-    exclude: ['/c/**', '/classes/**', '/settings', '/homework', '/dashboard', '/profile', '/notifications']
+    urls: () => ([
+      '/ua',
+      '/ua/login',
+      '/ua/register',
+      '/ua/privacy-policy',
+      '/en',
+      '/en/login',
+      '/en/register',
+      '/en/privacy-policy',
+      '/de',
+      '/de/login',
+      '/de/register',
+      '/de/privacy-policy',
+    ]),
+    excludeAppSources: true,
   },
   colorMode: {
     classSuffix: '',
