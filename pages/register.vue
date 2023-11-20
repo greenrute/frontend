@@ -13,6 +13,17 @@ useServerSeoMeta({
   title: t('register', 0) + ' - GreenRute',
 })
 
+const date = new Date()
+date.setMonth(date.getMonth() + 6)
+const token = useCookie('token', {
+  expires: date,
+  sameSite: true,
+})
+const user = useCookie<UserCookie>('user', {
+  expires: date,
+  sameSite: true,
+})
+
 const googleSignIn = useGoogleSignIn()
 const googleSignUpButton = ref<HTMLDivElement | null>(null)
 
@@ -44,17 +55,7 @@ const credentials = reactive({
 
 const login = async () => {
   pending.value = true
-  const date = new Date()
-  const start = date.getTime()
-  date.setMonth(date.getMonth() + 6)
-  const token = useCookie('token', {
-    expires: date,
-    sameSite: true,
-  })
-  const user = useCookie<UserCookie>('user', {
-    expires: date,
-    sameSite: true,
-  })
+  const start = new Date().getTime()
   await $fetch<apiResponse<apiResponseLogin>>('/users/register', {
     method: 'POST',
     headers: { 'Accept-Language': locale.value },
