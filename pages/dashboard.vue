@@ -183,7 +183,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
       <ScheduleItem v-for="item in currentClass.schedule.filter((d, i) => i !== new Date().getDay() - 1)" :key="item.day" :day="item.day" :lessons="item.lessons" />
     </div>
 
-    <div v-else-if="selectedClass" class="py-16 sm:py-32 text-center">
+    <div v-else-if="selectedClass && classes?.filter(c => c.hash === selectedClass)?.length" class="py-16 sm:py-32 text-center">
       <QueueListIcon class="mx-auto h-12 w-12 text-gray-400 dark:text-zinc-500 stroke-1" />
       <h3 class="mt-2 font-medium text-gray-900 dark:text-white">{{ $t('empty.lessons.title') }}</h3>
       <p class="mt-1.5 text-sm text-gray-500 dark:text-zinc-300/90">{{ $t('empty.lessons.description') }}</p>

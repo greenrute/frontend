@@ -48,14 +48,14 @@ const updateUser = async () => {
     .then(r => {
       if (!!r.data?.id) user.value = r.data
     })
-    .catch(() => { })
+    .catch(() => {})
 }
 
 onMounted(async () => {
   await updateUser()
 
-  if (classes.value && classes.value?.filter(c => c.hash === selectedClass.value)?.length === 0) {
-    selectedClass.value = null
+  if (classes.value.length > 0 && classes.value?.filter(c => c.hash === selectedClass.value)?.length === 0) {
+    selectedClass.value = classes.value[0].hash
   }
 
   interval.value = setInterval(updateClasses, 1000)
@@ -71,9 +71,7 @@ await updateUser()
 
 <template>
   <Html class="h-full scroll-smooth">
-
-  <Body class="h-full bg-white dark:bg-zinc-900" />
-
+    <Body class="h-full bg-white dark:bg-zinc-900" />
   </Html>
 
   <div class="min-h-full">

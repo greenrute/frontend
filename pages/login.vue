@@ -52,14 +52,16 @@ const login = async () => {
     .then(async r => {
       const date = new Date()
       date.setMonth(date.getMonth() + 6)
-      useCookie('token', {
+      const token = useCookie('token', {
         expires: date,
         sameSite: true,
-      }).value = (r as apiResponse<apiResponseToken>).data?.token?.token || null
-      useCookie<UserCookie>('user', {
+      })
+      token.value = (r as apiResponse<apiResponseToken>).data?.token?.token || null
+      const user = useCookie<UserCookie>('user', {
         expires: date,
         sameSite: true,
-      }).value = {
+      })
+      user.value = {
         id: (r as apiResponse<apiResponseUser>).data?.user?.id,
         email: (r as apiResponse<apiResponseUser>).data?.user?.email,
         name: (r as apiResponse<apiResponseUser>).data?.user?.name,
