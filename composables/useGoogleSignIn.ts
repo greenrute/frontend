@@ -15,7 +15,18 @@ export const useGoogleSignIn = () => {
       forceRegister.value = 1
     }
 
-    await $fetch('/users/google', {
+    const date = new Date()
+    date.setMonth(date.getMonth() + 6)
+    const token = useCookie('token', {
+      expires: date,
+      sameSite: true,
+    })
+    const user = useCookie<UserCookie>('user', {
+      expires: date,
+      sameSite: true,
+    })
+
+    await $fetch<apiResponse<apiResponseLogin>>('/users/google', {
       method: 'POST',
       query: { force: forceLogin.value, forceRegister: forceRegister.value },
       headers: { 'Accept-Language': locale.value },
@@ -79,22 +90,12 @@ export const useGoogleSignIn = () => {
         forceLogin.value = 0
         forceRegister.value = 0
 
-        const date = new Date()
-        date.setMonth(date.getMonth() + 6)
-        const token = useCookie('token', {
-          expires: date,
-          sameSite: true,
-        })
-        token.value = (r as apiResponse<apiResponseToken>).data?.token?.token || null
-        const user = useCookie<UserCookie>('user', {
-          expires: date,
-          sameSite: true,
-        })
+        token.value = r.data?.token?.token || null
         user.value = {
-          id: (r as apiResponse<apiResponseUser>).data?.user?.id,
-          email: (r as apiResponse<apiResponseUser>).data?.user?.email,
-          name: (r as apiResponse<apiResponseUser>).data?.user?.name,
-          picture: (r as apiResponse<apiResponseUser>).data?.user?.picture,
+          id: r.data?.user?.id,
+          email: r.data?.user?.email,
+          name: r.data?.user?.name,
+          picture: r.data?.user?.picture,
         }
         await navigateTo('/dashboard')
         setTimeout(() => {

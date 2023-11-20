@@ -24,6 +24,29 @@ declare interface apiResponseUser {
   }
 }
 
+declare interface apiResponseLogin {
+  user: {
+    id: number
+    email: string
+    name: string
+    picture: string
+    password: string
+    google_id: string
+    created_at: string
+    updated_at: string
+    token: apiResponseToken
+  }
+  token: {
+    id: number
+    user_id: number
+    email: string
+    token: string
+    expiry: string
+    created_at: string
+    updated_at: string
+  }
+}
+
 declare interface apiResponseClass {
   id: number
   name: string
