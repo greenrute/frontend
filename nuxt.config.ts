@@ -8,12 +8,20 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxt/image',
     '@vueuse/nuxt',
+    'nuxt-simple-robots',
+    'nuxt-simple-sitemap',
   ],
   runtimeConfig: {
     public: {
       gsiClientID: '',
       apiBase: 'https://api.greenrute.com/',
     },
+  },
+  site: {
+    url: 'https://greenrute.com',
+  },
+  sitemap: {
+    exclude: ['/c/**', '/classes/**', '/settings', '/homework', '/dashboard', '/profile', '/notifications']
   },
   colorMode: {
     classSuffix: '',
@@ -35,7 +43,7 @@ export default defineNuxtConfig({
         files: ['./de/general.yaml', './de/homepage.yaml'],
       },
       {
-        code: 'uk',
+        code: 'ua',
         iso: 'uk-UA',
         name: 'Українська',
         icon: 'Ukrainian',
@@ -43,8 +51,8 @@ export default defineNuxtConfig({
       },
     ],
     langDir: 'locales',
-    strategy: 'prefix_and_default',
-    defaultLocale: 'en',
+    strategy: 'prefix_except_default',
+    defaultLocale: 'ua',
     detectBrowserLanguage: {
       redirectOn: 'root',
     },
