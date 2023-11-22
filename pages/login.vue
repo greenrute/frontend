@@ -10,7 +10,7 @@ const { t, locale } = useI18n()
 const localePath = useLocalePath()
 
 useServerSeoMeta({
-  title: t('login', 0) + ' - GreenRute',
+  ogTitle: t('login', 0) + ' - GreenRute',
 })
 
 const googleSignIn = useGoogleSignIn()

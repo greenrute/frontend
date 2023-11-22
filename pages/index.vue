@@ -7,7 +7,7 @@ definePageMeta({
 const { t } = useI18n()
 
 useServerSeoMeta({
-  title: t('homepage.title'),
+  ogTitle: t('homepage.title'),
 })
 
 const documentEl = ref<Document | null>(null)

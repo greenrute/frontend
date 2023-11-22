@@ -3,7 +3,11 @@ definePageMeta({
   layout: 'main',
 })
 
-const { locale } = useI18n()
+const { t, locale } = useI18n()
+
+useServerSeoMeta({
+  ogTitle: t('menu privacy policy') + ' - GreenRute',
+})
 </script>
 
 <template>
