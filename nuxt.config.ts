@@ -22,10 +22,10 @@ export default defineNuxtConfig({
   },
   sitemap: {
     urls: () => ([
-      '/ua',
-      '/ua/login',
-      '/ua/register',
-      '/ua/privacy-policy',
+      '/uk',
+      '/uk/login',
+      '/uk/register',
+      '/uk/privacy-policy',
       '/en',
       '/en/login',
       '/en/register',
@@ -57,7 +57,7 @@ export default defineNuxtConfig({
         files: ['./de/general.yaml', './de/homepage.yaml'],
       },
       {
-        code: 'ua',
+        code: 'uk',
         iso: 'uk-UA',
         name: 'Українська',
         icon: 'Ukrainian',
