@@ -66,7 +66,7 @@ export default defineNuxtConfig({
     ],
     langDir: 'locales',
     strategy: 'prefix_and_default',
-    defaultLocale: 'ua',
+    defaultLocale: 'uk',
     detectBrowserLanguage: {
       redirectOn: 'root',
     },
