@@ -13,6 +13,19 @@ useServerSeoMeta({
   ogTitle: t('login', 0) + ' - GreenRute',
 })
 
+const date = new Date()
+date.setMonth(date.getMonth() + 6)
+
+const token = useCookie('token', {
+  expires: date,
+  sameSite: true,
+})
+
+const user = useCookie<UserCookie>('user', {
+  expires: date,
+  sameSite: true,
+})
+
 const googleSignIn = useGoogleSignIn()
 const googleSignInButton = ref<HTMLDivElement | null>(null)
 
@@ -50,16 +63,8 @@ const login = async () => {
     baseURL: useRuntimeConfig().public.apiBase,
   })
     .then(async r => {
-      const date = new Date()
-      date.setMonth(date.getMonth() + 6)
-      useCookie('token', {
-        expires: date,
-        sameSite: true,
-      }).value = r.data?.token?.token || null
-      useCookie<UserCookie>('user', {
-        expires: date,
-        sameSite: true,
-      }).value = {
+      token.value = r.data?.token?.token || null
+      user.value = {
         id: r.data?.user?.id,
         email: r.data?.user?.email,
         name: r.data?.user?.name,

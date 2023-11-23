@@ -53,7 +53,6 @@ const deleteHandler = async () => {
     </NuxtLink>
 
     <nav class="absolute left-1/2 -translate-x-1/2">
-      {{ route.name }}
       <ul class="flex items-center gap-4">
         <li>
           <NuxtLink :to="localePath(`/c/${currentClass?.hash}`)" :class="route.name?.toString().includes('c-hash___') ? 'font-bold' : ''">{{ $t('menu.schedule') }}</NuxtLink>

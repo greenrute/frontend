@@ -13,7 +13,14 @@ const selectedClass = useCookie('selectedClass')
 const openSidebar = () => sidebarOpen.value = true
 const closeSidebar = () => sidebarOpen.value = false
 const interval = ref<NodeJS.Timeout | undefined>(undefined)
-const user = useCookie<UserCookie>('user')
+
+const date = new Date()
+date.setMonth(date.getMonth() + 6)
+
+const user = useCookie<UserCookie>('user', {
+  expires: date,
+  sameSite: true,
+})
 
 const navigation: NavMenuItem[] = [
   { name: 'menu.schedule', href: '/dashboard', icon: HomeIcon },
@@ -53,10 +60,6 @@ const updateUser = async () => {
 
 onMounted(async () => {
   await updateUser()
-
-  if (classes.value.length > 0 && classes.value?.filter(c => c.hash === selectedClass.value)?.length === 0) {
-    selectedClass.value = classes.value[0].hash
-  }
 
   interval.value = setInterval(updateClasses, 1000)
 })
