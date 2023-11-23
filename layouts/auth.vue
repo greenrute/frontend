@@ -9,7 +9,6 @@ const config = useRuntimeConfig()
 const localePath = useLocalePath()
 const currentClass = useCurrentClass()
 const sidebarOpen = ref<boolean>(false)
-const selectedClass = useCookie('selectedClass')
 const openSidebar = () => sidebarOpen.value = true
 const closeSidebar = () => sidebarOpen.value = false
 const interval = ref<NodeJS.Timeout | undefined>(undefined)

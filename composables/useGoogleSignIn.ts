@@ -10,6 +10,19 @@ export const useGoogleSignIn = () => {
   const forceLogin = useState('forceLogin')
   const forceRegister = useState('forceRegister')
 
+  const date = new Date()
+  date.setMonth(date.getMonth() + 6)
+
+  const token = useCookie('token', {
+    expires: date,
+    sameSite: true,
+  })
+
+  const user = useCookie<UserCookie>('user', {
+    expires: date,
+    sameSite: true,
+  })
+
   const makeRequest = async (res: GSIResponse) => {
     if (forceRegister.value !== 1 && useRoute().name === 'register') {
       forceRegister.value = 1
@@ -79,16 +92,8 @@ export const useGoogleSignIn = () => {
         forceLogin.value = 0
         forceRegister.value = 0
 
-        const date = new Date()
-        date.setMonth(date.getMonth() + 6)
-        useCookie('token', {
-          expires: date,
-          sameSite: true,
-        }).value = r.data?.token?.token || null
-        useCookie<UserCookie>('user', {
-          expires: date,
-          sameSite: true,
-        }).value = {
+        token.value = r.data?.token?.token || null
+        user.value = {
           id: r.data?.user?.id,
           email: r.data?.user?.email,
           name: r.data?.user?.name,
