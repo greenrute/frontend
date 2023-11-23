@@ -53,12 +53,13 @@ const deleteHandler = async () => {
     </NuxtLink>
 
     <nav class="absolute left-1/2 -translate-x-1/2">
+      {{ route.name }}
       <ul class="flex items-center gap-4">
         <li>
-          <NuxtLink :to="localePath(`/c/${currentClass?.hash}`)" :class="route.name === 'c-hash' ? 'font-bold' : ''">{{ $t('menu.schedule') }}</NuxtLink>
+          <NuxtLink :to="localePath(`/c/${currentClass?.hash}`)" :class="route.name?.toString().includes('c-hash___') ? 'font-bold' : ''">{{ $t('menu.schedule') }}</NuxtLink>
         </li>
         <li>
-          <NuxtLink :to="localePath(`/c/${currentClass?.hash}/people`)" :class="route.name === 'c-hash-people' ? 'font-bold' : ''">{{ $t('menu.people') }}</NuxtLink>
+          <NuxtLink :to="localePath(`/c/${currentClass?.hash}/people`)" :class="route.name?.toString().includes('c-hash-people___') ? 'font-bold' : ''">{{ $t('menu.people') }}</NuxtLink>
         </li>
       </ul>
     </nav>
@@ -66,14 +67,14 @@ const deleteHandler = async () => {
     <div v-if="user.isAdmin" class="flex items-center gap-1.5">
       <NuxtLink v-if="user.isOwner" :to="localePath(`/c/${currentClass?.hash}/edit`)" class="text-gray-600 hover:text-gray-800 dark:text-zinc-200 dark:hover:text-white rounded-full p-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500">
         <span class="sr-only">{{ $t('menu.edit class info') }}</span>
-        <InformationCircleSolidIcon class="h-6 w-6 text-gray-800 dark:text-white" aria-hidden="true" v-if="route.name === 'c-hash-edit'" />
+        <InformationCircleSolidIcon class="h-6 w-6 text-gray-800 dark:text-white" aria-hidden="true" v-if="route.name?.toString().includes('c-hash-edit___')" />
         <InformationCircleOutlineIcon class="h-6 w-6" aria-hidden="true" v-else />
       </NuxtLink>
       <Menu as="div" class="relative text-left">
         <div>
           <MenuButton class="flex p-1 items-center rounded-full text-gray-600 hover:text-gray-800 dark:text-zinc-200 dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500">
             <span class="sr-only">{{ $t('menu.options') }}</span>
-            <PencilSquareSolidIcon class="h-5.5 w-5.5 -mt-0.5" aria-hidden="true" v-if="route.name === 'c-hash-schedule' || route.name === 'c-hash-timetable'" />
+            <PencilSquareSolidIcon class="h-5.5 w-5.5 -mt-0.5" aria-hidden="true" v-if="route.name?.toString().includes('c-hash-schedule___') || route.name?.toString().includes('c-hash-timetable___')" />
             <PencilSquareOutlineIcon class="h-5.5 w-5.5 -mt-0.5" aria-hidden="true" v-else />
           </MenuButton>
         </div>

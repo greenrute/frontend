@@ -43,7 +43,7 @@ const switchTheme = () => {
         <h3 class="text-lg truncate">{{ currentClass?.name }}</h3>
       </NuxtLink>
     </template>
-    <template v-else-if="currentClass && route.name?.toString()?.includes('dashboard')">
+    <template v-else-if="currentClass && route.name?.toString()?.includes('dashboard___')">
       <div class="flex items-center gap-2 min-w-0">
         <div class="h-3 w-3 rounded-full shrink-0" :style="{ backgroundColor: currentClass?.color }" />
         <h3 class="text-lg truncate">{{ currentClass?.name }}</h3>
@@ -54,19 +54,19 @@ const switchTheme = () => {
       <div class="flex items-center">
         <NuxtLink :to="`/c/${currentClass?.hash}/people`" class="p-2 -mr-0.5">
           <span class="sr-only">{{ $t('menu.people') }}</span>
-          <UsersSolidIcon class="h-5.5 w-5.5 text-gray-800 dark:text-white" aria-hidden="true" v-if="route.name === 'c-hash-people'" />
+          <UsersSolidIcon class="h-5.5 w-5.5 text-gray-800 dark:text-white" aria-hidden="true" v-if="route.name.toString().includes('c-hash-people___')" />
           <UsersOutlineIcon class="h-5.5 w-5.5 text-gray-600 dark:text-zinc-200" aria-hidden="true" v-else />
         </NuxtLink>
         <NuxtLink :to="`/c/${currentClass?.hash}/edit`" class="p-2">
           <span class="sr-only">{{ $t('menu.edit class info') }}</span>
-          <InformationCircleSolidIcon class="h-6 w-6 text-gray-800 dark:text-white" aria-hidden="true" v-if="route.name === 'c-hash-edit'" />
+          <InformationCircleSolidIcon class="h-6 w-6 text-gray-800 dark:text-white" aria-hidden="true" v-if="route.name.toString().includes('c-hash-edit___')" />
           <InformationCircleOutlineIcon class="h-6 w-6 text-gray-600 dark:text-zinc-200" aria-hidden="true" v-else />
         </NuxtLink>
         <Menu as="div" class="relative text-left">
           <div>
             <MenuButton class="flex p-1 items-center rounded-full text-gray-600 hover:text-gray-800 dark:text-zinc-200 dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500">
               <span class="sr-only">{{ $t('menu.options') }}</span>
-              <PencilSquareSolidIcon class="h-5.5 w-5.5 text-gray-800 dark:text-white -mt-0.5" aria-hidden="true" v-if="route.name === 'c-hash-schedule' || route.name === 'c-hash-timetable'" />
+              <PencilSquareSolidIcon class="h-5.5 w-5.5 text-gray-800 dark:text-white -mt-0.5" aria-hidden="true" v-if="route.name.toString().includes('c-hash-schedule___') || route.name.toString().includes('c-hash-timetable___')" />
               <PencilSquareOutlineIcon class="h-5.5 w-5.5 text-gray-600 dark:text-zinc-200 -mt-0.5" aria-hidden="true" v-else />
             </MenuButton>
           </div>
@@ -92,7 +92,7 @@ const switchTheme = () => {
         </Menu>
       </div>
     </template>
-    <template v-else-if="currentClass && route.name?.toString()?.includes('dashboard')">
+    <template v-else-if="currentClass && route.name?.toString()?.includes('dashboard___')">
       <div class="max-sm:hidden w-max flex justify-end shrink-0">
         <MainButton variant="outline" disabled class="!opacity-100 my-2 ml-2 px-0">{{ currentLesson.timeToEnd }}</MainButton>
       </div>

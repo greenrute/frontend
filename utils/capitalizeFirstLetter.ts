@@ -13,5 +13,5 @@ export const capitalizeFirstLetter = (str: string, endWith: '' | 'dot' | 'exclam
       break
   }
 
-  return str.charAt(0).toUpperCase() + str.slice(1) + end
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() + end
 }
