@@ -123,7 +123,7 @@ const submit = async () => {
                       <ComboboxOption v-for="lesson in filteredLessons" :key="lesson.id" :value="lesson" as="template" v-slot="{ active, selected }">
                         <li class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-800 dark:text-white" :class="active ? 'bg-gray-100 dark:bg-zinc-800' : ''">
                           <div class="flex items-center">
-                            <component :is="'Emoji' + lesson.icon" class="h-4 w-4 shrink-0" />
+                            <component :is="'Emoji' + capitalizeFirstLetter(lesson.icon)" class="h-4 w-4 shrink-0" />
                             <span :class="['ml-3 truncate', selected && 'font-semibold']">
                               {{ lesson.name }}
                             </span>
