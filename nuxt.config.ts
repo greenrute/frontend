@@ -68,7 +68,7 @@ export default defineNuxtConfig({
     strategy: 'prefix_and_default',
     defaultLocale: 'uk',
     detectBrowserLanguage: {
-      redirectOn: 'root',
+      redirectOn: 'no prefix',
     },
     vueI18n: './i18n.config.ts',
   },
