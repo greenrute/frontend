@@ -142,5 +142,5 @@ await updateUser()
   </div>
 
   <Notification />
-  <Welcome />
+  <!-- <Welcome /> -->
 </template>
