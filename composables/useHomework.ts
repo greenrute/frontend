@@ -7,6 +7,16 @@ export const useHomework = async (day: DayName, tomorrow: boolean = false) => {
   const currentClass = useCurrentClass()
   const currentLesson = useCurrentLesson(true, toRef(getNearestDay(getDayIndex(day))))
 
+  if (!currentClass.value?.hash) {
+    return {
+      homework: [],
+      percentOfDoneHomework: computed<number[]>(() => []),
+      changeTaskStatus: async (tastId: number) => {},
+      add: async (homework: NewHomework) => {},
+      pending: ref(false),
+    }
+  }
+
   const url = tomorrow ? `/classes/${currentClass.value?.id}/homework/by-days/${getDayIndex(day)},${getDayIndex(day)+1 > 5 ? 1 : getDayIndex(day)+1}` : `/classes/${currentClass.value?.id}/homework/by-day/${getDayIndex(day)}`
   const { data, refresh } = await useFetch<apiResponse<{ homeworks: { [key: string]: { [key: string]: ARHomework[] } } }>>(url, {
     method: 'GET',
