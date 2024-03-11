@@ -70,7 +70,7 @@ const login = async () => {
         name: r.data?.user?.name,
         picture: r.data?.user?.picture,
       }
-      await navigateTo('/dashboard')
+      await navigateTo(localePath('/dashboard'))
       setTimeout(() => {
         pushNotification({
           status: 'success',

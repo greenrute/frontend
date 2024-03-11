@@ -1,5 +1,6 @@
 export const useAuthentication = () => {
   const { t, locale } = useI18n()
+  const localePath = useLocalePath()
 
   return {
     logout: async (): Promise<void> => {
@@ -12,7 +13,7 @@ export const useAuthentication = () => {
         .then(async r => {
           useCookie('token').value = null
           useCookie('user').value = null
-          await navigateTo('/login')
+          await navigateTo(localePath('/login'))
           setTimeout(() => {
             pushNotification({
               status: 'success',

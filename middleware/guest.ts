@@ -1,4 +1,6 @@
 export default defineNuxtRouteMiddleware(() => {
+  const localePath = useLocalePath()
+
   const date = new Date()
   date.setMonth(date.getMonth() + 6)
   
@@ -8,6 +10,6 @@ export default defineNuxtRouteMiddleware(() => {
   })
 
   if (token.value && token.value !== '') {
-    return navigateTo('/dashboard')
+    return navigateTo(localePath('/dashboard'))
   }
 })

@@ -7,6 +7,7 @@ interface GSIResponse {
 
 export const useGoogleSignIn = () => {
   const { t, locale } = useI18n()
+  const localePath = useLocalePath()
   const forceLogin = useState('forceLogin')
   const forceRegister = useState('forceRegister')
 
@@ -99,7 +100,7 @@ export const useGoogleSignIn = () => {
           name: r.data?.user?.name,
           picture: r.data?.user?.picture,
         }
-        await navigateTo('/dashboard')
+        await navigateTo(localePath('/dashboard'))
         setTimeout(() => {
           pushNotification({
             status: 'success',
