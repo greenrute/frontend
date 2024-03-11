@@ -163,7 +163,7 @@ export const useGoogleSignIn = () => {
       initGSIScript().then(() => {
         (window as any).google.accounts.id.renderButton(
           ref.value,
-          {type: 'standard', theme, size: 'large', text, shape: 'pill', logo_alignment, width: ref.value.offsetWidth},
+          {type: 'standard', theme, size: 'large', text, shape: 'pill', logo_alignment, width: ref.value?.offsetWidth},
         )
       })
     },
