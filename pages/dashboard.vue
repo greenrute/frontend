@@ -85,7 +85,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
                 <div v-for="(lesson, index) in currentClass?.schedule[new Date().getDay() - 1].lessons" :key="lesson.uuid" class="flex items-center justify-between gap-1.5 py-1.5 px-3 transition-all ease-out duration-300">
                   <div class="grid grid-cols-[1fr_auto_auto] items-center gap-2">
                     <div class="text-base text-gray-400 dark:text-zinc-400 w-2.5">{{ index + 1 }}.</div>
-                    <component :is="'Emoji' + capitalizeFirstLetter(lesson.icon)" class="h-4.5 w-4.5 shrink-0" />
+                    <component :is="'Emoji' + lesson.icon" class="h-4.5 w-4.5 shrink-0" />
                     <div class="text-lg truncate">{{ lesson.name }}</div>
                   </div>
                 </div>

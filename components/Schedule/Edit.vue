@@ -159,7 +159,7 @@ watch(lessons, async (newSchedule, oldSchedule) => {
               <div class="flex-1 flex items-stretch justify-between">
                 <div class="grid grid-cols-[1fr_auto_auto] items-center gap-2 py-1.5 px-3 cursor-default transition-all ease-out duration-300" :class="editMode ? '-translate-x-4' : ''">
                   <div class="text-sm text-gray-400 dark:text-zinc-400 w-2.5 transition-all ease-out duration-300" :class="editMode ? 'scale-0' : ''">{{ index + 1 }}.</div>
-                  <component :is="'Emoji' + capitalizeFirstLetter(lesson.icon)" class="h-4 w-4 shrink-0" />
+                  <component :is="'Emoji' + lesson.icon" class="h-4 w-4 shrink-0" />
                   <div class="text-base truncate">{{ lesson.name }}</div>
                 </div>
                 <button class="shrink-0 flex justify-center items-center w-10 -mr-13 transition-all ease-out duration-200 text-gray-200 dark:text-zinc-300 hover:text-white dark:hover:text-zinc-100 bg-red-500 dark:bg-red-600" :class="editMode ? 'invisible' : ''" tabindex="-1" @click="deleteHandler(index)">

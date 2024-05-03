@@ -8,6 +8,21 @@ const warningCookie = useCookie<boolean>('beta-warning', {
   sameSite: true,
   expires: date,
 })
+
+import { provideUseId } from '@headlessui/vue'
+
+provideUseId(() => useId())
+
+import { isIOS } from '@vueuse/core'
+const event = useRequestEvent()
+
+if (event?.node.req.headers['user-agent']?.includes('iPhone') || isIOS) {
+  useHead({
+    meta: [
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' },
+    ],
+  })
+}
 </script>
 
 <template>
@@ -15,8 +30,8 @@ const warningCookie = useCookie<boolean>('beta-warning', {
     <span class="w-full">⚠️&nbsp;{{ $t('general.warning') }}</span>
     <button @click="warningCookie = true">❎</button>
   </div> -->
+  <NuxtLoadingIndicator color="#16a34a" :throttle="0" />
   <NuxtLayout>
-    <NuxtLoadingIndicator color="#16a34a" :throttle="0" />
     <NuxtPage />
   </NuxtLayout>
 </template>

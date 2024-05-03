@@ -24,7 +24,7 @@
     "@vueuse/nuxt": "^10.9.0",
     "canvas-confetti": "^1.9.2",
     "focus-visible": "^5.2.0",
-    "nuxt": "^3.10.3",
+    "nuxt": "^3.11.2",
     "nuxt-simple-robots": "^4.0.0-rc.14",
     "nuxt-simple-sitemap": "^4.4.1",
     "object-hash": "^3.0.0",
