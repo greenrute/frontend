@@ -193,7 +193,7 @@ const deleteHomework = async (id: number, task: string) => {
                       <div v-show="showOptions" class="-mx-0.25 px-0.25">
                         <MainTextInput class="!text-sm !w-[calc(100%+2px)] !rounded-none -m-0.25 !ring-inset" v-model="newHomework.description" :placeholder="$t('homework.placeholders.description')" />
                         <HomeworkDatePicker class="!text-sm !w-[calc(100%+2px)] !rounded-none -m-0.25 !ring-inset" v-model="newHomework.date" :day-index="getDayIndex(day)" />
-                        <HomeworkLessonPicker class="!text-sm !w-[calc(100%+2px)] !rounded-none -m-0.25 !ring-inset" v-model="newHomework.lesson" :day-index="getDayIndex(day)" />
+                        <HomeworkLessonPickerNew class="!text-sm !w-[calc(100%+2px)] !rounded-none -m-0.25 !ring-inset" v-model="newHomework.lesson" :day-index="getDayIndex(day)" />
                         <SwitchGroup as="div" class="flex items-center justify-between w-[calc(100%+2px)] rounded-none -m-0.25 mb-0 border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-2 px-3">
                           <span class="flex flex-grow flex-col">
                             <SwitchLabel as="span" class="text-sm leading-6" passive>{{ $t('homework.public') }}</SwitchLabel>
