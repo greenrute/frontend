@@ -42,7 +42,7 @@ const newHomework = reactive<NewHomework>({
 })
 
 watch(newHomework, newData => {
-  if (newData.date !== homeworkDate.value) {
+  if (`${newData.date.getDate()}.${newData.date.getMonth()+1}.${newData.date.getFullYear()}` !== `${homeworkDate.value.getDate()}.${homeworkDate.value.getMonth()+1}.${homeworkDate.value.getFullYear()}`) {
     homeworkDate.value = newData.date
     newHomework.lesson = currentLessonDetails.value.lessonDetails as Lesson
   }
