@@ -10,6 +10,7 @@ export const useHomework = async (day: DayName, tomorrow: boolean = false) => {
   if (!currentClass.value?.hash) {
     return {
       homework: computed<{ [key: string]: { [key: string]: ARHomework[] } }>(() => [].reduce(() => ({}), {})),
+      refresh: (opts?: undefined) => new Promise<void>((resolve, reject) => {}),
       percentOfDoneHomework: (day: { [key: string]: ARHomework[] }) => 0,
       changeTaskStatus: async (tastId: number) => {},
       add: async (homework: NewHomework) => {},

@@ -184,19 +184,19 @@ const deleteHomework = async (id: number, task: string) => {
                 <div class="mt-5">
                   <MainForm @validated="submit" class="bg-gray-100 dark:bg-zinc-800 py-3 px-3 -mx-1 rounded-3xl flex flex-col items-stretch [&_*:has(:focus)]:!z-20 [&_*:has(.on-top)]:!z-20 [&>div:nth-child(2):has(:focus)]:!z-40 [&>div:nth-child(2):has(.on-top)]:!z-40 [&.is-validated_*:has(:invalid)]:!z-30">
                     <div class="w-full flex justify-stretch [&>div]:w-full [&>div]:-mx-0.25 [&>div]:-mt-0.25 [&:has(:first-child:not(:focus)>*:last-child)]:z-20">
-                      <MainTextInput class="!rounded-tl-2xl !rounded-b-none !rounded-r-none !ring-inset" v-model="newHomework.text" :placeholder="$t('homework.placeholders.task')" required />
+                      <MainTextInput class="!text-sm !rounded-tl-2xl !rounded-b-none !rounded-r-none !ring-inset" v-model="newHomework.text" :placeholder="$t('homework.placeholders.task')" required />
                       <MainButton type="button" @click="showOptions = !showOptions" variant="outline" class="z-10 focus:z-20 active:z-20 rounded-tr-2xl rounded-l-none rounded-b-none bg-white dark:bg-zinc-900 ring-inset ring-gray-200 dark:ring-zinc-700 -mx-0.25 -mt-0.25">
                         <ChevronLeftIcon class="h-5.5 w-5.h-5.5 transition-all ease-out duration-300" :class="showOptions ? '-rotate-90' : ''" />
                       </MainButton>
                     </div>
                     <TransitionCollapse>
                       <div v-show="showOptions" class="-mx-0.25 px-0.25">
-                        <MainTextInput class="!w-[calc(100%+2px)] !rounded-none -m-0.25 !ring-inset" v-model="newHomework.description" :placeholder="$t('homework.placeholders.description')" />
-                        <HomeworkDatePicker class="!w-[calc(100%+2px)] !rounded-none -m-0.25 !ring-inset" v-model="newHomework.date" :day-index="getDayIndex(day)" />
-                        <HomeworkLessonPicker class="!w-[calc(100%+2px)] !rounded-none -m-0.25 !ring-inset" v-model="newHomework.lesson" :day-index="getDayIndex(day)" />
+                        <MainTextInput class="!text-sm !w-[calc(100%+2px)] !rounded-none -m-0.25 !ring-inset" v-model="newHomework.description" :placeholder="$t('homework.placeholders.description')" />
+                        <HomeworkDatePicker class="!text-sm !w-[calc(100%+2px)] !rounded-none -m-0.25 !ring-inset" v-model="newHomework.date" :day-index="getDayIndex(day)" />
+                        <HomeworkLessonPicker class="!text-sm !w-[calc(100%+2px)] !rounded-none -m-0.25 !ring-inset" v-model="newHomework.lesson" :day-index="getDayIndex(day)" />
                         <SwitchGroup as="div" class="flex items-center justify-between w-[calc(100%+2px)] rounded-none -m-0.25 mb-0 border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-2 px-3">
                           <span class="flex flex-grow flex-col">
-                            <SwitchLabel as="span" class="sm:text-sm leading-6" passive>{{ $t('homework.public') }}</SwitchLabel>
+                            <SwitchLabel as="span" class="text-sm leading-6" passive>{{ $t('homework.public') }}</SwitchLabel>
                           </span>
                           <Switch v-model="newHomework.public" :class="[newHomework.public ? 'bg-green-600' : 'bg-gray-200 dark:bg-zinc-700', 'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-800']">
                             <span aria-hidden="true" :class="[newHomework.public ? 'translate-x-5 dark:bg-zinc-100' : 'translate-x-0 dark:bg-zinc-400', 'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out']" />
