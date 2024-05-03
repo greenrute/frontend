@@ -18,7 +18,7 @@ useServerSeoMeta({
   <MainHeader />
   <main>
     <MainContainer class="max-w-prose py-10">
-      <component :is="'PrivacyPolicy' + capitalizeFirstLetter(locale)" />
+      <component :is="'PrivacyPolicy' + locale.toUpperCase()" />
     </MainContainer>
   </main>
   <MainFooter />
