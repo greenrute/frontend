@@ -23,6 +23,8 @@ if (event?.node.req.headers['user-agent']?.includes('iPhone') || isIOS) {
     ],
   })
 }
+
+import { SpeedInsights } from '@vercel/speed-insights/nuxt'
 </script>
 
 <template>
@@ -34,4 +36,5 @@ if (event?.node.req.headers['user-agent']?.includes('iPhone') || isIOS) {
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
+  <SpeedInsights />
 </template>
