@@ -36,5 +36,7 @@ import { SpeedInsights } from '@vercel/speed-insights/nuxt'
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
-  <SpeedInsights />
+  <ClientOnly>
+    <SpeedInsights />
+  </ClientOnly>
 </template>
