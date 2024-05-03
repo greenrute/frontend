@@ -12,6 +12,8 @@ useServerSeoMeta({
   ogDescription: t('meta description'),
   ogImage: `https://greenrute.com/_vercel/image?url=/img/screenshots/dark/${locale.value}/dashboard.png&w=768&q=100`,
 })
+
+import { SpeedInsights } from '@vercel/speed-insights/nuxt'
 </script>
 
 <template>
@@ -29,6 +31,7 @@ useServerSeoMeta({
 
   <slot />
 
+  <SpeedInsights />
   <Notification />
   <Prompt />
 </template>
