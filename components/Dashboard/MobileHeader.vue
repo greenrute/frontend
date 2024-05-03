@@ -38,7 +38,7 @@ const switchTheme = () => {
       <Bars3Icon class="h-6 w-6" aria-hidden="true" />
     </button>
     <template v-if="currentClass && route.name?.toString()?.includes('c-hash')">
-      <NuxtLink :to="`/c/${currentClass?.hash}`" class="flex items-center gap-2 min-w-0">
+      <NuxtLink :to="localePath(`/c/${currentClass?.hash}`)" class="flex items-center gap-2 min-w-0">
         <div class="h-3 w-3 rounded-full shrink-0" :style="{ backgroundColor: currentClass?.color }" />
         <h3 class="text-lg truncate">{{ currentClass?.name }}</h3>
       </NuxtLink>
@@ -52,12 +52,12 @@ const switchTheme = () => {
     <div class="flex flex-1" />
     <template v-if="currentClass && route.name?.toString()?.includes('c-hash')">
       <div class="flex items-center">
-        <NuxtLink :to="`/c/${currentClass?.hash}/people`" class="p-2 -mr-0.5">
+        <NuxtLink :to="localePath(`/c/${currentClass?.hash}/people`)" class="p-2 -mr-0.5">
           <span class="sr-only">{{ $t('menu.people') }}</span>
           <UsersSolidIcon class="h-5.5 w-5.5 text-gray-800 dark:text-white" aria-hidden="true" v-if="route.name.toString().includes('c-hash-people___')" />
           <UsersOutlineIcon class="h-5.5 w-5.5 text-gray-600 dark:text-zinc-200" aria-hidden="true" v-else />
         </NuxtLink>
-        <NuxtLink :to="`/c/${currentClass?.hash}/edit`" class="p-2">
+        <NuxtLink :to="localePath(`/c/${currentClass?.hash}/edit`)" class="p-2">
           <span class="sr-only">{{ $t('menu.edit class info') }}</span>
           <InformationCircleSolidIcon class="h-6 w-6 text-gray-800 dark:text-white" aria-hidden="true" v-if="route.name.toString().includes('c-hash-edit___')" />
           <InformationCircleOutlineIcon class="h-6 w-6 text-gray-600 dark:text-zinc-200" aria-hidden="true" v-else />
