@@ -77,7 +77,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
         <div class="h-full">
           <div class="pl-3 pr-2.5 font-medium mb-3 py-0.25 text-lg flex items-center justify-between">
             <span :style="{ color: currentClass?.color }">{{ $t(`days.${currentClass?.schedule[new Date().getDay() - 1].day}`) }}</span>
-            <span>{{ useDateFormat(date, 'DD.MM').value }}</span>
+            <span>{{ useDateFormat(now, 'DD.MM').value }}</span>
           </div>
           <div class="relative h-full -m-2 rounded-lg bg-white/50 dark:bg-zinc-900/40 backdrop-blur-sm">
             <div class="flex flex-col">
