@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
-import type { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables'
-const { locale, locales, setLocale } = useI18n()
 
 const date = new Date()
 date.setMonth(date.getMonth() + 6)

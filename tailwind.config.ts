@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss'
-const defaultTheme = require('tailwindcss/defaultTheme')
+import defaultTheme from 'tailwindcss/defaultTheme'
 
 module.exports = <Partial<Config>>{
   theme: {

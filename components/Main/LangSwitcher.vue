@@ -2,7 +2,8 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { LanguageIcon } from '@heroicons/vue/20/solid'
 import { MainButton } from '#components'
-import type { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables'
+import type { LocaleObject } from '@nuxtjs/i18n'
+
 
 const { locale, locales, setLocale } = useI18n()
 

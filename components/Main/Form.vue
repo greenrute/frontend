@@ -7,7 +7,7 @@ const emit = defineEmits<{
 
 const validated = ref(false)
 
-const validate = (event: SubmitEvent) => {
+const validate = (event: Event) => {
   if (!(event.target as HTMLFormElement).checkValidity()) {
     event.preventDefault()
     event.stopPropagation()

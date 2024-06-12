@@ -5,11 +5,10 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
-    '@nuxtjs/tailwindcss',
     '@nuxt/image',
     '@vueuse/nuxt',
     'nuxt-simple-robots',
-    'nuxt-simple-sitemap',
+    "@nuxtjs/sitemap"
   ],
   runtimeConfig: {
     public: {
@@ -86,7 +85,15 @@ export default defineNuxtConfig({
     }
   },
   build: {
-    transpile: ['@vuepic/vue-datepicker'],
+    transpile: [
+      '@heroicons/vue',
+      'vue-slicksort',
+      'canvas-confetti',
+      'focus-visible',
+      '@vuepic/vue-datepicker',
+      'object-hash',
+      'tailwindcss',
+    ],
   },
   experimental: {
     payloadExtraction: false,
@@ -98,6 +105,7 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
         { rel: 'manifest', href: '/site.webmanifest' },
+        // @ts-ignore
         { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#16a34a' },
       ],
       meta: [
