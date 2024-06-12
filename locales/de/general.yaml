@@ -198,7 +198,7 @@ profile:
 
 homework:
   empty: Keine Aufgaben
-  add: Hausaufgaben hinzufügen
+  add: Hinzufügen
   placeholders:
     task: "Eine Aufgabe, zum Beispiel: ein Gedicht lernen..."
     description: "Beschreibung, zum Beispiel: auf S. 12..."
