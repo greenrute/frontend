@@ -7,18 +7,21 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxt/image',
     '@vueuse/nuxt',
-    'nuxt-simple-robots',
+    '@nuxtjs/robots',
     "@nuxtjs/sitemap"
   ],
+
   runtimeConfig: {
     public: {
       gsiClientID: '',
       apiBase: 'https://api.greenrute.com/',
     },
   },
+
   site: {
     url: 'https://greenrute.com',
   },
+
   sitemap: {
     urls: () => ([
       '/uk',
@@ -36,28 +39,30 @@ export default defineNuxtConfig({
     ]),
     excludeAppSources: true,
   },
+
   colorMode: {
     classSuffix: '',
   },
+
   i18n: {
     locales: [
       {
         code: 'en',
-        iso: 'en-US',
+        language: 'en-US',
         name: 'English',
         icon: 'English',
         files: ['./en/general.yaml', './en/homepage.yaml'],
       },
       {
         code: 'de',
-        iso: 'de-DE',
+        language: 'de-DE',
         name: 'Deutsch',
         icon: 'German',
         files: ['./de/general.yaml', './de/homepage.yaml'],
       },
       {
         code: 'uk',
-        iso: 'uk-UA',
+        language: 'uk-UA',
         name: 'Українська',
         icon: 'Ukrainian',
         files: ['./uk/general.yaml', './uk/homepage.yaml'],
@@ -71,11 +76,13 @@ export default defineNuxtConfig({
     },
     vueI18n: './i18n.config.ts',
   },
+
   css: [
     '~/assets/css/fonts.css',
     '~/assets/css/animations.css',
     '~/assets/css/datepicker.css',
   ],
+
   postcss: {
     plugins: {
       'postcss-focus-visible': {
@@ -84,6 +91,7 @@ export default defineNuxtConfig({
       autoprefixer: {},
     }
   },
+
   build: {
     transpile: [
       '@heroicons/vue',
@@ -95,9 +103,11 @@ export default defineNuxtConfig({
       'tailwindcss',
     ],
   },
+
   experimental: {
     payloadExtraction: false,
   },
+
   app: {
     head: {
       link: [
@@ -114,7 +124,10 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   devtools: {
     enabled: true,
   },
+
+  compatibilityDate: '2024-10-16',
 })

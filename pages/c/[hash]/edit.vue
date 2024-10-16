@@ -51,7 +51,7 @@ const update = async () => {
         status: 'success',
         message: r.message,
       })
-      await navigateTo(`/c/${currentClass.value?.hash}`)
+      await navigateTo(localePath(`/c/${currentClass.value?.hash}`))
     })
     .catch(error => {
       pushNotification({
@@ -113,7 +113,7 @@ const deleteHandler = async () => {
       <MainTextInput :label="$t('new class.name')" :invalid="$t('the title must not be shorter than n characters', 3)" id="class-name" v-model="newClass.name" required minlength="3" />
       <MainTextArea :label="$t('new class.description')" id="class-description" v-model="newClass.description" />
       <div class="flex justify-between items-center">
-        <MainColorPicker :label="$t('new class.color')" id="class-color" v-model="newClass.color" :colors="mainColors.map(c => c.color)" />
+        <MainColorPicker :label="$t('new class.color')" id="class-color" v-model="newClass.color" :colors="mainColors.map((c: any) => c.color)" />
         <MainButton type="submit" variant="solid" color="green" :disabled="pending">
           <template v-if="!pending">{{ $t('edit.class.button') }}</template>
           <IconLoader v-else class="my-0.5 w-5 h-5 motion-safe:animate-loader" />
