@@ -1,5 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-// noinspection JSUnusedGlobalSymbols
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/color-mode',
@@ -124,10 +123,6 @@ export default defineNuxtConfig({
       ],
     },
   },
-
-  devtools: {
-    enabled: true,
-  },
-
-  compatibilityDate: '2024-10-16',
+  compatibilityDate: '2024-04-03',
+  devtools: { enabled: true },
 })
