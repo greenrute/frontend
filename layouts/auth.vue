@@ -112,8 +112,8 @@ await updateUser()
               </NuxtLink>
             </h3>
             <div v-if="classes?.length" class="mt-1 space-y-1" role="group" aria-labelledby="desktop-classes-headline">
-              <NuxtLink v-for="classItem in classes" :key="classItem.hash" :to="localePath('/c/' + classItem.hash)" custom v-slot="{ href, navigate, isExactActive }">
-                <a :href="href" @click="navigate" class="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 dark:text-zinc-200 hover:bg-gray-50 dark:hover:bg-zinc-900 hover:text-gray-900 dark:hover:text-white" :aria-current="isExactActive ? 'page' : undefined">
+              <NuxtLink v-for="classItem in classes" :key="classItem.hash" :to="localePath('/c/' + classItem.hash)" custom v-slot="{ href, navigate, isActive, isExactActive }">
+                <a :href="href" @click="navigate" class="group flex items-center rounded-md px-3 py-2 text-sm font-medium" :class="isActive ? 'bg-gray-200 dark:bg-zinc-700 text-gray-900 dark:text-zinc-50' : 'text-gray-700 dark:text-zinc-300 hover:text-gray-900 dark:hover:text-zinc-50 hover:bg-gray-50 dark:hover:bg-zinc-900'" :aria-current="isExactActive ? 'page' : undefined">
                   <span class="w-2.5 h-2.5 mr-3 rounded-full shrink-0" :style="{ backgroundColor: classItem.color }" aria-hidden="true" />
                   <span class="truncate">{{ classItem.name }}</span>
                 </a>
