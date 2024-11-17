@@ -69,6 +69,7 @@ menu:
 
   schedule: Zeitplan
   homework: Hausaufgaben
+  elternportal: ElternPortal
   people: Menschen
 
   my classes: Meine Klassen
@@ -176,7 +177,7 @@ edit:
     button: Aktualisieren
 
 people:
-  students: Klassenkameradenliste
+  students: Mitschüler
   user role: Benutzer-Rolle
   roles:
     owner: Eigentümer:in
