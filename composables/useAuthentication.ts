@@ -21,11 +21,14 @@ export const useAuthentication = () => {
             })
           }, 150)
         })
-        .catch(error => {
+        .catch(async error => {
           pushNotification({
             status: 'error',
             message: error.data?.message || t('could not connect to the server'),
           })
+          useCookie('token').value = null
+          useCookie('user').value = null
+          await navigateTo(localePath('/login'))
         })
     },
   }

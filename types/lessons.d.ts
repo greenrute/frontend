@@ -11,6 +11,7 @@ declare interface Class {
   name: string
   description: string
   color: string
+  country: string
 }
 
 declare interface NavigationItem {

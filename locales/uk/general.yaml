@@ -137,6 +137,11 @@ new class:
   name: Назва класу
   description: Опис класу
   color: Колір класу
+  country: Країна
+
+supported countries:
+  not specified: Не вказано
+  germany: Німеччина
 
 settings:
   default class: Клас за замовчуванням

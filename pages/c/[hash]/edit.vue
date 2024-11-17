@@ -18,6 +18,7 @@ const newClass = reactive<Class>({
   name: currentClass.value?.name as string,
   description: currentClass.value?.description as string,
   color: currentClass.value?.color as string,
+  country: currentClass.value?.country as string,
 })
 
 const update = async () => {
@@ -33,6 +34,7 @@ const update = async () => {
       name: newClass.name,
       description: newClass.description,
       color: newClass.color,
+      country: newClass.country,
     },
     baseURL: config.public.apiBase,
   })
@@ -112,8 +114,11 @@ const deleteHandler = async () => {
     <MainForm @validated="update" class="flex flex-col gap-6">
       <MainTextInput :label="$t('new class.name')" :invalid="$t('the title must not be shorter than n characters', 3)" id="class-name" v-model="newClass.name" required minlength="3" />
       <MainTextArea :label="$t('new class.description')" id="class-description" v-model="newClass.description" />
-      <div class="flex justify-between items-center">
-        <MainColorPicker :label="$t('new class.color')" id="class-color" v-model="newClass.color" :colors="mainColors.map((c: any) => c.color)" />
+      <div class="flex justify-between items-center flex-wrap gap-y-6">
+        <div class="flex gap-6 min-w-0">
+          <MainColorPicker :label="$t('new class.color')" class="shrink-0" id="class-color" v-model="newClass.color" :colors="mainColors.map((c: any) => c.color)" />
+          <MainCountryPicker v-model="newClass.country" class="min-w-0"/>
+        </div>
         <MainButton type="submit" variant="solid" color="green" :disabled="pending">
           <template v-if="!pending">{{ $t('edit.class.button') }}</template>
           <IconLoader v-else class="my-0.5 w-5 h-5 motion-safe:animate-loader" />

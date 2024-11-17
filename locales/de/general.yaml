@@ -17,7 +17,7 @@ menu privacy policy: Datenschutzrichtlinie
 
 # Genehmigung
 login: Anmeldung | Anmelden
-register: Registrierung | Registrieren | Melden Sie sich an
+register: Registrierung | Registrieren | Erstellen Sie ein neues Konto
 logout: Eingang | Hinausgehen
 get started: Registrieren
 for free: kostenlos
@@ -137,6 +137,11 @@ new class:
   name: Klassenname
   description: Klassenbeschreibung
   color: Klassenfarbe
+  country: Land
+
+supported countries:
+  not specified: Nicht angegeben
+  germany: Deutschland
 
 settings:
   default class: Standardklasse

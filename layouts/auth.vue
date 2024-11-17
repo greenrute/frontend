@@ -40,7 +40,9 @@ const updateClasses = async () => {
     .then(r => {
       if (!!r.data?.classes) classes.value = r.data.classes
     })
-    .catch(() => { })
+    .catch((e) => {
+      console.log(e)
+    })
 }
 
 const updateUser = async () => {

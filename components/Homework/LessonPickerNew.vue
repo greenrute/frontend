@@ -27,7 +27,7 @@ const lessons = computed(() => currentClass.value?.schedule[props.dayIndex - 1].
       </ListboxButton>
 
       <transition enter-active-class="transition duration-100 ease-out" enter-from-class="transform scale-95 opacity-0" enter-to-class="transform scale-100 opacity-100" leave-active-class="transition duration-75 ease-in" leave-from-class="transform scale-100 opacity-100" leave-to-class="transform scale-95 opacity-0">
-        <ListboxOptions class="absolute bottom-full z-50 mb-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py py-1 sm:text-sm shadow-lg ring-1 ring-black ring-opacity-5 dark:ring-zinc-700 focus:outline-none origin-top">
+        <ListboxOptions class="absolute bottom-full z-50 mb-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 sm:text-sm shadow-lg ring-1 ring-black ring-opacity-5 dark:ring-zinc-700 focus:outline-none origin-top">
           <ListboxOption v-for="lesson in lessons" :key="lesson.id" :value="lesson" as="template" v-slot="{ active }">
             <li class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-800 dark:text-white" :class="active ? 'bg-gray-100 dark:bg-zinc-800' : ''">
               <div class="flex items-center">

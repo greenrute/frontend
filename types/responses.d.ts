@@ -53,6 +53,7 @@ declare interface apiResponseClass {
   description: string
   color: string
   hash: string
+  country: string
   timetable: {
     day: string
     records: {

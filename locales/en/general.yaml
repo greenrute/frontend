@@ -137,6 +137,11 @@ new class:
   name: Class name
   description: Class description
   color: Class color
+  country: Country
+
+supported countries:
+  not specified: Not specified
+  germany: Germany
 
 settings:
   default class: Default class

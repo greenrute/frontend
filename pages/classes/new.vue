@@ -14,6 +14,7 @@ const newClass = reactive<Class>({
   name: '',
   description: '',
   color: color.value,
+  country: '',
 })
 
 const randomColor = getRandomColor()
@@ -34,6 +35,7 @@ const create = async () => {
       name: newClass.name,
       description: newClass.description,
       color: newClass.color,
+      country: newClass.country,
     },
     baseURL: useRuntimeConfig().public.apiBase,
   })
@@ -47,16 +49,20 @@ const create = async () => {
       })
         .then(r => {
           const classes = useState<apiResponseClass[]>('classes', () => (r as any)?.data?.classes)
-          if (classes.value?.length === 1) {
-            const date = new Date()
-            date.setMonth(date.getMonth() + 6)
-            const selectedClass = useCookie<string>('selectedClass', {
-              expires: date,
-              sameSite: true,
-            })
-            selectedClass.value = classes.value[0].hash
+
+          const date = new Date()
+          date.setMonth(date.getMonth() + 6)
+          const selectedClass = useCookie<string>('selectedClass', {
+            expires: date,
+            sameSite: true,
+          })
+
+          if (!selectedClass.value) {
+            selectedClass.value = (r as any)?.data?.classes[0].hash
+            location.href = localePath('/c/' + selectedClass.value)
+          } else {
+            location.href = localePath('/c/' + (r as any)?.data?.classes[0].hash)
           }
-          location.href = localePath('/dashboard')
         })
       pushNotification({
         status: 'success',
@@ -94,9 +100,12 @@ const create = async () => {
     <MainForm @validated="create" class="flex flex-col gap-6">
       <MainTextInput :label="$t('new class.name')" :invalid="$t('the title must not be shorter than n characters', 3)" id="class-name" v-model="newClass.name" required minlength="3" />
       <MainTextArea :label="$t('new class.description')" id="class-description" v-model="newClass.description" />
-      <div class="flex justify-between items-center">
-        <MainColorPicker :label="$t('new class.color')" id="class-color" v-model="newClass.color" :colors="mainColors.map(c => c.color)" />
-        <MainButton type="submit" variant="solid" color="green" :disabled="pending">
+      <div class="flex justify-between items-center flex-wrap gap-y-6">
+        <div class="flex gap-6 min-w-0">
+          <MainColorPicker :label="$t('new class.color')" class="shrink-0" id="class-color" v-model="newClass.color" :colors="mainColors.map(c => c.color)" />
+          <MainCountryPicker v-model="newClass.country" class="min-w-0"/>
+        </div>
+        <MainButton type="submit" variant="solid" color="green" :disabled="pending" class="max-sm:w-full">
           <template v-if="!pending">{{ $t('empty.classes.button') }}</template>
           <IconLoader v-else class="my-0.5 w-5 h-5 motion-safe:animate-loader" />
         </MainButton>
