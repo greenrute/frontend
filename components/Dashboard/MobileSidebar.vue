@@ -33,9 +33,9 @@ defineEmits<{
                 <div class="space-y-1">
                   <NuxtLink v-for="item in navigation" :key="item.name" :to="localePath(item.href)" custom v-slot="{ href, navigate, isActive, isExactActive }">
                     <a :href="href" @click.prevent="$emit('close'); navigate()" class="group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md" :class="isActive ? 'bg-gray-200 dark:bg-zinc-700 text-gray-900 dark:text-zinc-50' : 'text-gray-700 dark:text-zinc-300 hover:text-gray-900 dark:hover:text-zinc-50 hover:bg-gray-50 dark:hover:bg-zinc-900'" :aria-current="isExactActive ? 'page' : undefined">
-                      <!--suppress JSValidateTypes -->
                       <component :is="item.icon" class="mr-3 flex-shrink-0 h-6 w-6" :class="isActive ? 'text-gray-500 dark:text-zinc-300' : 'text-gray-400 dark:text-zinc-400 group-hover:text-gray-500 dark:group-hover:text-zinc-300'" aria-hidden="true" />
                       {{ $t(item.name) }}
+                      <span v-if="item.beta" class="block ml-auto text-xs py-0.5 px-1 bg-yellow-400/70 dark:bg-yellow-400 dark:text-zinc-800 rounded-md">{{ $t('general.beta') }}</span>
                     </a>
                   </NuxtLink>
                 </div>

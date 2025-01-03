@@ -12,11 +12,13 @@ declare interface Class {
   description: string
   color: string
   country: string
+  school: string
 }
 
 declare interface NavigationItem {
   name: string
   href: string
+  beta?: boolean
 }
 
 declare interface NavMenuItem extends NavigationItem {

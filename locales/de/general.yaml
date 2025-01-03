@@ -18,7 +18,7 @@ menu privacy policy: Datenschutzrichtlinie
 # Genehmigung
 login: Anmeldung | Anmelden
 register: Registrierung | Registrieren | Erstellen Sie ein neues Konto
-logout: Eingang | Hinausgehen
+logout: Ausloggen | Abmelden
 get started: Registrieren
 for free: kostenlos
 
@@ -69,6 +69,7 @@ menu:
 
   schedule: Zeitplan
   homework: Hausaufgaben
+  schedule changes: Vertretungsplan
   elternportal: ElternPortal
   people: Menschen
 
@@ -113,7 +114,7 @@ empty:
 
 welcome:
   - title: Glückwunsch!
-    text: Sie haben sich erfolgreich bei GreenRute registriert. Wir möchten Ihnen einige Aspekte der Nutzung der Anwendung erläutern.
+    text: Sie haben sich erfolgreich bei GreenRute registriert. Wir möchten Ihnen einige Aspekte der Nutzung der App erläutern.
   - title: Die Klasse ist das wichtigste strukturelle Glied von GreenRute
     text: GreenRute besteht aus Klassen. Sie finden sie im linken Bereich <-. Sie können sie erstellen und an Kursen teilnehmen. Auf der Hauptseite können Sie auswählen, welche Klasse standardmäßig angezeigt wird.
   - title: Gemeinsamer Stundenplan
@@ -126,11 +127,13 @@ general:
   create: Erstellen
   select: Wählen
   update: Aktualisieren
-  warning: Die Anwendung befindet sich derzeit in der aktiven Entwicklung. Ihr Konto oder Ihre Daten können verloren gehen
+  warning: Die Webseite befindet sich derzeit in der aktiven Entwicklung. Ihr Konto oder Ihre Daten können verloren gehen
   yesterday: Gestern
   today: Heute
   tomorrow: Morgen
   wip: Seite in Entwicklung
+  loading: Wird geladen
+  beta: Beta
 
 new class:
   title: Neue Klasse
@@ -139,6 +142,7 @@ new class:
   description: Klassenbeschreibung
   color: Klassenfarbe
   country: Land
+  school: Schule
 
 supported countries:
   not specified: Nicht angegeben
@@ -177,7 +181,7 @@ edit:
     button: Aktualisieren
 
 people:
-  students: Mitschüler
+  students: Klassenmitglieder
   user role: Benutzer-Rolle
   roles:
     owner: Eigentümer:in
@@ -210,3 +214,16 @@ homework:
     description: "Beschreibung, zum Beispiel: auf S. 12..."
   public: Für jeden
   delete: Aufgabe „{task}“ wirklich löschen?
+
+schedule changes:
+  no changes available: Für diese Klasse sind keine Stundenplanänderungen verfügbar
+  no changes: Keine Stundenplanänderungen für heute
+  my class: Meine Klasse
+  all classes: Alle Klassen
+  class: Klasse
+  lesson: Stunde
+  subject: Fack
+  teacher: Lehrkraft
+  status: Status
+  canceled: Entfall
+  no status: ""

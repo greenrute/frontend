@@ -9,6 +9,11 @@ export const useCurrentClass = (updateLock: boolean = false): ComputedRef<apiRes
     sameSite: true,
   })
 
+  const currentClassCountry = useCookie<string>('currentClassCountry', {
+    expires: date,
+    sameSite: true,
+  })
+
   const cc = computed(() => {
     const { params } = useRoute()
 
@@ -18,7 +23,13 @@ export const useCurrentClass = (updateLock: boolean = false): ComputedRef<apiRes
       currentClass.value = selectedClass.value
     }
 
-    return classes.value?.filter(c => c.hash === currentClass.value)?.[0]
+    const ccr = classes.value?.filter(c => c.hash === currentClass.value)?.[0]
+
+    if ((!currentClassCountry.value || currentClassCountry.value !== ccr?.country) && !!ccr?.country) {
+      currentClassCountry.value = ccr.country
+    }
+
+    return ccr
   })
 
   return cc

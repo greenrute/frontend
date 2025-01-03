@@ -16,10 +16,15 @@ date.setMonth(date.getMonth() + 6)
 
 const setSelectedClass = (event: string) => {
   selectedClass.value = event
+  currentClassCountry.value = ''
   location.reload()
 }
 
 const selectedClass = useCookie<string>('selectedClass', {
+  expires: date,
+  sameSite: true,
+})
+const currentClassCountry = useCookie<string>('currentClassCountry', {
   expires: date,
   sameSite: true,
 })

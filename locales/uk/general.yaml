@@ -69,7 +69,7 @@ menu:
 
   schedule: Розклад
   homework: Домашнє завдання
-  elternportal: ElternPortal
+  schedule changes: Розклад змін
   people: Люди
 
   my classes: Мої класи
@@ -131,6 +131,8 @@ general:
   today: Сьогодні
   tomorrow: Завтра
   wip: Сторінка в розробці
+  loading: Завантаження
+  beta: Бета
 
 new class:
   title: Новий клас
@@ -139,6 +141,7 @@ new class:
   description: Опис класу
   color: Колір класу
   country: Країна
+  school: Школа
 
 supported countries:
   not specified: Не вказано
@@ -210,3 +213,16 @@ homework:
     description: "Опис, наприклад: на с. 12..."
   public: Для всіх
   delete: Справді видалити завдання "{task}"?
+
+schedule changes:
+  no changes available: Інформація про зміни в розкладі недоступна для цього класу
+  no changes: Розклад на сьогодні без змін
+  my class: Мій клас
+  all classes: Всі класи
+  class: Клас
+  lesson: Урок
+  subject: Предмет
+  teacher: Вчитель
+  status: Статус
+  canceled: Скасовано
+  no status: ""

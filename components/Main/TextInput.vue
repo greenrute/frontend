@@ -34,7 +34,10 @@ const detect = (event: Event) => {
 
 <template>
   <div>
-    <MainTag v-if="label" :id="id" :hint="hint">{{ label }}</MainTag>
+    <MainTag v-if="label" :id="id" :hint="hint">
+      {{ label }}
+      <span v-if="!invalid" class="inline-flex items-center rounded-md bg-gray-50 dark:bg-zinc-400/10 px-2 py-1 text-xs font-medium text-zinc-600 dark:text-gray-400 ring-1 ring-inset ring-gray-500/10 dark:ring-zinc-400/20">{{ $t('optional') }}</span>
+    </MainTag>
     <div class="relative rounded-md">
       <input :id="id" :type="type" :value="modelValue" v-bind="$attrs" @invalid="valid = false" ref="input"
         @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value);detect($event)" :class="type === 'password' && 'font-mono'"

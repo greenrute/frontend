@@ -69,7 +69,7 @@ menu:
 
   schedule: Schedule
   homework: Homework
-  elternportal: ElternPortal
+  schedule changes: Schedule changes
   people: People
 
   my classes: My classes
@@ -78,8 +78,8 @@ menu:
   edit timetable: Edit timetable
   edit class info: Edit class information
   delete class:
-    short: Видалити клас
-    full: Справді видалити клас?
+    short: Delete class
+    full: Are you sure you want to delete this class?
 
 actions:
   change theme: Change appearance
@@ -131,6 +131,8 @@ general:
   today: Today
   tomorrow: Tomorrow
   wip: Page under development
+  loading: Loading
+  beta: Beta
 
 new class:
   title: New class
@@ -139,6 +141,7 @@ new class:
   description: Class description
   color: Class color
   country: Country
+  school: School
 
 supported countries:
   not specified: Not specified
@@ -210,3 +213,16 @@ homework:
     description: "Description, for example: on p. 12..."
   public: For everyone
   delete: Really delete task "{task}"?
+
+schedule changes:
+  no changes available: No schedule changes available for this class
+  no changes: No schedule changes for today
+  my class: My class
+  all classes: All classes
+  class: Class
+  lesson: Lesson
+  subject: Subject
+  teacher: Teacher
+  status: Status
+  canceled: Canceled
+  no status: ""

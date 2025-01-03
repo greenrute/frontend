@@ -43,7 +43,7 @@ const switchTheme = () => {
         <h3 class="text-lg truncate">{{ currentClass?.name }}</h3>
       </NuxtLink>
     </template>
-    <template v-else-if="currentClass && route.name?.toString()?.includes('dashboard___')">
+    <template v-else-if="currentClass && (route.name?.toString()?.includes('dashboard___') || route.name?.toString()?.includes('schedule-change___'))">
       <div class="flex items-center gap-2 min-w-0">
         <div class="h-3 w-3 rounded-full shrink-0" :style="{ backgroundColor: currentClass?.color }" />
         <h3 class="text-lg truncate">{{ currentClass?.name }}</h3>

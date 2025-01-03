@@ -54,6 +54,7 @@ declare interface apiResponseClass {
   color: string
   hash: string
   country: string
+  school: string
   timetable: {
     day: string
     records: {
@@ -79,6 +80,22 @@ declare interface apiResponseClass {
     token: apiResponseToken
   }[]
   created_at: string
+  updated_at: string
+}
+
+declare interface apiResponseScheduleChanges {
+  records: {
+    class: string
+    lesson: number[]
+    subject: string
+    room: string
+    new_teacher: string
+    previous_teacher: string
+    status: string
+  }[]
+  absent_teachers: string[] | null
+  affected_classes: string[] | null
+  created_for: string
   updated_at: string
 }
 

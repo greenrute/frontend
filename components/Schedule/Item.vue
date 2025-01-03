@@ -11,9 +11,9 @@ defineProps<{
   <div v-if="lessons?.length">
     <div class="pl-3 pr-2.5 font-bold mb-2 uppercase flex items-center justify-between">
       {{ $t(`days.${day}`) }}
-      <HomeworkDialog class="text-green-600" :day="day">
+      <HomeworkModal class="text-green-600" :day="day">
         <QueueListIcon class="h-5.5 w-5.5" />
-      </HomeworkDialog>
+      </HomeworkModal>
     </div>
     <div class="overflow-hidden bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-2xl backdrop-blur-sm shadow-md">
       <div class="flex flex-col">

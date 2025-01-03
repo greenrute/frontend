@@ -15,6 +15,7 @@ const newClass = reactive<Class>({
   description: '',
   color: color.value,
   country: '',
+  school: '',
 })
 
 const randomColor = getRandomColor()
@@ -36,6 +37,7 @@ const create = async () => {
       description: newClass.description,
       color: newClass.color,
       country: newClass.country,
+      school: newClass.school,
     },
     baseURL: useRuntimeConfig().public.apiBase,
   })
@@ -99,6 +101,7 @@ const create = async () => {
 
     <MainForm @validated="create" class="flex flex-col gap-6">
       <MainTextInput :label="$t('new class.name')" :invalid="$t('the title must not be shorter than n characters', 3)" id="class-name" v-model="newClass.name" required minlength="3" />
+      <MainTextInput :label="$t('new class.school')" id="class-school" v-model="newClass.school" />
       <MainTextArea :label="$t('new class.description')" id="class-description" v-model="newClass.description" />
       <div class="flex justify-between items-center flex-wrap gap-y-6">
         <div class="flex gap-6 min-w-0">
