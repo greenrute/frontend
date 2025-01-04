@@ -1,4 +1,4 @@
-import { ukrainianPluralRule } from './utils/ukrainianPluralRule'
+import { ukrainianPluralRule } from './ukrainianPluralRule'
 
 export default defineI18nConfig(() => ({
   legacy: false,

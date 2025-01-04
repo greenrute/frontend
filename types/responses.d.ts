@@ -63,10 +63,7 @@ declare interface apiResponseClass {
       end: string
     }[]
   }[]
-  schedule: {
-    day: DayName
-    lessons: Lesson[]
-  }[]
+  schedule: ScheduleItem[]
   people: {
     id: number
     email: string

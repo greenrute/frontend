@@ -35,7 +35,7 @@ const tabs = [
   { name: t('schedule changes.my class'), id: 0 },
   { name: t('schedule changes.all classes'), id: 1 },
 ]
-const currentTab = ref<number>(1)
+const currentTab = ref<number>(0)
 </script>
 
 <template>
@@ -56,7 +56,7 @@ const currentTab = ref<number>(1)
   </div>
 
   <template v-else>
-    <div v-show="currentClass?.schedule?.filter(i => i?.lessons?.length)?.length" class="hidden lg:flex border-b border-gray-200 dark:border-zinc-700 py-3 items-center justify-between px-8">
+    <div v-show="(currentClass as apiResponseClass)?.schedule.filter(i => i.lessons.length)?.length" class="hidden lg:flex border-b border-gray-200 dark:border-zinc-700 py-3 items-center justify-between px-8">
       <div class="mt-4 flex items-center gap-2 sm:mt-0 max-w-[16rem]">
         <div class="h-3 w-3 rounded-full shrink-0" :style="{ backgroundColor: currentClass?.color }" />
         <h3 class="text-lg truncate">{{ currentClass?.name }}</h3>
@@ -78,47 +78,11 @@ const currentTab = ref<number>(1)
     </div>
 
     <div v-show="currentTab === 0" class="mt-6 px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-center min-h-96 font-display text-4xl uppercase text-center leading-normal">
-        <div>
-          🏗️{{ ' ' }}<span class="opacity-60">{{ $t('general.wip') }}</span>
-        </div>
-      </div>
+      <ScheduleChangesTable :schedule-changes="scheduleChanges?.data?.schedule_change" :target-class="currentClass?.name" />
     </div>
 
     <div v-show="currentTab === 1" class="mt-6 px-4 sm:px-6 lg:px-8">
-      <div class="flow-root">
-        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <div class="overflow-hidden shadow ring-1 ring-black/5 sm:rounded-3xl">
-              <table class="min-w-full divide-y divide-gray-300 dark:divide-zinc-700">
-                <thead class="bg-zinc-50 dark:bg-zinc-800">
-                  <tr>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-zinc-900 dark:text-zinc-50 sm:pl-6">
-                      <span class="sr-only">{{ $t('schedule changes.class') }}</span>
-                    </th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-zinc-900 dark:text-zinc-50">{{ $t('schedule changes.lesson') }}</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-zinc-900 dark:text-zinc-50">{{ $t('schedule changes.subject') }}</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-zinc-900 dark:text-zinc-50">{{ $t('schedule changes.teacher') }}</th>
-                    <th scope="col" class="py-3.5 pr-4 pl-3 text-left text-sm font-semibold text-zinc-900 dark:text-zinc-50 sm:pr-6">
-                      <span class="sr-only">{{ $t('schedule changes.status') }}</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-200 dark:divide-zinc-700/50 bg-white dark:bg-zinc-800/50">
-                  <tr v-for="(record, index) in scheduleChanges?.data?.schedule_change.records" :key="record.class+record.lesson.join(',')">
-                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-zinc-900 dark:text-zinc-50 sm:pl-6" :class="index % 2 === 0 ? undefined : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80'">{{ record.class }}</td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-zinc-500 dark:text-zinc-300" :class="index % 2 === 0 ? undefined : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80'">{{ getRanges(record.lesson)[0] }}</td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-zinc-500 dark:text-zinc-300" :class="index % 2 === 0 ? undefined : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80'">{{ record.subject }}</td>
-                    <td v-if="record.previous_teacher === record.new_teacher" class="whitespace-nowrap px-3 py-4 text-sm text-zinc-500 dark:text-zinc-300" :class="index % 2 === 0 ? undefined : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80'">{{ record.new_teacher }}</td>
-                    <td v-else class="whitespace-nowrap px-3 py-4 text-sm text-zinc-500 dark:text-zinc-300" :class="index % 2 === 0 ? undefined : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80'">{{ record.new_teacher }} <span class="line-through">{{ record.previous_teacher }}</span></td>
-                    <td class="whitespace-nowrap py-4 pr-4 pl-3 text-sm font-medium text-zinc-900 dark:text-zinc-50 sm:pr-6" :class="index % 2 === 0 ? undefined : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80'">{{ $t('schedule changes.' + record.status) }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ScheduleChangesTable :schedule-changes="scheduleChanges?.data?.schedule_change" />
     </div>
   </template>
 </template>

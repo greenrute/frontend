@@ -65,7 +65,7 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
     <Title>{{ $t('menu.schedule') }} - GreenRute</Title>
   </Head>
 
-  <div v-show="classes?.length && currentClass?.schedule?.filter(i => i?.lessons?.length)?.length" class="hidden lg:flex border-b border-gray-200 dark:border-zinc-700 py-3 items-center justify-between px-8">
+  <div v-show="classes?.length && (currentClass as apiResponseClass)?.schedule.filter(i => i.lessons.length)?.length" class="hidden lg:flex border-b border-gray-200 dark:border-zinc-700 py-3 items-center justify-between px-8">
     <div class="mt-4 flex items-center gap-2 sm:mt-0 max-w-[16rem]">
       <div class="h-3 w-3 rounded-full shrink-0" :style="{ backgroundColor: currentClass?.color }" />
       <h3 class="text-lg truncate">{{ currentClass?.name }}</h3>
@@ -184,11 +184,11 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
       </div>
     </div>
 
-    <div v-if="currentClass?.schedule?.filter(i => i?.lessons?.length)?.length" class="mb-10 grid grid-cols-1 gap-6 sm:gap-7 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-      <ScheduleItem v-for="item in currentClass.schedule.filter((d, i) => i !== new Date().getDay() - 1)" :key="item.day" :day="item.day" :lessons="item.lessons" />
+    <div v-if="(currentClass as apiResponseClass)?.schedule.filter(i => i?.lessons?.length)?.length" class="mb-10 grid grid-cols-1 gap-6 sm:gap-7 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+      <ScheduleItem v-for="item in (currentClass as apiResponseClass).schedule.filter((d, i) => i !== new Date().getDay() - 1)" :key="item.day" :day="item.day" :lessons="item.lessons" />
     </div>
 
-    <div v-else-if="selectedClass && classes?.filter(c => c.hash === selectedClass)?.length" class="py-16 sm:py-32 text-center">
+    <div v-else-if="selectedClass && (classes as apiResponseClass[])?.filter(c => c.hash === selectedClass)?.length" class="py-16 sm:py-32 text-center">
       <QueueListIcon class="mx-auto h-12 w-12 text-gray-400 dark:text-zinc-500 stroke-1" />
       <h3 class="mt-2 font-medium text-gray-900 dark:text-white">{{ $t('empty.lessons.title') }}</h3>
       <p class="mt-1.5 text-sm text-gray-500 dark:text-zinc-300/90">{{ $t('empty.lessons.description') }}</p>

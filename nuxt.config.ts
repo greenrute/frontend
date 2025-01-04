@@ -67,13 +67,11 @@ export default defineNuxtConfig({
         files: ['./uk/general.yaml', './uk/homepage.yaml'],
       },
     ],
-    langDir: 'locales',
-    strategy: 'prefix_and_default',
     defaultLocale: 'uk',
+    strategy: 'prefix_and_default',
     detectBrowserLanguage: {
       redirectOn: 'no prefix',
     },
-    vueI18n: './i18n.config.ts',
   },
 
   css: [

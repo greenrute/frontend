@@ -114,7 +114,7 @@ const deleteHandler = async () => {
     <h1 class="text-2xl mb-4 font-display font-semibold text-gray-900 dark:text-zinc-50 sm:truncate">{{ $t('edit.class.title') }}</h1>
 
     <MainForm @validated="update" class="flex flex-col gap-6">
-      <MainTextInput :label="$t('new class.name')" :invalid="$t('the title must not be shorter than n characters', 3)" id="class-name" v-model="newClass.name" required minlength="3" />
+      <MainTextInput :label="$t('new class.name')" :invalid="$t('the title must not be shorter than n characters', 2)" id="class-name" v-model="newClass.name" required minlength="2" />
       <MainTextInput :label="$t('new class.school')" id="class-school" v-model="newClass.school" />
       <MainTextArea :label="$t('new class.description')" id="class-description" v-model="newClass.description" />
       <div class="flex justify-between items-center flex-wrap gap-y-6">

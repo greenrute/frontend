@@ -32,3 +32,8 @@ declare interface CurrentLesson {
   lessonUUID?: string
   lessonDetails?: Lesson
 }
+
+declare interface ScheduleItem {
+  day: DayName
+  lessons: Lesson[]
+}

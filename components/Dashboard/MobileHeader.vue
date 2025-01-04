@@ -153,7 +153,7 @@ const switchTheme = () => {
                 </button>
                 </MenuItem>
                 <MenuItem v-slot="{ active, close }" as="div">
-                <NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="http://t.me/greenrute_support" target="_blank" :external="true" @click="close">
+                <NuxtLink class="flex items-center justify-between px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" to="mailto:support@greenrute.com" target="_blank" :external="true" @click="close">
                   {{ $t('menu.support') }}
                   <LifebuoyIcon class="h-4 w-4" aria-hidden="true" />
                 </NuxtLink>
