@@ -15,7 +15,7 @@ const status = ref('pending')
 const scheduleChanges = ref<apiResponse<{ schedule_change: apiResponseScheduleChanges }> | null>(null)
 
 onMounted(async () => {
-  await $fetch<apiResponse<{ schedule_change: apiResponseScheduleChanges }>>(`/classes/${currentClass.value?.id}/schedule/changes`, {
+  await $fetch<apiResponse<{ schedule_change: apiResponseScheduleChanges }>>(`/classes/${currentClass.value?.id}/schedule/today/changes`, {
     headers: {
       'Accept-Language': locale.value,
       'Authorization': 'Bearer ' + token.value,
