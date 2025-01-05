@@ -199,8 +199,8 @@ const updatePassword = async () => {
       <div class="border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 rounded-xl p-4">
         <div class="flex justify-between gap-8 max-[410px]:flex-col-reverse max-[410px]:gap-4">
           <MainForm @validated="updateInfo" class="[&_label]:mb-2 w-full flex flex-col gap-3">
-            <MainTextInput v-model="(userData.name as string)" id="name-input" :label="$t('name')" />
-            <MainTextInput v-model="(userData.email as string)" id="email-input" :label="$t('email address')" />
+            <MainTextInput v-model="(userData.name as string)" id="name-input" :label="$t('name')" required />
+            <MainTextInput v-model="(userData.email as string)" id="email-input" :label="$t('email address')" required />
             <MainButton type="submit" color="green" class="mt-2 sm:self-start">
               <span v-if="!pendingInfo">{{ $t('general.save') }}</span>
               <IconLoader v-else class="my-0.5 w-5 h-5 motion-safe:animate-loader" />
@@ -226,7 +226,7 @@ const updatePassword = async () => {
       <div class="border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 rounded-xl p-4">
         <div class="flex justify-between gap-8">
           <MainForm @validated="updatePassword" class="[&_label]:mb-2 w-full flex flex-col gap-3">
-            <MainTextInput v-model="userData.oldPassword" id="old-password-input" :label="$t('profile.old password')" type="password" :hint="$t('profile.old password hint')" autocomplete="current-password" />
+            <MainTextInput v-model="userData.oldPassword" id="old-password-input" :label="$t('profile.old password')" type="password" :hint="$t('profile.old password hint')" autocomplete="current-password" no-optional-label />
             <MainTextInput v-model="userData.newPassword" id="new-password-input" :label="$t('profile.new password')" :invalid="$t('the password must be at least n characters long', 3)" required minlength="3" type="password" autocomplete="new-password" />
             <MainTextInput v-model="userData.confirmPassword" id="confirm-password-input" :label="$t('profile.confirm password')" :invalid="$t('the password must be at least n characters long', 3)" required minlength="3" type="password" autocomplete="new-password" />
             <MainButton type="submit" color="green" class="mt-2 sm:self-start">

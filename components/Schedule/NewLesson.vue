@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle, Combobox, ComboboxButton, ComboboxInput, ComboboxLabel, ComboboxOption, ComboboxOptions } from '@headlessui/vue'
 import { PlusCircleIcon, CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
+import { isIOS } from '@vueuse/core'
 
 const { t, locale } = useI18n()
 
@@ -103,7 +104,7 @@ const submit = async () => {
       </TransitionChild>
 
       <div class="fixed inset-0 overflow-y-auto">
-        <div class="flex min-h-full items-start lg:items-center justify-center p-4 text-center">
+        <div class="flex min-h-full sm:items-center justify-center p-4 text-center" :class="isIOS ? 'items-start' : 'items-center'">
           <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0 scale-95" enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
             <DialogPanel class="w-full max-w-md transform rounded-2xl bg-white dark:bg-zinc-900 p-6 text-left align-middle shadow-xl transition-all">
               <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900 dark:text-zinc-50">
@@ -113,7 +114,7 @@ const submit = async () => {
               <Combobox class="mt-5" as="div" v-model="selectedLesson" v-slot="{ open }">
                 <ComboboxLabel class="mb-3 block text-sm font-medium text-gray-700 dark:text-zinc-300">{{ $t('edit.lesson name') }}</ComboboxLabel>
                 <div class="relative">
-                  <ComboboxInput class="w-full rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left shadow-sm focus:outline-none focus:ring-1 sm:text-sm" :class="invalid ? 'ring-1 border-red-600 dark:border-red-500 ring-red-600 dark:ring-red-500' : 'focus:border-green-500 dark:focus:border-green-600 focus:ring-green-500 dark:focus:ring-green-600'" @keydown.enter="!open && submit()" @change="query = $event.target.value" :display-value="(lesson: Lesson) => lesson.name" :placeholder="$t('edit.placeholder')" />
+                  <ComboboxInput class="w-full rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left shadow-sm focus:outline-none focus:ring-1 sm:text-sm" :class="invalid ? 'ring-1 border-red-600 dark:border-red-500 ring-red-600 dark:ring-red-500' : 'focus:border-green-500 dark:focus:border-green-600 focus:ring-green-500 dark:focus:ring-green-600'" @keydown.enter="!open && submit()" @change="query = $event.target.value" :display-value="lesson => (lesson as Lesson).name" :placeholder="$t('edit.placeholder')" />
                   <ComboboxButton class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
                     <ChevronUpDownIcon class="h-5 w-5 text-zinc-400" aria-hidden="true" />
                   </ComboboxButton>
