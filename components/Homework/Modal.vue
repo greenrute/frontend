@@ -109,7 +109,7 @@ const deleteHomework = async (id: number, task: string) => {
       </TransitionChild>
 
       <div class="fixed inset-0 overflow-y-auto">
-        <div class="flex min-h-full sm:items-center justify-center p-4 text-center" :class="Object.keys(days).length ? 'items-end' : isIOS ? 'items-start' : 'items-center'">
+        <div class="flex min-h-full sm:items-center justify-center px-4 pb-4 text-center" :class="Object.keys(days).length ? 'items-end pt-4' : 'items-start pt-6 sm:pt-4'">
           <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0 scale-95" enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
             <DialogPanel class="w-full max-w-md transform rounded-2xl bg-white dark:bg-zinc-900 p-6 text-left align-middle shadow-xl transition-all">
               <div>
