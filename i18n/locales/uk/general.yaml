@@ -217,6 +217,8 @@ homework:
 schedule changes:
   no changes available: Інформація про зміни в розкладі недоступна для цього класу
   no changes: Розклад на сьогодні без змін
+  no changes tomorrow: Розклад на завтра без змін
+  no changes description: Якщо зміни все-таки існують, перевірте чи назва класу збігається з тою, що є на вкладці "Всі класи"
   my class: Мій клас
   all classes: Всі класи
   class: Клас

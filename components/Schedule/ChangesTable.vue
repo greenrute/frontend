@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { CheckCircleIcon } from '@heroicons/vue/24/outline'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   scheduleChanges: apiResponseScheduleChanges | undefined
   targetClass?: string
-}>()
+  targetDay?: string
+}>(), {
+  targetDay: 'today',
+})
 
 const records = computed(() => props.targetClass ? props.scheduleChanges?.records.filter(r => r.class.includes(props.targetClass as string)) : props.scheduleChanges?.records)
 </script>
@@ -12,9 +15,10 @@ const records = computed(() => props.targetClass ? props.scheduleChanges?.record
 <template>
   <div>
     <div v-if="!records?.length">
-      <div class="min-h-[60vh] py-24 flex justify-center items-center gap-1 text-lg text-gray-600 dark:text-zinc-400">
-        <CheckCircleIcon class="w-6 h-6" />
-        {{ $t('schedule changes.no changes') }}
+      <div class="py-16 sm:py-32 text-center max-w-screen-sm mx-auto">
+        <CheckCircleIcon class="mx-auto h-12 w-12 text-gray-400 dark:text-zinc-500 stroke-1" />
+        <h3 class="mt-2 font-medium text-gray-900 dark:text-white">{{ $t('schedule changes.no changes' + (targetDay === 'tomorrow' ? ' tomorrow' : '')) }}</h3>
+        <p class="mt-1.5 text-sm text-gray-500 dark:text-zinc-300/90">{{ $t('schedule changes.no changes description') }}</p>
       </div>
     </div>
     <div v-else class="flow-root max-w-screen-sm mx-auto">

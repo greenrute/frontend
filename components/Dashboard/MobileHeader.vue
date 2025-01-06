@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { UserCircleIcon, Cog8ToothIcon, BellIcon, ArrowDownTrayIcon, MoonIcon, SunIcon, LifebuoyIcon, ArrowLeftOnRectangleIcon, LanguageIcon, ClockIcon, TableCellsIcon } from '@heroicons/vue/20/solid'
+import { Listbox, ListboxButton, ListboxOptions, ListboxOption, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import { UserCircleIcon, Cog8ToothIcon, BellIcon, ArrowDownTrayIcon, MoonIcon, SunIcon, LifebuoyIcon, ArrowLeftEndOnRectangleIcon, LanguageIcon, ClockIcon, TableCellsIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 import {
   PencilSquareIcon as PencilSquareOutlineIcon,
   InformationCircleIcon as InformationCircleOutlineIcon,
@@ -23,6 +23,7 @@ const currentClass = useCurrentClass()
 const currentLesson = useCurrentLesson()
 const authentication = useAuthentication()
 const user = useCookie<UserCookie>('user')
+const currentDay = useState<string>('current-schedule-changes-day', () => 'today')
 
 const switchTheme = () => {
   setTimeout(() => {
@@ -43,7 +44,7 @@ const switchTheme = () => {
         <h3 class="text-lg truncate">{{ currentClass?.name }}</h3>
       </NuxtLink>
     </template>
-    <template v-else-if="currentClass && (route.name?.toString()?.includes('dashboard___') || route.name?.toString()?.includes('schedule-change___'))">
+    <template v-else-if="currentClass && (route.name?.toString()?.includes('dashboard___') || route.name?.toString()?.includes('schedule-changes___'))">
       <div class="flex items-center gap-2 min-w-0">
         <div class="h-3 w-3 rounded-full shrink-0" :style="{ backgroundColor: currentClass?.color }" />
         <h3 class="text-lg truncate">{{ currentClass?.name }}</h3>
@@ -99,6 +100,27 @@ const switchTheme = () => {
       <div class="sm:hidden flex fixed bottom-4 left-1/2 lg:left-[calc(50%+8rem)] -translate-x-1/2">
         <MainButton variant="solid" :color="currentLesson.active ? 'adaptive' : 'reverse'" disabled class="!opacity-100 !py-1.5 whitespace-nowrap shadow-md dark:shadow-zinc-800/30 transition-all duration-300 ease-out">{{ currentLesson.timeToEnd }}</MainButton>
       </div>
+    </template>
+    <template v-else-if="currentClass && route.name?.toString().includes('schedule-changes___')">
+      <Listbox v-model="currentDay">
+        <div class="relative my-auto">
+          <ListboxButton class="relative w-full text-left rounded-full py-1 pl-3 pr-10 dark:bg-zinc-900 border border-gray-300 dark:border-zinc-700 dark:placeholder-zinc-400 focus:border-green-500 dark:focus:border-green-600 focus:ring-1 focus:ring-green-500 dark:focus:ring-green-600 text-base sm:text-sm">
+            {{ $t('general.' + currentDay) }}
+            <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+              <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+            </span>
+          </ListboxButton>
+          <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+            <ListboxOptions class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow ring-1 ring-black ring-opacity-5 dark:ring-zinc-700 focus:outline-none sm:text-sm">
+              <ListboxOption as="template" v-slot="{ active, selected }" v-for="day in ['today', 'tomorrow']" :key="day" :value="day">
+                <li class="flex items-center relative select-none py-1 px-3 text-gray-800 dark:text-white" :class="[selected ? 'cursor-default font-medium' : 'cursor-pointer', active ? 'bg-gray-100 dark:bg-zinc-800' : '']">
+                  <span class="block truncate">{{ $t('general.' + day) }}</span>
+                </li>
+              </ListboxOption>
+            </ListboxOptions>
+          </transition>
+        </div>
+      </Listbox>
     </template>
     <div class="flex pr-4 sm:pr-6 lg:pr-8 shrink-0">
       <div class="flex items-center">
@@ -163,7 +185,7 @@ const switchTheme = () => {
                 <MenuItem v-slot="{ active }">
                 <button class="flex items-center justify-between w-full text-left px-4 py-2 text-sm" :class="active ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-zinc-200'" @click="authentication.logout">
                   {{ $t('logout', 1) }}
-                  <ArrowLeftOnRectangleIcon class="h-4 w-4" aria-hidden="true" />
+                  <ArrowLeftEndOnRectangleIcon class="h-4 w-4" aria-hidden="true" />
                 </button>
                 </MenuItem>
               </div>

@@ -34,7 +34,7 @@ const navigation: NavMenuItem[] = [
 if (currentClassCountry.value === 'germany') {
   navigation.push({
     name: 'menu.schedule changes',
-    href: '/schedule-change',
+    href: '/schedule-changes',
     icon: CalendarDateRangeIcon,
     beta: true,
   })

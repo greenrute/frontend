@@ -26,7 +26,7 @@ sign in to your account: Melden Sie sich bei Ihrem Konto an
 get started for free: Registrieren Sie sich kostenlos
 don't have an account: Sie haben noch kein Konto?
 already registered: Bereits registriert?
-to your account: zu deinem Konto
+to your account: zu Ihrem Konto
 
 name: Name
 email address: E-Mail-Adresse
@@ -218,6 +218,8 @@ homework:
 schedule changes:
   no changes available: Für diese Klasse sind keine Stundenplanänderungen verfügbar
   no changes: Keine Stundenplanänderungen für heute
+  no changes tomorrow: Keine Stundenplanänderungen für morgen
+  no changes description: Wenn die Änderungen doch vorhanden sind, überprüfen Sie, ob der Klassenname mit dem auf dem Tab „Alle Klassen“ übereinstimmt
   my class: Meine Klasse
   all classes: Alle Klassen
   class: Klasse

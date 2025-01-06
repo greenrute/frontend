@@ -217,6 +217,8 @@ homework:
 schedule changes:
   no changes available: No schedule changes available for this class
   no changes: No schedule changes for today
+  no changes tomorrow: No schedule changes for tomorrow
+  no changes description: If the changes still exist, check if the class name matches the one in the "All classes" tab
   my class: My class
   all classes: All classes
   class: Class
