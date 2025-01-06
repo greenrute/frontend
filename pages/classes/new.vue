@@ -33,11 +33,11 @@ const create = async () => {
       'Authorization': 'Bearer ' + useCookie('token').value
     },
     body: {
-      name: newClass.name,
-      description: newClass.description,
+      name: newClass.name.trim(),
+      description: newClass.description.trim(),
       color: newClass.color,
       country: newClass.country,
-      school: newClass.school,
+      school: newClass.school.trim(),
     },
     baseURL: useRuntimeConfig().public.apiBase,
   })

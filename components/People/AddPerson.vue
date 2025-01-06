@@ -77,7 +77,7 @@ const submit = async () => {
   </MainButton>
 
   <TransitionRoot appear :show="open" as="template">
-    <Dialog as="div" @close="open = false" class="relative z-10">
+    <Dialog as="div" @close="open = false" class="relative z-20">
       <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0" enter-to="opacity-100" leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-0">
         <div class="fixed inset-0 bg-gray-500 dark:bg-zinc-800 bg-opacity-75 dark:bg-opacity-75 backdrop-blur" />
       </TransitionChild>

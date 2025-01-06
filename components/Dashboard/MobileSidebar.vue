@@ -42,9 +42,11 @@ defineEmits<{
                 <div class="mt-8">
                   <h3 class="flex justify-between items-center px-3 text-sm font-medium text-gray-500 dark:text-zinc-400" id="mobile-classes-headline">
                     {{ $t('menu.my classes') }}
-                    <NuxtLink :to="localePath('/classes/new')" v-if="classes?.length" class="hover:text-gray-600 dark:hover:text-zinc-300">
-                      <PlusIcon class="h-5 w-5" aria-hidden="true" />
-                      <span class="sr-only">{{ $t('empty.classes.button') }}</span>
+                    <NuxtLink :to="localePath('/classes/new')" v-if="classes?.length" class="hover:text-gray-600 dark:hover:text-zinc-300" custom v-slot="{ href, navigate, isExactActive }">
+                      <a :href="href" @click.prevent="$emit('close'); navigate()" :aria-current="isExactActive ? 'page' : undefined">
+                        <PlusIcon class="h-5 w-5" aria-hidden="true" />
+                        <span class="sr-only">{{ $t('empty.classes.button') }}</span>
+                      </a>
                     </NuxtLink>
                   </h3>
                   <div v-if="classes?.length" class="mt-1 space-y-1" role="group" aria-labelledby="mobile-classes-headline">

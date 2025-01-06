@@ -32,11 +32,11 @@ const update = async () => {
       'Authorization': 'Bearer ' + useCookie('token').value
     },
     body: {
-      name: newClass.name,
-      description: newClass.description,
+      name: newClass.name.trim(),
+      description: newClass.description.trim(),
       color: newClass.color,
       country: newClass.country,
-      school: newClass.school,
+      school: newClass.school.trim(),
     },
     baseURL: config.public.apiBase,
   })
@@ -122,7 +122,7 @@ const deleteHandler = async () => {
           <MainColorPicker :label="$t('new class.color')" class="shrink-0" id="class-color" v-model="newClass.color" :colors="mainColors.map((c: any) => c.color)" />
           <MainCountryPicker v-model="newClass.country" class="min-w-0"/>
         </div>
-        <MainButton type="submit" variant="solid" color="green" :disabled="pending">
+        <MainButton type="submit" variant="solid" color="green" :disabled="pending" class="max-sm:w-full">
           <template v-if="!pending">{{ $t('edit.class.button') }}</template>
           <IconLoader v-else class="my-0.5 w-5 h-5 motion-safe:animate-loader" />
         </MainButton>
