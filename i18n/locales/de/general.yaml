@@ -225,6 +225,7 @@ schedule changes:
   class: Klasse
   lesson: Stunde
   subject: Fach
+  room: Raum
   teacher: Lehrkraft
   status: Status
   canceled: Entfall

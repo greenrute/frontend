@@ -33,6 +33,7 @@ const records = computed(() => props.targetClass ? props.scheduleChanges?.record
                   </th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-zinc-900 dark:text-zinc-50">{{ $t('schedule changes.lesson') }}</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-zinc-900 dark:text-zinc-50">{{ $t('schedule changes.subject') }}</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-zinc-900 dark:text-zinc-50">{{ $t('schedule changes.room') }}</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-zinc-900 dark:text-zinc-50">{{ $t('schedule changes.teacher') }}</th>
                   <th scope="col" class="py-3.5 pr-4 pl-3 text-left text-sm font-semibold text-zinc-900 dark:text-zinc-50 sm:pr-6">
                     <span class="sr-only">{{ $t('schedule changes.status') }}</span>
@@ -46,11 +47,12 @@ const records = computed(() => props.targetClass ? props.scheduleChanges?.record
                   </td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-zinc-500 dark:text-zinc-300" :class="index % 2 === 0 ? undefined : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80'">{{ getRanges(record.lesson)[0] }}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-zinc-500 dark:text-zinc-300" :class="[index % 2 === 0 ? undefined : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80', record.status === 'canceled' ? 'line-through' : '']">{{ record.subject }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-zinc-500 dark:text-zinc-300" :class="[index % 2 === 0 ? undefined : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80', record.status === 'canceled' ? 'line-through' : '']">{{ record.room }}</td>
                   <td v-if="record.previous_teacher === record.new_teacher" class="whitespace-nowrap px-3 py-4 text-sm text-zinc-500 dark:text-zinc-300" :class="[index % 2 === 0 ? undefined : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80', record.status === 'canceled' ? 'line-through' : '']">{{ record.new_teacher }}</td>
                   <td v-else class="whitespace-nowrap px-3 py-4 text-sm text-zinc-500 dark:text-zinc-300" :class="[index % 2 === 0 ? undefined : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80', record.status === 'canceled' ? 'line-through' : '']">{{ record.new_teacher }} <span class="line-through">{{ record.previous_teacher }}</span></td>
                   <td class="whitespace-nowrap py-4 pr-4 pl-3 text-sm font-medium text-zinc-900 dark:text-zinc-50 sm:pr-6" :class="index % 2 === 0 ? undefined : 'bg-zinc-50 dark:bg-zinc-900 dark:bg-opacity-80'">
                     <span :class="record.status === 'canceled' ? 'text-red-600 dark:text-red-500' : ''">
-                      {{ $t('schedule changes.' + record.status) }}
+                      {{ record.status.includes('Verlegung') ? record.status : $t('schedule changes.' + record.status) }}
                     </span>
                   </td>
                 </tr>

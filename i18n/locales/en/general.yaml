@@ -224,6 +224,7 @@ schedule changes:
   class: Class
   lesson: Lesson
   subject: Subject
+  room: Room
   teacher: Teacher
   status: Status
   canceled: Canceled

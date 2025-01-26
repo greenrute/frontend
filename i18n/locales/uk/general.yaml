@@ -224,6 +224,7 @@ schedule changes:
   class: Клас
   lesson: Урок
   subject: Предмет
+  room: Кімната
   teacher: Вчитель
   status: Статус
   canceled: Скасовано
