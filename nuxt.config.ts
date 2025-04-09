@@ -13,7 +13,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       gsiClientID: '',
-      apiBase: 'https://api.greenrute.com/',
+      apiBase: 'https://api.greenrute.com',
+      baseUrl: 'https://greenrute.com',
     },
   },
 

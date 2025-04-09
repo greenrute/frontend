@@ -192,10 +192,14 @@ const addHomerworkEl = ref<HTMLDivElement | null>(null)
       <QueueListIcon class="mx-auto h-12 w-12 text-gray-400 dark:text-zinc-500 stroke-1" />
       <h3 class="mt-2 font-medium text-gray-900 dark:text-white">{{ $t('empty.lessons.title') }}</h3>
       <p class="mt-1.5 text-sm text-gray-500 dark:text-zinc-300/90">{{ $t('empty.lessons.description') }}</p>
-      <div class="mt-6">
+      <div class="mt-6 flex max-md:flex-col justify-center items-stretch max-sm:px-[10vw] sm:max-md:px-[20vw] md:items-center gap-3">
         <MainButton variant="solid" color="green" class="inline-flex items-center" :to="localePath(`/c/${selectedClass}/schedule`)">
           <PlusIcon class="-ml-1 mr-1.5 h-5 w-5" aria-hidden="true" />
           {{ $t('empty.lessons.button') }}
+        </MainButton>
+        <MainButton variant="outline" color="zinc" :to="localePath('/notifications')">
+          {{ $t('general.continue with') }}
+          <IconUntis class="h-6 ml-1" />
         </MainButton>
       </div>
     </div>

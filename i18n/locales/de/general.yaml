@@ -134,6 +134,7 @@ general:
   wip: Seite in Entwicklung
   loading: Wird geladen
   beta: Beta
+  continue with: Weiter mit
 
 new class:
   title: Neue Klasse
@@ -155,7 +156,7 @@ settings:
 
 color modes:
   system: System
-  light: Licht
+  light: Hell
   dark: Dunkel
 
 days:
